@@ -18,7 +18,7 @@ import {
 } from "@/components/ui/sidebar";
 import { Roles } from "@/constants/roles";
 import { adminRoutes } from "@/routes/adminRoutes";
-import { agentRoutes } from "@/routes/agentRoutes";
+import { userRoutes } from "@/routes/userRoutes";
 import { Route } from "@/types/routes.type";
 import { NavUser } from "../ui/nav-user";
 
@@ -30,8 +30,8 @@ export function AppSidebar({ user, ...props }: { user: { role: string } & React.
           case Roles.admin:
                routes = adminRoutes;
                break;
-          case Roles.agent:
-               routes = agentRoutes;
+          case Roles.user:
+               routes = userRoutes;
                break;
           default:
                routes = [];

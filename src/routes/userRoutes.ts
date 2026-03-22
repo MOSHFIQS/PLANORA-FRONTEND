@@ -1,7 +1,7 @@
 import { Route } from "@/types/routes.type";
 
 
-export const agentRoutes: Route[] = [
+export const userRoutes: Route[] = [
      {
           title: "agent sidebar",
           items: [
