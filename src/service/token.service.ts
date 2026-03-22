@@ -11,7 +11,7 @@ export const sessionService = {
           if (!token) return null
 
           try {
-               return jwt.verify(token, process.env.ACCESS_TOKEN_SECRET as string) as TokenPayload
+               return jwt.verify(token, process.env.REFRESH_TOKEN_SECRET as string) as TokenPayload
           } catch (err){
                // console.log("JWT invalid or expired:", err);
                return null

@@ -1,5 +1,8 @@
-const HomePage = async () => {
+import { sessionService } from "@/service/token.service";
 
+const HomePage = async () => {
+     const data = await sessionService.getUserFromToken()
+     console.log(data);
      return (
           <div>
 

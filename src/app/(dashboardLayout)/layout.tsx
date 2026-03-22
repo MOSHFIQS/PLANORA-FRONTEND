@@ -10,7 +10,7 @@ import { ReactNode } from "react"
 import { redirect } from "next/navigation";
 import { AppSidebar } from "@/components/appSidebar/app-sidebar"
 
-export default async  function DashboardLayout({ admin, agent }: { admin: ReactNode, agent: ReactNode }) {
+export default async  function DashboardLayout({ admin, user }: { admin: ReactNode, user: ReactNode }) {
 
      const data = await sessionService.getUserFromToken()
      console.log("token",data);
@@ -42,8 +42,8 @@ export default async  function DashboardLayout({ admin, agent }: { admin: ReactN
           case Roles.admin:
                content = admin
                break
-          case Roles.agent:
-               content = agent
+          case Roles.user:
+               content = user
                break
           default:
                content = null

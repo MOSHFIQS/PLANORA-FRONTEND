@@ -9,32 +9,32 @@ export async function proxy(request: NextRequest) {
      const pathname = request.nextUrl.pathname;
      const data = await sessionService.getUserFromToken()
 
-     // console.log("data",data);
+     console.log("data",data);
 
 
      const role = data?.role
 
      const isAdmin = role === Roles.admin 
-     const isAgent = role === Roles.agent
+     const isUser = role === Roles.user
 
 
  
-     // if (isAdmin && (pathname.startsWith("/dashboard") || pathname.startsWith("/agent-dashboard"))) {
-     //      return NextResponse.redirect(new URL("/admin-dashboard", request.url))
-     // }
+     if (isAdmin && (pathname.startsWith("/dashboard") || pathname.startsWith("/user-dashboard"))) {
+          return NextResponse.redirect(new URL("/admin-dashboard", request.url))
+     }
 
 
-     // if (isAgent && (pathname.startsWith("/dashboard") || pathname.startsWith("/admin-dashboard"))) {
-     //      return NextResponse.redirect(new URL("/agent-dashboard", request.url))
-     // }
+     if (isUser && (pathname.startsWith("/dashboard") || pathname.startsWith("/admin-dashboard"))) {
+          return NextResponse.redirect(new URL("/user-dashboard", request.url))
+     }
 
-     // if(!role && (pathname.startsWith("/admin-dashboard") || pathname.startsWith("/agent-dashboard") || pathname.startsWith("/dashboard"))){
-     //      return NextResponse.redirect(new URL("/", request.url))
-     // }
+     if(!role && (pathname.startsWith("/admin-dashboard") || pathname.startsWith("/user-dashboard") || pathname.startsWith("/dashboard"))){
+          return NextResponse.redirect(new URL("/", request.url))
+     }
 
-     // if(!role && (pathname.startsWith("/admin-dashboard") || pathname.startsWith("/agent-dashboard"))){
-     //      return NextResponse.redirect(new URL("/", request.url))
-     // }
+     if(!role && (pathname.startsWith("/admin-dashboard") || pathname.startsWith("/user-dashboard"))){
+          return NextResponse.redirect(new URL("/", request.url))
+     }
 
 
      return NextResponse.next()
@@ -42,8 +42,8 @@ export async function proxy(request: NextRequest) {
 
 export const config = {
      matcher: [
-          // "/admin-dashboard/:path*",
-          // "/agent-dashboard/:path*",
-          // "/dashboard/:path*",
+          "/admin-dashboard/:path*",
+          "/user-dashboard/:path*",
+          "/dashboard/:path*",
      ],
 }
