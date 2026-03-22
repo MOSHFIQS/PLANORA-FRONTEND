@@ -16,6 +16,7 @@ import {
      SheetTrigger,
 } from "@/components/ui/sheet";
 import Link from "next/link";
+import { useAuth } from "@/context/AuthProvider";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -25,11 +26,25 @@ interface MenuItem {
 }
 
 const Navbar = () => {
+     const { user, logout, loading } = useAuth();
      const router = useRouter();
      const pathname = usePathname();
 
 
 
+
+     const handleLogout = () => {
+          logout();
+          router.push("/");
+     };
+
+     if (loading) {
+          return (
+               <section className="py-4">
+                    <div className="h-10" />
+               </section>
+          );
+     }
 
      const menu: MenuItem[] = [
           { title: "Home", url: "/" },
@@ -68,7 +83,31 @@ const Navbar = () => {
                               </NavigationMenu>
                          </div>
 
-                     
+                         {/* Auth */}
+                         <div className="flex items-center gap-3">
+
+
+                              {/* Auth */}
+                              {user?.id ? (
+                                   <Button variant="outline" onClick={handleLogout}>
+                                        Logout
+                                   </Button>
+                              ) : (
+                                   <>
+                                        <Button asChild variant="outline">
+                                             <Link href={`/login?redirect=${pathname}`}>
+                                                  Login
+                                             </Link>
+                                        </Button>
+
+                                        <Button asChild>
+                                             <Link href="/register">
+                                                  Register
+                                             </Link>
+                                        </Button>
+                                   </>
+                              )}
+                         </div>
                     </nav>
 
                     {/* Mobile */}

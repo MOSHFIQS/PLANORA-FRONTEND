@@ -1,8 +1,12 @@
 "use client"
 
 import {
+    BadgeCheck,
+    Bell,
     ChevronsUpDown,
+    CreditCard,
     LogOut,
+    Sparkles,
 } from "lucide-react"
 
 import {
@@ -13,6 +17,7 @@ import {
 import {
     DropdownMenu,
     DropdownMenuContent,
+    DropdownMenuGroup,
     DropdownMenuItem,
     DropdownMenuLabel,
     DropdownMenuSeparator,
@@ -24,30 +29,20 @@ import {
     SidebarMenuItem,
     useSidebar,
 } from "@/components/ui/sidebar"
+import { useAuth } from "@/context/AuthProvider"
 import { useRouter } from "next/navigation"
-import { useState } from "react"
-
-// Fake user for testing
-const fakeUser = {
-    name: "John Doe",
-    email: "john.doe@example.com",
-    image: "https://i.pravatar.cc/150?img=12",
-}
 
 export function NavUser() {
     const { isMobile } = useSidebar()
-    const router = useRouter()
-
-    // User state: can be fake user or null
-    const [user, setUser] = useState<typeof fakeUser | null>(fakeUser)
+    const router = useRouter();
+    const { user, logout } = useAuth()
 
     const handleLogout = () => {
-        setUser(null)
-        router.push("/")
-    }
+        logout();
+        router.push("/");
+    };
 
-    if (!user) return null
-
+    if (!user) return null;
     return (
         <SidebarMenu>
             <SidebarMenuItem>
@@ -68,7 +63,6 @@ export function NavUser() {
                             <ChevronsUpDown className="ml-auto size-4" />
                         </SidebarMenuButton>
                     </DropdownMenuTrigger>
-
                     <DropdownMenuContent
                         className="w-(--radix-dropdown-menu-trigger-width) min-w-56 rounded-lg"
                         side={isMobile ? "bottom" : "right"}
@@ -87,9 +81,22 @@ export function NavUser() {
                                 </div>
                             </div>
                         </DropdownMenuLabel>
-
+                        {/* <DropdownMenuSeparator /> */}
+                        {/* <DropdownMenuGroup>
+                            <DropdownMenuItem>
+                                <BadgeCheck />
+                                Account
+                            </DropdownMenuItem>
+                            <DropdownMenuItem>
+                                <CreditCard />
+                                Billing
+                            </DropdownMenuItem>
+                            <DropdownMenuItem>
+                                <Bell />
+                                Notifications
+                            </DropdownMenuItem>
+                        </DropdownMenuGroup> */}
                         <DropdownMenuSeparator />
-
                         <DropdownMenuItem onClick={handleLogout}>
                             <LogOut />
                             Log out

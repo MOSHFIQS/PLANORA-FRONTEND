@@ -19,18 +19,18 @@ export async function proxy(request: NextRequest) {
 
 
  
-     if (isAdmin && (pathname.startsWith("/dashboard") || pathname.startsWith("/agent-dashboard"))) {
-          return NextResponse.redirect(new URL("/admin-dashboard", request.url))
-     }
+     // if (isAdmin && (pathname.startsWith("/dashboard") || pathname.startsWith("/agent-dashboard"))) {
+     //      return NextResponse.redirect(new URL("/admin-dashboard", request.url))
+     // }
 
 
-     if (isAgent && (pathname.startsWith("/dashboard") || pathname.startsWith("/admin-dashboard"))) {
-          return NextResponse.redirect(new URL("/agent-dashboard", request.url))
-     }
+     // if (isAgent && (pathname.startsWith("/dashboard") || pathname.startsWith("/admin-dashboard"))) {
+     //      return NextResponse.redirect(new URL("/agent-dashboard", request.url))
+     // }
 
-     if(!role && (pathname.startsWith("/admin-dashboard") || pathname.startsWith("/agent-dashboard") || pathname.startsWith("/dashboard"))){
-          return NextResponse.redirect(new URL("/", request.url))
-     }
+     // if(!role && (pathname.startsWith("/admin-dashboard") || pathname.startsWith("/agent-dashboard") || pathname.startsWith("/dashboard"))){
+     //      return NextResponse.redirect(new URL("/", request.url))
+     // }
 
      // if(!role && (pathname.startsWith("/admin-dashboard") || pathname.startsWith("/agent-dashboard"))){
      //      return NextResponse.redirect(new URL("/", request.url))
@@ -42,8 +42,8 @@ export async function proxy(request: NextRequest) {
 
 export const config = {
      matcher: [
-          "/admin-dashboard/:path*",
-          "/agent-dashboard/:path*",
-          "/dashboard/:path*",
+          // "/admin-dashboard/:path*",
+          // "/agent-dashboard/:path*",
+          // "/dashboard/:path*",
      ],
 }

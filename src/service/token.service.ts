@@ -6,7 +6,7 @@ import { TokenPayload } from "@/types/token.types"
 export const sessionService = {
      getUserFromToken: async (): Promise<TokenPayload | null> => {
           const cookieStore = await cookies()
-          const token = cookieStore.get("accessToken")?.value
+          const token = cookieStore.get("refreshToken")?.value
 
           if (!token) return null
 
