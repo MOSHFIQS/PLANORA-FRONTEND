@@ -24,6 +24,7 @@ import { toast } from "sonner"
 import * as z from "zod"
 
 import { useRouter } from "next/navigation"
+import { useAuth } from "@/context/AuthProvider"
 
 import { signInAction } from "@/actions/auth.action"
 
@@ -33,6 +34,8 @@ const formSchema = z.object({
 })
 
 export function LoginForm({ ...props }: React.ComponentProps<typeof Card>) {
+
+  const { setAuthData } = useAuth();
   const router = useRouter()
 
   const form = useForm({
@@ -59,7 +62,14 @@ export function LoginForm({ ...props }: React.ComponentProps<typeof Card>) {
           return { form: "Invalid email or password" }
         }
 
-       
+        if (result.ok) {
+          setAuthData(
+            result.data.user,
+            result.data.accessToken,
+            result.data.refreshToken,
+            result.data.token
+          );
+        }
 
         toast.success(result.message, { id: toastId })
 
