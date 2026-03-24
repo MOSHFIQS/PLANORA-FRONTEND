@@ -1,68 +1,108 @@
 "use client";
 
 import { format } from "date-fns";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { MyJoinedEvent } from "@/types/joinedEvent.types";
+import { AppImage } from "../appImage/AppImage";
 
 type Props = {
     myEvents: MyJoinedEvent[];
 };
 
 const MyJoinedEventsList = ({ myEvents }: Props) => {
-    if (!myEvents || myEvents.length === 0) {
-        return <p className="p-6 text-gray-500">You haven't joined any events yet.</p>;
+    if (!myEvents?.length) {
+        return (
+            <p className="p-6 text-center text-muted-foreground">
+                You haven't joined any events yet.
+            </p>
+        );
     }
 
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
-            {myEvents.map((joinedEvent) => {
-                const { event, ticket, payment, status } = joinedEvent;
-                const date = new Date(event?.dateTime);
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 ">
+            {myEvents.map((item) => {
+                const { event, payment, status } = item;
+
+                const date = event?.dateTime
+                    ? new Date(event.dateTime)
+                    : null;
+
+                const isPaid =
+                    payment?.some((p) => p.status === "SUCCESS") || false;
+
+                const isApproved = status === "APPROVED" || isPaid;
 
                 return (
-                    <Card key={joinedEvent.id} className="shadow-sm">
-                        <CardHeader>
-                            <CardTitle>{event?.title}</CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                            {event?.images && event?.images[0] && (
-                                <img
-                                    src={event?.images[0]}
-                                    alt={event?.title}
-                                    className="w-full h-40 object-cover rounded-md mb-2"
+                    <Card
+                        key={item.id}
+                        className="overflow-hidden flex flex-col pt-0"
+                    >
+                        {/* IMAGE */}
+                        <div className="relative h-44 w-full">
+                            {event?.images?.[0] && (
+                                <AppImage
+                                    src={event.images[0]}
+                                    className="h-full w-full object-cover"
                                 />
                             )}
 
-                            <p>
-                                {/* <strong>Date:</strong> {format(date, "PPP")} */}
-                            </p>
-                            <p>
-                                {/* <strong>Time:</strong> {format(date, "p")} */}
-                            </p>
-                            <p>
-                                <strong>Venue:</strong> {event?.venue}
-                            </p>
-                            <p>
-                                <strong>Type:</strong> {event?.type}
-                            </p>
-                            <p>
-                                <strong>Fee:</strong> {event?.fee} tk
-                            </p>
-                            <p>
-                                <strong>Participation Status:</strong> {status}
-                            </p>
-                            {ticket && (
-                                <p>
-                                    <strong>Ticket Status:</strong> {ticket?.status}
+                            <div className="absolute top-3 right-3">
+                                <Badge
+                                    variant={isApproved ? "default" : "secondary"}
+                                >
+                                    {isApproved ? "Approved" : "Pending"}
+                                </Badge>
+                            </div>
+                        </div>
+
+                        {/* CONTENT */}
+                        <CardContent className="space-y-3 pt-4">
+                            <h3 className="font-semibold text-base line-clamp-1">
+                                {event?.title}
+                            </h3>
+
+                            {date && (
+                                <p className="text-sm text-muted-foreground">
+                                    {format(date, "PPP • p")}
                                 </p>
                             )}
-                            {payment && payment.length > 0 && (
-                                <p>
-                                    <strong>Payment:</strong>{" "}
-                                    {payment[0]?.status} ({payment[0]?.amount} tk)
+
+                            <div className="flex items-center justify-between text-sm">
+                                {event?.type && (
+                                    <Badge variant="outline">
+                                        {event.type}
+                                    </Badge>
+                                )}
+
+                                <span className="font-medium">
+                                    {event?.fee} tk
+                                </span>
+                            </div>
+
+                            {event?.venue && (
+                                <p className="text-sm text-muted-foreground line-clamp-1">
+                                    {event.venue}
                                 </p>
                             )}
                         </CardContent>
+
+                        {/* FOOTER ACTION */}
+                        <CardFooter className="mt-auto">
+                            {isApproved ? (
+                                <Button className="w-full">
+                                    View Event
+                                </Button>
+                            ) : (
+                                <Button
+                                    variant="secondary"
+                                    className="w-full"
+                                >
+                                    Pay Now
+                                </Button>
+                            )}
+                        </CardFooter>
                     </Card>
                 );
             })}

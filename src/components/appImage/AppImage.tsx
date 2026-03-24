@@ -1,9 +1,20 @@
-import Image from "next/image";
+"use client";
+
+import Image, { ImageProps } from "next/image";
 import { useState } from "react";
 
-const fallbackImage = "/fallback.png"; // put any placeholder in public/images
+const fallbackImage = "/fallback.png";
 
-export const AppImage = ({ src }: { src: string }) => {
+type Props = {
+  src: string;
+  className?: string;
+} & Omit<ImageProps, "src" | "alt">;
+
+export const AppImage = ({
+  src,
+  className = "",
+  ...rest
+}: Props) => {
   const [imgSrc, setImgSrc] = useState(src);
 
   return (
@@ -12,8 +23,9 @@ export const AppImage = ({ src }: { src: string }) => {
       alt="event"
       width={48}
       height={48}
-      className="h-12 w-12 object-cover rounded border"
       onError={() => setImgSrc(fallbackImage)}
+      className={` ${className}`}
+      {...rest}
     />
   );
 };

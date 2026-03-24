@@ -86,7 +86,7 @@ export default function MyEventsList({ myEvents }: { myEvents: Event[] }) {
                   {/* IMAGE */}
                   <TableCell>
                     {event?.images?.[0] ? (
-                     <AppImage src={event.images[0]} />
+                     <AppImage src={event.images[0]} className="h-12 w-12 object-cover rounded border"/>
                     ) : (
                       <div className="h-12 w-12 border rounded flex items-center justify-center" >
                          N/A
