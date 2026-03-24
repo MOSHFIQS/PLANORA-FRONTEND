@@ -25,6 +25,7 @@ import {
   AlertDialogFooter,
 } from "@/components/ui/alert-dialog";
 import { AppImage } from "../appImage/AppImage";
+import { deleteEventAction } from "@/actions/event.action";
 
 // import your actions later
 // import { deleteEventAction } from "@/actions/event.action";
@@ -50,9 +51,9 @@ export default function MyEventsList({ myEvents }: { myEvents: Event[] }) {
   const handleDelete = (id: string) => {
     startTransition(async () => {
       try {
-        // const res = await deleteEventAction(id);
+        const res = await deleteEventAction(id);
 
-        // if (!res?.ok) throw new Error(res?.message);
+        if (!res?.ok) throw new Error(res?.message);
 
         toast.success("Event deleted successfully");
       } catch (err: any) {

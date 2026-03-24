@@ -64,7 +64,7 @@ export async function createEventAction(payload: any) {
             };
         }
 
-        revalidatePath("/events");
+        revalidatePath("/dashboard/event");
 
         return {
             ok: true,
@@ -116,8 +116,7 @@ export async function updateEventAction(id: string, payload: any) {
             };
         }
 
-        revalidatePath("/events");
-        revalidatePath(`/events/${id}`);
+        revalidatePath("/dashboard/event");
 
         return {
             ok: true,
@@ -143,7 +142,7 @@ export async function deleteEventAction(id: string) {
             };
         }
 
-        revalidatePath("/events");
+        revalidatePath("/dashboard/event");
 
         return {
             ok: true,

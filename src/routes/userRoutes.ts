@@ -10,12 +10,12 @@ export const userRoutes: Route[] = [
                     url: "/seller-dashboard/profile",
                },
                {
-                    title: "Create Medicine",
-                    url: "/seller-dashboard/create-medicine",
+                    title: "Create Event",
+                    url: "/dashboard/event/create",
                },
                {
-                    title: "All Medicine",
-                    url: "/seller-dashboard/seller-medicines",
+                    title: "My Events",
+                    url: "/dashboard/event",
                },
 
                {
