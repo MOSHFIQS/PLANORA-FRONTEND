@@ -84,7 +84,7 @@ const CreateEventForm = () => {
                     };
                     console.log(payload);
 
-                
+
                     const res = await createEventAction(payload);
                     if (!res?.ok) {
                          toast.error(res?.message, { id: toastId });
@@ -92,7 +92,7 @@ const CreateEventForm = () => {
                     }
                     console.log(res);
                     toast.success("Event created successfully", { id: toastId });
-                    // router.push("/events");
+                    router.push("/dashboard/event");
                } catch (err: any) {
                     toast.error("Something went wrong", { id: toastId });
                }
@@ -284,59 +284,61 @@ const CreateEventForm = () => {
                                         field.state.meta.isTouched && !field.state.meta.isValid;
 
                                    return (
-                                        <FieldGroup className="flex-row">
-                                             {/* DATE */}
-                                             <Field>
-                                                  <FieldLabel htmlFor="date">Date</FieldLabel>
-                                                  <Popover open={datePickerOpen} onOpenChange={setDatePickerOpen}>
-                                                       <PopoverTrigger asChild>
-                                                            <Button
-                                                                 variant="outline"
-                                                                 id="date"
-                                                                 className="w-32 justify-between font-normal"
-                                                            >
-                                                                 {selectedDate
-                                                                      ? format(selectedDate, "PPP")
-                                                                      : "Select date"}
-                                                            </Button>
-                                                       </PopoverTrigger>
+                                        <FieldGroup className="flex-col">
+                                             <div className="flex gap-4">
+                                                  {/* DATE */}
+                                                  <Field>
+                                                       <FieldLabel htmlFor="date">Date</FieldLabel>
+                                                       <Popover open={datePickerOpen} onOpenChange={setDatePickerOpen}>
+                                                            <PopoverTrigger asChild>
+                                                                 <Button
+                                                                      variant="outline"
+                                                                      id="date"
+                                                                      className="w-32 justify-between font-normal"
+                                                                 >
+                                                                      {selectedDate
+                                                                           ? format(selectedDate, "PPP")
+                                                                           : "Select date"}
+                                                                 </Button>
+                                                            </PopoverTrigger>
 
-                                                       <PopoverContent className="w-auto p-0" align="start">
-                                                            <Calendar
-                                                                 mode="single"
-                                                                 selected={selectedDate}
-                                                                 captionLayout="dropdown"
-                                                                 defaultMonth={selectedDate}
-                                                                 onSelect={(date) => {
-                                                                      setSelectedDate(date);
-                                                                      setDatePickerOpen(false);
+                                                            <PopoverContent className="w-auto p-0" align="start">
+                                                                 <Calendar
+                                                                      mode="single"
+                                                                      selected={selectedDate}
+                                                                      captionLayout="dropdown"
+                                                                      defaultMonth={selectedDate}
+                                                                      onSelect={(date) => {
+                                                                           setSelectedDate(date);
+                                                                           setDatePickerOpen(false);
 
-                                                                      const combined = combineDateTime(date, selectedTime);
-                                                                      if (combined) field.handleChange(combined);
-                                                                 }}
-                                                            />
-                                                       </PopoverContent>
-                                                  </Popover>
-                                             </Field>
+                                                                           const combined = combineDateTime(date, selectedTime);
+                                                                           if (combined) field.handleChange(combined);
+                                                                      }}
+                                                                 />
+                                                            </PopoverContent>
+                                                       </Popover>
+                                                  </Field>
 
-                                             {/* TIME */}
-                                             <Field className="w-32">
-                                                  <FieldLabel htmlFor="time">Time</FieldLabel>
-                                                  <Input
-                                                       type="time"
-                                                       id="time"
-                                                       step="1"
-                                                       value={selectedTime}
-                                                       onChange={(e) => {
-                                                            const time = e.target.value;
-                                                            setSelectedTime(time);
+                                                  {/* TIME */}
+                                                  <Field className="w-32">
+                                                       <FieldLabel htmlFor="time">Time</FieldLabel>
+                                                       <Input
+                                                            type="time"
+                                                            id="time"
+                                                            step="1"
+                                                            value={selectedTime}
+                                                            onChange={(e) => {
+                                                                 const time = e.target.value;
+                                                                 setSelectedTime(time);
 
-                                                            const combined = combineDateTime(selectedDate, time);
-                                                            if (combined) field.handleChange(combined);
-                                                       }}
-                                                       className="appearance-none bg-background [&::-webkit-calendar-picker-indicator]:hidden"
-                                                  />
-                                             </Field>
+                                                                 const combined = combineDateTime(selectedDate, time);
+                                                                 if (combined) field.handleChange(combined);
+                                                            }}
+                                                            className="appearance-none bg-background [&::-webkit-calendar-picker-indicator]:hidden"
+                                                       />
+                                                  </Field>
+                                             </div>
 
                                              {isInvalid && <FieldError errors={field.state.meta.errors} />}
                                         </FieldGroup>
