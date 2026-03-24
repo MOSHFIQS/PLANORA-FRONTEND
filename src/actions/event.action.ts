@@ -55,6 +55,7 @@ export async function getSingleEventAction(id: string) {
 export async function createEventAction(payload: any) {
     try {
         const res = await eventService.createEvent(payload);
+        console.log(res);
 
         if (!res?.ok) {
             return {
@@ -68,6 +69,8 @@ export async function createEventAction(payload: any) {
         return {
             ok: true,
             message: res.message || "Event created successfully",
+            data: res.data
+
         };
     } catch {
         return {

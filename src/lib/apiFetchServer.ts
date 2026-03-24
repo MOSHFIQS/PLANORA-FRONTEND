@@ -23,6 +23,7 @@ export async function apiFetchServerMain(
                },
                body: options?.body,
           });
+          // console.log(res);
 
           let data: any = {};
           try {
@@ -30,7 +31,7 @@ export async function apiFetchServerMain(
           } catch {
                data = {};
           }
-          // console.log(data);
+          // console.log("data 33",data);
 
           if (!res.ok) {
                return {
