@@ -3,7 +3,7 @@ import { Route } from "@/types/routes.type";
 
 export const userRoutes: Route[] = [
      {
-          title: "agent sidebar",
+          title: "user sidebar",
           items: [
                {
                     title: "Profile",

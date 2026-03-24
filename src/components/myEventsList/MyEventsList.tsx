@@ -127,7 +127,7 @@ export default function MyEventsList({ myEvents }: { myEvents: Event[] }) {
                       size="icon"
                       variant="outline"
                       onClick={() =>
-                        router.push(`/events/${event?.id}`)
+                        router.push(`/dashboard/event/${event?.id}`)
                       }
                     >
                       <Eye className="w-4 h-4" />
