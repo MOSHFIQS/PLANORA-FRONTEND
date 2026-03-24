@@ -43,11 +43,11 @@ export function AppSidebar({ user, ...props }: { user: { role: string } & React.
                <SidebarContent >
                     <Link href={"/"} className="flex items-center gap-2 justify-start pt-4 pl-4">
                          <img
-                              src="https://deifkwefumgah.cloudfront.net/shadcnblocks/block/logos/shadcnblockscom-icon.svg"
+                              src="/logo/logo.png"
                               className="max-h-8 dark:invert"
                               alt="logo"
                          />
-                         <span className="text-lg font-semibold tracking-tighter">Afrans Perfume</span>
+                         <span className="text-lg font-semibold tracking-tighter">PLANORA</span>
                     </Link>
 
                     {routes.map((group) => (
