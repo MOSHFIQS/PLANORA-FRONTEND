@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { AppImage } from "../appImage/AppImage";
 import ImageMagnifier from "../imageMagnifier/ImageMagnifier";
+import DescriptionViwer from "../descriptionViwer/DescriptionViwer";
 
 type Event = {
      id: string;
@@ -76,10 +77,12 @@ const EventDetails = ({ event }: { event: Event }) => {
                     </CardHeader>
 
                     <CardContent>
-                         <div
-                              className="prose max-w-none"
-                              dangerouslySetInnerHTML={{ __html: event?.description }}
-                         />
+                         <div>
+                              <DescriptionViwer
+                                   description={event.description}
+                                   height="300px"
+                              />
+                         </div>
                     </CardContent>
                </Card>
 
