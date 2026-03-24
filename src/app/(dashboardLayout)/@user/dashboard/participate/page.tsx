@@ -1,6 +1,6 @@
-import { getMyEventsAction } from '@/actions/event.action';
-import MyEventsList from '@/components/myEventsList/MyEventsList';
-import React from 'react';
+
+import { getMyEventsAction } from '@/actions/participate.action';
+import MyJoinedEventsList from '@/components/myJoinedEventList/MyJoinedEventsList';
 
 const MyJoinedEventsPage = async () => {
 
@@ -15,7 +15,7 @@ const MyJoinedEventsPage = async () => {
           );
      }
 
-     // return <MyJoinedEvents myEvents={res?.data} />;
+     return <MyJoinedEventsList myEvents={res?.data} />;
 };
 
 export default MyJoinedEventsPage;

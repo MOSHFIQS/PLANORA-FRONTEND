@@ -19,8 +19,8 @@ export const userRoutes: Route[] = [
                },
 
                {
-                    title: "My Orders",
-                    url: "/seller-dashboard/my-orders",
+                    title: "My Joined Events",
+                    url: "/dashboard/participate",
                },
                {
                     title: "Home",

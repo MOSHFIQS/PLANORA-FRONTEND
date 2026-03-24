@@ -2,7 +2,7 @@ import React from 'react'
 
 const AgentProfile = () => {
   return (
-    <div>AgentProfile</div>
+    <div>UserProfile</div>
   )
 }
 
