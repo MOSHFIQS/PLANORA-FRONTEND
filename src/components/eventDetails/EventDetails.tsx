@@ -7,19 +7,9 @@ import { Button } from "@/components/ui/button";
 import { AppImage } from "../appImage/AppImage";
 import ImageMagnifier from "../imageMagnifier/ImageMagnifier";
 import DescriptionViwer from "../descriptionViwer/DescriptionViwer";
+import { Event } from "@/types/event.types";
 
-type Event = {
-     id: string;
-     title: string;
-     description: string;
-     venue?: string;
-     dateTime: string;
-     visibility: "PUBLIC" | "PRIVATE";
-     type: "ONLINE" | "OFFLINE";
-     meetingLink?: string;
-     fee: number;
-     images: string[];
-};
+
 
 const EventDetails = ({ event }: { event: Event }) => {
      return (

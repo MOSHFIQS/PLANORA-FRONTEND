@@ -8,7 +8,7 @@ export interface Event {
      visibility: "PUBLIC" | "PRIVATE";
      type: "ONLINE" | "OFFLINE";
      meetingLink: string;
-     fee: string;
+     fee: number;
      images: string[];
      createdAt: string;
      updatedAt: string;

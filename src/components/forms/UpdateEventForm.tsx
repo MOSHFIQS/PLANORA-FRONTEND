@@ -47,10 +47,9 @@ const UpdateEventForm = ({ event }: Props) => {
 
     const eventImages = useImageUpload({
      max: 10,
-     defaultImages: event?.images || [], // works perfectly
+     defaultImages: event?.images || [], 
 });
 
-     // date + time split from existing value
      const existingDate = event?.dateTime ? new Date(event.dateTime) : undefined;
 
      const [selectedDate, setSelectedDate] = useState<Date | undefined>(

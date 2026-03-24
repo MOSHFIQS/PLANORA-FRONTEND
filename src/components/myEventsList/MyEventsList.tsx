@@ -26,22 +26,12 @@ import {
 } from "@/components/ui/alert-dialog";
 import { AppImage } from "../appImage/AppImage";
 import { deleteEventAction } from "@/actions/event.action";
+import { Event } from "@/types/event.types";
 
 // import your actions later
 // import { deleteEventAction } from "@/actions/event.action";
 
-type Event = {
-  id: string;
-  title: string;
-  description: string;
-  venue?: string;
-  dateTime: string;
-  visibility: "PUBLIC" | "PRIVATE";
-  type: "ONLINE" | "OFFLINE";
-  meetingLink?: string;
-  fee: number;
-  images: string[];
-};
+
 
 export default function MyEventsList({ myEvents }: { myEvents: Event[] }) {
   const router = useRouter();
