@@ -13,10 +13,18 @@ export type ImageType = {
 
 type Options = {
      max?: number;
+     defaultImages?: string[]; 
 };
 
-export const useImageUpload = ({ max = 5 }: Options = {}) => {
-     const [images, setImages] = useState<ImageType[]>([]);
+export const useImageUpload = ({ max = 5, defaultImages = [] }: Options = {}) => {
+     const [images, setImages] = useState<ImageType[]>(
+          defaultImages.map((img, index) => ({
+               id: crypto.randomUUID(),
+               name: `Image-${index}`,
+               img,
+               imageUploading: false,
+          }))
+     );
 
      const upload = async (file: File) => {
           if (images.length >= max) {
@@ -45,11 +53,7 @@ export const useImageUpload = ({ max = 5 }: Options = {}) => {
                setImages((prev) =>
                     prev.map((img) =>
                          img.id === tempId
-                              ? {
-                                   ...img,
-                                   img: res.data?.url,
-                                   imageUploading: false,
-                              }
+                              ? { ...img, img: res.data?.url, imageUploading: false }
                               : img
                     )
                );
@@ -60,14 +64,26 @@ export const useImageUpload = ({ max = 5 }: Options = {}) => {
      };
 
      const remove = async (img: ImageType) => {
-          try {
-               await deleteImagesAction({ url: img.img });
+     try {
+          setImages((prev) =>
+               prev.map((i) =>
+                    i.id === img.id ? { ...i, imageUploading: true } : i
+               )
+          );
 
-               setImages((prev) => prev.filter((i) => i.id !== img.id));
-          } catch (err: any) {
-               toast.error(err?.message);
-          }
-     };
+          await deleteImagesAction({ url: img.img });
+
+          setImages((prev) => prev.filter((i) => i.id !== img.id));
+     } catch (err: any) {
+          toast.error(err?.message);
+
+          setImages((prev) =>
+               prev.map((i) =>
+                    i.id === img.id ? { ...i, imageUploading: false } : i
+               )
+          );
+     }
+};
 
      return {
           images,

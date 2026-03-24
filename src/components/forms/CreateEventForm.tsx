@@ -219,6 +219,7 @@ const CreateEventForm = () => {
                                                   <FieldLabel htmlFor={field.name}>Meeting Link</FieldLabel>
                                                   <Input
                                                        id={field.name}
+                                                       type="url"
                                                        name={field.name}
                                                        placeholder="Meeting Link (if ONLINE)"
                                                        value={field.state.value}

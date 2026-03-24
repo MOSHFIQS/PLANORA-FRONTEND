@@ -118,7 +118,7 @@ export default function MyEventsList({ myEvents }: { myEvents: Event[] }) {
                   <TableCell>{event?.visibility}</TableCell>
 
                   {/* FEE */}
-                  <TableCell>{event?.fee}tk</TableCell>
+                  <TableCell>{event?.fee} tk</TableCell>
 
                   {/* ACTIONS */}
                   <TableCell className="text-right space-x-2">
