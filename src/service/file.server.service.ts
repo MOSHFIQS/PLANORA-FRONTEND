@@ -5,7 +5,7 @@ export const fileService = {
     uploadImages: (formData: FormData) =>
         apiFetchServerMain("/file/upload-image", {
             method: "POST",
-            body: formData, // DO NOT stringify
+            body: formData, 
         }),
 
     // delete single or multiple images

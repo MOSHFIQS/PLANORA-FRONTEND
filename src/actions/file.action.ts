@@ -5,6 +5,7 @@ import { fileService } from "@/service/file.server.service";
 export async function uploadImagesAction(formData: FormData) {
     try {
         const res = await fileService.uploadImages(formData);
+        console.log(res);
 
         if (!res?.ok) {
             return {
@@ -31,6 +32,7 @@ export async function deleteImagesAction(payload: {
 }) {
     try {
         const res = await fileService.deleteImages(payload);
+        console.log(res);
 
         if (!res?.ok) {
             return {

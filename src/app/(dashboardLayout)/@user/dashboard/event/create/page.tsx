@@ -1,9 +1,10 @@
+import CreateEventForm from "@/components/forms/CreateEventForm";
 
 
 const CreateProductPage = async () => {
      return (
           <div>
-               {/* <CreateEventForm /> */}
+               <CreateEventForm />
           </div>
      );
 };
