@@ -9,7 +9,7 @@ import { createEventAction } from "@/actions/event.action";
 import { useImageUpload } from "@/hooks/useImageUpload";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Field, FieldLabel, FieldError } from "@/components/ui/field";
+import { Field, FieldLabel, FieldError, FieldGroup } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import ImageUploader from "@/components/imageUploader/ImageUploader";
@@ -20,7 +20,11 @@ import {
      SelectTrigger,
      SelectValue,
 } from "@/components/ui/select";
-
+import TextEditor from "../textEditor/TextEditor";
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
+import { Calendar } from "../ui/calendar";
+import { useState } from "react";
+import { format } from "date-fns";
 
 // -------------------- validation schema --------------------
 const formSchema = z.object({
@@ -39,6 +43,19 @@ const formSchema = z.object({
 const CreateEventForm = () => {
      const router = useRouter();
      const eventImages = useImageUpload({ max: 10 });
+     const [datePickerOpen, setDatePickerOpen] = useState(false);
+     const [selectedDate, setSelectedDate] = useState<Date | undefined>();
+     const [selectedTime, setSelectedTime] = useState("10:30:00");
+
+     const combineDateTime = (date?: Date, time?: string) => {
+          if (!date || !time) return "";
+
+          const [hours, minutes, seconds] = time.split(":").map(Number);
+          const newDate = new Date(date);
+          newDate.setHours(hours || 0, minutes || 0, seconds || 0);
+
+          return newDate.toISOString();
+     };
 
      const form = useForm({
           defaultValues: {
@@ -65,9 +82,9 @@ const CreateEventForm = () => {
                               .filter((img) => !img.imageUploading)
                               .map((img) => img.img),
                     };
-                    //    console.log(payload);
+                    console.log(payload);
 
-                    // Uncomment when ready to call API
+                
                     const res = await createEventAction(payload);
                     if (!res?.ok) {
                          toast.error(res?.message, { id: toastId });
@@ -96,25 +113,144 @@ const CreateEventForm = () => {
                          }}
                          className="space-y-6"
                     >
-                         {/** TITLE */}
-                         <form.Field name="title">
-                              {(field) => {
-                                   const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
-                                   return (
-                                        <Field >
-                                             <FieldLabel htmlFor={field.name}>Title</FieldLabel>
-                                             <Input
-                                                  id={field.name}
-                                                  name={field.name}
-                                                  placeholder="Event Title"
-                                                  value={field.state.value}
-                                                  onChange={(e) => field.handleChange(e.target.value)}
-                                             />
-                                             {isInvalid && <FieldError errors={field.state.meta.errors} />}
-                                        </Field>
-                                   );
-                              }}
-                         </form.Field>
+                         <div className="grid grid-cols-2 gap-4">
+                              {/** TITLE */}
+                              <form.Field name="title">
+                                   {(field) => {
+                                        const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
+                                        return (
+                                             <Field >
+                                                  <FieldLabel htmlFor={field.name}>Title</FieldLabel>
+                                                  <Input
+                                                       id={field.name}
+                                                       name={field.name}
+                                                       placeholder="Event Title"
+                                                       value={field.state.value}
+                                                       onChange={(e) => field.handleChange(e.target.value)}
+                                                  />
+                                                  {isInvalid && <FieldError errors={field.state.meta.errors} />}
+                                             </Field>
+                                        );
+                                   }}
+                              </form.Field>
+
+
+
+                              {/** VENUE */}
+                              <form.Field name="venue">
+                                   {(field) => {
+                                        const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
+                                        return (
+                                             <Field >
+                                                  <FieldLabel htmlFor={field.name}>Venue</FieldLabel>
+                                                  <Input
+                                                       id={field.name}
+                                                       name={field.name}
+                                                       placeholder="Event Venue"
+                                                       value={field.state.value}
+                                                       onChange={(e) => field.handleChange(e.target.value)}
+                                                  />
+                                                  {isInvalid && <FieldError errors={field.state.meta.errors} />}
+                                             </Field>
+                                        );
+                                   }}
+                              </form.Field>
+
+
+
+                              <form.Field name="visibility">
+                                   {(field) => {
+                                        const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
+                                        return (
+                                             <Field >
+                                                  <FieldLabel htmlFor={field.name}>Visibility</FieldLabel>
+                                                  <Select
+                                                       value={field.state.value}
+                                                       onValueChange={(val: "PUBLIC" | "PRIVATE") =>
+                                                            field.handleChange(val)
+                                                       }
+                                                  >
+                                                       <SelectTrigger id={field.name}>
+                                                            <SelectValue placeholder="Select visibility" />
+                                                       </SelectTrigger>
+                                                       <SelectContent>
+                                                            <SelectItem value="PUBLIC">Public</SelectItem>
+                                                            <SelectItem value="PRIVATE">Private</SelectItem>
+                                                       </SelectContent>
+                                                  </Select>
+                                                  {isInvalid && <FieldError errors={field.state.meta.errors} />}
+                                             </Field>
+                                        );
+                                   }}
+                              </form.Field>
+
+                              <form.Field name="type">
+                                   {(field) => {
+                                        const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
+                                        return (
+                                             <Field >
+                                                  <FieldLabel htmlFor={field.name}>Event Type</FieldLabel>
+                                                  <Select
+                                                       value={field.state.value}
+                                                       onValueChange={(val: "ONLINE" | "OFFLINE") =>
+                                                            field.handleChange(val)
+                                                       }
+                                                  >
+                                                       <SelectTrigger id={field.name}>
+                                                            <SelectValue placeholder="Select type" />
+                                                       </SelectTrigger>
+                                                       <SelectContent>
+                                                            <SelectItem value="ONLINE">Online</SelectItem>
+                                                            <SelectItem value="OFFLINE">Offline</SelectItem>
+                                                       </SelectContent>
+                                                  </Select>
+                                                  {isInvalid && <FieldError errors={field.state.meta.errors} />}
+                                             </Field>
+                                        );
+                                   }}
+                              </form.Field>
+
+                              {/** MEETING LINK */}
+                              <form.Field name="meetingLink">
+                                   {(field) => {
+                                        const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
+                                        return (
+                                             <Field >
+                                                  <FieldLabel htmlFor={field.name}>Meeting Link</FieldLabel>
+                                                  <Input
+                                                       id={field.name}
+                                                       name={field.name}
+                                                       placeholder="Meeting Link (if ONLINE)"
+                                                       value={field.state.value}
+                                                       onChange={(e) => field.handleChange(e.target.value)}
+                                                  />
+                                                  {isInvalid && <FieldError errors={field.state.meta.errors} />}
+                                             </Field>
+                                        );
+                                   }}
+                              </form.Field>
+
+                              {/** FEE */}
+                              <form.Field name="fee">
+                                   {(field) => {
+                                        const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
+                                        return (
+                                             <Field >
+                                                  <FieldLabel htmlFor={field.name}>Fee</FieldLabel>
+                                                  <Input
+                                                       id={field.name}
+                                                       name={field.name}
+                                                       type="number"
+                                                       value={field.state.value}
+                                                       onChange={(e) => field.handleChange(Number(e.target.value))}
+                                                  />
+                                                  {isInvalid && <FieldError errors={field.state.meta.errors} />}
+                                             </Field>
+                                        );
+                                   }}
+                              </form.Field>
+                         </div>
+
 
                          {/** DESCRIPTION */}
                          <form.Field name="description">
@@ -123,12 +259,17 @@ const CreateEventForm = () => {
                                    return (
                                         <Field >
                                              <FieldLabel htmlFor={field.name}>Description</FieldLabel>
-                                             <Input
-                                                  id={field.name}
-                                                  name={field.name}
-                                                  placeholder="Event Description"
+                                             <TextEditor
+                                                  label="Description "
+                                                  placeholder="Style your product description here..."
                                                   value={field.state.value}
-                                                  onChange={(e) => field.handleChange(e.target.value)}
+                                                  onChange={field.handleChange}
+                                                  // error={
+                                                  //      field.state.meta.isTouched && field.state.meta.errors?.length
+                                                  //           ? String(field.state.meta.errors[0]?.message)
+                                                  //           : undefined
+                                                  // }
+                                                  height="300px"
                                              />
                                              {isInvalid && <FieldError errors={field.state.meta.errors} />}
                                         </Field>
@@ -136,134 +277,69 @@ const CreateEventForm = () => {
                               }}
                          </form.Field>
 
-                         {/** VENUE */}
-                         <form.Field name="venue">
-                              {(field) => {
-                                   const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
-                                   return (
-                                        <Field >
-                                             <FieldLabel htmlFor={field.name}>Venue</FieldLabel>
-                                             <Input
-                                                  id={field.name}
-                                                  name={field.name}
-                                                  placeholder="Event Venue"
-                                                  value={field.state.value}
-                                                  onChange={(e) => field.handleChange(e.target.value)}
-                                             />
-                                             {isInvalid && <FieldError errors={field.state.meta.errors} />}
-                                        </Field>
-                                   );
-                              }}
-                         </form.Field>
 
-                         {/** DATE & TIME */}
                          <form.Field name="dateTime">
                               {(field) => {
-                                   const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
-                                   return (
-                                        <Field >
-                                             <FieldLabel htmlFor={field.name}>Date & Time</FieldLabel>
-                                             <Input
-                                                  id={field.name}
-                                                  name={field.name}
-                                                  type="datetime-local"
-                                                  value={field.state.value}
-                                                  onChange={(e) => field.handleChange(e.target.value)}
-                                             />
-                                             {isInvalid && <FieldError errors={field.state.meta.errors} />}
-                                        </Field>
-                                   );
-                              }}
-                         </form.Field>
+                                   const isInvalid =
+                                        field.state.meta.isTouched && !field.state.meta.isValid;
 
-                         <form.Field name="visibility">
-                              {(field) => {
-                                   const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
                                    return (
-                                        <Field >
-                                             <FieldLabel htmlFor={field.name}>Visibility</FieldLabel>
-                                             <Select
-                                                  value={field.state.value}
-                                                  onValueChange={(val: "PUBLIC" | "PRIVATE") =>
-                                                       field.handleChange(val)
-                                                  }
-                                             >
-                                                  <SelectTrigger id={field.name}>
-                                                       <SelectValue placeholder="Select visibility" />
-                                                  </SelectTrigger>
-                                                  <SelectContent>
-                                                       <SelectItem value="PUBLIC">Public</SelectItem>
-                                                       <SelectItem value="PRIVATE">Private</SelectItem>
-                                                  </SelectContent>
-                                             </Select>
-                                             {isInvalid && <FieldError errors={field.state.meta.errors} />}
-                                        </Field>
-                                   );
-                              }}
-                         </form.Field>
+                                        <FieldGroup className="flex-row">
+                                             {/* DATE */}
+                                             <Field>
+                                                  <FieldLabel htmlFor="date">Date</FieldLabel>
+                                                  <Popover open={datePickerOpen} onOpenChange={setDatePickerOpen}>
+                                                       <PopoverTrigger asChild>
+                                                            <Button
+                                                                 variant="outline"
+                                                                 id="date"
+                                                                 className="w-32 justify-between font-normal"
+                                                            >
+                                                                 {selectedDate
+                                                                      ? format(selectedDate, "PPP")
+                                                                      : "Select date"}
+                                                            </Button>
+                                                       </PopoverTrigger>
 
-                         <form.Field name="type">
-                              {(field) => {
-                                   const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
-                                   return (
-                                        <Field >
-                                             <FieldLabel htmlFor={field.name}>Event Type</FieldLabel>
-                                             <Select
-                                                  value={field.state.value}
-                                                  onValueChange={(val: "ONLINE" | "OFFLINE") =>
-                                                       field.handleChange(val)
-                                                  }
-                                             >
-                                                  <SelectTrigger id={field.name}>
-                                                       <SelectValue placeholder="Select type" />
-                                                  </SelectTrigger>
-                                                  <SelectContent>
-                                                       <SelectItem value="ONLINE">Online</SelectItem>
-                                                       <SelectItem value="OFFLINE">Offline</SelectItem>
-                                                  </SelectContent>
-                                             </Select>
-                                             {isInvalid && <FieldError errors={field.state.meta.errors} />}
-                                        </Field>
-                                   );
-                              }}
-                         </form.Field>
+                                                       <PopoverContent className="w-auto p-0" align="start">
+                                                            <Calendar
+                                                                 mode="single"
+                                                                 selected={selectedDate}
+                                                                 captionLayout="dropdown"
+                                                                 defaultMonth={selectedDate}
+                                                                 onSelect={(date) => {
+                                                                      setSelectedDate(date);
+                                                                      setDatePickerOpen(false);
 
-                         {/** MEETING LINK */}
-                         <form.Field name="meetingLink">
-                              {(field) => {
-                                   const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
-                                   return (
-                                        <Field >
-                                             <FieldLabel htmlFor={field.name}>Meeting Link</FieldLabel>
-                                             <Input
-                                                  id={field.name}
-                                                  name={field.name}
-                                                  placeholder="Meeting Link (if ONLINE)"
-                                                  value={field.state.value}
-                                                  onChange={(e) => field.handleChange(e.target.value)}
-                                             />
-                                             {isInvalid && <FieldError errors={field.state.meta.errors} />}
-                                        </Field>
-                                   );
-                              }}
-                         </form.Field>
+                                                                      const combined = combineDateTime(date, selectedTime);
+                                                                      if (combined) field.handleChange(combined);
+                                                                 }}
+                                                            />
+                                                       </PopoverContent>
+                                                  </Popover>
+                                             </Field>
 
-                         {/** FEE */}
-                         <form.Field name="fee">
-                              {(field) => {
-                                   const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
-                                   return (
-                                        <Field >
-                                             <FieldLabel htmlFor={field.name}>Fee</FieldLabel>
-                                             <Input
-                                                  id={field.name}
-                                                  name={field.name}
-                                                  type="number"
-                                                  value={field.state.value}
-                                                  onChange={(e) => field.handleChange(Number(e.target.value))}
-                                             />
+                                             {/* TIME */}
+                                             <Field className="w-32">
+                                                  <FieldLabel htmlFor="time">Time</FieldLabel>
+                                                  <Input
+                                                       type="time"
+                                                       id="time"
+                                                       step="1"
+                                                       value={selectedTime}
+                                                       onChange={(e) => {
+                                                            const time = e.target.value;
+                                                            setSelectedTime(time);
+
+                                                            const combined = combineDateTime(selectedDate, time);
+                                                            if (combined) field.handleChange(combined);
+                                                       }}
+                                                       className="appearance-none bg-background [&::-webkit-calendar-picker-indicator]:hidden"
+                                                  />
+                                             </Field>
+
                                              {isInvalid && <FieldError errors={field.state.meta.errors} />}
-                                        </Field>
+                                        </FieldGroup>
                                    );
                               }}
                          </form.Field>
