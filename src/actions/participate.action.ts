@@ -15,7 +15,19 @@ export async function getMyEventsAction() {
           return { ok: false, message: err?.message || "Something went wrong" };
      }
 }
+export async function getMySingleEventAction(id: string) {
+    try {
+        const res = await participationService.getMySingleEvent(id);
 
+        if (!res?.ok) {
+            return { ok: false, message: res?.message || "Failed to fetch participation" };
+        }
+
+        return { ok: true, data: res.data };
+    } catch (err: any) {
+        return { ok: false, message: err?.message || "Something went wrong" };
+    }
+}
 
 export async function getEventParticipantsAction(eventId: string) {
      try {

@@ -13,7 +13,7 @@ import { AppSidebar } from "@/components/appSidebar/app-sidebar"
 export default async  function DashboardLayout({ admin, user }: { admin: ReactNode, user: ReactNode }) {
 
      const data = await sessionService.getUserFromToken()
-     console.log("token",data);
+     // console.log("token",data);
      if (!data) {
           redirect("/login");
      }
