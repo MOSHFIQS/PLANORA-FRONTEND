@@ -7,16 +7,14 @@ import { Button } from "@/components/ui/button";
 import { MyJoinedEvent } from "@/types/joinedEvent.types";
 import { AppImage } from "../appImage/AppImage";
 import Link from "next/link";
-import { initiatePaymentAction } from "@/actions/payment.action";
-import { toast } from "sonner";
-import { useState } from "react";
+import { usePayment } from "@/hooks/usePayment";
 
 type Props = {
   myEvents: MyJoinedEvent[];
 };
 
 const MyJoinedEventsCard = ({ myEvents }: Props) => {
-  const [loadingId, setLoadingId] = useState<string | null>(null);
+  const { handlePayment, loadingId } = usePayment();
 
   if (!myEvents?.length) {
     return (
@@ -26,28 +24,7 @@ const MyJoinedEventsCard = ({ myEvents }: Props) => {
     );
   }
 
-  const handlePayment = async (payload: {
-    eventId?: string;
-    invitationId?: string;
-  }) => {
-    const key = payload.eventId || payload.invitationId || "";
-    setLoadingId(key);
 
-    const toastId = toast.loading("Redirecting to payment...");
-
-    const res = await initiatePaymentAction(payload);
-
-    if (!res?.ok) {
-      toast.error(res?.message, { id: toastId });
-      setLoadingId(null);
-      return;
-    }
-
-    toast.success("Redirecting...", { id: toastId });
-
-    // redirect to Stripe
-    window.location.href = res.data.paymentUrl;
-  };
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -122,14 +99,10 @@ const MyJoinedEventsCard = ({ myEvents }: Props) => {
                   onClick={() =>
                     handlePayment({
                       eventId: item.eventId,
-                      // future ready if you add invitations:
-                      // invitationId: item.invitationId
                     })
                   }
                 >
-                  {loadingId === item.eventId
-                    ? "Processing..."
-                    : "Pay Now"}
+                  {loadingId === item.eventId ? "Processing..." : "Pay Now"}
                 </Button>
               )}
             </CardFooter>

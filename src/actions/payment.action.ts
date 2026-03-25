@@ -15,7 +15,6 @@ export async function initiatePaymentAction(payload: {
         message: res?.message || "Payment failed",
       };
     }
-
     return {
       ok: true,
       data: res.data, // { paymentId, paymentUrl }
