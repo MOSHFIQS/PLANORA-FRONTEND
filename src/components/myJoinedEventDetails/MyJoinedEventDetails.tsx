@@ -88,7 +88,7 @@ const MyJoinedEventDetails = ({ joinedEventData }: Props) => {
                     </div>
                   )}
                   <div className="space-y-1">
-                    <p className="text-center pt-3">
+                    <p className="text-center ">
                       <span className="font-semibold">Ticket:</span>{" "}
                       {ticket.status}
                     </p>

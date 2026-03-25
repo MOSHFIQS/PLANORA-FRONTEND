@@ -3,7 +3,6 @@
 import { format } from "date-fns";
 import {
   Card,
-  CardContent,
   CardHeader,
   CardTitle,
   CardDescription,
@@ -92,14 +91,11 @@ const EventDetailsSmart = ({ type, data }: Props) => {
                 <Badge variant="outline">{event?.type}</Badge>
               </p>
 
-              <p>
-                <span className="font-semibold">Fee:</span>{" "}
-                {event?.fee} tk{" "}
-                {isFree && (
-                  <span className="text-green-600 font-medium">
-                    (Free)
-                  </span>
-                )}
+              <p className="flex items-center gap-2">
+                <span className="font-semibold">Fee : </span>
+                <span className="px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-700">
+                  {event.fee} tk
+                </span>
               </p>
 
               {/* ONLY FULL */}
@@ -119,7 +115,7 @@ const EventDetailsSmart = ({ type, data }: Props) => {
               {isFull && ticket?.qrCode && (
                 <Card className="p-4">
                   <QRCodeCanvas value={ticket.qrCode} size={180} />
-                  <p className="text-center pt-3">
+                  <p className="text-center ">
                     <span className="font-semibold ">Ticket:</span>{" "}
                     {ticket.status}
                   </p>
@@ -193,21 +189,27 @@ const EventDetailsSmart = ({ type, data }: Props) => {
           )}
         </div>
 
-        {/* FOOTER PAY BUTTON (PUBLIC ONLY) */}
-        {!isFull && !isFree && (
-          <CardFooter>
+        {!isFull && (
+          <CardFooter className="px-4">
             <Button
-              className="w-full"
-              disabled={loadingId === event?.id}
-              onClick={() =>
+              className={`w-full`}
+              disabled={loadingId === event?.id || !event?.id}
+              onClick={() => {
+                if (!event?.id) {
+                  console.error("Missing event id", event);
+                  return;
+                }
+
                 handlePayment({
-                  eventId: event?.id,
-                })
-              }
+                  eventId: event.id,
+                });
+              }}
             >
               {loadingId === event?.id
                 ? "Processing..."
-                : "Unlock Full Access"}
+                : isFree
+                  ? "Join Free"
+                  : `Pay ${event?.fee} tk to join event`}
             </Button>
           </CardFooter>
         )}

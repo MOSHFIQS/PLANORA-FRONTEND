@@ -22,7 +22,6 @@ export async function apiFetchServerMain(
                     ...(options?.headers || {}),
                },
                body: options?.body,
-               cache: "no-store",
           });
           // console.log(res);
 

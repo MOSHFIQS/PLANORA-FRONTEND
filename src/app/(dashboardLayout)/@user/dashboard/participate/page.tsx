@@ -1,7 +1,5 @@
 import { getMyEventsAction } from '@/actions/participate.action';
 import MyJoinedEventsCard from '@/components/myJoinedEventCard/MyJoinedEventsCard';
-import PaymentRefreshHandler from '@/components/payment/PaymentRefreshHandler';
-export const dynamic = "force-dynamic";
 
 
 const MyJoinedEventsPage = async () => {
@@ -18,7 +16,6 @@ const MyJoinedEventsPage = async () => {
 
      return (
           <>
-               <PaymentRefreshHandler />
                <MyJoinedEventsCard myEvents={res.data} />
           </>
      );

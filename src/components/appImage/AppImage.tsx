@@ -21,10 +21,9 @@ export const AppImage = ({
     <Image
       src={imgSrc}
       alt="event"
-      width={48}
-      height={48}
+      fill
       onError={() => setImgSrc(fallbackImage)}
-      className={` ${className}`}
+      className={` ${className} `}
       {...rest}
     />
   );
