@@ -28,9 +28,9 @@ export async function getAllEventsAction() {
 }
 
 
-export async function getSingleEventAction(id: string) {
+export async function getOrganizersEventByIdAction(id: string) {
     try {
-        const res = await eventService.getSingleEvent(id);
+        const res = await eventService.getOrganizersEventById(id);
 
         if (!res?.ok) {
             return {

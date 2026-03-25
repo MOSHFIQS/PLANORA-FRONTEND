@@ -1,4 +1,4 @@
-import { getSingleEventAction } from "@/actions/event.action"
+import { getOrganizersEventByIdAction } from "@/actions/event.action"
 import UpdateEventForm from "@/components/forms/UpdateEventForm"
 
 
@@ -9,7 +9,7 @@ export default async function UpdateEventPage({
 }) {
      const { id } = await params
 
-     const res = await getSingleEventAction(id)
+     const res = await getOrganizersEventByIdAction(id)
 
  
      const event = res?.ok ? res?.data : null

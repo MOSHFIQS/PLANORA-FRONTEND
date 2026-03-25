@@ -2,7 +2,7 @@ import { getOrganizersEventByIdAction } from "@/actions/event.action";
 import EventDetails from "@/components/eventDetails/EventDetails";
 
 
-const EventDetailsPage = async ({ params }: { params: Promise<{ id: string }> }) => {
+const HomePageEventDetailsPage = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params;
   const res = await getOrganizersEventByIdAction(id);
   const event = res?.ok ? res?.data : null;
@@ -13,4 +13,4 @@ const EventDetailsPage = async ({ params }: { params: Promise<{ id: string }> })
   return <EventDetails event={event} />;
 };
 
-export default EventDetailsPage;
+export default HomePageEventDetailsPage;
