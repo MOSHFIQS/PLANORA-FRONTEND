@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import { Card } from "../ui/card";
 
 interface Props {
      images: string[] | string;
@@ -38,8 +39,8 @@ export default function ImageMagnifier({ images, zoom = 1.1 }: Props) {
           <div className="space-y-4">
                {/* Main Image */}
 
-               <div
-                    className="w-full h-140 border shadow rounded-lg overflow-hidden relative"
+               <Card
+                    className="w-full h-140   rounded-lg overflow-hidden relative"
                     onMouseMove={handleMouseMove}
                     onMouseEnter={() => setShowMagnifier(true)}
                     onMouseLeave={() => setShowMagnifier(false)}
@@ -57,7 +58,7 @@ export default function ImageMagnifier({ images, zoom = 1.1 }: Props) {
                          sizes="100vw"
                          priority
                     />
-               </div>
+               </Card>
 
                {/* Thumbnails */}
                <div className="flex gap-2 flex-wrap items-center justify-center">

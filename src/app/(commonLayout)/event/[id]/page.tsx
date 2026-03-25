@@ -1,6 +1,5 @@
 import { getSingleEventPublicAction } from "@/actions/event.action";
-import EventDetails from "@/components/eventDetails/EventDetails";
-import HomePageEventDetails from "@/components/homePageEventDetails/HomePageEventDetails";
+import EventDetailsSmart from "@/components/eventDetailsSmart/EventDetailsSmart";
 
 
 const HomePageEventDetailsPage = async ({ params }: { params: Promise<{ id: string }> }) => {
@@ -13,7 +12,7 @@ const HomePageEventDetailsPage = async ({ params }: { params: Promise<{ id: stri
 
 
 
-  return <HomePageEventDetails event={event} />;
+  return <EventDetailsSmart type={event.type} data={event.data} />;
 };
 
 export default HomePageEventDetailsPage;

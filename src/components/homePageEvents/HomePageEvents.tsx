@@ -31,7 +31,7 @@ const HomePageEvents = ({ events }: Props) => {
         return (
           <Card key={event.id} className="overflow-hidden flex flex-col pt-0">
             {/* IMAGE */}
-            <div className="relative h-44 w-full">
+            <div className="relative h-60 w-full">
               {event?.images?.[0] && (
                 <AppImage
                   src={event.images[0]}
@@ -64,7 +64,7 @@ const HomePageEvents = ({ events }: Props) => {
             <CardFooter className="mt-auto">
               <Button
                 variant="secondary"
-                className="w-full"
+                className="w-full rounded-full"
                 disabled={loadingId === event.id}
                 onClick={() =>
                   handlePayment({

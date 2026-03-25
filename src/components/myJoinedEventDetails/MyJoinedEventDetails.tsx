@@ -7,6 +7,7 @@ import { AppImage } from "../appImage/AppImage";
 import { QRCodeCanvas } from "qrcode.react";
 import ImageMagnifier from "../imageMagnifier/ImageMagnifier";
 import DescriptionViwer from "../descriptionViwer/DescriptionViwer";
+import { Badge } from "../ui/badge";
 
 type Props = {
   joinedEventData: MyJoinedEvent;
@@ -43,10 +44,10 @@ const MyJoinedEventDetails = ({ joinedEventData }: Props) => {
           </div>
         )}
 
-        <CardContent className="space-y-4">
+        <div className="px-4 space-y-4 pt-5">
           {/* Event Details */}
-          <div className="flex items-center justify-between gap-4">
-            <div className="space-y-4">
+          <Card className="flex flex-col md:flex-row md:text-start text-center justify-between items-center gap-6 px-4">
+            <div className="space-y-3">
               {date && (
                 <p>
                   <span className="font-semibold">Date:</span> {format(date, "PPP")}
@@ -63,7 +64,8 @@ const MyJoinedEventDetails = ({ joinedEventData }: Props) => {
                 </p>
               )}
               <p>
-                <span className="font-semibold">Type:</span> {event?.type}
+                <span className="font-semibold">Type:</span>{" "}
+                <Badge variant="outline">{event?.type}</Badge>
               </p>
               <p>
                 <span className="font-semibold">Fee:</span> {event?.fee} tk{" "}
@@ -86,8 +88,10 @@ const MyJoinedEventDetails = ({ joinedEventData }: Props) => {
                     </div>
                   )}
                   <div className="space-y-1">
-                    <p className="text-center pt-3">Status: {ticket.status}</p>
-                    {/* <p>Created at: {format(new Date(ticket.createdAt), "PPP p")}</p> */}
+                    <p className="text-center pt-3">
+                      <span className="font-semibold">Ticket:</span>{" "}
+                      {ticket.status}
+                    </p>
                     {ticket.checkedInAt && (
                       <p>Checked In At: {format(new Date(ticket.checkedInAt), "PPP p")}</p>
                     )}
@@ -95,33 +99,39 @@ const MyJoinedEventDetails = ({ joinedEventData }: Props) => {
                 </div>
               </div>
             )}
-          </div>
+          </Card>
 
           {/* Payment Info */}
           {payment && payment.length > 0 && (
             <div className="space-y-2">
               <p className="font-semibold">Payment:</p>
-              {payment.map((p) => (
-                <div
+              {payment.map((p: any) => (
+                <Card
                   key={p.id}
-                  className="flex flex-col sm:flex-row justify-between border p-2 rounded"
+                  className="grid grid-cols-1 xl:grid-cols-2 items-center  p-4"
                 >
-                  <span>Status: {p.status}</span>
-                  <span>Amount: {p.amount} tk</span>
-                  {p.invoiceUrl && (
-                    <a
-                      href={p.invoiceUrl}
-                      target="_blank"
-                      className="text-blue-600 underline"
-                    >
-                      Invoice
-                    </a>
-                  )}
-                  <span>
-                    Paid at: {format(new Date(p.createdAt), "PPP p")}
-                  </span>
-                  {p.transactionId && <span>Transaction ID: {p.transactionId}</span>}
-                </div>
+
+                  <p>
+                    <span className="font-semibold">Status: </span>{" "}
+                    {p.status}
+                  </p>
+
+                  <p>
+                    <span className="font-semibold">Amount: </span> {" "}
+                    {p.amount} tk
+                  </p>
+
+                  <p>
+                    <span className="font-semibold">Paid at:</span>{" "}
+                    {format(new Date(p.createdAt), "PPP p")}
+                  </p>
+
+                  {p.transactionId && <p>
+                    <span className="font-semibold">TransactionId:</span>{" "}
+                    {p.transactionId}
+                  </p>}
+
+                </Card>
               ))}
             </div>
           )}
@@ -129,15 +139,17 @@ const MyJoinedEventDetails = ({ joinedEventData }: Props) => {
 
 
           {event?.type === "ONLINE" && event?.meetingLink && (
-            <div>
+            <div className="space-y-2">
               <p className="font-semibold">Meeting Link:</p>
-              <a
-                href={event.meetingLink}
-                target="_blank"
-                className="text-blue-600 underline break-all"
-              >
-                {event.meetingLink}
-              </a>
+             <Card className="p-4">
+                <a
+                  href={event.meetingLink}
+                  target="_blank"
+                  className="text-blue-600 underline break-all"
+                >
+                  {event.meetingLink}
+                </a>
+              </Card>
             </div>
           )}
 
@@ -147,12 +159,12 @@ const MyJoinedEventDetails = ({ joinedEventData }: Props) => {
               <div>
                 <DescriptionViwer
                   description={event.description}
-                  height="300px"
+                  height="30px"
                 />
               </div>
             </div>
           )}
-        </CardContent>
+        </div>
       </Card>
     </div>
   );
