@@ -15,7 +15,7 @@ type Props = {
   myEvents: MyJoinedEvent[];
 };
 
-const MyJoinedEventsList = ({ myEvents }: Props) => {
+const MyJoinedEventsCard = ({ myEvents }: Props) => {
   const [loadingId, setLoadingId] = useState<string | null>(null);
 
   if (!myEvents?.length) {
@@ -140,4 +140,4 @@ const MyJoinedEventsList = ({ myEvents }: Props) => {
   );
 };
 
-export default MyJoinedEventsList;
+export default MyJoinedEventsCard;
