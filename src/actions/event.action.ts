@@ -28,6 +28,30 @@ export async function getAllEventsAction() {
 }
 
 
+export async function getSingleEventPublicAction(id: string) {
+    try {
+        const res = await eventService.getSingleEventPublic(id);
+
+        if (!res?.ok) {
+            return {
+                ok: false,
+                message: res?.message || "Failed to fetch event",
+            };
+        }
+
+        return {
+            ok: true,
+            data: res.data,
+        };
+    } catch {
+        return {
+            ok: false,
+            message: "Something went wrong",
+        };
+    }
+}
+
+
 export async function getOrganizersEventByIdAction(id: string) {
     try {
         const res = await eventService.getOrganizersEventById(id);

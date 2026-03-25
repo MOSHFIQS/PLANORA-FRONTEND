@@ -8,6 +8,12 @@ export const eventService = {
         }),
 
     // get organizers single event
+    getSingleEventPublic: (id: string) =>
+        apiFetchServerMain(`/event/public/${id}`, {
+            method: "GET",
+        }),
+
+    // get organizers single event
     getOrganizersEventById: (id: string) =>
         apiFetchServerMain(`/event/${id}`, {
             method: "GET",
