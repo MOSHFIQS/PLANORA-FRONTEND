@@ -10,12 +10,7 @@ import {
      DialogTitle,
 } from "@/components/ui/dialog";
 
-import {
-     DropdownMenu,
-     DropdownMenuContent,
-     DropdownMenuItem,
-     DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+
 
 import { Button } from "@/components/ui/button";
 
@@ -72,7 +67,7 @@ export default function ImageView({
                               alt={img.name}
                               width={140}
                               height={140}
-                              className={`rounded-lg max-h-[140px] max-w-full object-cover ${img.imageUploading ? "opacity-50" : "opacity-100"}`}
+                              className={`rounded-lg max-h-35 max-w-full object-cover ${img.imageUploading ? "opacity-50" : "opacity-100"}`}
                          />
 
                          {/* Spinner on this image */}

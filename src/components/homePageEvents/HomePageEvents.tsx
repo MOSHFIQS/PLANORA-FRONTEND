@@ -23,7 +23,7 @@ const HomePageEvents = ({ events }: Props) => {
      }
 
      return (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                {events.map((event) => {
                     const date = event?.dateTime ? new Date(event.dateTime) : null;
 
@@ -72,7 +72,7 @@ const HomePageEvents = ({ events }: Props) => {
                               {/* FOOTER */}
                               <Button className="w-full" asChild>
                                    <Link href={`/event/${event.id}`}>
-                                        View Info
+                                        View Event Info
                                    </Link>
                               </Button>
                          </Card>

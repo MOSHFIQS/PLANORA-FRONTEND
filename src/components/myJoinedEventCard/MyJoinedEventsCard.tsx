@@ -41,7 +41,7 @@ const MyJoinedEventsCard = ({ myEvents }: Props) => {
         return (
           <Card key={item.id} className="overflow-hidden flex flex-col pt-0">
             {/* IMAGE */}
-            <div className="relative h-44 w-full">
+            <div className="relative h-60 w-full">
               {event?.images?.[0] && (
                 <AppImage
                   src={event.images[0]}
