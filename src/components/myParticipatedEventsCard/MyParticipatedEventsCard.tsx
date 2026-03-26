@@ -13,7 +13,7 @@ type Props = {
   myEvents: MyJoinedEvent[];
 };
 
-const MyJoinedEventsCard = ({ myEvents }: Props) => {
+const MyParticipatedEventsCard = ({ myEvents }: Props) => {
   const { handlePayment, loadingId } = usePayment();
 
   if (!myEvents?.length) {
@@ -113,4 +113,4 @@ const MyJoinedEventsCard = ({ myEvents }: Props) => {
   );
 };
 
-export default MyJoinedEventsCard;
+export default MyParticipatedEventsCard;

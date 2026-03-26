@@ -13,7 +13,7 @@ type Props = {
   joinedEventData: MyJoinedEvent;
 };
 
-const MyJoinedEventDetails = ({ joinedEventData }: Props) => {
+const MyParticipatedEventDetails = ({ joinedEventData }: Props) => {
   const { event, ticket, payment, status, user } = joinedEventData;
   console.log(event);
   console.log(ticket);
@@ -170,4 +170,4 @@ const MyJoinedEventDetails = ({ joinedEventData }: Props) => {
   );
 };
 
-export default MyJoinedEventDetails;
+export default MyParticipatedEventDetails;

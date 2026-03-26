@@ -5,8 +5,6 @@ export type User = {
      email: string;
      phone: string;
      image: string;
-     nationalId: string;
-     addressLine: string;
      status: "ACTIVE" | "INACTIVE" | "PENDING" | "DELETED";
      roleId: string;
      role: "AGENT" | "ADMIN";

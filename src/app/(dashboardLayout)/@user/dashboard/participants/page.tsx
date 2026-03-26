@@ -1,8 +1,8 @@
 import { getMyEventsAction } from '@/actions/participate.action';
-import MyJoinedEventsCard from '@/components/myJoinedEventCard/MyJoinedEventsCard';
+import MyParticipatedEventsCard from '@/components/myParticipatedEventsCard/MyParticipatedEventsCard';
 
 
-const MyJoinedEventsPage = async () => {
+const MyParticipatedEventsPage = async () => {
      const res = await getMyEventsAction();
      console.log(res.data);
 
@@ -16,9 +16,9 @@ const MyJoinedEventsPage = async () => {
 
      return (
           <>
-               <MyJoinedEventsCard myEvents={res.data} />
+               <MyParticipatedEventsCard myEvents={res.data} />
           </>
      );
 };
 
-export default MyJoinedEventsPage;
+export default MyParticipatedEventsPage;

@@ -43,6 +43,20 @@ export async function getEventParticipantsAction(eventId: string) {
      }
 }
 
+export async function getMyAllParticipantsAction() {
+  try {
+    const res = await participationService.getMyAllParticipants();
+
+    if (!res?.ok) {
+      return { ok: false, message: res?.message || "Failed" };
+    }
+
+    return { ok: true, data: res.data };
+  } catch (err: any) {
+    return { ok: false, message: err?.message };
+  }
+}
+
 
 export async function updateParticipationStatusAction(
      id: string,
