@@ -87,7 +87,7 @@ const MyParticipatedEventsCard = ({ myEvents }: Props) => {
             <CardFooter className="mt-auto">
               {isApproved ? (
                 <Button className="w-full">
-                  <Link href={`/dashboard/participate/${item.id}`}>
+                  <Link href={`/dashboard/participants/my-participated-events/${item.id}`}>
                     View Event
                   </Link>
                 </Button>

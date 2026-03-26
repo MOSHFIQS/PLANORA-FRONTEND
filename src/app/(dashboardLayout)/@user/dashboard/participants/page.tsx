@@ -1,24 +1,24 @@
-import { getMyEventsAction } from '@/actions/participate.action';
-import MyParticipatedEventsCard from '@/components/myParticipatedEventsCard/MyParticipatedEventsCard';
+
+import { getMyAllParticipantsAction } from "@/actions/participate.action";
+import MyAllEventParticipants from "@/components/myAllEventParticipants/MyAllEventParticipants";
+import { Participant } from "@/types/participant.types";
 
 
-const MyParticipatedEventsPage = async () => {
-     const res = await getMyEventsAction();
-     console.log(res.data);
 
-     if (!res?.ok) {
-          return (
-               <p className="p-6 text-red-600">
-                    Failed to load Events
-               </p>
-          );
-     }
+
+const MyAllEventParticipantsPage = async () => {
+
+     const res = await getMyAllParticipantsAction();
+     const participants = res?.data as Participant[];
+
+
+     
 
      return (
-          <>
-               <MyParticipatedEventsCard myEvents={res.data} />
-          </>
+          <MyAllEventParticipants
+               participants={participants}
+          />
      );
 };
 
-export default MyParticipatedEventsPage;
+export default MyAllEventParticipantsPage;

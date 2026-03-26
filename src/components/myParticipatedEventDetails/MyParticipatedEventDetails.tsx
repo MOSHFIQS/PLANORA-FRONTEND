@@ -80,7 +80,7 @@ const MyParticipatedEventDetails = ({ joinedEventData }: Props) => {
             {/* Ticket Info */}
             {ticket && (
               <div className="space-y-2">
-                <div className="border p-4 rounded flex flex-col ">
+                <Card className="p-4 rounded flex flex-col ">
 
                   {ticket.qrCode && (
                     <div className="mt-4 sm:mt-0">
@@ -96,7 +96,7 @@ const MyParticipatedEventDetails = ({ joinedEventData }: Props) => {
                       <p>Checked In At: {format(new Date(ticket.checkedInAt), "PPP p")}</p>
                     )}
                   </div>
-                </div>
+                </Card>
               </div>
             )}
           </Card>
