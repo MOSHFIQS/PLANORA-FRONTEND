@@ -1,54 +1,412 @@
+// "use client";
 
-import { Participant } from "@/types/participant.types";
+// import React, { useTransition, useState } from "react";
+// import {
+//   Table,
+//   TableHeader,
+//   TableRow,
+//   TableHead,
+//   TableBody,
+//   TableCell,
+// } from "@/components/ui/table";
+// import {
+//   Card,
+//   CardHeader,
+//   CardTitle,
+//   CardContent,
+// } from "@/components/ui/card";
+// import { Button } from "@/components/ui/button";
+// import {
+//   Select,
+//   SelectTrigger,
+//   SelectValue,
+//   SelectContent,
+//   SelectItem,
+// } from "@/components/ui/select";
+// import {
+//   AlertDialog,
+//   AlertDialogTrigger,
+//   AlertDialogContent,
+//   AlertDialogHeader,
+//   AlertDialogTitle,
+//   AlertDialogDescription,
+//   AlertDialogFooter,
+// } from "@/components/ui/alert-dialog";
+// import { toast } from "sonner";
+// import { Event, Participant, } from "@/types/event.types";
+// import { sendInvitationAction } from "@/actions/invitation.action";
+
+// export default function MyAllEventParticipants({
+//   participants,
+//   events,
+// }: {
+//   participants: Participant[];
+//   events: Event[];
+// }) {
+//   const [openDialogId, setOpenDialogId] = useState<string | null>(null);
+//   const [selectedEventId, setSelectedEventId] = useState<string>("");
+//   const [isPending, startTransition] = useTransition();
+
+//   // Only private events
+//   const privateEvents = events.filter((event) => event.visibility === "PRIVATE");
+
+//   const handleSendInvite = (participantId: string) => {
+//     if (!selectedEventId || selectedEventId === "no-events") {
+//       toast.error("Please select an event");
+//       return;
+//     }
+
+//     startTransition(async () => {
+//       try {
+//         const res = await sendInvitationAction({
+//           userId: participantId,
+//           eventId: selectedEventId,
+//         });
+
+//         if (!res.ok) throw new Error(res.message);
+
+//         toast.success("Invitation sent successfully!");
+
+//         // Optimistic UI update: add invite to participant's events
+//         const participant = participants.find((p) => p.id === participantId);
+//         if (participant) {
+//           participant.events.push({
+//             eventId: selectedEventId,
+//             title: privateEvents.find((e) => e.id === selectedEventId)?.title || "",
+//             invited: true,
+//             participationStatus: null,
+//             invitationStatus: "PENDING",
+//           });
+//         }
+//       } catch (err: any) {
+//         toast.error(err?.message || "Failed to send invitation");
+//       } finally {
+//         setOpenDialogId(null);
+//         setSelectedEventId("");
+//       }
+//     });
+//   };
+
+//   return (
+//     <Card>
+//       <CardHeader>
+//         <CardTitle>All Participants</CardTitle>
+//       </CardHeader>
+
+//       <CardContent>
+//         <Table>
+//           <TableHeader>
+//             <TableRow>
+//               <TableHead>User</TableHead>
+//               <TableHead>Email</TableHead>
+//               <TableHead>Events Joined / Invited</TableHead>
+//               <TableHead>Actions</TableHead>
+//             </TableRow>
+//           </TableHeader>
+
+//           <TableBody>
+//             {participants.length > 0 ? (
+//               participants.map((p) => (
+//                 <TableRow key={p.id}>
+//                   {/* USER */}
+//                   <TableCell>
+//                     <div className="flex items-center gap-3">
+//                       <img
+//                         src={p.image ?? "/default-avatar.png"}
+//                         alt={p.name}
+//                         className="h-10 w-10 rounded-full object-cover border"
+//                       />
+//                       <span className="font-medium">{p.name}</span>
+//                     </div>
+//                   </TableCell>
+
+//                   {/* EMAIL */}
+//                   <TableCell>{p.email}</TableCell>
+
+//                   {/* EVENTS */}
+//                   <TableCell>
+//                     <div className="flex flex-wrap gap-2">
+//                       {p.events?.map((e) => (
+//                         <span
+//                           key={e.eventId}
+//                           className={`px-2 py-1 text-xs rounded-md ${e.invited
+//                               ? "bg-yellow-100 text-yellow-800"
+//                               : "bg-green-100 text-green-800"
+//                             }`}
+//                           title={
+//                             e.invited
+//                               ? `Invitation Status: ${e.invitationStatus}`
+//                               : `Participation Status: ${e.participationStatus}`
+//                           }
+//                         >
+//                           {e.title}
+//                         </span>
+//                       ))}
+//                     </div>
+//                   </TableCell>
+
+//                   {/* ACTIONS */}
+//                   <TableCell>
+//                     <AlertDialog
+//                       open={openDialogId === p.id}
+//                       onOpenChange={(isOpen) => !isOpen && setOpenDialogId(null)}
+//                     >
+//                       {/* Trigger button */}
+//                       <AlertDialogTrigger asChild>
+//                         <Button
+//                           variant="outline"
+//                           onClick={() => setOpenDialogId(p.id)}
+//                           disabled={privateEvents.length === 0}
+//                         >
+//                           Send Invite
+//                         </Button>
+//                       </AlertDialogTrigger>
+
+//                       {/* Dialog content */}
+//                       <AlertDialogContent>
+//                         <AlertDialogHeader>
+//                           <AlertDialogTitle>Send Invitation</AlertDialogTitle>
+//                           <AlertDialogDescription>
+//                             Select an event to send invitation to{" "}
+//                             <span className="font-medium">{p.name}</span>
+//                           </AlertDialogDescription>
+//                         </AlertDialogHeader>
+
+//                         {/* Select Event */}
+//                         <div className="mt-2">
+//                           <Select
+//                             value={selectedEventId}
+//                             onValueChange={(val) => setSelectedEventId(val)}
+//                           >
+//                             <SelectTrigger className="w-full">
+//                               <SelectValue placeholder="Select event" />
+//                             </SelectTrigger>
+//                             <SelectContent>
+//                               {privateEvents.length > 0 ? (
+//                                 privateEvents.map((event) => {
+//                                   const isDisabled = p.events.some(
+//                                     (e) =>
+//                                       e.eventId === event.id &&
+//                                       (e.invited || e.participationStatus === "APPROVED")
+//                                   );
+//                                   return (
+//                                     <SelectItem
+//                                       key={event.id}
+//                                       value={event.id}
+//                                       disabled={isDisabled}
+//                                     >
+//                                       {event.title}
+//                                     </SelectItem>
+//                                   );
+//                                 })
+//                               ) : (
+//                                 <SelectItem value="no-events" disabled>
+//                                   No events found
+//                                 </SelectItem>
+//                               )}
+//                             </SelectContent>
+//                           </Select>
+//                         </div>
+
+//                         {/* Buttons */}
+//                         <AlertDialogFooter className="mt-4 flex justify-end gap-2">
+//                           <Button
+//                             variant="outline"
+//                             onClick={() => setOpenDialogId(null)}
+//                           >
+//                             Cancel
+//                           </Button>
+//                           <Button
+//                             onClick={() => handleSendInvite(p.id)}
+//                             disabled={isPending || !selectedEventId}
+//                           >
+//                             Send
+//                           </Button>
+//                         </AlertDialogFooter>
+//                       </AlertDialogContent>
+//                     </AlertDialog>
+//                   </TableCell>
+//                 </TableRow>
+//               ))
+//             ) : (
+//               <TableRow>
+//                 <TableCell colSpan={4} className="text-center py-4">
+//                   No participants found.
+//                 </TableCell>
+//               </TableRow>
+//             )}
+//           </TableBody>
+//         </Table>
+//       </CardContent>
+//     </Card>
+//   );
+// }
 
 
-const MyAllEventParticipants = ({ participants }: { participants: Participant[] }) => {
-  if (!participants || participants.length === 0) {
-    return <p>No participants found.</p>;
-  }
+"use client";
+
+import { useTransition, useState } from "react";
+import { toast } from "sonner";
+import { sendInvitationAction } from "@/actions/invitation.action";
+import { Participant, Event } from "@/types/event.types";
+
+import { Button } from "@/components/ui/button";
+import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
+import {
+  AlertDialog,
+  AlertDialogTrigger,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogDescription,
+  AlertDialogFooter,
+} from "@/components/ui/alert-dialog";
+
+import { UserPlus, Mail, Calendar, Check, Clock, X } from "lucide-react";
+import { AppImage } from "../appImage/AppImage";
+
+export default function MyAllEventParticipants({ participants, events }: { participants: Participant[]; events: Event[] }) {
+  console.log(participants);
+  const [openDialogId, setOpenDialogId] = useState<string | null>(null);
+  const [selectedEventId, setSelectedEventId] = useState<string>("");
+  const [isPending, startTransition] = useTransition();
+
+  const privateEvents = events.filter((event) => event.visibility === "PRIVATE");
+
+  const handleSendInvite = (participantId: string) => {
+    if (!selectedEventId || selectedEventId === "no-events") {
+      toast.error("Please select an event");
+      return;
+    }
+
+    startTransition(async () => {
+      try {
+        const res = await sendInvitationAction({
+          userId: participantId,
+          eventId: selectedEventId,
+        });
+
+        if (!res.ok) throw new Error(res.message);
+
+        toast.success("Invitation sent successfully!");
+
+        // Optimistic UI update
+        const participant = participants.find((p) => p.id === participantId);
+        if (participant) {
+          participant.events.push({
+            eventId: selectedEventId,
+            title: privateEvents.find((e) => e.id === selectedEventId)?.title || "",
+            invited: true,
+            participationStatus: null,
+            invitationStatus: "PENDING",
+          });
+        }
+      } catch (err: any) {
+        toast.error(err?.message || "Failed to send invitation");
+      } finally {
+        setOpenDialogId(null);
+        setSelectedEventId("");
+      }
+    });
+  };
 
   return (
-    <div className="max-w-4xl mx-auto p-4">
-      <h2 className="text-2xl font-semibold mb-4">All Participants</h2>
-      <div className="grid gap-4">
-        {participants.map((p) => (
-          <div
-            key={p.id}
-            className="flex items-center gap-4 p-4 border rounded-md shadow-sm"
-          >
-            <img
-              src={p.user.image}
-              alt={p.user.name}
-              className="w-16 h-16 rounded-full object-cover"
-            />
-            <div className="flex-1">
-              <h3 className="text-lg font-medium">{p.user.name}</h3>
-              <p className="text-sm text-gray-500">{p.user.email}</p>
-              <p className="text-sm">
-                Event: <span className="font-semibold">{p.event.title}</span>
-              </p>
-              <p className="text-sm">
-                Status:{" "}
-                <span
-                  className={`font-semibold ${p.status === "APPROVED"
-                      ? "text-green-600"
-                      : p.status === "PENDING"
-                        ? "text-yellow-600"
-                        : "text-red-600"
-                    }`}
-                >
-                  {p.status}
-                </span>
-              </p>
-              <p className="text-sm text-gray-400">
-                Joined: {new Date(p.createdAt).toLocaleDateString()}
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {participants.length === 0 && <p className="col-span-full text-center text-muted-foreground">No participants found.</p>}
+
+      {participants.map((p) => (
+        <div key={p.id} className="bg-white rounded-xl shadow-md p-5 border hover:shadow-lg transition-shadow">
+          {/* Header: Avatar + Name */}
+          <div className="flex items-center gap-4 mb-4">
+            <AppImage src={p.image} alt={p.name} width={50} height={50} className="h-12 w-12 rounded-full border object-cover" />
+            <div>
+              <h3 className="font-semibold text-lg">{p.name}</h3>
+              <p className="text-sm text-muted-foreground flex items-center gap-1">
+                <Mail size={14} /> {p.email}
               </p>
             </div>
           </div>
-        ))}
-      </div>
+
+          {/* Events */}
+          <div className="mb-4">
+            <h4 className="font-medium text-sm text-muted-foreground mb-2 flex items-center gap-2">
+              <Calendar size={16} /> Events
+            </h4>
+            <div className="flex flex-wrap gap-2">
+              {p.events.map((e, index) => (
+                <span
+                  key={`${e.eventId}-${index}`}
+                  className={`flex items-center gap-1 px-2 py-1 rounded-md text-xs font-medium ${e.invited ? "bg-yellow-100 text-yellow-800" : "bg-green-100 text-green-800"
+                    }`}
+                  title={e.invited ? `Invitation Status: ${e.invitationStatus}` : `Participation Status: ${e.participationStatus}`}
+                >
+                  {e.invited ? <Clock size={12} /> : <Check size={12} />} {e.title}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          {/* Actions */}
+          <AlertDialog open={openDialogId === p.id} onOpenChange={(isOpen) => !isOpen && setOpenDialogId(null)}>
+            <AlertDialogTrigger asChild>
+              <div>
+                <Button
+                  className="w-full flex items-center justify-center gap-2"
+                  variant="outline"
+                  disabled={privateEvents.length === 0}
+                  onClick={() => setOpenDialogId(p.id)} // make sure click sets the dialog id
+                >
+                  <UserPlus size={16} /> Send Invite
+                </Button>
+              </div>
+            </AlertDialogTrigger>
+
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>Send Invitation</AlertDialogTitle>
+                <AlertDialogDescription>
+                  Select an event to send invitation to <span className="font-medium">{p.name}</span>
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+
+              <div className="mt-4">
+                <Select value={selectedEventId} onValueChange={(val) => setSelectedEventId(val)}>
+                  <SelectTrigger className="w-full">
+                    <SelectValue placeholder="Select event" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {privateEvents.length > 0 ? (
+                      privateEvents.map((event) => {
+                        const isDisabled = p.events.some(
+                          (e) => e.eventId === event.id && (e.invited || e.participationStatus === "APPROVED")
+                        );
+                        return (
+                          <SelectItem key={event.id} value={event.id} disabled={isDisabled}>
+                            {event.title}
+                          </SelectItem>
+                        );
+                      })
+                    ) : (
+                      <SelectItem value="no-events" disabled>
+                        No events found
+                      </SelectItem>
+                    )}
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <AlertDialogFooter className="mt-4 flex justify-end gap-2">
+                <Button variant="outline" onClick={() => setOpenDialogId(null)}>
+                  <X size={14} /> Cancel
+                </Button>
+                <Button onClick={() => handleSendInvite(p.id)} disabled={isPending || !selectedEventId}>
+                  Send
+                </Button>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
+        </div>
+      ))}
     </div>
   );
-};
-
-export default MyAllEventParticipants;
+}

@@ -19,3 +19,22 @@ export interface Event {
      createdAt: string;
      updatedAt: string;
 }
+
+
+// Participant-specific event wrapper
+export interface ParticipantEvent {
+  eventId: string;
+  title: string;
+  invited: boolean;              // true if this user was invited
+  participationStatus: "PENDING" | "APPROVED" | "REJECTED" | "BANNED" | null;
+  invitationStatus?: "PENDING" | "ACCEPTED" | "DECLINED" | null; // optional if needed
+}
+
+// Participant type for frontend
+export interface Participant {
+  id: string;
+  name: string;
+  email: string;
+  image?: string;
+  events: ParticipantEvent[];
+}

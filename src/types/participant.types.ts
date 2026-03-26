@@ -1,12 +1,15 @@
-import { Event } from "./event.types";
-import { User } from "./user.types";
+
+
+type Event ={
+    id:string;
+    title:string;
+    dateTime:string;
+}
 
 export type Participant = {
-   id: string;
-    userId: string;
-    eventId: string;
-    status: "APPROVED" | "PENDING" | "REJECTED"; // use other statuses if exist
-    createdAt: string; // ISO date string
-    user: User;
-    event: Event;
+    id: string;
+    name:string;
+    email:string;
+    image:string
+    events: Event[];
 };
