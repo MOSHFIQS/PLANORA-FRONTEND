@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -75,11 +74,7 @@ const EventDetails = ({ event }: { event: Event }) => {
                     </CardContent>
                </Card>
 
-               {/* ACTIONS (optional) */}
-               <div className="flex gap-3">
-                    <Button>Join Event</Button>
-                    <Button variant="outline">Share</Button>
-               </div>
+               
           </div>
      );
 };

@@ -1,6 +1,7 @@
 "use server";
 
 import { invitationService } from "@/service/invitation.server.service";
+import { revalidatePath } from "next/cache";
 
 // 1. Send Invitation
 export async function sendInvitationAction(payload: {
@@ -64,6 +65,8 @@ export async function cancelInvitationAction(id: string) {
         message: res?.message || "Failed to cancel invitation",
       };
     }
+
+    revalidatePath("/dashboard/invitations")
 
     return {
       ok: true,
