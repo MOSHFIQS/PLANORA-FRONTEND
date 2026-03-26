@@ -42,7 +42,7 @@ const EventDetailsSmart = ({ type, data }: Props) => {
           <CardTitle className="text-2xl">{event?.title}</CardTitle>
 
           <CardDescription>
-            Organized by: <strong>{event?.organizer?.name}</strong>
+            Organized by: <strong>{event?.organizer?.name}sssssssssssss</strong>
           </CardDescription>
 
           {/* ONLY FULL */}

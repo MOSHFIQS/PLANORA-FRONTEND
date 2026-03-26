@@ -23,8 +23,12 @@ export const userRoutes: Route[] = [
                },
 
                {
-                    title: "My Participated Eevents",
+                    title: "My Participated Events",
                     url: "/dashboard/participants/my-participated-events",
+               },
+               {
+                    title: "My Invitations",
+                    url: "/dashboard/invitations",
                },
                {
                     title: "Home",

@@ -6,9 +6,6 @@ export const participationService = {
           apiFetchServerMain("/participation/my-events", {
                method: "GET",
           }),
-
-     getMySingleEvent: (id: string) =>
-          apiFetchServerMain(`/participation/me/${id}`, { method: "GET" }),
      
      getMyAllParticipants: () =>
           apiFetchServerMain("/participation/my-all-participants"),

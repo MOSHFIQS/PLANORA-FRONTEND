@@ -16,6 +16,8 @@ type Props = {
 const MyParticipatedEventsCard = ({ myEvents }: Props) => {
   const { handlePayment, loadingId } = usePayment();
 
+  console.log(myEvents);
+
   if (!myEvents?.length) {
     return (
       <p className="p-6 text-center text-muted-foreground">
@@ -30,6 +32,7 @@ const MyParticipatedEventsCard = ({ myEvents }: Props) => {
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {myEvents.map((item) => {
         const { event, payment, status } = item;
+        console.log(item?.event?.id);
 
         const date = event?.dateTime ? new Date(event.dateTime) : null;
 
@@ -87,7 +90,7 @@ const MyParticipatedEventsCard = ({ myEvents }: Props) => {
             <CardFooter className="mt-auto">
               {isApproved ? (
                 <Button className="w-full">
-                  <Link href={`/dashboard/participants/my-participated-events/${item.id}`}>
+                  <Link href={`/dashboard/participants/my-participated-events/${item?.event?.id}`}>
                     View Event
                   </Link>
                 </Button>

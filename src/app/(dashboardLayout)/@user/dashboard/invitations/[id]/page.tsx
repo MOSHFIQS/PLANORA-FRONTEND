@@ -2,7 +2,7 @@ import { getSingleEventPublicAction } from "@/actions/event.action";
 import EventDetailsSmart from "@/components/eventDetailsSmart/EventDetailsSmart";
 
 
-const MyParticipatedEventDetailsPage = async ({ params }: { params: Promise<{ id: string }> }) => {
+const MyInvitationEventDetailsPage = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params;
   console.log(id);
   const res = await getSingleEventPublicAction(id);
@@ -17,4 +17,4 @@ const MyParticipatedEventDetailsPage = async ({ params }: { params: Promise<{ id
   return <EventDetailsSmart type={event.type} data={event.data} />;
 };
 
-export default MyParticipatedEventDetailsPage;
+export default MyInvitationEventDetailsPage;

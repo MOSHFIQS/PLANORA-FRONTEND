@@ -315,34 +315,36 @@ export default function MyAllEventParticipants({ participants, events }: { parti
       {participants.length === 0 && <p className="col-span-full text-center text-muted-foreground">No participants found.</p>}
 
       {participants.map((p) => (
-        <div key={p.id} className="bg-white rounded-xl shadow-md p-5 border hover:shadow-lg transition-shadow">
-          {/* Header: Avatar + Name */}
-          <div className="flex items-center gap-4 mb-4">
-            <AppImage src={p.image} alt={p.name} width={50} height={50} className="h-12 w-12 rounded-full border object-cover" />
-            <div>
-              <h3 className="font-semibold text-lg">{p.name}</h3>
-              <p className="text-sm text-muted-foreground flex items-center gap-1">
-                <Mail size={14} /> {p.email}
-              </p>
+        <div key={p.id} className="bg-white rounded-xl shadow-md p-5 border hover:shadow-lg transition-shadow flex flex-col justify-between">
+          <div className="flex flex-col gap-2">
+            {/* Header: Avatar + Name */}
+            <div className="flex items-center gap-4 mb-4">
+              <AppImage src={p.image} alt={p.name} width={50} height={50} className="h-12 w-12 rounded-full border object-cover" />
+              <div>
+                <h3 className="font-semibold text-lg">{p.name}</h3>
+                <p className="text-sm text-muted-foreground flex items-center gap-1">
+                  <Mail size={14} /> {p.email}
+                </p>
+              </div>
             </div>
-          </div>
 
-          {/* Events */}
-          <div className="mb-4">
-            <h4 className="font-medium text-sm text-muted-foreground mb-2 flex items-center gap-2">
-              <Calendar size={16} /> Events
-            </h4>
-            <div className="flex flex-wrap gap-2">
-              {p.events.map((e, index) => (
-                <span
-                  key={`${e.eventId}-${index}`}
-                  className={`flex items-center gap-1 px-2 py-1 rounded-md text-xs font-medium ${e.invited ? "bg-yellow-100 text-yellow-800" : "bg-green-100 text-green-800"
-                    }`}
-                  title={e.invited ? `Invitation Status: ${e.invitationStatus}` : `Participation Status: ${e.participationStatus}`}
-                >
-                  {e.invited ? <Clock size={12} /> : <Check size={12} />} {e.title}
-                </span>
-              ))}
+            {/* Events */}
+            <div className="mb-4">
+              <h4 className="font-medium text-sm text-muted-foreground mb-2 flex items-center gap-2">
+                <Calendar size={16} /> Events
+              </h4>
+              <div className="flex flex-wrap gap-2">
+                {p.events.map((e, index) => (
+                  <span
+                    key={`${e.eventId}-${index}`}
+                    className={`flex items-center gap-1 px-2 py-1 rounded-md text-xs font-medium ${e.invited ? "bg-yellow-100 text-yellow-800" : "bg-green-100 text-green-800"
+                      }`}
+                    title={e.invited ? `Invitation Status: ${e.invitationStatus}` : `Participation Status: ${e.participationStatus}`}
+                  >
+                    {e.invited ? <Clock size={12} /> : <Check size={12} />} {e.title}
+                  </span>
+                ))}
+              </div>
             </div>
           </div>
 
