@@ -471,11 +471,11 @@ const MyInvitationsCard = ({ invitations }: { invitations: Invitation[] }) => {
             return (
               <Card key={item.id} className="overflow-hidden flex flex-col pt-0">
                 {/* IMAGE */}
-                <div className="relative h-60 w-full">
+                <div className="relative h-60 w-full border-b overflow-hidden">
                   {event?.images?.[0] && (
                     <AppImage
                       src={event.images[0]}
-                      className="h-full w-full object-cover"
+                      className="h-full w-full object-cover hover:scale-105 duration-300"
                     />
                   )}
                   <div className="absolute top-3 right-3">
@@ -621,13 +621,13 @@ const MyInvitationsCard = ({ invitations }: { invitations: Invitation[] }) => {
                       {/* ACTIONS */}
                       <TableCell className="text-right">
                         {isAccepted ? (
-                          <Button>
+                          <Button asChild size={"sm"}>
                             <Link href={`invitations/${event.id}`}>View Event</Link>
                           </Button>
                         ) : (
                           <div className="flex justify-end gap-2">
                             {event.fee === 0 ? (
-                              <Button
+                              <Button size={"sm"}
                                 onClick={() =>
                                   handlePayment({ invitationId: item.id })
                                 }
@@ -636,7 +636,8 @@ const MyInvitationsCard = ({ invitations }: { invitations: Invitation[] }) => {
                               </Button>
                             ) : (
                               <Button
-                                variant="secondary"
+                                variant="outline"
+                                size={"sm"}
                                 disabled={loadingId === item.eventId}
                                 onClick={() =>
                                   handlePayment({ invitationId: item.id })
@@ -649,6 +650,7 @@ const MyInvitationsCard = ({ invitations }: { invitations: Invitation[] }) => {
                             )}
 
                             <Button
+                            size={"sm"}
                               variant="destructive"
                               disabled={rejectingId === item.id}
                               onClick={() => handleReject(item.id)}

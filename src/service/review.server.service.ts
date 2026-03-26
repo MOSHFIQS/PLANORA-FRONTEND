@@ -39,4 +39,9 @@ export const reviewService = {
     apiFetchServerMain(`/review/event/${eventId}`, {
       method: "GET",
     }),
+    
+  getOrganizerEventReviewsByEventId: (eventId: string) =>
+    apiFetchServerMain(`/review/organizer/events/${eventId}`, {
+      method: "GET",
+    }),
 };

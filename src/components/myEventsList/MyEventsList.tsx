@@ -27,6 +27,7 @@ import {
 import { AppImage } from "../appImage/AppImage";
 import { deleteEventAction } from "@/actions/event.action";
 import { Event } from "@/types/event.types";
+import Link from "next/link";
 
 // import your actions later
 // import { deleteEventAction } from "@/actions/event.action";
@@ -86,10 +87,10 @@ export default function MyEventsList({ myEvents }: { myEvents: Event[] }) {
                   {/* IMAGE */}
                   <TableCell>
                     {event?.images?.[0] ? (
-                     <AppImage src={event.images[0]} width={50} height={50} className="h-12 w-12 object-cover rounded border"/>
+                      <AppImage src={event.images[0]} width={50} height={50} className="h-12 w-12 object-cover rounded border" />
                     ) : (
                       <div className="h-12 w-12 border rounded flex items-center justify-center" >
-                         N/A
+                        N/A
                       </div>
                     )}
                   </TableCell>
@@ -133,6 +134,10 @@ export default function MyEventsList({ myEvents }: { myEvents: Event[] }) {
                       }
                     >
                       <Pencil className="w-4 h-4" />
+                    </Button>
+                    {/* reviews */}
+                    <Button asChild>
+                      <Link href={`/dashboard/review/event/${event.id}`}></Link>
                     </Button>
 
                     {/* DELETE */}

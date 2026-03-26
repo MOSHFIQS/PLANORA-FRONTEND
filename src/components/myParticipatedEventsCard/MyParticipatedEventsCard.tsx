@@ -147,12 +147,14 @@ import { AppImage } from "../appImage/AppImage";
 import Link from "next/link";
 import { usePayment } from "@/hooks/usePayment";
 import { useState } from "react";
+import ReviewDialog from "../reviewDialog/ReviewDialog";
 
 type Props = {
   myEvents: MyJoinedEvent[];
 };
 
 const MyParticipatedEventsCard = ({ myEvents }: Props) => {
+  console.log(myEvents);
   const { handlePayment, loadingId } = usePayment();
   const [viewMode, setViewMode] = useState<"card" | "table">("card");
 
@@ -163,6 +165,7 @@ const MyParticipatedEventsCard = ({ myEvents }: Props) => {
       </p>
     );
   }
+
 
   return (
     <div className="space-y-4">
@@ -186,15 +189,16 @@ const MyParticipatedEventsCard = ({ myEvents }: Props) => {
             const date = event?.dateTime ? new Date(event.dateTime) : null;
             const isPaid = payment?.some((p) => p.status === "SUCCESS") || false;
             const isApproved = status === "APPROVED" || isPaid;
+            const isReviewed = event?.reviews && event.reviews.length > 0;
 
             return (
               <Card key={item.id} className="overflow-hidden flex flex-col pt-0">
                 {/* IMAGE */}
-                <div className="relative h-60 w-full">
+                <div className="relative h-60 w-full border-b overflow-hidden">
                   {event?.images?.[0] && (
                     <AppImage
                       src={event.images[0]}
-                      className="h-full w-full object-cover"
+                      className="h-full w-full object-cover hover:scale-105 duration-300"
                     />
                   )}
                   <div className="absolute top-3 right-3">
@@ -228,11 +232,20 @@ const MyParticipatedEventsCard = ({ myEvents }: Props) => {
                 {/* FOOTER */}
                 <CardFooter className="mt-auto">
                   {isApproved ? (
-                    <Button className="w-full">
-                      <Link href={`/dashboard/participants/my-participated-events/${event?.id}`}>
-                        View Event
-                      </Link>
-                    </Button>
+                    <div className="flex gap-2 w-full">
+                      <Button className="flex-4">
+                        <Link href={`/dashboard/participants/my-participated-events/${event?.id}`}>
+                          View Event
+                        </Link>
+                      </Button>
+                      {event?.id && (
+                        <ReviewDialog eventId={event.id}>
+                          <Button disabled={isReviewed} className="flex-1"> 
+                            {isReviewed ? "Reviewed" : "Review"}
+                          </Button>
+                        </ReviewDialog>
+                      )}
+                    </div>
                   ) : (
                     <Button
                       variant="secondary"
@@ -280,6 +293,7 @@ const MyParticipatedEventsCard = ({ myEvents }: Props) => {
                   const date = event?.dateTime ? new Date(event.dateTime) : null;
                   const isPaid = payment?.some((p) => p.status === "SUCCESS") || false;
                   const isApproved = status === "APPROVED" || isPaid;
+                  const isReviewed = event?.reviews && event.reviews.length > 0;
 
                   return (
                     <TableRow key={item.id}>
@@ -306,15 +320,23 @@ const MyParticipatedEventsCard = ({ myEvents }: Props) => {
                       </TableCell>
                       <TableCell className="text-right">
                         {isApproved ? (
-                          <Button size="sm">
-                            <Link href={`/dashboard/participants/my-participated-events/${event?.id}`}>
-                              View Event
-                            </Link>
-                          </Button>
+                          <div className="flex items-end justify-end gap-2 ">
+                            <Button size="xs">
+                              <Link href={`/dashboard/participants/my-participated-events/${event?.id}`}>
+                                View Event
+                              </Link>
+                            </Button>
+                            {event?.id && (
+                              <ReviewDialog eventId={event.id}>
+                                <Button disabled={isReviewed} size={"xs"}>
+                                  {isReviewed ? "Reviewed" : "Review"}
+                                </Button>
+                              </ReviewDialog>
+                            )}
+                          </div>
                         ) : (
                           <Button
-                            size="sm"
-                            variant="secondary"
+                            size="xs"
                             disabled={loadingId === item.eventId}
                             onClick={() =>
                               handlePayment({ eventId: item.eventId })

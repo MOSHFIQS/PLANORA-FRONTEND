@@ -32,6 +32,9 @@ export type Organizer = {
   id: string;
   name: string;
 };
+export type Review = {
+  id: string;
+};
 
 export type Event = {
   id: string;
@@ -45,6 +48,7 @@ export type Event = {
   meetingLink?: string;
   organizerId: string;
   organizer?: Organizer;
+  reviews?: Review[]
 };
 
 export type MyJoinedEvent = {
