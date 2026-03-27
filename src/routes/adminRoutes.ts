@@ -14,8 +14,8 @@ export const adminRoutes: Route[] = [
                     url: "/admin-dashboard/profile",
                },
                {
-                    title: "All Admins",
-                    url: "/admin-dashboard/admin",
+                    title: "All Users",
+                    url: "/admin-dashboard/users",
                },
                {
                     title: "All Products",
