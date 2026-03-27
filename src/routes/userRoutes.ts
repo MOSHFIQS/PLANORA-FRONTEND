@@ -1,14 +1,18 @@
 import { Route } from "@/types/routes.type";
 
-
 export const userRoutes: Route[] = [
      {
-          title: "user sidebar",
+          title: "Account",
           items: [
                {
                     title: "Profile",
                     url: "/seller-dashboard/profile",
                },
+          ],
+     },
+     {
+          title: "Events",
+          items: [
                {
                     title: "Create Event",
                     url: "/dashboard/event/create",
@@ -18,26 +22,35 @@ export const userRoutes: Route[] = [
                     url: "/dashboard/event",
                },
                {
-                    title: "My Events Participants",
+                    title: "Participants",
                     url: "/dashboard/participants",
                },
-
                {
                     title: "My Participated Events",
                     url: "/dashboard/participants/my-participated-events",
                },
+          ],
+     },
+     {
+          title: "Engagement",
+          items: [
                {
                     title: "My Invitations",
                     url: "/dashboard/invitations",
                },
                {
+                    title: "My Reviews",
+                    url: "/dashboard/review",
+               },
+          ],
+     },
+     {
+          title: "General",
+          items: [
+               {
                     title: "Home",
                     url: "/",
                },
-               {
-                    title: "Shop",
-                    url: "/medicines",
-               }
           ],
-     }
-]
+     },
+];

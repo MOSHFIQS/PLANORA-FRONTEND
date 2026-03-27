@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/table";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Pencil, Trash2, Eye, Plus } from "lucide-react";
+import { Pencil, Trash2, Eye, Plus, MessageSquareText } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
@@ -137,7 +137,7 @@ export default function MyEventsList({ myEvents }: { myEvents: Event[] }) {
                     </Button>
                     {/* reviews */}
                     <Button asChild>
-                      <Link href={`/dashboard/review/event/${event.id}`}></Link>
+                      <Link href={`/dashboard/review/event/${event.id}`}>  <MessageSquareText size={30} /></Link>
                     </Button>
 
                     {/* DELETE */}

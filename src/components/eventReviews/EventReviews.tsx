@@ -16,6 +16,7 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
+import { AppImage } from "../appImage/AppImage";
 
 type User = {
   id: string;
@@ -68,12 +69,11 @@ const EventReviews: React.FC<EventReviewsProps> = ({ organizersReviews }) => {
   return (
     <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
       {reviews.map((review) => (
-        <Card key={review.id} className="hover:shadow-lg transition-shadow duration-300 relative">
-          <CardHeader className="flex items-center gap-4 pb-2">
-            <Avatar>
-              <AvatarImage src={review.user.image} alt={review.user.name} />
-              <AvatarFallback>{review.user.name[0]}</AvatarFallback>
-            </Avatar>
+        <Card key={review.id} className="hover:shadow transition-shadow duration-300 relative">
+          <CardHeader className="flex items-center  gap-2 ">
+            <div className="border rounded-full">
+              <AppImage src={review.user.image} alt={review.user.name} className="w-10 h-10 rounded-full"/>
+            </div>
             <div>
               <CardTitle className="text-sm font-semibold">{review.user.name}</CardTitle>
               <p className="text-xs text-gray-500">
