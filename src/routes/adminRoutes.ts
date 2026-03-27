@@ -9,10 +9,10 @@ export const adminRoutes: Route[] = [
                     title: "Analytics",
                     url: "/admin-dashboard",
                },
-               // {
-               //      title: "Profile",
-               //      url: "/admin-dashboard/profile",
-               // },
+               {
+                    title: "Profile",
+                    url: "/admin-dashboard/profile",
+               },
                {
                     title: "All Admins",
                     url: "/admin-dashboard/admin",

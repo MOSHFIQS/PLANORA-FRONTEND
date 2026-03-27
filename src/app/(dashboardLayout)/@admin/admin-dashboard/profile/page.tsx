@@ -1,7 +1,7 @@
 
 import { getMyProfileAction } from '@/actions/profile.action';
 import MyProfile from '@/components/myProfile/MyProfile';
-const UserProfilePage = async () => {
+const AdminProfilePage = async () => {
 
      const res = await getMyProfileAction();
      console.log(res.data);
@@ -17,4 +17,4 @@ const UserProfilePage = async () => {
      return <MyProfile profileData={res?.data} />;
 };
 
-export default UserProfilePage;
+export default AdminProfilePage;
