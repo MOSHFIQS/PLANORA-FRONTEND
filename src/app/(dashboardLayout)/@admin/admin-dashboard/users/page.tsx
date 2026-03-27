@@ -1,6 +1,6 @@
 
 import { getAllUsersAction } from '@/actions/admin.action';
-import AllUsers from '@/components/allUsers/AllUsers';
+import AllUsers from '@/components/admin/allUsers/AllUsers';
 const AllUsersPage = async () => {
 
      const res = await getAllUsersAction();

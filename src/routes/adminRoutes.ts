@@ -18,31 +18,6 @@ export const adminRoutes: Route[] = [
                     url: "/admin-dashboard/users",
                },
                {
-                    title: "All Products",
-                    url: "/admin-dashboard/product",
-               },
-               // {
-               //      title: "Create Category",
-               //      url: "/admin-dashboard/category/create",
-               // },
-               {
-                    title: "All Category",
-                    url: "/admin-dashboard/category",
-               },
-               {
-                    title: "All Orders",
-                    url: "/admin-dashboard/order",
-               },
-               {
-                    title: "All Banners",
-                    url: "/admin-dashboard/banner",
-               },
-               {
-                    title: "Create FAQ",
-                    url: "/admin-dashboard/faq/create",
-               },
-               
-               {
                     title: "Home",
                     url: "/",
                }
