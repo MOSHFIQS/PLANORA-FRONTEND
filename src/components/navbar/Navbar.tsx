@@ -18,6 +18,7 @@ import {
 import Link from "next/link";
 import { useAuth } from "@/context/AuthProvider";
 import { usePathname, useRouter } from "next/navigation";
+import { Input } from "../ui/input";
 import { useState } from "react";
 
 interface MenuItem {
@@ -29,6 +30,7 @@ const Navbar = () => {
      const { user, logout, loading } = useAuth();
      const router = useRouter();
      const pathname = usePathname();
+     const [search, setSearch] = useState("");
 
 
 
@@ -48,7 +50,7 @@ const Navbar = () => {
 
      const menu: MenuItem[] = [
           { title: "Home", url: "/" },
-          { title: "All Products", url: "/products" },
+          { title: "All Events", url: "/event" },
      ];
 
      return (
@@ -83,9 +85,31 @@ const Navbar = () => {
                               </NavigationMenu>
                          </div>
 
-                         {/* Auth */}
+                         {/* Search + Auth */}
                          <div className="flex items-center gap-3">
 
+                              {/* Search */}
+                              <div className="flex items-center gap-2">
+                                   <Input
+                                        placeholder="Search products..."
+                                        value={search}
+                                        onChange={(e) => {
+                                             const value = e.target.value;
+                                             setSearch(value);
+
+                                             if (value.trim()) {
+                                                  // If there is a search term
+                                                  router.push(`/events?search=${value}`);
+                                             } else {
+                                                  // If the field is empty, show all events
+                                                  router.push(`/events`);
+                                             }
+                                        }}
+                                        className="w-56"
+                                   />
+
+
+                              </div>
 
                               {/* Auth */}
                               {user?.id ? (
@@ -129,16 +153,36 @@ const Navbar = () => {
                                         <SheetTitle className="text-center  font-extrabold">PLANORA</SheetTitle>
                                    </SheetHeader>
 
-                                   <div className="flex flex-col gap-4 mt-4 px-4">
+                                   <div className="flex flex-col gap-4 mt-4">
                                         {menu.map((item) => (
                                              <Link
                                                   key={item.title}
                                                   href={item.url}
-                                                  className="font-semibold bg-gray-100 rounded-xl text-center p-2"
+                                                  className="font-semibold"
                                              >
                                                   {item.title}
                                              </Link>
                                         ))}
+
+                                        <Input
+                                             placeholder="Search Events..."
+                                             value={search}
+                                             onChange={(e) => {
+                                                  const value = e.target.value;
+                                                  setSearch(value);
+
+                                                  if (value.trim()) {
+                                                       // If there is a search term
+                                                       router.push(`/events?search=${value}`);
+                                                  } else {
+                                                       // If the field is empty, show all products
+                                                       router.push(`/events`);
+                                                  }
+                                             }}
+                                             className="w-56"
+                                        />
+
+
                                    </div>
                               </SheetContent>
                          </Sheet>

@@ -62,7 +62,7 @@ export function AppSidebar({ user, ...props }: { user: { role: string } & React.
                                                   <SidebarMenuItem key={item.title}>
                                                        <SidebarMenuButton
                                                             asChild
-                                                            className={`text-[15px] font-semibold rounded px-2 py-0
+                                                            className={`text-[15px] uppercase font-bold  rounded px-2 py-0
                ${isActive
                                                                       ? "bg-gray-600 text-white cursor-default"
                                                                       : "hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-black"

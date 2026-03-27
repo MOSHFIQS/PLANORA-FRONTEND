@@ -25,6 +25,7 @@ import {
 import TextEditor from "../textEditor/TextEditor";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Calendar } from "../ui/calendar";
+import { Label } from "../ui/label";
 
 // -------------------- validation --------------------
 const formSchema = z.object({
@@ -35,20 +36,28 @@ const formSchema = z.object({
      visibility: z.enum(["PUBLIC", "PRIVATE"]),
      type: z.enum(["ONLINE", "OFFLINE"]),
      meetingLink: z.string(),
+     categoryId: z.string(),
      fee: z.number().min(0),
 });
 
-type Props = {
-     event: any;
+type Category = {
+     id: string;
+     name: string;
 };
 
-const UpdateEventForm = ({ event }: Props) => {
+
+type Props = {
+     event: any;
+     categories: Category[]
+};
+
+const UpdateEventForm = ({ event, categories }: Props) => {
      const router = useRouter();
 
-    const eventImages = useImageUpload({
-     max: 10,
-     defaultImages: event?.images || [], 
-});
+     const eventImages = useImageUpload({
+          max: 10,
+          defaultImages: event?.images || [],
+     });
 
      const existingDate = event?.dateTime ? new Date(event.dateTime) : undefined;
 
@@ -87,6 +96,7 @@ const UpdateEventForm = ({ event }: Props) => {
                visibility: event?.visibility || "PUBLIC",
                type: event?.type || "ONLINE",
                meetingLink: event?.meetingLink || "",
+               categoryId: event?.categoryId || "",
                fee: event?.fee || 0,
           },
           validators: {
@@ -367,6 +377,32 @@ const UpdateEventForm = ({ event }: Props) => {
                                              </Field>
                                         </div>
                                    </FieldGroup>
+                              )}
+                         </form.Field>
+
+                         <form.Field name="categoryId">
+                              {(field) => (
+                                   <div className="space-y-2">
+                                        <Label>Category</Label>
+                                        <Select
+                                             value={field.state.value}
+                                             onValueChange={(value) =>
+                                                  field.handleChange(value)
+                                             }
+                                        >
+                                             <SelectTrigger className="w-full">
+                                                  <SelectValue placeholder="Select Category" />
+                                             </SelectTrigger>
+
+                                             <SelectContent>
+                                                  {categories.map((cat) => (
+                                                       <SelectItem key={cat.id} value={cat.id}>
+                                                            {cat.name}
+                                                       </SelectItem>
+                                                  ))}
+                                             </SelectContent>
+                                        </Select>
+                                   </div>
                               )}
                          </form.Field>
 

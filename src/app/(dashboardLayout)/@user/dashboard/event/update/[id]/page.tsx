@@ -1,3 +1,4 @@
+import { getAllCategoriesAction } from "@/actions/category.action"
 import { getOrganizersEventByIdAction } from "@/actions/event.action"
 import UpdateEventForm from "@/components/forms/UpdateEventForm"
 
@@ -10,8 +11,11 @@ export default async function UpdateEventPage({
      const { id } = await params
 
      const res = await getOrganizersEventByIdAction(id)
+     const categoryRes = await getAllCategoriesAction();
 
- 
+     const categories = categoryRes?.data || [];
+
+
      const event = res?.ok ? res?.data : null
 
 
@@ -19,5 +23,5 @@ export default async function UpdateEventPage({
 
 
 
-     return <UpdateEventForm event={event}  />
+     return <UpdateEventForm event={event} categories={categories} />
 }

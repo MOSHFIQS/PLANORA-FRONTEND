@@ -25,6 +25,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Calendar } from "../ui/calendar";
 import { useState } from "react";
 import { format } from "date-fns";
+import { Label } from "../ui/label";
 
 // -------------------- validation schema --------------------
 const formSchema = z.object({
@@ -35,12 +36,18 @@ const formSchema = z.object({
      visibility: z.enum(["PUBLIC", "PRIVATE"]),
      type: z.enum(["ONLINE", "OFFLINE"]),
      meetingLink: z.string(),        // string only
+     categoryId: z.string(),        // string only
      fee: z.number().min(0, "Fee cannot be negative"),
 });
 
+type Category = {
+     id: string;
+     name: string;
+};
 
 
-const CreateEventForm = () => {
+const CreateEventForm = ({ categories }: { categories: Category[] }) => {
+     console.log(categories);
      const router = useRouter();
      const eventImages = useImageUpload({ max: 10 });
      const [datePickerOpen, setDatePickerOpen] = useState(false);
@@ -66,6 +73,7 @@ const CreateEventForm = () => {
                visibility: "PUBLIC",
                type: "ONLINE",
                meetingLink: "",
+               categoryId: "",
                fee: 0,
           },
           validators: {
@@ -345,6 +353,41 @@ const CreateEventForm = () => {
                                         </FieldGroup>
                                    );
                               }}
+                         </form.Field>
+
+                         {/* CATEGORY */}
+                         <form.Field name="categoryId">
+                              {(field) => (
+                                   <div className="space-y-2">
+                                        <Label>Category</Label>
+                                        <Select
+                                             value={field?.state?.value || ""}
+                                             onValueChange={(value) =>
+                                                  field?.handleChange(value)
+                                             }
+                                        >
+                                             <SelectTrigger className="w-full">
+                                                  <SelectValue placeholder="Select Category" />
+                                             </SelectTrigger>
+                                             <SelectContent>
+                                                  {categories?.length > 0 ? (
+                                                       categories?.map((cat) => (
+                                                            <SelectItem
+                                                                 key={cat?.id}
+                                                                 value={cat?.id?.toString()}
+                                                            >
+                                                                 {cat?.name}
+                                                            </SelectItem>
+                                                       ))
+                                                  ) : (
+                                                       <SelectItem value="none" disabled>
+                                                            No category found
+                                                       </SelectItem>
+                                                  )}
+                                             </SelectContent>
+                                        </Select>
+                                   </div>
+                              )}
                          </form.Field>
 
                          {/** IMAGES */}

@@ -41,6 +41,6 @@ export async function proxy(request: NextRequest) {
 export const config = {
      matcher: [
           "/admin-dashboard/:path*",
-          "/dashboard/:path*",
+          // "/dashboard/:path*",
      ],
 }
