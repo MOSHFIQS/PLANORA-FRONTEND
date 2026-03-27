@@ -45,7 +45,7 @@ export const userRoutes: Route[] = [
           ],
      },
      {
-          title: "General",
+          title: "Navigation",
           items: [
                {
                     title: "Home",
