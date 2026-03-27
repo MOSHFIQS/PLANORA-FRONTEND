@@ -11,7 +11,30 @@ export async function getAllUsersAction() {
     if (!res?.ok) {
       return {
         ok: false,
-        message: res?.message || "Failed to fetch users",
+        message: res?.message || "Failed to fetch Users",
+      };
+    }
+
+    return {
+      ok: true,
+      data: res.data,
+    };
+  } catch {
+    return {
+      ok: false,
+      message: "Something went wrong",
+    };
+  }
+}
+// Get all admins
+export async function getAllAdminsAction() {
+  try {
+    const res = await adminService.getAllAdmins();
+
+    if (!res?.ok) {
+      return {
+        ok: false,
+        message: res?.message || "Failed to fetch Admins",
       };
     }
 
@@ -34,6 +57,8 @@ export async function updateUserStatusAction(
 ) {
   try {
     const res = await adminService.updateUserStatus(id, payload);
+    revalidatePath("/admin-dashboard/users");
+    console.log("res", res);
 
     if (!res?.ok) {
       return {
@@ -42,12 +67,44 @@ export async function updateUserStatusAction(
       };
     }
 
-    revalidatePath("/admin-dashboard/users");
 
     return {
       ok: true,
       data: res.data,
       message: res?.message || "User status updated",
+    };
+  } catch {
+
+    return {
+      ok: false,
+      message: "Something went wrong",
+    };
+  }
+}
+
+
+export async function updateUserRoleAction(
+  id: string,
+  role: "USER" | "ADMIN"
+) {
+  try {
+    const res = await adminService.updateUserRole(id, role);
+
+    if (!res?.ok) {
+      return {
+        ok: false,
+        message: res?.message || "Failed to update role",
+      };
+    }
+
+    // revalidate relevant pages
+    revalidatePath("/dashboard/users");
+    revalidatePath("/dashboard/admins");
+
+    return {
+      ok: true,
+      message: res.message || "User role updated successfully",
+      data: res.data,
     };
   } catch {
     return {

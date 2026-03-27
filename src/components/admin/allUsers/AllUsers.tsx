@@ -17,6 +17,7 @@ import { Trash2, ShieldCheck, ShieldOff } from "lucide-react";
 import {
   updateUserStatusAction,
   deleteUserAction,
+  updateUserRoleAction,
 } from "@/actions/admin.action";
 import {
   Select,
@@ -40,6 +41,7 @@ type User = {
 const AllUsers = ({ users }: { users: User[] }) => {
   const [isPending, startTransition] = useTransition();
   const [loadingId, setLoadingId] = useState<string | null>(null);
+  
 
 
   const handleStatusToggle = (user: User) => {
@@ -122,7 +124,33 @@ const AllUsers = ({ users }: { users: User[] }) => {
 
                   {/* Role */}
                   <TableCell>
-                    <Badge variant="secondary">{user.role}</Badge>
+                    <Select
+                      defaultValue={user.role}
+                      onValueChange={async (value) => {
+                        setLoadingId(user.id);
+
+                        const res = await updateUserRoleAction(user.id,  value as "ADMIN" | "USER");
+
+                        if (!res?.ok) {
+                          toast.error(res?.message || "Failed to update");
+                        } else {
+                          toast.success(res?.message || "Status updated");
+                        }
+
+                        setLoadingId(null);
+                      }}
+                    >
+                      <SelectTrigger
+                        className="w-[130px]"
+                        disabled={isLoading}
+                      >
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="ADMIN">ADMIN</SelectItem>
+                        <SelectItem value="USER">USER</SelectItem>
+                      </SelectContent>
+                    </Select>
                   </TableCell>
 
                   {/* Status (Select) */}
@@ -177,7 +205,6 @@ const AllUsers = ({ users }: { users: User[] }) => {
                     <div className="flex items-end justify-end gap-2">
                       {/* Toggle Button */}
                       <Button
-                        size="xs"
                         variant="outline"
                         disabled={isLoading}
                         onClick={() => handleStatusToggle(user)}
@@ -193,12 +220,11 @@ const AllUsers = ({ users }: { users: User[] }) => {
 
                       {/* Delete */}
                       <Button
-                        size="xs"
                         variant="destructive"
                         disabled={isLoading}
                         onClick={() => handleDelete(user.id)}
                       >
-                        {isLoading ? "..." : <Trash2 className="w-4 h-4" />}
+                        {isLoading ? "..." : <Trash2  />}
                       </Button>
                     </div>
                   </TableCell>

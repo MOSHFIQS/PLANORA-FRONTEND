@@ -6,12 +6,22 @@ export const adminService = {
     apiFetchServerMain("/admin/users", {
       method: "GET",
     }),
+  getAllAdmins: () =>
+    apiFetchServerMain("/admin/admins", {
+      method: "GET",
+    }),
 
   // Update user status
   updateUserStatus: (id: string, payload: { status: string }) =>
     apiFetchServerMain(`/admin/users/${id}/status`, {
       method: "PATCH",
       body: JSON.stringify(payload),
+    }),
+
+  updateUserRole: (id: string, role: "USER" | "ADMIN") =>
+    apiFetchServerMain(`/admin/users/${id}/role`, {
+      method: "PATCH",
+      body: JSON.stringify({ role }),
     }),
 
   // Delete user
