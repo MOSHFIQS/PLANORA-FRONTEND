@@ -107,7 +107,7 @@ const EventReviews: React.FC<EventReviewsProps> = ({ organizersReviews }) => {
             {/* RIGHT ACTIONS */}
             <div className="ml-auto flex items-center gap-2">
               {/* UPDATE */}
-              {pathname?.startsWith("/dashboard/review") && (
+              {pathname === "/dashboard/review" && (
                 <UpdateReviewDialog
                   review={review}
                   onUpdated={(updatedReview) => {
