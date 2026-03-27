@@ -34,4 +34,10 @@ export const bannerService = {
           apiFetchServerMain(`/banner/${id}`, {
                method: "DELETE",
           }),
+
+     updateBannerStatus: (id: string, isActive: boolean) =>
+          apiFetchServerMain(`/banner/${id}/status`, {
+               method: "PATCH",
+               body: JSON.stringify({ isActive }),
+          }),
 };
