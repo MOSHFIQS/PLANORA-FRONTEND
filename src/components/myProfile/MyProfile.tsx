@@ -119,11 +119,11 @@ const MyProfile: React.FC<MyProfileProps> = ({ profileData }) => {
                                         <div>
                                              <label className="block text-sm font-medium mb-1">Profile Image</label>
                                              <ImageUploader
-                                                  label="Event Images"
+                                                  label="Profile Image"
                                                   images={profileImage.images}
                                                   onUpload={profileImage.upload}
                                                   onDelete={profileImage.remove}
-                                                  multiple
+                                                  multiple={false}
                                              />
                                         </div>
                                    </div>

@@ -41,7 +41,7 @@ const AllUsers = ({ users }: { users: User[] }) => {
   const [isPending, startTransition] = useTransition();
   const [loadingId, setLoadingId] = useState<string | null>(null);
 
-  // 🔒 Toggle status (ACTIVE <-> SUSPENDED/BLOCKED)
+
   const handleStatusToggle = (user: User) => {
     setLoadingId(user.id);
 
@@ -63,7 +63,7 @@ const AllUsers = ({ users }: { users: User[] }) => {
     });
   };
 
-  // 🗑 Delete user
+  // Delete user
   const handleDelete = (id: string) => {
     setLoadingId(id);
 

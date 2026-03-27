@@ -14,13 +14,13 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
-import { createCategoryAction } from "@/actions/category.action";
+import { createCategoryAction, updateCategoryAction } from "@/actions/category.action";
 import { useImageUpload } from "@/hooks/useImageUpload";
 import ImageUploader from "@/components/imageUploader/ImageUploader";
 
-export default function CreateCategory() {
+export default function UpdateCategory({ category }: { category: any }) {
      const [loading, setLoading] = useState(false);
-     const categoryImages = useImageUpload({ max: 1 });
+     const categoryImages = useImageUpload({ max: 1,defaultImages: [category?.image] });
 
      console.log(categoryImages.images[0]?.img);
 
@@ -28,8 +28,8 @@ export default function CreateCategory() {
 
      const form = useForm({
           defaultValues: {
-               name: "",
-               description: "",
+               name: category.name,
+               description: category.description,
           },
 
           onSubmit: async ({ value }) => {
@@ -39,16 +39,16 @@ export default function CreateCategory() {
                          ...value,
                          image: categoryImages.images[0]?.img
                     }
-                    // console.log(payload);
+                    console.log(payload);
 
 
 
-                    const res = await createCategoryAction(payload);
+                    const res = await updateCategoryAction(category.id, payload);
 
                     if (!res.ok) {
                          throw new Error(res.message);
                     }
-                    router.push("/admin-dashboard/category");
+                    // router.push("/admin-dashboard/category");
                     toast.success(res.message);
                     form.reset();
                } catch (err: any) {
@@ -139,7 +139,7 @@ export default function CreateCategory() {
                               />
 
                               <Button type="submit" className="w-full" disabled={loading}>
-                                   {loading ? "Creating..." : "Create Category"}
+                                   {loading ? "Creating..." : "Update Category"}
                               </Button>
 
                          </form>
