@@ -1,4 +1,5 @@
 
+import { getAllCategoriesAction } from "@/actions/category.action";
 import { getAllEventsAction } from "@/actions/event.action";
 import HomePageEvents from "@/components/homePageEvents/HomePageEvents";
 import { sessionService } from "@/service/token.service";
@@ -7,6 +8,10 @@ const AllEventsPage = async ({ searchParams }: { searchParams: Promise<{ search:
      const { search } = await searchParams
      const res = await getAllEventsAction();
      console.log(res.data);
+
+     const categoryRes = await getAllCategoriesAction();
+
+     const categories = categoryRes?.data || [];
 
      const searchText = search || "";
 
@@ -19,7 +24,7 @@ const AllEventsPage = async ({ searchParams }: { searchParams: Promise<{ search:
      }
      return (
           <div>
-               <HomePageEvents events={res.data}  search={searchText} />
+               <HomePageEvents events={res.data}  search={searchText} categories={categories}/>
           </div>
      );
 };

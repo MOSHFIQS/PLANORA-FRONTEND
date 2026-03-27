@@ -50,7 +50,7 @@ const Navbar = () => {
 
      const menu: MenuItem[] = [
           { title: "Home", url: "/" },
-          { title: "All Events", url: "/event" },
+          { title: "All Events", url: "/events" },
      ];
 
      return (

@@ -60,6 +60,10 @@ export const userRoutes: Route[] = [
                     title: "Home",
                     url: "/",
                },
+               {
+                    title: "All Events",
+                    url: "/events",
+               },
           ],
      },
 ];
