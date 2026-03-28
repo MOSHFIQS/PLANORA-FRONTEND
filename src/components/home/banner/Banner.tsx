@@ -177,8 +177,10 @@ import { Banner } from "@/types/banner.types"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { AppImage } from "@/components/appImage/AppImage"
+import { format } from "date-fns"
 
 export default function CarouselPlugin({ banners }: { banners: Banner[] }) {
+     console.log(banners);
 
      const plugin = React.useRef(
           Autoplay({ delay: 2000, stopOnInteraction: true })
@@ -191,7 +193,7 @@ export default function CarouselPlugin({ banners }: { banners: Banner[] }) {
 
 
      return (
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-2 border p-0 xl:p-10 bg-gray-50">
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-2 border-2 rounded p-0 xl:p-10 mt-10">
 
                {/* MAIN CAROUSEL */}
                <div className="lg:col-span-4">
@@ -205,10 +207,10 @@ export default function CarouselPlugin({ banners }: { banners: Banner[] }) {
                               align: "start",
                               loop: true
                          }}
-                         
+
                     >
 
-                         <CarouselContent className="h-[360px] sm:h-[450px] md:h-[450px] lg:h-[520px] xl:h-[600px]  m-0  w-full">
+                         <CarouselContent className="h-[400px] sm:h-[450px] md:h-[450px] lg:h-[500px] xl:h-[550px]  m-0  w-full">
 
                               {mainBanners.map((banner) => (
                                    <CarouselItem key={banner.id} className="h-full p-0">
@@ -226,70 +228,95 @@ export default function CarouselPlugin({ banners }: { banners: Banner[] }) {
                                              <div className="absolute inset-0 bg-black/50 " />
 
                                              <div className="absolute inset-0 flex items-center">
-                                                  <div className="max-w-xl ml-6 md:ml-12 p-6 text-white">
+                                                  <div className="max-w-xl ml-6 md:ml-12 p-6  rounded-md text-white space-y-4">
 
-                                                       <h2 className="text-3xl md:text-5xl font-bold mb-3">
+                                                       {/* Event Type Badge */}
+                                                       <span className="inline-block px-3 py-1 text-sm font-semibold rounded-full bg-indigo-500 bg-opacity-80">
+                                                            {banner.type} Event
+                                                       </span>
+
+                                                       {/* Title */}
+                                                       <h2 className="text-3xl md:text-5xl font-bold leading-tight">
                                                             {banner.title}
                                                        </h2>
 
-                                                       <p className="text-sm md:text-base font-semibold mb-2">
+                                                       {/* Description */}
+                                                       <p className="text-sm md:text-base font-medium">
                                                             {banner.description}
                                                        </p>
 
-                                                       <p className="text-xs mb-6">
-                                                            {banner.altText}
+                                                       {/* Alt Text */}
+                                                       <p className="text-xs text-gray-200">{banner.altText}</p>
+
+                                                       {/* Date & Time */}
+                                                       <p className="text-sm font-semibold">
+                                                            {format(new Date(banner.dateTime), "PPP 'at' p")}
                                                        </p>
 
+                                                       {/* Button */}
                                                        {banner.buttonText && (
-                                                            <Link href={banner.redirectUrl || "#"}>
-                                                                 <Button className="bg-white text-black">
+                                                            <Button variant={"outline"} asChild className="text-black">
+                                                                 <Link href={banner.redirectUrl || "#"}>
                                                                       {banner.buttonText}
-                                                                 </Button>
-                                                            </Link>
+                                                                 </Link>
+                                                            </Button>
                                                        )}
-
                                                   </div>
                                              </div>
                                         </div>
 
 
                                         {/* ===== XL → NEW DESIGN ===== */}
-                                        <div className="hidden xl:flex h-full w-full">
+                                        <div className="hidden xl:flex items-center justify-between h-full w-full gap-10 px-1">
 
                                              {/* LEFT TEXT */}
-                                             <div className="w-1/3 flex items-center bg-white px-16">
-                                                  <div className="max-w-xl">
+                                             <div className="flex-1  bg-white   ">
+                                                  <div className="space-y-8">
+                                                       {/* Badge */}
+                                                       <div className="inline-block">
+                                                            <span className="px-3 py-1 text-sm font-semibold rounded-full bg-indigo-100 text-indigo-800">
+                                                                 {banner.type} Event
+                                                            </span>
+                                                       </div>
 
-                                                       <h2 className="text-5xl font-bold mb-4">
-                                                            {banner.title}
+                                                       {/* Title */}
+                                                       <h2 className="text-3xl sm:text-2xl font-extrabold leading-tight text-gray-900">
+                                                            {banner.title}sdfsdfsdfsd
                                                        </h2>
 
-                                                       <p className="text-base font-semibold mb-2">
+                                                       <div className="space-y-3">
+                                                            {/* Description */}
+                                                       <p className="text-lg font-medium text-gray-700">
                                                             {banner.description}
                                                        </p>
 
-                                                       <p className="text-sm mb-6">
-                                                            {banner.altText}
+                                                       {/* Alt Text */}
+                                                       <p className="text-sm text-gray-500">{banner.altText}</p>
+
+                                                       {/* Date & Time */}
+                                                       <p className="text-sm text-gray-600 font-medium">
+                                                            {format(new Date(banner.dateTime), "PPP 'at' p")}
                                                        </p>
+                                                       </div>
 
+                                                       {/* Button */}
                                                        {banner.buttonText && (
-                                                            <Link href={banner.redirectUrl || "#"}>
-                                                                 <Button className="bg-black text-white px-8 py-2 rounded-none">
+                                                            <Button asChild >
+                                                                 <Link href={banner.redirectUrl || "#"}>
                                                                       {banner.buttonText}
-                                                                 </Button>
-                                                            </Link>
+                                                                 </Link>
+                                                            </Button>
                                                        )}
-
                                                   </div>
                                              </div>
 
                                              {/* RIGHT IMAGE */}
-                                             <div className="w-1/1 h-full">
+                                             <div className="h-full border-2 rounded flex-4">
                                                   <AppImage
                                                        src={banner.image}
                                                        priority
                                                        loading="eager"
-                                                       className="object-cover w-full h-full"
+                                                       className="object-cover w-full h-full rounded"
                                                   />
                                              </div>
 
