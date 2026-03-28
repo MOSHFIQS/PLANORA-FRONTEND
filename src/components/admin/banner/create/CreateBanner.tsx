@@ -17,13 +17,13 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
 
-import {
-     Select,
-     SelectContent,
-     SelectItem,
-     SelectTrigger,
-     SelectValue,
-} from "@/components/ui/select";
+// import {
+//      Select,
+//      SelectContent,
+//      SelectItem,
+//      SelectTrigger,
+//      SelectValue,
+// } from "@/components/ui/select";
 import ImageUploader from "@/components/imageUploader/ImageUploader";
 import { useImageUpload } from "@/hooks/useImageUpload";
 import { createBannerAction } from "@/actions/banner.action";
@@ -150,7 +150,7 @@ export default function CreateBanner() {
                                    </form.Field>
 
                                    {/* POSITION */}
-                                   <form.Field name="position">
+                                   {/* <form.Field name="position">
                                         {(field) => (
                                              <div className="space-y-2 w-full">
                                                   <Label>Position</Label>
@@ -173,7 +173,7 @@ export default function CreateBanner() {
                                                   </Select>
                                              </div>
                                         )}
-                                   </form.Field>
+                                   </form.Field> */}
 
                                    {/* POSITION ORDER */}
                                    <form.Field name="positionOrder">

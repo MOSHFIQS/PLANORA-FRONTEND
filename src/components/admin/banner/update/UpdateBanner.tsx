@@ -87,7 +87,7 @@ export default function UpdateBanner({ banner }: { banner: any }) {
           <div className="">
                <Card className="pt-0">
                     <CardHeader className="px-6 py-4 border-b bg-gradient-to-r from-orange-50 to-white rounded-md">
-                         <CardTitle className="text-xl font-semibold text-gray-800">Create Banner</CardTitle>
+                         <CardTitle className="text-xl font-semibold text-gray-800">Update Banner</CardTitle>
                          <CardDescription>
                               Add a Banner to Your HomePage
                          </CardDescription>
@@ -150,7 +150,7 @@ export default function UpdateBanner({ banner }: { banner: any }) {
                                    </form.Field>
 
                                    {/* POSITION */}
-                                   <form.Field name="position">
+                                   {/* <form.Field name="position">
                                         {(field) => (
                                              <div className="space-y-2 w-full">
                                                   <Label>Position</Label>
@@ -173,7 +173,7 @@ export default function UpdateBanner({ banner }: { banner: any }) {
                                                   </Select>
                                              </div>
                                         )}
-                                   </form.Field>
+                                   </form.Field> */}
 
                                    {/* POSITION ORDER */}
                                    <form.Field name="positionOrder">
@@ -209,7 +209,7 @@ export default function UpdateBanner({ banner }: { banner: any }) {
                                    {/* ALT TEXT */}
                                    <form.Field name="altText">
                                         {(field) => (
-                                             <div className="space-y-2 col-span-1 md:col-span-2">
+                                             <div className="space-y-2 ">
                                                   <Label>Alt Text</Label>
                                                   <Input
                                                        value={field.state.value}

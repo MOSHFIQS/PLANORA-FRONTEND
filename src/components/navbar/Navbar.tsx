@@ -91,7 +91,7 @@ const Navbar = () => {
                               {/* Search */}
                               <div className="flex items-center gap-2">
                                    <Input
-                                        placeholder="Search products..."
+                                        placeholder="Search Events..."
                                         value={search}
                                         onChange={(e) => {
                                              const value = e.target.value;
