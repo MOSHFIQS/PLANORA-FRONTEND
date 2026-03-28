@@ -19,7 +19,6 @@ import Link from "next/link";
 import { useAuth } from "@/context/AuthProvider";
 import { usePathname, useRouter } from "next/navigation";
 import { Input } from "../ui/input";
-import { useState } from "react";
 import { useEventSearch } from "@/hooks/useEventSearch";
 
 const Navbar = () => {
@@ -33,14 +32,6 @@ const Navbar = () => {
           logout();
           router.push("/");
      };
-
-     if (loading) {
-          return (
-               <section className="py-4">
-                    <div className="h-10" />
-               </section>
-          );
-     }
 
      const menu = [
           { title: "Home", url: "/" },
@@ -57,10 +48,27 @@ const Navbar = () => {
           }
      };
 
+     const isActive = (url: string) => {
+          if (url === "/") {
+               return pathname === "/";
+          }
+          return pathname === url || pathname.startsWith(url + "/");
+     };
+
+     if (loading) {
+          return (
+               <section className="py-4">
+                    <div className="h-10" />
+               </section>
+          );
+     }
+
      return (
           <section className="py-4 border-b">
                <div>
-                    <nav className="hidden items-center justify-between lg:flex">
+                    {/* ================= DESKTOP ================= */}
+                    <nav className="hidden items-center justify-between lg:flex px-4">
+
                          {/* Logo */}
                          <Link href="/" className="flex items-center gap-2">
                               <img src="/logo/logo.png" className="max-h-8" />
@@ -68,42 +76,51 @@ const Navbar = () => {
                          </Link>
 
                          {/* Menu */}
-                         <NavigationMenu>
-                              <NavigationMenuList>
-                                   {menu.map((item) => (
-                                        <NavigationMenuItem key={item.title}>
-                                             <NavigationMenuLink asChild>
-                                                  <Link
-                                                       href={item.url}
-                                                       className="px-4 py-2 text-sm font-medium hover:bg-muted rounded-md bg-gray-50 shadow"
-                                                  >
-                                                       {item.title}
-                                                  </Link>
-                                             </NavigationMenuLink>
-                                        </NavigationMenuItem>
-                                   ))}
-                              </NavigationMenuList>
-                         </NavigationMenu>
+                         <div className="flex items-center gap-4">
+                              {menu.map((item) => (
+                                   <Button asChild variant="outline">
+                                        <Link
+                                        key={item.title}
+                                        href={item.url}
+                                        className={`px-3 py-2 text-sm font-medium shadow transition
+        ${isActive(item.url)
+                                                  ? "bg-primary text-white"
+                                                  : "bg-gray-50 hover:bg-muted"
+                                             }
+      `}
+                                   >
+                                        {item.title}
+                                   </Link>
+                                   </Button>
+                              ))}
+                         </div>
 
                          {/* Search + Auth */}
                          <div className="flex items-center gap-3">
                               <Input
                                    placeholder="Search Events..."
                                    value={search}
-                                   onChange={(e) => setSearch(e.target.value)}
+                                   onChange={(e) => handleSearch(e.target.value)}
                                    className="w-56"
                               />
 
                               {user?.id ? (
-                                   <Button variant="outline" onClick={handleLogout}>
-                                        Logout
-                                   </Button>
+                                   <>
+                                        <Button
+                                             variant="outline"
+                                             onClick={() => router.push("/dashboard")}
+                                        >
+                                             Dashboard
+                                        </Button>
+
+                                        <Button variant="outline" onClick={handleLogout}>
+                                             Logout
+                                        </Button>
+                                   </>
                               ) : (
                                    <>
                                         <Button asChild variant="outline">
-                                             <Link href={`/login?redirect=${pathname}`}>
-                                                  Login
-                                             </Link>
+                                             <Link href={`/login?redirect=${pathname}`}>Login</Link>
                                         </Button>
 
                                         <Button asChild>
@@ -114,39 +131,90 @@ const Navbar = () => {
                          </div>
                     </nav>
 
-                    {/* Mobile */}
-                    <div className="flex items-center justify-between lg:hidden">
-                         <Link href="/">
-                              <img src="/logo/logo.png" className="max-h-8" />
+                    {/* ================= MOBILE ================= */}
+                    <div className="flex items-center justify-between lg:hidden px-4">
+
+                         {/* Logo */}
+                         <Link href="/" className="flex items-center gap-2">
+                              <img src="/logo/logo.png" className="h-8" />
+                              <span className="font-semibold">PLANORA</span>
                          </Link>
 
                          <Sheet>
                               <SheetTrigger asChild>
                                    <Button variant="outline" size="icon">
-                                        <Menu className="w-4 h-4" />
+                                        <Menu className="w-5 h-5" />
                                    </Button>
                               </SheetTrigger>
 
-                              <SheetContent>
+                              <SheetContent side="right" className="w-[280px] px-3">
                                    <SheetHeader>
-                                        <SheetTitle className="text-center font-extrabold">
+                                        <SheetTitle className="text-center text-xl font-bold">
                                              PLANORA
                                         </SheetTitle>
                                    </SheetHeader>
 
-                                   <div className="flex flex-col gap-4 mt-4">
-                                        {menu.map((item) => (
-                                             <Link key={item.title} href={item.url}>
-                                                  {item.title}
-                                             </Link>
-                                        ))}
+                                   <div className="flex flex-col gap-4 mt-6">
 
+                                        {/* Search */}
                                         <Input
                                              placeholder="Search Events..."
                                              value={search}
-                                             onChange={(e) => setSearch(e.target.value)}
-                                             className="w-56"
+                                             onChange={(e) => handleSearch(e.target.value)}
+                                             className="w-full"
                                         />
+
+                                        {/* Menu */}
+                                        <div className="flex flex-col gap-2">
+                                             {menu.map((item) => (
+                                                  <Link key={item.title} href={item.url}>
+                                                       <Button
+                                                            variant={isActive(item.url) ? "default" : "ghost"}
+                                                            className="w-full justify-start"
+                                                       >
+                                                            {item.title}
+                                                       </Button>
+                                                  </Link>
+                                             ))}
+                                        </div>
+
+                                        {/* Divider */}
+                                        <div className="border-t my-2" />
+
+                                        {/* Auth */}
+                                        <div className="flex flex-col gap-2">
+                                             {user?.id ? (
+                                                  <>
+                                                       <Button
+                                                            variant="outline"
+                                                            className="w-full"
+                                                            onClick={() => router.push("/dashboard")}
+                                                       >
+                                                            Dashboard
+                                                       </Button>
+
+                                                       <Button
+                                                            variant="destructive"
+                                                            className="w-full"
+                                                            onClick={handleLogout}
+                                                       >
+                                                            Logout
+                                                       </Button>
+                                                  </>
+                                             ) : (
+                                                  <>
+                                                       <Button asChild variant="outline" className="w-full">
+                                                            <Link href={`/login?redirect=${pathname}`}>
+                                                                 Login
+                                                            </Link>
+                                                       </Button>
+
+                                                       <Button asChild className="w-full">
+                                                            <Link href="/register">Register</Link>
+                                                       </Button>
+                                                  </>
+                                             )}
+                                        </div>
                                    </div>
                               </SheetContent>
                          </Sheet>
