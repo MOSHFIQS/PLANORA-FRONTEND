@@ -52,7 +52,6 @@ export async function getEventTicketsAction(eventId: string) {
   }
 }
 
-//  Check-in Ticket
 export async function checkInTicketAction(qrCode: string) {
   try {
     const res = await ticketService.checkInTicket(qrCode);
@@ -66,7 +65,7 @@ export async function checkInTicketAction(qrCode: string) {
 
     return {
       ok: true,
-      message: res.message || "Ticket checked in",
+      message: res.message,
       data: res.data,
     };
   } catch {
