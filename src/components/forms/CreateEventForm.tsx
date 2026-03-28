@@ -192,6 +192,7 @@ const CreateEventForm = ({ categories }: { categories: Category[] }) => {
                                    }}
                               </form.Field>
 
+
                               <form.Field name="type">
                                    {(field) => {
                                         const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;

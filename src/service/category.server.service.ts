@@ -32,4 +32,5 @@ export const categoryService = {
     apiFetchServerMain(`/category/${id}`, {
       method: "DELETE",
     }),
+
 };

@@ -26,15 +26,45 @@ import {
 } from "@/components/ui/select";
 import ImageUploader from "@/components/imageUploader/ImageUploader";
 import { useImageUpload } from "@/hooks/useImageUpload";
-import { updateBannerAction,} from "@/actions/banner.action";
+import { updateBannerAction, } from "@/actions/banner.action";
+import { format } from "date-fns";
+import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
+import { Popover } from '@/components/ui/popover';
+import { PopoverContent } from '@/components/ui/popover';
+import { Calendar } from "@/components/ui/calendar";
+import { PopoverTrigger } from '@/components/ui/popover';
 
 
 export default function UpdateBanner({ banner }: { banner: any }) {
      const [loading, setLoading] = useState(false);
-     const bannerImages = useImageUpload({ max: 1,defaultImages:[banner.image] });
+     const bannerImages = useImageUpload({ max: 1, defaultImages: [banner.image] });
      console.log(bannerImages.images);
      const router = useRouter();
 
+
+     const existingDate = banner?.dateTime ? new Date(banner.dateTime) : undefined;
+
+     const [selectedDate, setSelectedDate] = useState<Date | undefined>(
+          existingDate
+     );
+
+     const [selectedTime, setSelectedTime] = useState(
+          existingDate
+               ? format(existingDate, "HH:mm:ss")
+               : "10:30:00"
+     );
+
+     const [datePickerOpen, setDatePickerOpen] = useState(false);
+
+     const combineDateTime = (date?: Date, time?: string) => {
+          if (!date || !time) return "";
+
+          const [h, m, s] = time.split(":").map(Number);
+          const d = new Date(date);
+          d.setHours(h || 0, m || 0, s || 0);
+
+          return d.toISOString();
+     };
 
 
      const form = useForm({
@@ -44,6 +74,10 @@ export default function UpdateBanner({ banner }: { banner: any }) {
                redirectUrl: banner?.redirectUrl ?? "",
                position: banner?.position ?? "MAIN",
                positionOrder: banner?.positionOrder ?? 1,
+               dateTime: banner?.dateTime
+                    ? new Date(banner.dateTime).toISOString()
+                    : "",
+               type: banner?.type || "ONLINE",
                buttonText: banner?.buttonText ?? "",
                altText: banner?.altText ?? "",
                isActive: banner?.isActive ?? true,
@@ -59,6 +93,8 @@ export default function UpdateBanner({ banner }: { banner: any }) {
                          image: bannerImages.images[0]?.img,
                          redirectUrl: value.redirectUrl,
                          position: value.position,
+                         type: value.type,
+                         dateTime: new Date(value.dateTime),
                          positionOrder: Number(value.positionOrder),
                          buttonText: value.buttonText,
                          altText: value.altText,
@@ -66,7 +102,7 @@ export default function UpdateBanner({ banner }: { banner: any }) {
                     };
 
                     console.log(bannerPayload);
-                    const res = await updateBannerAction(banner.id,bannerPayload);
+                    const res = await updateBannerAction(banner.id, bannerPayload);
 
                     if (!res?.ok) throw new Error(res?.message);
 
@@ -206,10 +242,37 @@ export default function UpdateBanner({ banner }: { banner: any }) {
                                         )}
                                    </form.Field>
 
+
+                                   <form.Field name="type">
+                                        {(field) => (
+                                             <Field>
+                                                  <FieldLabel>Type</FieldLabel>
+                                                  <Select
+                                                       value={field.state.value}
+                                                       onValueChange={(val: any) =>
+                                                            field.handleChange(val)
+                                                       }
+                                                  >
+                                                       <SelectTrigger>
+                                                            <SelectValue />
+                                                       </SelectTrigger>
+                                                       <SelectContent>
+                                                            <SelectItem value="ONLINE">
+                                                                 Online
+                                                            </SelectItem>
+                                                            <SelectItem value="OFFLINE">
+                                                                 Offline
+                                                            </SelectItem>
+                                                       </SelectContent>
+                                                  </Select>
+                                             </Field>
+                                        )}
+                                   </form.Field>
+
                                    {/* ALT TEXT */}
                                    <form.Field name="altText">
                                         {(field) => (
-                                             <div className="space-y-2 ">
+                                             <div className="space-y-2 w-full ">
                                                   <Label>Alt Text</Label>
                                                   <Input
                                                        value={field.state.value}
@@ -220,7 +283,96 @@ export default function UpdateBanner({ banner }: { banner: any }) {
                                              </div>
                                         )}
                                    </form.Field>
+
+
+
+
+
+
+
                               </div>
+                              {/* DATE TIME */}
+                              <form.Field name="dateTime">
+                                   {(field) => (
+                                        <FieldGroup className="flex-col">
+                                             <div className="flex gap-4">
+                                                  <Field>
+                                                       <FieldLabel>Date</FieldLabel>
+                                                       <Popover
+                                                            open={datePickerOpen}
+                                                            onOpenChange={
+                                                                 setDatePickerOpen
+                                                            }
+                                                       >
+                                                            <PopoverTrigger asChild>
+                                                                 <Button variant="outline">
+                                                                      {selectedDate
+                                                                           ? format(
+                                                                                selectedDate,
+                                                                                "PPP"
+                                                                           )
+                                                                           : "Select"}
+                                                                 </Button>
+                                                            </PopoverTrigger>
+
+                                                            <PopoverContent>
+                                                                 <Calendar
+                                                                      mode="single"
+                                                                      selected={
+                                                                           selectedDate
+                                                                      }
+                                                                      onSelect={(
+                                                                           date
+                                                                      ) => {
+                                                                           setSelectedDate(
+                                                                                date
+                                                                           );
+                                                                           const combined =
+                                                                                combineDateTime(
+                                                                                     date,
+                                                                                     selectedTime
+                                                                                );
+                                                                           if (
+                                                                                combined
+                                                                           )
+                                                                                field.handleChange(
+                                                                                     combined
+                                                                                );
+                                                                      }}
+                                                                 />
+                                                            </PopoverContent>
+                                                       </Popover>
+                                                  </Field>
+
+                                                  <Field>
+                                                       <FieldLabel>Time</FieldLabel>
+                                                       <Input
+                                                            type="time"
+                                                            step="1"
+                                                            value={selectedTime}
+                                                            onChange={(e) => {
+                                                                 const time =
+                                                                      e.target.value;
+                                                                 setSelectedTime(
+                                                                      time
+                                                                 );
+
+                                                                 const combined =
+                                                                      combineDateTime(
+                                                                           selectedDate,
+                                                                           time
+                                                                      );
+                                                                 if (combined)
+                                                                      field.handleChange(
+                                                                           combined
+                                                                      );
+                                                            }}
+                                                       />
+                                                  </Field>
+                                             </div>
+                                        </FieldGroup>
+                                   )}
+                              </form.Field>
 
                               {/* IMAGE UPLOAD — FULL WIDTH */}
                               <div className="space-y-3 ">
