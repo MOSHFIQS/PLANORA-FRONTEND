@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { format } from "date-fns";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { AppImage } from "../appImage/AppImage";
 import { Event } from "@/types/event.types";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 type Category = {
   id: string;
@@ -19,11 +19,23 @@ type Props = {
   events: Event[];
   search: string;
   categories: Category[];
+  selectedCategoryFromUrl: string;
 };
 
-const HomePageEvents = ({ events, search = "", categories }: Props) => {
-  const pathname = usePathname();
-  const [selectedCategory, setSelectedCategory] = useState<string>("ALL");
+const HomePageEvents = ({
+  events,
+  search = "",
+  categories,
+  selectedCategoryFromUrl,
+}: Props) => {
+  const router = useRouter();
+  const [selectedCategory, setSelectedCategory] =
+    useState<string>(selectedCategoryFromUrl || "ALL");
+
+  // sync with URL
+  useEffect(() => {
+    setSelectedCategory(selectedCategoryFromUrl || "ALL");
+  }, [selectedCategoryFromUrl]);
 
   const filteredEvents = events?.filter((event) => {
     const matchSearch = event.title
@@ -38,42 +50,49 @@ const HomePageEvents = ({ events, search = "", categories }: Props) => {
     return matchSearch && matchCategory;
   });
 
-  const visibleEvents =
-    pathname === "/" ? filteredEvents.slice(0, 8) : filteredEvents;
+  const handleCategoryClick = (categoryId: string) => {
+    setSelectedCategory(categoryId);
+
+    // reset search + update URL
+    if (categoryId === "ALL") {
+      router.push(`/events`);
+    } else {
+      router.push(`/events?category=${categoryId}`);
+    }
+  };
 
   return (
     <div className="space-y-6 mt-6">
-      
-      {/* ✅ CATEGORY BUTTONS ONLY ON NON-HOME ROUTES */}
-      {pathname !== "/" && (
-        <div className="flex flex-wrap gap-2">
+      {/* CATEGORY */}
+      <div className="flex flex-wrap gap-2">
+        <Button
+          variant={selectedCategory === "ALL" ? "default" : "outline"}
+          onClick={() => handleCategoryClick("ALL")}
+        >
+          All
+        </Button>
+
+        {categories?.map((cat) => (
           <Button
-            variant={selectedCategory === "ALL" ? "default" : "outline"}
-            onClick={() => setSelectedCategory("ALL")}
+            key={cat.id}
+            variant={
+              selectedCategory === cat.id ? "default" : "outline"
+            }
+            onClick={() => handleCategoryClick(cat.id)}
           >
-            All
+            {cat.name}
           </Button>
+        ))}
+      </div>
 
-          {categories?.map((cat) => (
-            <Button
-              key={cat.id}
-              variant={selectedCategory === cat.id ? "default" : "outline"}
-              onClick={() => setSelectedCategory(cat.id)}
-            >
-              {cat.name}
-            </Button>
-          ))}
-        </div>
-      )}
-
-      {/* GRID / NO DATA */}
-      {!visibleEvents?.length ? (
+      {/* EVENTS */}
+      {!filteredEvents?.length ? (
         <p className="text-center text-muted-foreground">
           No events found.
         </p>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {visibleEvents.map((event) => {
+          {filteredEvents.map((event) => {
             const date = event?.dateTime
               ? new Date(event.dateTime)
               : null;
@@ -133,4 +152,5 @@ const HomePageEvents = ({ events, search = "", categories }: Props) => {
     </div>
   );
 };
+
 export default HomePageEvents;

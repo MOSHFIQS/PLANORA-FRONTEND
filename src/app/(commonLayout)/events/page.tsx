@@ -1,32 +1,29 @@
-
 import { getAllCategoriesAction } from "@/actions/category.action";
 import { getAllEventsAction } from "@/actions/event.action";
 import HomePageEvents from "@/components/homePageEvents/HomePageEvents";
-import { sessionService } from "@/service/token.service";
 
-const AllEventsPage = async ({ searchParams }: { searchParams: Promise<{ search: string }> }) => {
-     const { search } = await searchParams
-     const res = await getAllEventsAction();
-     console.log(res.data);
+const AllEventsPage = async ({
+  searchParams,
+}: {
+  searchParams: Promise<{ search?: string; category?: string }>;
+}) => {
+  const { search = "", category = "ALL" } = await searchParams;
 
-     const categoryRes = await getAllCategoriesAction();
+  const res = await getAllEventsAction();
+  const categoryRes = await getAllCategoriesAction();
 
-     const categories = categoryRes?.data || [];
+  if (!res?.ok) {
+    return <p className="p-6 text-red-600">Failed to load Events</p>;
+  }
 
-     const searchText = search || "";
-
-     if (!res?.ok) {
-          return (
-               <p className="p-6 text-red-600">
-                    Failed to load Events
-               </p>
-          );
-     }
-     return (
-          <div>
-               <HomePageEvents events={res.data}  search={searchText} categories={categories}/>
-          </div>
-     );
+  return (
+    <HomePageEvents
+      events={res.data}
+      search={search}
+      selectedCategoryFromUrl={category}
+      categories={categoryRes?.data || []}
+    />
+  );
 };
 
 export default AllEventsPage;

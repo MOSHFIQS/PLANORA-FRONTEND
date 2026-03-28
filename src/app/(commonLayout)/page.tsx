@@ -2,6 +2,7 @@
 import { getAllBannersAction } from "@/actions/banner.action";
 import { getAllEventsAction } from "@/actions/event.action";
 import CarouselPlugin from "@/components/home/banner/Banner";
+import EventsSlider from "@/components/home/eventsSlider/EventsSlider";
 import HomePageEvents from "@/components/homePageEvents/HomePageEvents";
 import { sessionService } from "@/service/token.service";
 import { Banner } from "@/types/banner.types";
@@ -25,11 +26,13 @@ const HomePage = async () => {
           );
      }
      return (
-          <div>
+          <div className="my-100">
 
 
                <CarouselPlugin banners={banners} />
-               <HomePageEvents events={events} search={""} categories={[]} />
+               {/* <HomePageEvents events={events} search={""} categories={[]} /> */}
+
+               <EventsSlider events={events} />
 
           </div>
      );

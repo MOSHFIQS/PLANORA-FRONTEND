@@ -280,8 +280,8 @@ export default function CarouselPlugin({ banners }: { banners: Banner[] }) {
                                                        </div>
 
                                                        {/* Title */}
-                                                       <h2 className="text-3xl sm:text-2xl font-extrabold leading-tight text-gray-900">
-                                                            {banner.title}sdfsdfsdfsd
+                                                       <h2 className="text-2xl sm:text-3xl font-extrabold leading-tight text-gray-900">
+                                                            {banner.title}
                                                        </h2>
 
                                                        <div className="space-y-3">
