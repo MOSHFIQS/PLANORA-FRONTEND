@@ -62,15 +62,6 @@ const CategoryCard = ({ categories }: { categories: Category[] }) => {
         })}
       </div>
 
-      {/* ALL button */}
-      <div className="text-center mt-6">
-        <button
-          onClick={() => router.push("/events")}
-          className="px-6 py-2 bg-black text-white rounded-lg"
-        >
-          View All Events
-        </button>
-      </div>
     </div>
   );
 };
