@@ -7,6 +7,7 @@ import { ticketService } from "@/service/server/ticket.server.service";
 export async function getMyTicketsAction() {
   try {
     const res = await ticketService.getMyTickets();
+    console.log(res);
 
     if (!res?.ok) {
       return {

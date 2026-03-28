@@ -12,6 +12,8 @@ import {
   List,
   CreditCard,
   Wallet,
+  Ticket,
+  ScanLine,
 } from "lucide-react";
 
 export const userRoutes: Route[] = [
@@ -61,21 +63,38 @@ export const userRoutes: Route[] = [
     ],
   },
 
- {
-  title: "Payments",
-  items: [
-    {
-      title: "My Payments",
-      url: "/dashboard/payments",
-      icon: CreditCard,
-    },
-    {
-      title: "Event Payments",
-      url: "/dashboard/payments/event-payments",
-      icon: Wallet,
-    },
-  ],
-},
+  {
+    title: "Payments",
+    items: [
+      {
+        title: "My Payments",
+        url: "/dashboard/payments",
+        icon: CreditCard,
+      },
+      {
+        title: "Event Payments",
+        url: "/dashboard/payments/event-payments",
+        icon: Wallet,
+      },
+    ],
+  },
+
+  // ✅ NEW: Tickets Section
+  {
+    title: "Tickets",
+    items: [
+      {
+        title: "My Tickets",
+        url: "/dashboard/tickets",
+        icon: Ticket,
+      },
+      {
+        title: "Scan Tickets",
+        url: "/dashboard/tickets/scan",
+        icon: ScanLine,
+      },
+    ],
+  },
 
   {
     title: "Engagement",
