@@ -1,6 +1,7 @@
 "use server";
 
-import { reviewService } from "@/service/review.server.service";
+import { reviewService } from "@/service/server/review.server.service";
+
 
 // CREATE
 export async function createReview(payload: {

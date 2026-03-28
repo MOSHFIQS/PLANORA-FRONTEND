@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { format } from "date-fns";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { AppImage } from "../appImage/AppImage";
 import { Event } from "@/types/event.types";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 
 type Category = {
   id: string;
@@ -17,57 +17,77 @@ type Category = {
 
 type Props = {
   events: Event[];
-  search: string;
   categories: Category[];
-  selectedCategoryFromUrl: string;
 };
 
-const HomePageEvents = ({
-  events,
-  search = "",
-  categories,
-  selectedCategoryFromUrl,
-}: Props) => {
+const HomePageEvents = ({ events, categories }: Props) => {
   const router = useRouter();
-  const [selectedCategory, setSelectedCategory] =
-    useState<string>(selectedCategoryFromUrl || "ALL");
+  const searchParams = useSearchParams();
 
-  // sync with URL
+  const search = searchParams.get("search");
+  const categoryFromUrl = searchParams.get("categoryId");
+
+  const [selectedCategory, setSelectedCategory] = useState<string>("ALL");
+
+  // sync state from URL
   useEffect(() => {
-    setSelectedCategory(selectedCategoryFromUrl || "ALL");
-  }, [selectedCategoryFromUrl]);
+    if (categoryFromUrl) {
+      setSelectedCategory(categoryFromUrl);
+    } else {
+      setSelectedCategory("ALL");
+    }
+  }, [categoryFromUrl]);
 
-  const filteredEvents = events?.filter((event) => {
-    const matchSearch = event.title
-      ?.toLowerCase()
-      .includes(search.toLowerCase());
-
-    const matchCategory =
-      selectedCategory === "ALL"
-        ? true
-        : event.categoryId === selectedCategory;
-
-    return matchSearch && matchCategory;
-  });
-
-  const handleCategoryClick = (categoryId: string) => {
+  // category click
+  const handleCategoryChange = (categoryId: string) => {
     setSelectedCategory(categoryId);
 
-    // reset search + update URL
+    const params = new URLSearchParams(searchParams.toString());
+
+    // remove search
+    params.delete("search");
+
     if (categoryId === "ALL") {
-      router.push(`/events`);
+      params.delete("categoryId");
     } else {
-      router.push(`/events?category=${categoryId}`);
+      params.set("categoryId", categoryId);
     }
+
+    router.push(`?${params.toString()}`);
   };
+
+  // ALL click
+  const handleAllCategory = () => {
+    setSelectedCategory("ALL");
+
+    const params = new URLSearchParams(searchParams.toString());
+
+    params.delete("search");
+    params.delete("categoryId");
+
+    router.push(`?${params.toString()}`);
+  };
+
+  // active category from URL (source of truth)
+  const activeCategory = categoryFromUrl || selectedCategory;
+
+  // filtering
+  const filteredEvents = events?.filter((event) => {
+    const matchCategory =
+      activeCategory === "ALL"
+        ? true
+        : event.categoryId === activeCategory;
+
+    return matchCategory;
+  });
 
   return (
     <div className="space-y-6 mt-6">
-      {/* CATEGORY */}
+      {/* CATEGORY FILTER */}
       <div className="flex flex-wrap gap-2">
         <Button
-          variant={selectedCategory === "ALL" ? "default" : "outline"}
-          onClick={() => handleCategoryClick("ALL")}
+          variant={activeCategory === "ALL" ? "default" : "outline"}
+          onClick={handleAllCategory}
         >
           All
         </Button>
@@ -75,17 +95,15 @@ const HomePageEvents = ({
         {categories?.map((cat) => (
           <Button
             key={cat.id}
-            variant={
-              selectedCategory === cat.id ? "default" : "outline"
-            }
-            onClick={() => handleCategoryClick(cat.id)}
+            variant={activeCategory === cat.id ? "default" : "outline"}
+            onClick={() => handleCategoryChange(cat.id)}
           >
             {cat.name}
           </Button>
         ))}
       </div>
 
-      {/* EVENTS */}
+      {/* GRID */}
       {!filteredEvents?.length ? (
         <p className="text-center text-muted-foreground">
           No events found.
@@ -98,10 +116,13 @@ const HomePageEvents = ({
               : null;
 
             return (
-              <Card key={event.id} className="overflow-hidden flex flex-col p-0">
+              <Card
+                key={event.id}
+                className="overflow-hidden flex flex-col p-0 rounded"
+              >
                 <Link
                   href={`/event/${event.id}`}
-                  className="relative h-70 w-full overflow-hidden border-b-1"
+                  className="relative h-50 xl:h-55 w-full overflow-hidden border-b-1"
                 >
                   {event?.images?.[0] && (
                     <AppImage

@@ -1,4 +1,5 @@
-import { participationService } from "@/service/participation.server.service";
+import { participationService } from "@/service/server/participation.server.service";
+
 
 
 

@@ -1,7 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { bannerService } from "@/service/banner.server.service";
+import { bannerService } from "@/service/server/banner.server.service";
 
 // GET ALL
 export async function getAllBannersAction() {

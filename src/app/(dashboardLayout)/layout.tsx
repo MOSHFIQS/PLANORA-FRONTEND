@@ -5,10 +5,10 @@ import {
      SidebarTrigger,
 } from "@/components/ui/sidebar"
 import { Roles } from "@/constants/roles"
-import { sessionService } from "@/service/token.service"
 import { ReactNode } from "react"
 import { redirect } from "next/navigation";
 import { AppSidebar } from "@/components/appSidebar/app-sidebar"
+import { sessionService } from "@/service/server/token.service";
 
 export default async  function DashboardLayout({ admin, user }: { admin: ReactNode, user: ReactNode }) {
 

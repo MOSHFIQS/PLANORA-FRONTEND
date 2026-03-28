@@ -2,8 +2,8 @@ import { apiFetchServerMain } from "@/lib/apiFetchServer";
 
 export const eventService = {
     // get all events (public)
-    getAllEvents: () =>
-        apiFetchServerMain("/event", {
+    getAllEvents: (query?: string) =>
+        apiFetchServerMain(`/event?${query || ""}`, {
             method: "GET",
         }),
 

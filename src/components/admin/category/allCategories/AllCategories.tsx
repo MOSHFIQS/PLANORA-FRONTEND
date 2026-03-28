@@ -14,8 +14,10 @@ import {
      AlertDialogHeader, AlertDialogTitle, AlertDialogDescription, AlertDialogFooter,
 } from "@/components/ui/alert-dialog";
 import { deleteCategoryAction } from "@/actions/category.action";
+import { AppImage } from "@/components/appImage/AppImage";
 
 export default function AllCategories({ categories }: any) {
+     console.log(categories);
      const router = useRouter();
      const [openDialogId, setOpenDialogId] = React.useState<string | null>(null);
      const [isPending, startTransition] = useTransition();
@@ -50,6 +52,7 @@ export default function AllCategories({ categories }: any) {
                     <Table>
                          <TableHeader>
                               <TableRow>
+                                   <TableHead>Image</TableHead>
                                    <TableHead>Name</TableHead>
                                    <TableHead>Description</TableHead>
                                    <TableHead className="text-right">Actions</TableHead>
@@ -61,6 +64,14 @@ export default function AllCategories({ categories }: any) {
                                    categories.length > 0 ?
                                         (categories?.map((cat: any) => (
                                              <TableRow key={cat.id}>
+                                                  <TableCell>
+                                                       <AppImage
+                                                            src={cat.image}
+                                                            width={50}
+                                                            height={50}
+                                                            className="h-12 w-12 object-cover rounded border"
+                                                       />
+                                                  </TableCell>
                                                   <TableCell>{cat.name}</TableCell>
                                                   <TableCell>{cat.description || "—"}</TableCell>
                                                   <TableCell className="text-right space-x-2">

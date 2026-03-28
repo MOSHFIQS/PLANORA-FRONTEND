@@ -1,7 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { categoryService } from "@/service/category.server.service";
+import { categoryService } from "@/service/server/category.server.service";
 
 // GET ALL
 export async function getAllCategoriesAction() {

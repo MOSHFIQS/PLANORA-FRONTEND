@@ -1,6 +1,6 @@
 "use server";
 
-import { fileService } from "@/service/file.server.service";
+import { fileService } from "@/service/server/file.server.service";
 
 export async function uploadImagesAction(formData: FormData) {
     try {

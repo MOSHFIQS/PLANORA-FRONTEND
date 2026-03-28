@@ -1,6 +1,6 @@
 "use server";
 
-import { authService } from "@/service/auth.server.service";
+import { authService } from "@/service/server/auth.server.service";
 import { revalidatePath } from "next/cache";
 
 export async function signInAction(data: { email: string; password: string }) {

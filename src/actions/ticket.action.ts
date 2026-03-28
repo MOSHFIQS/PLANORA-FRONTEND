@@ -1,6 +1,7 @@
 "use server";
 
-import { ticketService } from "@/service/ticket.server.service";
+import { ticketService } from "@/service/server/ticket.server.service";
+
 
 //  Get My Tickets
 export async function getMyTicketsAction() {

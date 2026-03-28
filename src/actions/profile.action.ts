@@ -1,6 +1,6 @@
 "use server";
 
-import { profileService } from "@/service/profile.server.service";
+import { profileService } from "@/service/server/profile.server.service";
 import { revalidatePath } from "next/cache";
 
 export async function getMyProfileAction() {

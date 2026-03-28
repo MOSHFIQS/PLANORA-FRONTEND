@@ -1,6 +1,7 @@
 "use server"
 
-import { userService } from "@/service/user.server.service";
+import { userService } from "@/service/server/user.server.service";
+
 
 //  Get user stats
 export async function getUserStatsAction() {

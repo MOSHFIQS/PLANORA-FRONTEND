@@ -1,6 +1,6 @@
 "use server";
 
-import { invitationService } from "@/service/invitation.server.service";
+import { invitationService } from "@/service/server/invitation.server.service";
 import { revalidatePath } from "next/cache";
 
 // 1. Send Invitation

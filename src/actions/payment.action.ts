@@ -1,6 +1,7 @@
 "use server";
 
-import { paymentService } from "@/service/payment.server.service";
+import { paymentService } from "@/service/server/payment.server.service";
+
 
 export async function initiatePaymentAction(payload: {
   eventId?: string;

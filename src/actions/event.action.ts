@@ -1,12 +1,19 @@
 "use server";
 
+import { eventService } from "@/service/server/event.server.service";
 import { revalidatePath } from "next/cache";
-import { eventService } from "@/service/event.server.service";
 
 
-export async function getAllEventsAction() {
+export async function getAllEventsAction(search?: string, categoryId?: string) {
     try {
-        const res = await eventService.getAllEvents();
+        const query = new URLSearchParams();
+
+        if (search) query.append("search", search);
+        if (categoryId) query.append("categoryId", categoryId);
+
+        const res = await eventService.getAllEvents(query.toString());
+        console.log(res);
+
 
         if (!res?.ok) {
             return {

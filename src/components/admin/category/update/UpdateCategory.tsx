@@ -48,7 +48,7 @@ export default function UpdateCategory({ category }: { category: any }) {
                     if (!res.ok) {
                          throw new Error(res.message);
                     }
-                    // router.push("/admin-dashboard/category");
+                    router.push("/admin-dashboard/category");
                     toast.success(res.message);
                     form.reset();
                } catch (err: any) {
@@ -64,9 +64,9 @@ export default function UpdateCategory({ category }: { category: any }) {
           <div >
                <Card className="pt-0">
                     <CardHeader className="px-6 py-4 border-b bg-gradient-to-r from-orange-50 to-white rounded-md">
-                         <CardTitle className="text-xl font-semibold text-gray-800">Create Category</CardTitle>
+                         <CardTitle className="text-xl font-semibold text-gray-800">Update Category</CardTitle>
                          <CardDescription>
-                              Add a Category
+                              Update a Category
                          </CardDescription>
                     </CardHeader>
 
@@ -139,7 +139,7 @@ export default function UpdateCategory({ category }: { category: any }) {
                               />
 
                               <Button type="submit" className="w-full" disabled={loading}>
-                                   {loading ? "Creating..." : "Update Category"}
+                                   {loading ? "Updating..." : "Update Category"}
                               </Button>
 
                          </form>

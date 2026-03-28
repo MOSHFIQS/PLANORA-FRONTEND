@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server"
 import { Roles } from "./constants/roles"
-import { sessionService } from "./service/token.service";
+import { sessionService } from "./service/server/token.service";
 export const dynamic = "force-dynamic"
 
 

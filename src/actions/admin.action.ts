@@ -1,6 +1,6 @@
 "use server";
 
-import { adminService } from "@/service/admin.server.service";
+import { adminService } from "@/service/server/admin.server.service";
 import { revalidatePath } from "next/cache";
 
 // Get all users
