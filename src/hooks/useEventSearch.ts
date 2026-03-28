@@ -1,36 +1,37 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useRef, useState } from "react";
 
 export const useEventSearch = () => {
   const router = useRouter();
   const params = useSearchParams();
 
-  const initialSearch = params.get("search") || "";
+  const [search, setSearchState] = useState(
+    params.get("search") || ""
+  );
 
-  const [search, setSearchState] = useState(initialSearch);
+  const debounceRef = useRef<NodeJS.Timeout | null>(null);
 
-  // debounce
-  useEffect(() => {
-    const handler = setTimeout(() => {
+  const setSearch = (value: string) => {
+    setSearchState(value);
+
+    // clear previous timer
+    if (debounceRef.current) {
+      clearTimeout(debounceRef.current);
+    }
+
+    debounceRef.current = setTimeout(() => {
       const query = new URLSearchParams(params.toString());
 
-      if (search.trim()) {
-        query.set("search", search);
+      if (value.trim()) {
+        query.set("search", value);
       } else {
         query.delete("search");
       }
 
       router.push(`/events?${query.toString()}`);
-    }, 500); // 500ms delay
-
-    return () => clearTimeout(handler);
-  }, [search]);
-
-  // exposed setter
-  const setSearch = (value: string) => {
-    setSearchState(value);
+    }, 500);
   };
 
   return { search, setSearch };

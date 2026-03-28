@@ -205,6 +205,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
      };
 
      const logout = () => {
+          
           setUser(null);
           setAccessToken(null);
           setRefreshToken(null);

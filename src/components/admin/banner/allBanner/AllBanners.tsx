@@ -24,6 +24,7 @@ import {
 import { deleteBannerAction, updateBannerStatusAction } from "@/actions/banner.action";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { AppImage } from "@/components/appImage/AppImage";
+import { format } from "date-fns";
 
 export default function AllBanners({ banners }: any) {
      console.log(banners);
@@ -80,6 +81,7 @@ export default function AllBanners({ banners }: any) {
                                    <TableHead>Position</TableHead>
                                    <TableHead>Order</TableHead>
                                    <TableHead>Status</TableHead>
+                                   <TableHead>Date</TableHead>
                                    <TableHead className="text-right">Actions</TableHead>
                               </TableRow>
                          </TableHeader>
@@ -94,7 +96,7 @@ export default function AllBanners({ banners }: any) {
                                                   <AppImage
                                                        src={banner.image}
                                                        alt={banner.altText || banner.title}
-                                                       className="w-20 h-12 object-cover rounded"
+                                                       className="w-20 h-12 object-cover rounded border"
                                                        loading="eager"
                                                   />
                                              </TableCell>
@@ -145,10 +147,11 @@ export default function AllBanners({ banners }: any) {
                                                   </Select>
                                              </TableCell>
 
+                                             <TableCell>{format(new Date(banner.dateTime), "PPP 'at' p")}</TableCell>
+
                                              {/* ACTIONS */}
 
                                              <TableCell className="text-right space-x-2">
-
                                                   {/* EDIT */}
                                                   <Button
                                                        size="icon"

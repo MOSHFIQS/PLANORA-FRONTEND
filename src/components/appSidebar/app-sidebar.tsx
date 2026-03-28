@@ -57,18 +57,22 @@ export function AppSidebar({ user, ...props }: { user: { role: string } & React.
                                    <SidebarMenu>
                                         {group.items.map((item) => {
                                              const isActive = pathname === item.url;
+                                             const Icon = item.icon;
 
                                              return (
                                                   <SidebarMenuItem key={item.title}>
                                                        <SidebarMenuButton
                                                             asChild
-                                                            className={`text-[15px] uppercase font-bold  rounded px-2 py-0
-               ${isActive
+                                                            className={`text-[13px] uppercase font-bold rounded px-2 py-0
+        ${isActive
                                                                       ? "bg-gray-600 text-white cursor-default"
                                                                       : "hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-black"
                                                                  }`}
                                                        >
-                                                            <Link href={item.url}>{item.title}</Link>
+                                                            <Link href={item.url} className="flex items-center gap-2">
+                                                                 {Icon && <Icon size={18} />}
+                                                                 {item.title}
+                                                            </Link>
                                                        </SidebarMenuButton>
                                                   </SidebarMenuItem>
                                              );
@@ -79,9 +83,9 @@ export function AppSidebar({ user, ...props }: { user: { role: string } & React.
                     ))}
                </SidebarContent>
                <SidebarFooter>
-                    <NavUser/>
+                    <NavUser />
                </SidebarFooter>
-               
+
                <SidebarRail />
           </Sidebar>
      );

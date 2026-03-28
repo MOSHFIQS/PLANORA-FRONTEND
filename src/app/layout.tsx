@@ -3,7 +3,6 @@ import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
 import { spaceGrotesk } from "./fonts";
 import { AuthProvider } from "@/context/AuthProvider";
-import { SearchProvider } from "@/context/SearchContext";
 
 
 
@@ -22,12 +21,10 @@ export default function RootLayout({
                <body
                     className={`${spaceGrotesk.className} font-sans `}
                >
-                    <SearchProvider>
                          <AuthProvider>
                               <Toaster richColors />
                               {children}
                          </AuthProvider>
-                    </SearchProvider>
                </body>
           </html>
      );
