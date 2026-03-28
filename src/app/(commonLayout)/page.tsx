@@ -26,7 +26,7 @@ const HomePage = async () => {
           );
      }
      return (
-          <div className="my-100">
+          <div className="">
 
 
                <CarouselPlugin banners={banners} />

@@ -193,7 +193,7 @@ export default function CarouselPlugin({ banners }: { banners: Banner[] }) {
 
 
      return (
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-2 border-2 rounded p-0 xl:p-10 mt-10">
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-2 border-2 rounded p-0 xl:p-10 ">
 
                {/* MAIN CAROUSEL */}
                <div className="lg:col-span-4">
@@ -231,7 +231,7 @@ export default function CarouselPlugin({ banners }: { banners: Banner[] }) {
                                                   <div className="max-w-xl ml-6 md:ml-12 p-6  rounded-md text-white space-y-4">
 
                                                        {/* Event Type Badge */}
-                                                       <span className="inline-block px-3 py-1 text-sm font-semibold rounded-full bg-indigo-500 bg-opacity-80">
+                                                       <span className="inline-block px-3 py-1 text-sm font-semibold rounded-full bg-orange-400 bg-opacity-80">
                                                             {banner.type} Event
                                                        </span>
 
