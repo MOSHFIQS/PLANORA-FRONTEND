@@ -10,6 +10,8 @@ import {
   Star,
   Home,
   List,
+  CreditCard,
+  Wallet,
 } from "lucide-react";
 
 export const userRoutes: Route[] = [
@@ -58,6 +60,23 @@ export const userRoutes: Route[] = [
       },
     ],
   },
+
+ {
+  title: "Payments",
+  items: [
+    {
+      title: "My Payments",
+      url: "/dashboard/payments",
+      icon: CreditCard,
+    },
+    {
+      title: "Event Payments",
+      url: "/dashboard/payments/event-payments",
+      icon: Wallet,
+    },
+  ],
+},
+
   {
     title: "Engagement",
     items: [

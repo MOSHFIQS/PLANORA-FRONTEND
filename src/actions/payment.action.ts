@@ -27,3 +27,50 @@ export async function initiatePaymentAction(payload: {
     };
   }
 }
+
+
+export async function getMyPaymentsAction() {
+  try {
+    const res = await paymentService.getMyPayments();
+
+    if (!res?.ok) {
+      return {
+        ok: false,
+        message: res?.message || "Failed to fetch Payments",
+      };
+    }
+
+    return {
+      ok: true,
+      data: res.data,
+    };
+  } catch {
+    return {
+      ok: false,
+      message: "Something went wrong",
+    };
+  }
+}
+
+export async function getOrganizerPaymentsAction() {
+  try {
+    const res = await paymentService.getOrganizerPayments();
+
+    if (!res?.ok) {
+      return {
+        ok: false,
+        message: res?.message || "Failed to fetch Payments",
+      };
+    }
+
+    return {
+      ok: true,
+      data: res.data,
+    };
+  } catch {
+    return {
+      ok: false,
+      message: "Something went wrong",
+    };
+  }
+}

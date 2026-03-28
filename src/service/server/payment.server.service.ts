@@ -10,4 +10,14 @@ export const paymentService = {
       method: "POST",
       body: JSON.stringify(payload),
     }),
+
+     getMyPayments: () =>
+          apiFetchServerMain("/payment/my", {
+               method: "GET",
+          }),
+
+     getOrganizerPayments: () =>
+          apiFetchServerMain("/payment/organizer", {
+               method: "GET",
+          }),
 };
