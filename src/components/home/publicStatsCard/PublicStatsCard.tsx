@@ -20,7 +20,7 @@ const PublicStatsCard = ({ publicStats }: { publicStats: PublicStats }) => {
         title="Events By Category"
         description="Discover events based on your interests and join amazing experiences."
       /> */}
-     <div className="relative w-full h-[320px] overflow-hidden my-10">
+     <div className="relative w-full h-[320px] overflow-hidden ">
       
       {/* Background Image */}
       <Image
@@ -32,7 +32,7 @@ const PublicStatsCard = ({ publicStats }: { publicStats: PublicStats }) => {
       />
 
       {/* Overlay */}
-      <div className="absolute inset-0 bg-black/80 flex items-center justify-center">
+      <div className="absolute inset-0 bg-[#725cad9d] flex items-center justify-center">
         
         <div className="grid grid-cols-3 gap-16 text-center text-white px-10 w-full max-w-5xl">
           

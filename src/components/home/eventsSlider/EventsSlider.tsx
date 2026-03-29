@@ -61,7 +61,7 @@ export default function EventsSlider({ events }: Props) {
                     )}
                   </div>
                 </CardContent>
-                <Button className="w-full" asChild>
+                <Button className="w-full" asChild variant={"violet"}>
                   <Link href={`/events/${event.id}`}>View Event Info</Link>
                 </Button>
               </Card>

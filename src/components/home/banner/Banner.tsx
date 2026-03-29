@@ -69,7 +69,7 @@
 //                                         />
 
 //                                         {/* Dark overlay */}
-//                                         <div className="absolute inset-0 bg-black/50" />
+//                                         <div className="absolute inset-0 bg-black/40" />
 
 //                                         {/* Content container */}
 //                                         <div className="absolute inset-0 flex items-center">
@@ -193,7 +193,7 @@ export default function CarouselPlugin({ banners }: { banners: Banner[] }) {
 
 
      return (
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-2 border-2 rounded p-0 xl:p-10 bg-[#725CAD]">
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-2 border-2 rounded p-0 xl:px-5 xl:py-10 bg-[#725CAD]">
 
                {/* MAIN CAROUSEL */}
                <div className="lg:col-span-4">
@@ -225,14 +225,14 @@ export default function CarouselPlugin({ banners }: { banners: Banner[] }) {
                                                   className="object-cover w-full h-full "
                                              />
 
-                                             <div className="absolute inset-0 bg-black/50 " />
+                                             <div className="absolute inset-0 bg-black/40 " />
 
                                              <div className="absolute inset-0 flex items-center">
                                                   <div className="max-w-xl ml-6 md:ml-12 p-6  rounded-md text-white space-y-4">
 
                                                        {/* Event Type Badge */}
-                                                       <span className="inline-block px-3 py-1 text-sm font-semibold rounded-full bg-orange-400 bg-opacity-80">
-                                                            {banner.type} Event
+                                                       <span className="inline-block px-3 py-1 text-xs font-semibold rounded-full bg-blue-400 bg-opacity-80">
+                                                            {banner.type} EVENT
                                                        </span>
 
                                                        {/* Title */}
@@ -255,7 +255,7 @@ export default function CarouselPlugin({ banners }: { banners: Banner[] }) {
 
                                                        {/* Button */}
                                                        {banner.buttonText && (
-                                                            <Button variant={"outline"} asChild className="text-black">
+                                                            <Button variant={"violet"} asChild className="text-white">
                                                                  <Link href={banner.redirectUrl || "#"}>
                                                                       {banner.buttonText}
                                                                  </Link>
@@ -270,33 +270,33 @@ export default function CarouselPlugin({ banners }: { banners: Banner[] }) {
                                         <div className="hidden xl:flex items-center justify-between h-full w-full gap-10 px-5">
 
                                              {/* LEFT TEXT */}
-                                             <div className="flex-1  bg-white  p-10  rounded">
-                                                  <div className="space-y-8">
+                                             <div className="flex-1  p-10  bg-black/55  opacity-90 rounded">
+                                                  <div className="space-y-8 ">
                                                        {/* Badge */}
                                                        <div className="inline-block">
                                                             <span className="px-3 py-1 text-sm font-semibold rounded-full bg-indigo-100 text-indigo-800">
-                                                                 {banner.type} Event
+                                                                 {banner.type} EVENT
                                                             </span>
                                                        </div>
 
                                                        {/* Title */}
-                                                       <h2 className="text-2xl sm:text-3xl font-extrabold leading-tight text-gray-900">
+                                                       <h2 className="text-2xl sm:text-3xl font-extrabold leading-tight text-white">
                                                             {banner.title}
                                                        </h2>
 
                                                        <div className="space-y-3">
                                                             {/* Description */}
-                                                       <p className="text-lg font-medium text-gray-700">
-                                                            {banner.description}
-                                                       </p>
+                                                            <p className="text-lg font-medium text-white/75">
+                                                                 {banner.description}
+                                                            </p>
 
-                                                       {/* Alt Text */}
-                                                       <p className="text-sm text-gray-500">{banner.altText}</p>
+                                                            {/* Alt Text */}
+                                                            <p className="text-sm text-white/75">{banner.altText}</p>
 
-                                                       {/* Date & Time */}
-                                                       <p className="text-sm text-gray-600 font-medium">
-                                                            {format(new Date(banner.dateTime), "PPP 'at' p")}
-                                                       </p>
+                                                            {/* Date & Time */}
+                                                            <p className="text-sm text-white/75 font-medium">
+                                                                 {format(new Date(banner.dateTime), "PPP 'at' p")}
+                                                            </p>
                                                        </div>
 
                                                        {/* Button */}
@@ -311,13 +311,18 @@ export default function CarouselPlugin({ banners }: { banners: Banner[] }) {
                                              </div>
 
                                              {/* RIGHT IMAGE */}
-                                             <div className="h-full border-2 rounded flex-4">
+                                             {/* RIGHT IMAGE */}
+                                             <div className="h-full border-2 rounded flex-4 relative overflow-hidden group">
+                                                  {/* Image */}
                                                   <AppImage
                                                        src={banner.image}
                                                        priority
                                                        loading="eager"
-                                                       className="object-cover w-full h-full rounded"
+                                                       className="object-cover w-full h-full rounded duration-300 group-hover:scale-105"
                                                   />
+
+                                                  {/* Dark Overlay */}
+                                                  <div className="absolute inset-0 bg-[#725cad60] rounded pointer-events-none"></div>
                                              </div>
 
                                         </div>

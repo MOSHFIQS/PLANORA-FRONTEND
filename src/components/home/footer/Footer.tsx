@@ -4,8 +4,8 @@ import Link from "next/link";
 
 export default function Footer() {
      return (
-          <footer className="pt-12 border-t border-gray-200 bg-white text-gray-700">
-               <div className="container mx-auto px-6 md:px-12 grid md:grid-cols-4 gap-8">
+          <footer className="mt-5 pt-12 border-t border-gray-200 bg-white text-gray-700">
+               <div className=" px-6 md:px-12 grid md:grid-cols-4 gap-8">
 
                     {/* Brand Info */}
                     <div>
@@ -20,9 +20,9 @@ export default function Footer() {
                     </div>
 
                     {/* Quick Links */}
-                    <div>
-                         <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
-                         <ul className="space-y-2 text-sm">
+                    <div className="text-center">
+                         <h4 className="text-lg font-extrabold mb-4">Quick Links</h4>
+                         <ul className="space-y-2 text-sm text-[#725CAD] font-bold">
                               <li>
                                    <Link href="/" className="hover:text-[#181759] transition">
                                         Home
@@ -47,9 +47,9 @@ export default function Footer() {
                     </div>
 
                     {/* Support */}
-                    <div>
+                    <div className="text-center">
                          <h4 className="text-lg font-semibold mb-4">Customer Support</h4>
-                         <ul className="space-y-2 text-sm">
+                         <ul className="space-y-2 text-sm text-[#725CAD] font-bold">
                               <li>
                                    Email:{" "}
                                    <a
@@ -82,19 +82,19 @@ export default function Footer() {
                     </div>
 
                     {/* Social */}
-                    <div>
+                    <div className="text-center w-full">
                          <h4 className="text-lg font-semibold mb-4">Follow Us</h4>
-                         <div className="flex space-x-3">
-                              <Link href="/" className="p-2 rounded-full bg-gray-800 hover:bg-[#181759] transition">
+                         <div className="flex space-x-3 items-center justify-center">
+                              <Link href="/" className="p-2 rounded-full bg-[#725CAD] hover:bg-[#5A488C] transition">
                                    <Facebook className="w-5 h-5 text-white" />
                               </Link>
-                              <Link href="/" className="p-2 rounded-full bg-gray-800 hover:bg-[#181759] transition">
+                              <Link href="/" className="p-2 rounded-full bg-[#725CAD] hover:bg-[#5A488C] transition">
                                    <Twitter className="w-5 h-5 text-white" />
                               </Link>
-                              <Link href="/" className="p-2 rounded-full bg-gray-800 hover:bg-[#181759] transition">
+                              <Link href="/" className="p-2 rounded-full bg-[#725CAD] hover:bg-[#5A488C] transition">
                                    <Instagram className="w-5 h-5 text-white" />
                               </Link>
-                              <Link href="/" className="p-2 rounded-full bg-gray-800 hover:bg-[#181759] transition">
+                              <Link href="/" className="p-2 rounded-full bg-[#725CAD] hover:bg-[#5A488C] transition">
                                    <Linkedin className="w-5 h-5 text-white" />
                               </Link>
                          </div>

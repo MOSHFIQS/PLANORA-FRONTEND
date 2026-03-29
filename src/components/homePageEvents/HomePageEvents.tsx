@@ -86,7 +86,8 @@ const HomePageEvents = ({ events, categories }: Props) => {
       {/* CATEGORY FILTER */}
       <div className="flex flex-wrap gap-2">
         <Button
-          variant={activeCategory === "ALL" ? "default" : "outline"}
+
+          variant={activeCategory === "ALL" ? "orange" : "outline"}
           onClick={handleAllCategory}
         >
           All
@@ -95,7 +96,7 @@ const HomePageEvents = ({ events, categories }: Props) => {
         {categories?.map((cat) => (
           <Button
             key={cat.id}
-            variant={activeCategory === cat.id ? "default" : "outline"}
+            variant={activeCategory === cat.id ? "orange" : "outline"}
             onClick={() => handleCategoryChange(cat.id)}
           >
             {cat.name}
@@ -160,7 +161,7 @@ const HomePageEvents = ({ events, categories }: Props) => {
                   </div>
                 </CardContent>
 
-                <Button className="w-full" asChild>
+                <Button variant={"violet"} className="w-full" asChild>
                   <Link href={`/events/${event.id}`}>
                     View Event Info
                   </Link>

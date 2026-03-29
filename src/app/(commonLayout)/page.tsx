@@ -34,7 +34,7 @@ const HomePage = async () => {
           );
      }
      return (
-          <div className="">
+          <div className="space-y-10">
 
 
                <CarouselPlugin banners={banners} />

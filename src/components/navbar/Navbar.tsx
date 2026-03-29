@@ -64,7 +64,7 @@ const Navbar = () => {
      }
 
      return (
-          <section className="py-4 border-b">
+          <section className="py-4 border-b sticky top-0 z-50 bg-white ">
                <div>
                     {/* ================= DESKTOP ================= */}
                     <nav className="hidden items-center justify-between lg:flex px-4">
@@ -80,16 +80,16 @@ const Navbar = () => {
                               {menu.map((item) => (
                                    <button key={item.title} className={""}>
                                         <Link
-                                        href={item.url}
-                                        className={`px-3 py-2 text-sm font-medium border transition
+                                             href={item.url}
+                                             className={`px-3 py-2 text-sm font-medium border transition
         ${isActive(item.url)
-                                                  ? "bg-[#FE7743] text-white"
-                                                  : "bg-gray-50 hover:bg-muted"
-                                             }
+                                                       ? "bg-[#FE7743] text-white"
+                                                       : "bg-gray-50 hover:bg-muted"
+                                                  }
       `}
-                                   >
-                                        {item.title}
-                                   </Link>
+                                        >
+                                             {item.title}
+                                        </Link>
                                    </button>
                               ))}
                          </div>
@@ -115,6 +115,18 @@ const Navbar = () => {
                                         <Button variant="outline" onClick={handleLogout}>
                                              Logout
                                         </Button>
+                                        <div className="rounded-full border border-gray-300 w-[35px] h-[35px] overflow-hidden">
+                                             <img
+                                                  src={user.image || "https://i.ibb.co.com/LhN7fmfM/5578a3db8b5f1101c971bdf120e63784.jpg"}
+                                                  alt="User avatar"
+                                                  className="rounded-full object-cover w-full h-full"
+                                                  onError={(e) => {
+                                                       e.currentTarget.src =
+                                                            "https://i.ibb.co.com/LhN7fmfM/5578a3db8b5f1101c971bdf120e63784.jpg"
+                                                  }}
+                                             />
+
+                                        </div>
                                    </>
                               ) : (
                                    <>
@@ -168,7 +180,7 @@ const Navbar = () => {
                                              {menu.map((item) => (
                                                   <Link key={item.title} href={item.url}>
                                                        <Button
-                                                            variant={isActive(item.url) ? "default" : "ghost"}
+                                                            variant={isActive(item.url) ? "orange" : "outline"}
                                                             className="w-full justify-start"
                                                        >
                                                             {item.title}
@@ -185,7 +197,7 @@ const Navbar = () => {
                                              {user?.id ? (
                                                   <>
                                                        <Button
-                                                            variant="outline"
+                                                            variant="violet"
                                                             className="w-full"
                                                             onClick={() => router.push("/dashboard")}
                                                        >
@@ -193,7 +205,6 @@ const Navbar = () => {
                                                        </Button>
 
                                                        <Button
-                                                            variant="destructive"
                                                             className="w-full"
                                                             onClick={handleLogout}
                                                        >

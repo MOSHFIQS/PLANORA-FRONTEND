@@ -1,18 +1,21 @@
-
 import Footer from "@/components/home/footer/Footer";
 import { Navbar } from "@/components/navbar/Navbar";
 
-
 export default function CommonLayout({
-     children,
+  children,
 }: {
-     children: React.ReactNode;
+  children: React.ReactNode;
 }) {
-     return (
-          <div className="max-w-[90vw] mx-auto space-y-5">
-               <Navbar />
-               {children}
-               <Footer />
-          </div>
-     );
+  return (
+    <div className="max-w-[98vw] mx-auto min-h-screen flex flex-col space-y-5">
+      <Navbar />
+
+      {/* Main Content */}
+      <main className="flex-1">
+        {children}
+      </main>
+
+      <Footer />
+    </div>
+  );
 }
