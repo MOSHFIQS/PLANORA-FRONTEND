@@ -1,6 +1,7 @@
 "use server";
 
 import { reviewService } from "@/service/server/review.server.service";
+import { revalidatePath } from "next/cache";
 
 
 // CREATE
@@ -18,6 +19,8 @@ export async function createReview(payload: {
         message: res?.message || "Failed to create review",
       };
     }
+
+    revalidatePath("/dashboard/participants/my-participated-events");
 
     return {
       ok: true,

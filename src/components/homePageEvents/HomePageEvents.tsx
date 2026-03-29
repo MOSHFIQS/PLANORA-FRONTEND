@@ -96,7 +96,7 @@ const HomePageEvents = ({ events, categories, meta }: Props) => {
   };
 
   return (
-    <div className="space-y-6 mt-6">
+    <div className="space-y-6 my-10">
       {/* CATEGORY FILTER */}
       <div className="flex flex-wrap gap-2">
         <Button
@@ -124,7 +124,7 @@ const HomePageEvents = ({ events, categories, meta }: Props) => {
         </p>
       ) : (
         <>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 py-10">
             {events.map((event) => {
               const date = event?.dateTime
                 ? new Date(event.dateTime)

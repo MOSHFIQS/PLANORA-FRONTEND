@@ -48,36 +48,36 @@ export default function PaymentsList({ payments }: { payments: Payment[] }) {
                                                   {payment.participation?.event?.title || "N/A"}
                                              </TableCell>
                                              <TableCell>
-                                                  {payment.user.name || "N/A"}
+                                                  {payment?.user?.name || "N/A"}
                                              </TableCell>
                                              <TableCell>
-                                                  {payment.user.email || "N/A"}
+                                                  {payment?.user?.email || "N/A"}
                                              </TableCell>
 
                                              <TableCell>
-                                                  ${payment.amount}
+                                                  ${payment?.amount}
                                              </TableCell>
 
                                              <TableCell>
                                                   <Badge
                                                        className={
-                                                            payment.status === "SUCCESS"
+                                                            payment?.status === "SUCCESS"
                                                                  ? "bg-green-500"
                                                                  : payment.status === "PENDING"
                                                                       ? "bg-yellow-500"
                                                                       : "bg-red-500"
                                                        }
                                                   >
-                                                       {payment.status}
+                                                       {payment?.status}
                                                   </Badge>
                                              </TableCell>
 
                                              <TableCell className="text-xs">
-                                                  {payment.transactionId}
+                                                  {payment?.transactionId}
                                              </TableCell>
 
                                              <TableCell>
-                                                  {new Date(payment.createdAt).toLocaleString()}
+                                                  {new Date(payment?.createdAt).toLocaleString()}
                                              </TableCell>
                                         </TableRow>
                                    ))
