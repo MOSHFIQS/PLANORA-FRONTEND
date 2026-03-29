@@ -193,7 +193,7 @@ export default function CarouselPlugin({ banners }: { banners: Banner[] }) {
 
 
      return (
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-2 border-2 rounded p-0 xl:px-5 xl:py-10 bg-[#725CAD]">
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-2 border-2 rounded p-0 xl:px-5 xl:py-10 bg-[#DBCEA5]">
 
                {/* MAIN CAROUSEL */}
                <div className="lg:col-span-4">
@@ -322,7 +322,7 @@ export default function CarouselPlugin({ banners }: { banners: Banner[] }) {
                                                   />
 
                                                   {/* Dark Overlay */}
-                                                  <div className="absolute inset-0 bg-[#725cad60] rounded pointer-events-none"></div>
+                                                  <div className="absolute inset-0 bg-black/40 rounded pointer-events-none"></div>
                                              </div>
 
                                         </div>

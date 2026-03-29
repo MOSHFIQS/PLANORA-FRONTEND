@@ -1,109 +1,131 @@
-import { Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
+"use client";
+
+import {
+     Facebook,
+     Twitter,
+     Instagram,
+     Linkedin,
+     Phone,
+     Mail,
+     Send,
+} from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
 export default function Footer() {
      return (
-          <footer className="mt-5 pt-12 border-t border-gray-200 bg-white text-gray-700">
-               <div className=" px-6 md:px-12 grid md:grid-cols-4 gap-8">
+          <footer className="border-t bg-white text-black mt-10 transition-all duration-500">
 
-                    {/* Brand Info */}
-                    <div>
-                         <h3 className="text-2xl font-bold mb-4 flex items-center gap-2 text-[#181759]">
-                              <Image src="/logo/logo.png" width={30} height={30} alt="logo" />
-                              <span>PLANORA</span>
-                         </h3>
-                         <p className="text-sm leading-relaxed">
-                              Discover EVENTS crafted to elevate your style.
-                              Shop authentic perfumes with confidence and elegance.
+               {/* Main Footer */}
+               <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-10 px-6 md:px-12 py-12">
+
+                    {/* Brand */}
+                    <div className="flex flex-col gap-5">
+                         <div className="flex items-center gap-2">
+                              <Image src="/logo/logo.png" width={35} height={35} alt="logo" />
+                              <h2 className="text-2xl font-extrabold text-[#181759]">
+                                   PLANORA
+                              </h2>
+                         </div>
+
+                         <p className="text-sm text-gray-600">
+                              Discover EVENTS crafted to elevate your lifestyle.
+                              Book and explore experiences with confidence.
                          </p>
-                    </div>
 
-                    {/* Quick Links */}
-                    <div className="text-center">
-                         <h4 className="text-lg font-extrabold mb-4">Quick Links</h4>
-                         <ul className="space-y-2 text-sm text-[#725CAD] font-bold">
-                              <li>
-                                   <Link href="/" className="hover:text-[#181759] transition">
-                                        Home
-                                   </Link>
-                              </li>
-                              <li>
-                                   <Link href="/events" className="hover:text-[#181759] transition">
-                                             Events
-                                   </Link>
-                              </li>
-                              <li>
-                                   <Link href="/about-us" className="hover:text-[#181759] transition">
-                                        About Us
-                                   </Link>
-                              </li>
-                              <li>
-                                   <Link href="/contact-us" className="hover:text-[#181759] transition">
-                                        Contact
-                                   </Link>
-                              </li>
-                         </ul>
-                    </div>
-
-                    {/* Support */}
-                    <div className="text-center">
-                         <h4 className="text-lg font-semibold mb-4">Customer Support</h4>
-                         <ul className="space-y-2 text-sm text-[#725CAD] font-bold">
-                              <li>
-                                   Email:{" "}
-                                   <a
-                                        href="mailto:support@afranperfume.com"
-                                        className="hover:text-[#181759]"
+                         {/* Social */}
+                         <div className="flex gap-3">
+                              {[Facebook, Twitter, Instagram, Linkedin].map((Icon, i) => (
+                                   <Link
+                                        key={i}
+                                        href="/"
+                                        className="w-10 h-10 flex items-center justify-center bg-black text-white hover:bg-white hover:text-black border transition"
                                    >
-                                        support@planora.com
-                                   </a>
-                              </li>
-                              <li>
-                                   Phone:{" "}
-                                   <a
-                                        href="tel:+880123456789"
-                                        className="hover:text-[#181759]"
-                                   >
-                                        +880123456789
-                                   </a>
-                              </li>
-                              <li>
-                                   <Link href="/faq" className="hover:text-[#181759]">
-                                        FAQs
+                                        <Icon size={18} />
                                    </Link>
-                              </li>
-                              <li>
-                                   <Link href="/terms-condition" className="hover:text-[#181759]">
-                                        Terms & Conditions
-                                   </Link>
-                              </li>
-                         </ul>
+                              ))}
+                         </div>
                     </div>
 
-                    {/* Social */}
-                    <div className="text-center w-full">
-                         <h4 className="text-lg font-semibold mb-4">Follow Us</h4>
-                         <div className="flex space-x-3 items-center justify-center">
-                              <Link href="/" className="p-2 rounded-full bg-[#725CAD] hover:bg-[#5A488C] transition">
-                                   <Facebook className="w-5 h-5 text-white" />
+                    {/* Contact */}
+                    <div className="flex flex-col gap-4">
+                         <h4 className="text-xl font-extrabold">| Contact</h4>
+
+                         <p className="text-sm text-gray-600">
+                              Dhaka, Bangladesh
+                         </p>
+
+                         <div className="flex items-center gap-2 text-sm">
+                              <Phone size={18} />
+                              <span>+880123456789</span>
+                         </div>
+
+                         <div className="flex items-center gap-2 text-sm">
+                              <Mail size={18} />
+                              <span>support@planora.com</span>
+                         </div>
+                    </div>
+
+                    {/* Links */}
+                    <div className="flex flex-col gap-3">
+                         <h4 className="text-xl font-extrabold">| Quick Links</h4>
+
+                         {[
+                              { name: "Home", href: "/" },
+                              { name: "Events", href: "/events" },
+                              { name: "About Us", href: "/about-us" },
+                              { name: "Contact", href: "/contact-us" },
+                         ].map((item, i) => (
+                              <Link
+                                   key={i}
+                                   href={item.href}
+                                   className="text-sm hover:text-[#725CAD] transition"
+                              >
+                                   {item.name}
                               </Link>
-                              <Link href="/" className="p-2 rounded-full bg-[#725CAD] hover:bg-[#5A488C] transition">
-                                   <Twitter className="w-5 h-5 text-white" />
-                              </Link>
-                              <Link href="/" className="p-2 rounded-full bg-[#725CAD] hover:bg-[#5A488C] transition">
-                                   <Instagram className="w-5 h-5 text-white" />
-                              </Link>
-                              <Link href="/" className="p-2 rounded-full bg-[#725CAD] hover:bg-[#5A488C] transition">
-                                   <Linkedin className="w-5 h-5 text-white" />
-                              </Link>
+                         ))}
+                    </div>
+
+                    {/* Newsletter */}
+                    <div className="flex flex-col gap-4">
+                         <h4 className="text-xl font-extrabold">| Newsletter</h4>
+
+                         <p className="text-sm text-gray-600">
+                              Get latest events & updates directly in your inbox.
+                         </p>
+
+                         <div className="flex border border-black p-1">
+                              <input
+                                   type="email"
+                                   placeholder="Email Address"
+                                   className="w-full px-3 py-2 outline-none bg-transparent text-sm"
+                              />
+                              <button className="w-12 flex items-center justify-center bg-black text-white hover:bg-white hover:text-black border transition">
+                                   <Send size={18} />
+                              </button>
+                         </div>
+
+                         <div className="flex gap-2 items-start text-sm">
+                              <input type="checkbox" />
+                              <p>
+                                   Your email is safe with us.{" "}
+                                   <span className="underline cursor-pointer">
+                                        Privacy Policy
+                                   </span>
+                              </p>
                          </div>
                     </div>
                </div>
 
                {/* Bottom */}
-               <div className="border-t border-gray-200 mt-12 py-4 text-center text-sm text-gray-500">
-                    © {new Date().getFullYear()} PLANORA. Crafted with excellence .
+               <div className="border-t flex flex-col md:flex-row items-center justify-between gap-4 px-6 md:px-12 py-4 text-sm text-gray-600">
+                    <p>© {new Date().getFullYear()} PLANORA. All Rights Reserved.</p>
+
+                    <div className="flex gap-3">
+                         <Link href="#">Privacy Policy</Link>
+                         <span>|</span>
+                         <Link href="#">Terms</Link>
+                    </div>
                </div>
           </footer>
      );
