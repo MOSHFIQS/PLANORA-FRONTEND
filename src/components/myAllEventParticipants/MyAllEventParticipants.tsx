@@ -567,7 +567,7 @@ export default function MyAllEventParticipants({
           {participants.map((p) => (
             <div
               key={p.id}
-              className="bg-white rounded-xl shadow-md p-5 border hover:shadow-lg transition-shadow flex flex-col justify-between"
+              className="bg-white rounded shadow p-5 border hover:shadow-lg transition-shadow flex flex-col justify-between"
             >
               <div className="flex flex-col gap-2">
                 {/* Header: Avatar + Name */}
@@ -622,7 +622,7 @@ export default function MyAllEventParticipants({
               >
                 <AlertDialogTrigger asChild>
                   <Button
-                    variant="outline"
+                    variant="violet"
                     disabled={privateEvents.length === 0}
                     onClick={() => setOpenDialogId(p.id)}
                   >
@@ -681,6 +681,7 @@ export default function MyAllEventParticipants({
                       <X size={14} /> Cancel
                     </Button>
                     <Button
+                      variant="violet"
                       onClick={() => handleSendInvite(p.id)}
                       disabled={isPending || !selectedEventId}
                     >
@@ -767,7 +768,7 @@ export default function MyAllEventParticipants({
                       >
                         <AlertDialogTrigger asChild>
                           <Button
-                            variant="outline"
+                            variant="violet"
                             disabled={privateEvents.length === 0}
                             onClick={() => setOpenDialogId(p.id)}
                           >
@@ -829,6 +830,7 @@ export default function MyAllEventParticipants({
                               <X size={14} /> Cancel
                             </Button>
                             <Button
+                              variant="violet"
                               onClick={() => handleSendInvite(p.id)}
                               disabled={isPending || !selectedEventId}
                             >

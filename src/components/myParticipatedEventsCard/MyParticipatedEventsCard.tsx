@@ -233,7 +233,7 @@ const MyParticipatedEventsCard = ({ myEvents }: Props) => {
                 <CardFooter className="mt-auto">
                   {isApproved ? (
                     <div className="flex gap-2 w-full">
-                      <Button asChild className="flex-4">
+                      <Button  asChild className="flex-1" variant={"violet"}>
                         <Link href={`/dashboard/participants/my-participated-events/${event?.id}`}>
                           View Event
                         </Link>
@@ -321,7 +321,7 @@ const MyParticipatedEventsCard = ({ myEvents }: Props) => {
                       <TableCell className="text-right">
                         {isApproved ? (
                           <div className="flex items-end justify-end gap-2 ">
-                            <Button asChild size="xs">
+                            <Button variant={"violet"} asChild size="xs">
                               <Link href={`/dashboard/participants/my-participated-events/${event?.id}`}>
                                 View Event
                               </Link>

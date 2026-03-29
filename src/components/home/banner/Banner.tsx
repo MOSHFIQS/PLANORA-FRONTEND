@@ -193,7 +193,7 @@ export default function CarouselPlugin({ banners }: { banners: Banner[] }) {
 
 
      return (
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-2 border-2 rounded p-0 xl:p-10 ">
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-2 border-2 rounded p-0 xl:p-10 bg-[#725CAD]">
 
                {/* MAIN CAROUSEL */}
                <div className="lg:col-span-4">
@@ -210,7 +210,7 @@ export default function CarouselPlugin({ banners }: { banners: Banner[] }) {
 
                     >
 
-                         <CarouselContent className="h-[400px] sm:h-[450px] md:h-[450px] lg:h-[500px] xl:h-[550px]  m-0  w-full">
+                         <CarouselContent className="h-[400px] sm:h-[450px] md:h-[450px] lg:h-[500px] xl:h-[550px]  m-0  w-full ">
 
                               {mainBanners.map((banner) => (
                                    <CarouselItem key={banner.id} className="h-full p-0">
@@ -267,10 +267,10 @@ export default function CarouselPlugin({ banners }: { banners: Banner[] }) {
 
 
                                         {/* ===== XL → NEW DESIGN ===== */}
-                                        <div className="hidden xl:flex items-center justify-between h-full w-full gap-10 px-1">
+                                        <div className="hidden xl:flex items-center justify-between h-full w-full gap-10 px-5">
 
                                              {/* LEFT TEXT */}
-                                             <div className="flex-1  bg-white   ">
+                                             <div className="flex-1  bg-white  p-10  rounded">
                                                   <div className="space-y-8">
                                                        {/* Badge */}
                                                        <div className="inline-block">
@@ -301,7 +301,7 @@ export default function CarouselPlugin({ banners }: { banners: Banner[] }) {
 
                                                        {/* Button */}
                                                        {banner.buttonText && (
-                                                            <Button asChild >
+                                                            <Button asChild variant={"violet"} >
                                                                  <Link href={banner.redirectUrl || "#"}>
                                                                       {banner.buttonText}
                                                                  </Link>

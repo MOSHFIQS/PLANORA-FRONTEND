@@ -78,20 +78,19 @@ const Navbar = () => {
                          {/* Menu */}
                          <div className="flex items-center gap-4">
                               {menu.map((item) => (
-                                   <Button asChild variant="outline">
+                                   <button key={item.title} className={""}>
                                         <Link
-                                        key={item.title}
                                         href={item.url}
-                                        className={`px-3 py-2 text-sm font-medium shadow transition
+                                        className={`px-3 py-2 text-sm font-medium border transition
         ${isActive(item.url)
-                                                  ? "bg-primary text-white"
+                                                  ? "bg-[#FE7743] text-white"
                                                   : "bg-gray-50 hover:bg-muted"
                                              }
       `}
                                    >
                                         {item.title}
                                    </Link>
-                                   </Button>
+                                   </button>
                               ))}
                          </div>
 

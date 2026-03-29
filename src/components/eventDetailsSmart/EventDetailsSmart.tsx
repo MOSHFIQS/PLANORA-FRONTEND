@@ -191,7 +191,7 @@ const EventDetailsSmart = ({ type, data }: Props) => {
 
         {!isFull && (
           <CardFooter className="px-4">
-            <Button
+            <Button variant={"orange"}
               className={`w-full`}
               disabled={loadingId === event?.id || !event?.id}
               onClick={() => {
