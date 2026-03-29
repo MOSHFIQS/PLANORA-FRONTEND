@@ -79,7 +79,6 @@ export const userRoutes: Route[] = [
     ],
   },
 
-  // ✅ NEW: Tickets Section
   {
     title: "Tickets",
     items: [

@@ -74,3 +74,26 @@ export async function getOrganizerPaymentsAction() {
     };
   }
 }
+
+export async function getAllPaymentsAction() {
+  try {
+    const res = await paymentService.getAllPayments();
+
+    if (!res?.ok) {
+      return {
+        ok: false,
+        message: res?.message || "Failed to fetch Payments",
+      };
+    }
+
+    return {
+      ok: true,
+      data: res.data,
+    };
+  } catch {
+    return {
+      ok: false,
+      message: "Something went wrong",
+    };
+  }
+}

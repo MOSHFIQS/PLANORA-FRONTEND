@@ -44,26 +44,7 @@ const AllUsers = ({ users }: { users: User[] }) => {
   
 
 
-  const handleStatusToggle = (user: User) => {
-    setLoadingId(user.id);
 
-    startTransition(async () => {
-      const newStatus =
-        user.status === "ACTIVE" ? "SUSPENDED" : "ACTIVE";
-
-      const res = await updateUserStatusAction(user.id, {
-        status: newStatus,
-      });
-
-      if (!res?.ok) {
-        toast.error(res?.message || "Failed to update status");
-      } else {
-        toast.success(`User ${newStatus.toLowerCase()} successfully`);
-      }
-
-      setLoadingId(null);
-    });
-  };
 
   // Delete user
   const handleDelete = (id: string) => {
@@ -189,7 +170,7 @@ const AllUsers = ({ users }: { users: User[] }) => {
                   {/* Verified */}
                   <TableCell>
                     <Badge
-                      variant={user.emailVerified ? "default" : "secondary"}
+                      variant={user.emailVerified ? "default" : "destructive"}
                     >
                       {user.emailVerified ? "Verified" : "Unverified"}
                     </Badge>
@@ -203,20 +184,7 @@ const AllUsers = ({ users }: { users: User[] }) => {
                   {/* Actions */}
                   <TableCell className="text-right">
                     <div className="flex items-end justify-end gap-2">
-                      {/* Toggle Button */}
-                      <Button
-                        variant="outline"
-                        disabled={isLoading}
-                        onClick={() => handleStatusToggle(user)}
-                      >
-                        {isLoading ? (
-                          "..."
-                        ) : isActive ? (
-                          <ShieldOff className="w-4 h-4" />
-                        ) : (
-                          <ShieldCheck className="w-4 h-4" />
-                        )}
-                      </Button>
+                   
 
                       {/* Delete */}
                       <Button

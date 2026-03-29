@@ -20,4 +20,8 @@ export const paymentService = {
           apiFetchServerMain("/payment/organizer", {
                method: "GET",
           }),
+     getAllPayments: () =>
+          apiFetchServerMain("/payment/admin", {
+               method: "GET",
+          }),
 };

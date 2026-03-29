@@ -7,6 +7,7 @@ import {
   Tags,
   Image as ImageIcon,
   Home,
+  CreditCard,
 } from "lucide-react";
 
 export const adminRoutes: Route[] = [
@@ -60,6 +61,17 @@ export const adminRoutes: Route[] = [
         title: "All Banners",
         url: "/admin-dashboard/banner",
         icon: ImageIcon,
+      },
+    ],
+  },
+
+    {
+    title: "Payments",
+    items: [
+      {
+        title: "All Payments",
+        url: "/admin-dashboard/payments",
+        icon: CreditCard,
       },
     ],
   },
