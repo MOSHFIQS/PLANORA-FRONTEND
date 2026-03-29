@@ -36,7 +36,7 @@ const Navbar = () => {
      const menu = [
           { title: "Home", url: "/" },
           { title: "All Events", url: "/events" },
-          { title: "Contact", url: "/contact" },
+          { title: "Contact Us", url: "/contact" },
           { title: "Find Us", url: "/find-us" },
      ];
 
@@ -79,12 +79,12 @@ const Navbar = () => {
                               </Link>
 
                               {/* Menu */}
-                              <div className="flex items-center gap-1">
+                              <div className="flex items-center gap-3">
                                    {menu.map((item) => (
                                         <button key={item.title} className={""}>
                                              <Link
                                                   href={item.url}
-                                                  className={`px-3 py-2 text-sm font-medium  transition
+                                                  className={`px-2 py-1 text-sm font-medium border  transition
                                              ${isActive(item.url)
                                                             ? "bg-[#FE7743] text-white"
                                                             : "bg-gray-50 hover:bg-muted"

@@ -14,6 +14,7 @@ import {
   Wallet,
   Ticket,
   ScanLine,
+  MapPin,
 } from "lucide-react";
 
 export const userRoutes: Route[] = [
@@ -122,6 +123,16 @@ export const userRoutes: Route[] = [
         title: "All Events",
         url: "/events",
         icon: List,
+      },
+      {
+        title: "Contact Us",
+        url: "/contact",
+        icon: Mail,
+      },
+      {
+        title: "Find Us",
+        url: "/find-us",
+        icon:  MapPin,
       },
     ],
   },

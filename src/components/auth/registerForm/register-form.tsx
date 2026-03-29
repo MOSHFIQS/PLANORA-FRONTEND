@@ -1,4 +1,3 @@
-
 "use client"
 
 import { Button } from "@/components/ui/button"
@@ -39,12 +38,11 @@ const formSchema = z.object({
 })
 
 export function RegisterForm({ ...props }: React.ComponentProps<typeof Card>) {
-
-     const { setAuthData } = useAuth();
+     const { setAuthData } = useAuth()
      const router = useRouter()
-     const searchParams = useSearchParams();
-     const redirectUrl = searchParams.get("redirect") || "/";
-     const registerImages = useImageUpload({ max: 1 });
+     const searchParams = useSearchParams()
+     const redirectUrl = searchParams.get("redirect") || "/"
+     const registerImages = useImageUpload({ max: 1 })
 
      const form = useForm({
           defaultValues: {
@@ -52,28 +50,24 @@ export function RegisterForm({ ...props }: React.ComponentProps<typeof Card>) {
                email: "",
                password: "",
           },
-
           validators: {
                onSubmit: formSchema,
           },
-
           onSubmit: async ({ value }) => {
-
                const toastId = toast.loading("Registering...")
 
                try {
                     const payload = {
                          ...value,
                          image: registerImages.images[0]?.img,
-
                     }
 
-
                     const result = await registerAction(payload)
-                    // console.log(result.data);
 
                     if (!result.ok) {
-                         toast.error(result.message || "Invalid credentials", { id: toastId })
+                         toast.error(result.message || "Invalid credentials", {
+                              id: toastId,
+                         })
                          return { form: "Invalid email or password" }
                     }
 
@@ -83,13 +77,11 @@ export function RegisterForm({ ...props }: React.ComponentProps<typeof Card>) {
                               result.data.accessToken,
                               result.data.refreshToken,
                               result.data.token
-                         );
+                         )
                     }
 
                     toast.success(result.message, { id: toastId })
-
                     router.push(redirectUrl)
-
                } catch (err) {
                     console.error(err)
                     toast.error("Something went wrong", { id: toastId })
@@ -98,148 +90,161 @@ export function RegisterForm({ ...props }: React.ComponentProps<typeof Card>) {
      })
 
      return (
-          <Card {...props} className="max-w-4xl mx-auto">
+          <div className="flex flex-col  gap-6 max-w-5xl mx-auto" {...props}>
+               <Card className="overflow-hidden p-0">
+                    <CardContent className="grid p-4 md:grid-cols-2 ">
 
-               <CardHeader>
-                    <CardTitle>Login to your account</CardTitle>
-                    <CardDescription>
-                         Enter your information below to login
-                    </CardDescription>
-               </CardHeader>
+                         {/* LEFT FORM */}
+                         <form
+                              className="p-6 md:p-8"
+                              id="register-form"
+                              onSubmit={(e) => {
+                                   e.preventDefault()
+                                   form.handleSubmit()
+                              }}
+                         >
+                              <FieldGroup>
 
-               <CardContent>
+                                   {/* HEADER */}
+                                   <div className="flex flex-col items-center gap-2 text-center mb-4">
+                                        <h1 className="text-2xl font-bold">Create Account</h1>
+                                        <p className="text-muted-foreground">
+                                             Enter your details to register
+                                        </p>
+                                   </div>
 
-                    <form
-                         id="register-form"
-                         onSubmit={(e) => {
-                              e.preventDefault()
-                              form.handleSubmit()
-                         }}
-                    >
+                                   {/* NAME */}
+                                   <form.Field
+                                        name="name"
+                                        children={(field) => {
+                                             const isInvalid =
+                                                  field.state.meta.isTouched &&
+                                                  !field.state.meta.isValid
 
-                         <FieldGroup>
+                                             return (
+                                                  <Field data-invalid={isInvalid}>
+                                                       <FieldLabel>Name</FieldLabel>
+                                                       <Input
+                                                            type="text"
+                                                            value={field.state.value}
+                                                            onChange={(e) =>
+                                                                 field.handleChange(e.target.value)
+                                                            }
+                                                       />
+                                                       {isInvalid && (
+                                                            <FieldError errors={field.state.meta.errors} />
+                                                       )}
+                                                  </Field>
+                                             )
+                                        }}
+                                   />
 
-                              <form.Field
-                                   name="name"
-                                   children={(field) => {
+                                   {/* EMAIL */}
+                                   <form.Field
+                                        name="email"
+                                        children={(field) => {
+                                             const isInvalid =
+                                                  field.state.meta.isTouched &&
+                                                  !field.state.meta.isValid
 
-                                        const isInvalid =
-                                             field.state.meta.isTouched && !field.state.meta.isValid
+                                             return (
+                                                  <Field data-invalid={isInvalid}>
+                                                       <FieldLabel>Email</FieldLabel>
+                                                       <Input
+                                                            type="email"
+                                                            value={field.state.value}
+                                                            onChange={(e) =>
+                                                                 field.handleChange(e.target.value)
+                                                            }
+                                                            placeholder="m@example.com"
+                                                       />
+                                                       {isInvalid && (
+                                                            <FieldError errors={field.state.meta.errors} />
+                                                       )}
+                                                  </Field>
+                                             )
+                                        }}
+                                   />
 
-                                        return (
-                                             <Field data-invalid={isInvalid}>
+                                   {/* PASSWORD */}
+                                   <form.Field
+                                        name="password"
+                                        children={(field) => {
+                                             const isInvalid =
+                                                  field.state.meta.isTouched &&
+                                                  !field.state.meta.isValid
 
-                                                  <FieldLabel htmlFor={field.name}>
-                                                       Name
-                                                  </FieldLabel>
+                                             return (
+                                                  <Field data-invalid={isInvalid}>
+                                                       <FieldLabel>Password</FieldLabel>
+                                                       <Input
+                                                            type="password"
+                                                            value={field.state.value}
+                                                            onChange={(e) =>
+                                                                 field.handleChange(e.target.value)
+                                                            }
+                                                       />
+                                                       {isInvalid && (
+                                                            <FieldError errors={field.state.meta.errors} />
+                                                       )}
+                                                  </Field>
+                                             )
+                                        }}
+                                   />
 
-                                                  <Input
-                                                       type="text"
-                                                       id={field.name}
-                                                       name={field.name}
-                                                       value={field.state.value}
-                                                       onChange={(e) =>
-                                                            field.handleChange(e.target.value)
-                                                       }
-                                                  />
+                                   {/* IMAGE UPLOADER */}
+                                   <ImageUploader
+                                        label="Profile Image"
+                                        images={registerImages.images}
+                                        onUpload={registerImages.upload}
+                                        onDelete={registerImages.remove}
+                                        multiple={false}
+                                   />
 
-                                                  {isInvalid && (
-                                                       <FieldError errors={field.state.meta.errors} />
-                                                  )}
+                                   {/* BUTTON + LINK */}
+                                   <div className="flex flex-col gap-5 pt-2">
+                                        <Button
+                                             variant={"violet"}
+                                             form="register-form"
+                                             type="submit"
+                                             className="w-full"
+                                        >
+                                             Register
+                                        </Button>
 
-                                             </Field>
-                                        )
-                                   }}
+                                        <p className="text-sm text-center text-muted-foreground">
+                                             Already have an account?{" "}
+                                             <Link
+                                                  href="/login"
+                                                  className="text-primary hover:underline"
+                                             >
+                                                  Login here
+                                             </Link>
+                                        </p>
+                                   </div>
+                              </FieldGroup>
+                         </form>
+
+                         {/* RIGHT SIDE */}
+                         <div className="relative hidden bg-muted md:block">
+                              <img
+                                   src="/gradient.jpg"
+                                   alt="Register"
+                                   className="absolute inset-0 h-full w-full rounded-lg object-cover dark:brightness-[0.2] dark:grayscale"
                               />
-                              <form.Field
-                                   name="email"
-                                   children={(field) => {
 
-                                        const isInvalid =
-                                             field.state.meta.isTouched && !field.state.meta.isValid
+                              <div className="relative z-10 p-6 md:p-8 lg:p-12 text-white flex flex-col justify-end h-full gap-3">
+                                   <h2 className="text-3xl font-bold">
+                                        Join Planora Today!
+                                   </h2>
+                                   <p className="text-sm opacity-90">
+                                        Discover unforgettable events, connect with people, and create lasting memories.
+                                   </p>
+                              </div>
+                         </div>
 
-                                        return (
-                                             <Field data-invalid={isInvalid}>
-
-                                                  <FieldLabel htmlFor={field.name}>
-                                                       Email
-                                                  </FieldLabel>
-
-                                                  <Input
-                                                       type="email"
-                                                       id={field.name}
-                                                       name={field.name}
-                                                       value={field.state.value}
-                                                       onChange={(e) =>
-                                                            field.handleChange(e.target.value)
-                                                       }
-                                                  />
-
-                                                  {isInvalid && (
-                                                       <FieldError errors={field.state.meta.errors} />
-                                                  )}
-
-                                             </Field>
-                                        )
-                                   }}
-                              />
-
-                              <form.Field
-                                   name="password"
-                                   children={(field) => {
-
-                                        const isInvalid =
-                                             field.state.meta.isTouched && !field.state.meta.isValid
-
-                                        return (
-                                             <Field data-invalid={isInvalid}>
-
-                                                  <FieldLabel htmlFor={field.name}>
-                                                       Password
-                                                  </FieldLabel>
-
-                                                  <Input
-                                                       type="password"
-                                                       id={field.name}
-                                                       name={field.name}
-                                                       value={field.state.value}
-                                                       onChange={(e) =>
-                                                            field.handleChange(e.target.value)
-                                                       }
-                                                  />
-
-                                                  {isInvalid && (
-                                                       <FieldError errors={field.state.meta.errors} />
-                                                  )}
-
-                                             </Field>
-                                        )
-                                   }}
-                              />
-
-                              <ImageUploader
-                                   label="Event Images"
-                                   images={registerImages.images}
-                                   onUpload={registerImages.upload}
-                                   onDelete={registerImages.remove}
-                                   multiple={false}
-                              />
-
-                         </FieldGroup>
-
-                    </form>
-
-               </CardContent>
-
-               <CardFooter className="flex flex-col gap-5 justify-end">
-
-                    <Button form="register-form" type="submit" className="w-full">
-                         Register
-                    </Button>
-                    <h1>Already have an account? <Link href="/login" className="text-blue-500 hover:underline">Login here</Link></h1>
-
-               </CardFooter>
-
-          </Card>
+                    </CardContent>
+               </Card>
+          </div>
      )
 }

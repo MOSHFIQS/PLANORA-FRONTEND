@@ -8,6 +8,9 @@ import {
   Image as ImageIcon,
   Home,
   CreditCard,
+  List,
+  Mail,
+  MapPin,
 } from "lucide-react";
 
 export const adminRoutes: Route[] = [
@@ -65,7 +68,7 @@ export const adminRoutes: Route[] = [
     ],
   },
 
-    {
+  {
     title: "Payments",
     items: [
       {
@@ -83,6 +86,21 @@ export const adminRoutes: Route[] = [
         title: "Home",
         url: "/",
         icon: Home,
+      },
+      {
+        title: "All Events",
+        url: "/events",
+        icon: List,
+      },
+      {
+        title: "Contact Us",
+        url: "/contact",
+        icon: Mail,
+      },
+      {
+        title: "Find Us",
+        url: "/find-us",
+        icon: MapPin,
       },
     ],
   },

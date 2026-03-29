@@ -14,7 +14,7 @@ import Link from "next/link";
 
 export default function Footer() {
      return (
-          <footer className="border-t bg-white text-black mt-10 transition-all duration-500 hover:py-10 transition-all duration-700 ease-in-out">
+          <footer className="border-t bg-white text-black  transition-all duration-500 hover:py-10 transition-all duration-700 ease-in-out">
 
                {/* Main Footer */}
                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-10 px-6 md:px-12 py-12 ">

@@ -14,7 +14,7 @@ type PublicStats = {
 
 const PublicStatsCard = ({ publicStats }: { publicStats: PublicStats }) => {
   return (
-    <div>
+    <div className="pb-5">
      {/* <SectionHeader
         align="center"
         title="Events By Category"
