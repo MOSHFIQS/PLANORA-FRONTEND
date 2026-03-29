@@ -14,10 +14,10 @@ import Link from "next/link";
 
 export default function Footer() {
      return (
-          <footer className="border-t bg-white text-black mt-10 transition-all duration-500">
+          <footer className="border-t bg-white text-black mt-10 transition-all duration-500 hover:py-10 transition-all duration-700 ease-in-out">
 
                {/* Main Footer */}
-               <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-10 px-6 md:px-12 py-12">
+               <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-10 px-6 md:px-12 py-12 ">
 
                     {/* Brand */}
                     <div className="flex flex-col gap-5">
@@ -39,7 +39,7 @@ export default function Footer() {
                                    <Link
                                         key={i}
                                         href="/"
-                                        className="w-10 h-10 flex items-center justify-center bg-black text-white hover:bg-white hover:text-black border transition"
+                                        className="w-10 h-10 flex items-center justify-center bg-black text-white hover:bg-[#725CAD]  border transition"
                                    >
                                         <Icon size={18} />
                                    </Link>
@@ -100,7 +100,7 @@ export default function Footer() {
                                    placeholder="Email Address"
                                    className="w-full px-3 py-2 outline-none bg-transparent text-sm"
                               />
-                              <button className="w-12 flex items-center justify-center bg-black text-white hover:bg-white hover:text-black border transition">
+                              <button className="w-12 flex items-center justify-center bg-black text-white hover:bg-[#725CAD]  border transition">
                                    <Send size={18} />
                               </button>
                          </div>

@@ -36,6 +36,8 @@ const Navbar = () => {
      const menu = [
           { title: "Home", url: "/" },
           { title: "All Events", url: "/events" },
+          { title: "Contact", url: "/contact" },
+          { title: "Find Us", url: "/find-us" },
      ];
 
      const handleSearch = (value: string) => {
