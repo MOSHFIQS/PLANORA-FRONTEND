@@ -16,7 +16,8 @@ import {
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 
-import { createReview} from "@/actions/review.action";
+import { createReview } from "@/actions/review.action";
+import { Star } from "lucide-react";
 
 type Props = {
   eventId: string;
@@ -67,16 +68,18 @@ const ReviewDialog = ({ eventId, children }: Props) => {
         </AlertDialogHeader>
 
         {/* Rating */}
-        <div className="flex gap-2 mt-2">
+        {/* Rating */}
+        <div className="flex gap-1 mt-2">
           {[1, 2, 3, 4, 5].map((star) => (
-            <Button
+            <Star
               key={star}
-              variant={rating >= star ? "default" : "outline"}
-              size="sm"
+              size={40}
+              className={`cursor-pointer transition ${rating >= star
+                  ? "text-[#725cAD] fill-[#725cAD]"
+                  : "text-gray-300"
+                }`}
               onClick={() => setRating(star)}
-            >
-              {star}
-            </Button>
+            />
           ))}
         </div>
 

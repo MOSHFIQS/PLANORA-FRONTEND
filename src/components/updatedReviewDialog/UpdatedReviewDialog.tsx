@@ -68,7 +68,7 @@ const UpdateReviewDialog = ({ review, onUpdated }: Props) => {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button size="sm" variant="outline">
+        <Button size="sm" variant="violet">
           Edit
         </Button>
       </DialogTrigger>
@@ -98,10 +98,10 @@ const UpdateReviewDialog = ({ review, onUpdated }: Props) => {
                     return (
                       <Star
                         key={i}
-                        size={22}
+                        size={40}
                         className={`cursor-pointer ${
                           value <= field.state.value
-                            ? "text-yellow-400"
+                            ? "text-[#725cAD] fill-[#725cAD]"
                             : "text-gray-300"
                         }`}
                         onClick={() =>
