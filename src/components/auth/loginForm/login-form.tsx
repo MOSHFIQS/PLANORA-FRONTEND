@@ -1,3 +1,4 @@
+
 "use client"
 
 import { Button } from "@/components/ui/button"
@@ -23,10 +24,11 @@ import { useForm } from "@tanstack/react-form"
 import { toast } from "sonner"
 import * as z from "zod"
 
-import { useRouter } from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation"
 import { useAuth } from "@/context/AuthProvider"
+import { logInAction } from "@/actions/auth.action"
+import Link from "next/link"
 
-import { signInAction } from "@/actions/auth.action"
 
 const formSchema = z.object({
   password: z.string().min(6, "Minimum length is 6"),
@@ -37,6 +39,8 @@ export function LoginForm({ ...props }: React.ComponentProps<typeof Card>) {
 
   const { setAuthData } = useAuth();
   const router = useRouter()
+  const searchParams = useSearchParams();
+  const redirectUrl = searchParams.get("redirect") || "/";
 
   const form = useForm({
     defaultValues: {
@@ -54,7 +58,7 @@ export function LoginForm({ ...props }: React.ComponentProps<typeof Card>) {
 
       try {
 
-        const result = await signInAction(value)
+        const result = await logInAction(value)
         // console.log(result.data);
 
         if (!result.ok) {
@@ -73,7 +77,7 @@ export function LoginForm({ ...props }: React.ComponentProps<typeof Card>) {
 
         toast.success(result.message, { id: toastId })
 
-        router.push("/")
+        router.push(redirectUrl)
 
       } catch (err) {
         console.error(err)
@@ -83,7 +87,7 @@ export function LoginForm({ ...props }: React.ComponentProps<typeof Card>) {
   })
 
   return (
-    <Card {...props}>
+    <Card {...props} className="max-w-4xl mx-auto">
 
       <CardHeader>
         <CardTitle>Login to your account</CardTitle>
@@ -181,6 +185,12 @@ export function LoginForm({ ...props }: React.ComponentProps<typeof Card>) {
         <Button form="login-form" type="submit" className="w-full">
           Login
         </Button>
+        <h1>Don't have an account? <Link
+          href={`/register?redirect=${encodeURIComponent(redirectUrl)}`}
+          className="text-blue-500 hover:underline"
+        >
+          Register here
+        </Link></h1>
 
       </CardFooter>
 

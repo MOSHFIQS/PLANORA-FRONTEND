@@ -32,17 +32,7 @@ const Map = () => {
                     </div>
 
                </div>
-                    {/* Address Section */}  
-                    <div className="flex flex-col items-center justify-center gap-2 mt-5">
-                         <h3 className="text-2xl font-bold">Our Location</h3>
-                         <p className="text-center text-gray-600">
-                              Sea Pearl Beach Resort & Spa, Cox's Bazar, Bangladesh
-                         </p>
-                         <p className="text-center text-gray-600">
-                              Experience the perfect blend of comfort and coastal beauty at our resort, where unforgettable memories are made.
-                         </p>
-                         
-                    </div>
+                    
 
           </div>
      );

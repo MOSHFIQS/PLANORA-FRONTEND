@@ -9,6 +9,14 @@ export const authService = {
                method: "POST",
                body: JSON.stringify(payload),
           }),
+          
+     register: (payload: { email: string; password: string }) =>
+          apiFetchServerMain("/auth/register", {
+               method: "POST",
+               body: JSON.stringify(payload),
+          }),
 
-    
+
+
+
 }

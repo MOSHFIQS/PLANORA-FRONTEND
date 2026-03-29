@@ -210,12 +210,12 @@ export default function CarouselPlugin({ banners }: { banners: Banner[] }) {
 
                     >
 
-                         <CarouselContent className="h-[400px] sm:h-[450px] md:h-[450px] lg:h-[500px] xl:h-[550px]  m-0  w-full ">
+                         <CarouselContent className="h-[400px] sm:h-[450px] md:h-[500px] lg:h-[600px] xl:h-[700px]  m-0  w-full ">
 
                               {mainBanners.map((banner) => (
                                    <CarouselItem key={banner.id} className="h-full p-0">
 
-                                        {/* ===== MOBILE → OLD DESIGN ===== */}
+
                                         <div className="relative h-full ">
 
                                              <AppImage

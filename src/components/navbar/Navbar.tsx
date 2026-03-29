@@ -71,29 +71,31 @@ const Navbar = () => {
                     {/* ================= DESKTOP ================= */}
                     <nav className="hidden items-center justify-between lg:flex px-4">
 
-                         {/* Logo */}
-                         <Link href="/" className="flex items-center gap-2">
-                              <img src="/logo/logo.png" className="max-h-8" />
-                              <span className="text-lg font-semibold">PLANORA</span>
-                         </Link>
+                         <div className="flex items-center justify-center gap-10">
+                              {/* Logo */}
+                              <Link href="/" className="flex items-center gap-2">
+                                   <img src="/logo/logo.png" className="max-h-8" />
+                                   <span className="text-lg font-bold">PLANORA</span>
+                              </Link>
 
-                         {/* Menu */}
-                         <div className="flex items-center gap-4">
-                              {menu.map((item) => (
-                                   <button key={item.title} className={""}>
-                                        <Link
-                                             href={item.url}
-                                             className={`px-3 py-2 text-sm font-medium border transition
-        ${isActive(item.url)
-                                                       ? "bg-[#FE7743] text-white"
-                                                       : "bg-gray-50 hover:bg-muted"
-                                                  }
-      `}
-                                        >
-                                             {item.title}
-                                        </Link>
-                                   </button>
-                              ))}
+                              {/* Menu */}
+                              <div className="flex items-center gap-1">
+                                   {menu.map((item) => (
+                                        <button key={item.title} className={""}>
+                                             <Link
+                                                  href={item.url}
+                                                  className={`px-3 py-2 text-sm font-medium  transition
+                                             ${isActive(item.url)
+                                                            ? "bg-[#FE7743] text-white"
+                                                            : "bg-gray-50 hover:bg-muted"
+                                                       }
+                                             `}
+                                             >
+                                                  {item.title}
+                                             </Link>
+                                        </button>
+                                   ))}
+                              </div>
                          </div>
 
                          {/* Search + Auth */}

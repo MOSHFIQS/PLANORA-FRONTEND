@@ -9,6 +9,7 @@ import { AppImage } from "../appImage/AppImage";
 import { Event } from "@/types/event.types";
 import Link from "next/link";
 import { useSearchParams, useRouter } from "next/navigation";
+import { useAuth } from "@/context/AuthProvider";
 
 type Category = {
   id: string;
@@ -21,6 +22,7 @@ type Props = {
 };
 
 const HomePageEvents = ({ events, categories }: Props) => {
+  const { user } = useAuth();
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -28,6 +30,14 @@ const HomePageEvents = ({ events, categories }: Props) => {
   const categoryFromUrl = searchParams.get("categoryId");
 
   const [selectedCategory, setSelectedCategory] = useState<string>("ALL");
+
+  const handleViewEvent = (eventId: string) => {
+    if (!user) {
+      router.push(`/login?redirect=/events/${eventId}`);
+    } else {
+      router.push(`/events/${eventId}`);
+    }
+  };
 
   // sync state from URL
   useEffect(() => {
@@ -161,10 +171,12 @@ const HomePageEvents = ({ events, categories }: Props) => {
                   </div>
                 </CardContent>
 
-                <Button variant={"violet"} className="w-full" asChild>
-                  <Link href={`/events/${event.id}`}>
-                    View Event Info
-                  </Link>
+                <Button
+                  variant={"violet"}
+                  className="w-full"
+                  onClick={() => handleViewEvent(event.id)}
+                >
+                  View Event Info
                 </Button>
               </Card>
             );

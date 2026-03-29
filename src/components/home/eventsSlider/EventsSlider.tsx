@@ -12,12 +12,26 @@ import { Button } from "@/components/ui/button";
 import { AppImage } from "@/components/appImage/AppImage";
 import { Event } from "@/types/event.types";
 import SectionHeader from "@/components/sectionHeader/SectionHeader";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/context/AuthProvider";
 
 type Props = {
   events: Event[];
 };
 
 export default function EventsSlider({ events }: Props) {
+
+  const router = useRouter();
+  const { user } = useAuth();
+
+  const handleViewEvent = (eventId: string) => {
+    if (!user) {
+      router.push(`/login?redirect=/events/${eventId}`);
+    } else {
+      router.push(`/events/${eventId}`);
+    }
+  };
+
   const autoplay = useRef(Autoplay({ delay: 2500, stopOnInteraction: true }));
 
   if (!events?.length) {
@@ -30,7 +44,7 @@ export default function EventsSlider({ events }: Props) {
   return (
     <div>
       <SectionHeader
-      align="center"
+        align="center"
         title="Explore Events"
         description="Discover events based on your interests and join amazing experiences."
       />
@@ -61,8 +75,12 @@ export default function EventsSlider({ events }: Props) {
                     )}
                   </div>
                 </CardContent>
-                <Button className="w-full" asChild variant={"violet"}>
-                  <Link href={`/events/${event.id}`}>View Event Info</Link>
+                <Button
+                  className="w-full"
+                  variant={"violet"}
+                  onClick={() => handleViewEvent(event.id)}
+                >
+                  View Event Info
                 </Button>
               </Card>
             );
@@ -107,8 +125,12 @@ export default function EventsSlider({ events }: Props) {
                           )}
                         </div>
                       </CardContent>
-                      <Button className="w-full" asChild variant={"violet"}>
-                        <Link href={`/events/${event.id}`}>View Event Info</Link>
+                      <Button
+                        className="w-full"
+                        variant={"violet"}
+                        onClick={() => handleViewEvent(event.id)}
+                      >
+                        View Event Info
                       </Button>
                     </Card>
                   </CarouselItem>

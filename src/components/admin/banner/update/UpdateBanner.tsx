@@ -272,7 +272,7 @@ export default function UpdateBanner({ banner }: { banner: any }) {
                                    {/* ALT TEXT */}
                                    <form.Field name="altText">
                                         {(field) => (
-                                             <div className="space-y-2 w-full ">
+                                             <div className="space-y-2 col-span-1 md:col-span-2">
                                                   <Label>Alt Text</Label>
                                                   <Input
                                                        value={field.state.value}
