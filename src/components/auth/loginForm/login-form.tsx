@@ -51,13 +51,13 @@ export function LoginForm({ ...props }: React.ComponentProps<typeof Card>) {
           return { form: "Invalid email or password" }
         }
 
-        if (result.ok) {
+        if (result.ok && result.data?.user) {
           setAuthData(
             result.data.user,
             result.data.accessToken,
             result.data.refreshToken,
             result.data.token
-          )
+          );
         }
 
         toast.success(result.message, { id: toastId })

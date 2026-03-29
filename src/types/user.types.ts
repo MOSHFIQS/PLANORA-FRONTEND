@@ -1,14 +1,14 @@
 
 export type User = {
-     id: string;
+    id: string;
      name: string;
      email: string;
-     phone: string;
-     image: string;
-     status: "ACTIVE" | "INACTIVE" | "PENDING" | "DELETED";
-     roleId: string;
-     role: "AGENT" | "ADMIN";
+     emailVerified: boolean;
+     image: string ;
      createdAt: string;
      updatedAt: string;
+     role: "USER" | "ADMIN"; // adjust if more roles exist
+     status: string;
+     isDeleted: boolean;
      deletedAt: string | null;
 };

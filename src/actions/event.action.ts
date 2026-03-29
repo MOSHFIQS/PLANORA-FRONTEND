@@ -4,16 +4,18 @@ import { eventService } from "@/service/server/event.server.service";
 import { revalidatePath } from "next/cache";
 
 
-export async function getAllEventsAction(search?: string, categoryId?: string) {
+import { buildQueryString } from "@/utils/buildQueryString";
+
+export async function getAllEventsAction(searchTerm?: string, categoryId?: string , page?: number, limit?: number) {
     try {
-        const query = new URLSearchParams();
+        const query = buildQueryString({
+            searchTerm,
+            categoryId,
+            page,
+            limit
+        });
 
-        if (search) query.append("search", search);
-        if (categoryId) query.append("categoryId", categoryId);
-
-        const res = await eventService.getAllEvents(query.toString());
-        console.log(res);
-
+        const res = await eventService.getAllEvents(query);
 
         if (!res?.ok) {
             return {
@@ -38,6 +40,7 @@ export async function getAllEventsAction(search?: string, categoryId?: string) {
 export async function getSingleEventPublicAction(id: string) {
     try {
         const res = await eventService.getSingleEventPublic(id);
+        console.log("res",res);
 
         if (!res?.ok) {
             return {
@@ -49,6 +52,7 @@ export async function getSingleEventPublicAction(id: string) {
         return {
             ok: true,
             data: res.data,
+
         };
     } catch {
         return {

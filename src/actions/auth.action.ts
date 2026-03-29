@@ -28,9 +28,12 @@ export async function logInAction(data: { email: string; password: string }) {
           };
      }
 }
+
+
 export async function registerAction(data: { email: string; password: string }) {
      try {
           const res = await authService.register(data);
+          console.log(res);
 
           if (!res?.ok) {
                return {
@@ -45,6 +48,7 @@ export async function registerAction(data: { email: string; password: string }) 
                ok: true,
                message: res?.message || "Sign up successful",
                data: res.data,
+               status: res.status,
           };
      } catch (error) {
           return {
