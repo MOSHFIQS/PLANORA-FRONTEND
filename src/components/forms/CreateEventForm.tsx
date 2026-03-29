@@ -36,7 +36,7 @@ const formSchema = z.object({
      visibility: z.enum(["PUBLIC", "PRIVATE"]),
      type: z.enum(["ONLINE", "OFFLINE"]),
      meetingLink: z.string(),        // string only
-     categoryId: z.string(),        // string only
+     categoryId: z.string().min(1, "Category is required"),       // string only
      fee: z.number().min(0, "Fee cannot be negative"),
 });
 
@@ -360,24 +360,24 @@ const CreateEventForm = ({ categories }: { categories: Category[] }) => {
                          <form.Field name="categoryId">
                               {(field) => (
                                    <div className="space-y-2">
-                                        <Label>Category</Label>
+                                        <Label>Category *</Label>
+
                                         <Select
-                                             value={field?.state?.value || ""}
-                                             onValueChange={(value) =>
-                                                  field?.handleChange(value)
-                                             }
+                                             value={field.state.value || ""}
+                                             onValueChange={(value) => field.handleChange(value)}
                                         >
                                              <SelectTrigger className="w-full">
                                                   <SelectValue placeholder="Select Category" />
                                              </SelectTrigger>
+
                                              <SelectContent>
                                                   {categories?.length > 0 ? (
-                                                       categories?.map((cat) => (
+                                                       categories.map((cat) => (
                                                             <SelectItem
-                                                                 key={cat?.id}
-                                                                 value={cat?.id?.toString()}
+                                                                 key={cat.id}
+                                                                 value={cat.id.toString()}
                                                             >
-                                                                 {cat?.name}
+                                                                 {cat.name}
                                                             </SelectItem>
                                                        ))
                                                   ) : (
@@ -387,6 +387,13 @@ const CreateEventForm = ({ categories }: { categories: Category[] }) => {
                                                   )}
                                              </SelectContent>
                                         </Select>
+
+                                        {/* ERROR DISPLAY FIX */}
+                                        {field.state.meta.errors?.length > 0 && (
+                                             <p className="text-sm text-red-500">
+                                                  {field.state.meta.errors[0]?.message}
+                                             </p>
+                                        )}
                                    </div>
                               )}
                          </form.Field>

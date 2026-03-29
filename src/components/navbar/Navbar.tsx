@@ -66,7 +66,7 @@ const Navbar = () => {
      }
 
      return (
-          <section className="py-4 border-b sticky top-0 z-50 bg-white ">
+          <section className="py-4 border-b sticky top-0 z-50 bg-[#fdfaf6] ">
                <div>
                     {/* ================= DESKTOP ================= */}
                     <nav className="hidden items-center justify-between lg:flex px-4">

@@ -36,7 +36,7 @@ const formSchema = z.object({
      visibility: z.enum(["PUBLIC", "PRIVATE"]),
      type: z.enum(["ONLINE", "OFFLINE"]),
      meetingLink: z.string(),
-     categoryId: z.string(),
+     categoryId: z.string().min(1, "Category is required"),
      fee: z.number().min(0),
 });
 
@@ -384,11 +384,10 @@ const UpdateEventForm = ({ event, categories }: Props) => {
                               {(field) => (
                                    <div className="space-y-2">
                                         <Label>Category</Label>
+
                                         <Select
                                              value={field.state.value}
-                                             onValueChange={(value) =>
-                                                  field.handleChange(value)
-                                             }
+                                             onValueChange={(value) => field.handleChange(value)}
                                         >
                                              <SelectTrigger className="w-full">
                                                   <SelectValue placeholder="Select Category" />
@@ -402,6 +401,13 @@ const UpdateEventForm = ({ event, categories }: Props) => {
                                                   ))}
                                              </SelectContent>
                                         </Select>
+
+                                        {/* ERROR MESSAGE */}
+                                        {field.state.meta.errors?.length > 0 && (
+                                             <p className="text-sm text-red-500">
+                                                  {field.state.meta.errors[0]?.message}
+                                             </p>
+                                        )}
                                    </div>
                               )}
                          </form.Field>

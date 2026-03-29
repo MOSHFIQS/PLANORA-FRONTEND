@@ -193,7 +193,7 @@ export default function CarouselPlugin({ banners }: { banners: Banner[] }) {
 
 
      return (
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-2 border-2 rounded p-0 xl:px-5 xl:py-10 bg-[#DBCEA5]">
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-2 border-2 rounded p-0 ">
 
                {/* MAIN CAROUSEL */}
                <div className="lg:col-span-4">
@@ -216,7 +216,7 @@ export default function CarouselPlugin({ banners }: { banners: Banner[] }) {
                                    <CarouselItem key={banner.id} className="h-full p-0">
 
                                         {/* ===== MOBILE → OLD DESIGN ===== */}
-                                        <div className="relative h-full xl:hidden">
+                                        <div className="relative h-full ">
 
                                              <AppImage
                                                   src={banner.image}
@@ -225,10 +225,10 @@ export default function CarouselPlugin({ banners }: { banners: Banner[] }) {
                                                   className="object-cover w-full h-full "
                                              />
 
-                                             <div className="absolute inset-0 bg-black/40 " />
+                                             <div className="absolute inset-0 bg-[#fe78432a] " />
 
                                              <div className="absolute inset-0 flex items-center">
-                                                  <div className="max-w-xl ml-6 md:ml-12 p-6  rounded-md text-white space-y-4">
+                                                  <div className="w-full ml-6 md:ml-12 p-6  rounded-md text-white space-y-4">
 
                                                        {/* Event Type Badge */}
                                                        <span className="inline-block px-3 py-1 text-xs font-semibold rounded-full bg-blue-400 bg-opacity-80">
@@ -246,7 +246,7 @@ export default function CarouselPlugin({ banners }: { banners: Banner[] }) {
                                                        </p>
 
                                                        {/* Alt Text */}
-                                                       <p className="text-xs text-gray-200">{banner.altText}</p>
+                                                       <p className="text-xs text-gray-50">{banner.altText}</p>
 
                                                        {/* Date & Time */}
                                                        <p className="text-sm font-semibold">
@@ -267,39 +267,34 @@ export default function CarouselPlugin({ banners }: { banners: Banner[] }) {
 
 
                                         {/* ===== XL → NEW DESIGN ===== */}
-                                        <div className="hidden xl:flex items-center justify-between h-full w-full gap-10 px-5">
+                                        {/* <div className="hidden xl:flex items-center justify-between h-full w-full gap-10 px-5">
 
-                                             {/* LEFT TEXT */}
+                                             
                                              <div className="flex-1  p-10  bg-black/55  opacity-90 rounded">
                                                   <div className="space-y-8 ">
-                                                       {/* Badge */}
+                                                  
                                                        <div className="inline-block">
                                                             <span className="px-3 py-1 text-sm font-semibold rounded-full bg-indigo-100 text-indigo-800">
                                                                  {banner.type} EVENT
                                                             </span>
                                                        </div>
 
-                                                       {/* Title */}
                                                        <h2 className="text-2xl sm:text-3xl font-extrabold leading-tight text-white">
                                                             {banner.title}
                                                        </h2>
 
                                                        <div className="space-y-3">
-                                                            {/* Description */}
                                                             <p className="text-lg font-medium text-white/75">
                                                                  {banner.description}
                                                             </p>
 
-                                                            {/* Alt Text */}
                                                             <p className="text-sm text-white/75">{banner.altText}</p>
 
-                                                            {/* Date & Time */}
                                                             <p className="text-sm text-white/75 font-medium">
                                                                  {format(new Date(banner.dateTime), "PPP 'at' p")}
                                                             </p>
                                                        </div>
 
-                                                       {/* Button */}
                                                        {banner.buttonText && (
                                                             <Button asChild variant={"violet"} >
                                                                  <Link href={banner.redirectUrl || "#"}>
@@ -310,10 +305,8 @@ export default function CarouselPlugin({ banners }: { banners: Banner[] }) {
                                                   </div>
                                              </div>
 
-                                             {/* RIGHT IMAGE */}
-                                             {/* RIGHT IMAGE */}
                                              <div className="h-full border-2 rounded flex-4 relative overflow-hidden group">
-                                                  {/* Image */}
+                                                
                                                   <AppImage
                                                        src={banner.image}
                                                        priority
@@ -321,11 +314,10 @@ export default function CarouselPlugin({ banners }: { banners: Banner[] }) {
                                                        className="object-cover w-full h-full rounded duration-300 group-hover:scale-105"
                                                   />
 
-                                                  {/* Dark Overlay */}
                                                   <div className="absolute inset-0 bg-black/40 rounded pointer-events-none"></div>
                                              </div>
 
-                                        </div>
+                                        </div> */}
 
                                    </CarouselItem>
                               ))}

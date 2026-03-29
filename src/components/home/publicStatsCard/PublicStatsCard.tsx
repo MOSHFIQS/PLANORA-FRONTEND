@@ -32,7 +32,7 @@ const PublicStatsCard = ({ publicStats }: { publicStats: PublicStats }) => {
       />
 
       {/* Overlay */}
-      <div className="absolute inset-0 bg-[#725cad9d] flex items-center justify-center">
+      <div className="absolute inset-0 bg-[#2020229d] flex items-center justify-center">
         
         <div className="grid grid-cols-3 gap-16 text-center text-white px-10 w-full max-w-5xl">
           
