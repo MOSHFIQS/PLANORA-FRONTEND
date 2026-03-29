@@ -336,6 +336,7 @@ export default function MyEventsList({ myEvents }: { myEvents: Event[] }) {
                 <Button
                   size="icon"
                   variant="outline"
+                  className="flex-1"
                   onClick={() =>
                     router.push(`/dashboard/event/${event.id}`)
                   }
@@ -345,7 +346,7 @@ export default function MyEventsList({ myEvents }: { myEvents: Event[] }) {
 
                 <Button
                   size="icon"
-                  variant="outline"
+                  className="flex-1"
                   onClick={() =>
                     router.push(`/dashboard/event/update/${event.id}`)
                   }
@@ -353,7 +354,7 @@ export default function MyEventsList({ myEvents }: { myEvents: Event[] }) {
                   <Pencil className="w-4 h-4" />
                 </Button>
 
-                <Button asChild>
+                <Button asChild className="flex-1" variant={"violet"}>
                   <Link href={`/dashboard/review/event/${event.id}`}>
                     <MessageSquareText size={18} />
                   </Link>
@@ -369,6 +370,7 @@ export default function MyEventsList({ myEvents }: { myEvents: Event[] }) {
                   <AlertDialogTrigger asChild>
                     <Button
                       size="icon"
+                      className="flex-1"
                       variant="destructive"
                       onClick={() => setOpenDialogId(event.id)}
                     >
@@ -469,7 +471,6 @@ export default function MyEventsList({ myEvents }: { myEvents: Event[] }) {
 
                         <Button
                           size="icon"
-                          variant="outline"
                           onClick={() =>
                             router.push(`/dashboard/event/update/${event.id}`)
                           }
@@ -477,7 +478,7 @@ export default function MyEventsList({ myEvents }: { myEvents: Event[] }) {
                           <Pencil className="w-4 h-4" />
                         </Button>
 
-                        <Button asChild>
+                        <Button asChild variant={"violet"}>
                           <Link href={`/dashboard/review/event/${event.id}`}>
                             <MessageSquareText size={18} />
                           </Link>
