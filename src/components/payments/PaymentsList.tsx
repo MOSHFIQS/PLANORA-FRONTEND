@@ -6,14 +6,25 @@ import {
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Payment } from "@/types/payment.types";
+import { usePathname } from "next/navigation";
+import path from "path";
 
 export default function PaymentsList({ payments }: { payments: Payment[] }) {
+     const pathname = usePathname()
      console.log(payments);
      return (
           <Card>
-               <CardHeader>
-                    <CardTitle>Event Payments</CardTitle>
-               </CardHeader>
+             {
+               pathname === "/dashboard/payments" ? (
+                    <CardHeader>
+                         <CardTitle className="text-xl">My Payments</CardTitle>
+                    </CardHeader>
+               ): (
+                    <CardHeader>
+                         <CardTitle className="text-xl">Event Payments</CardTitle>
+                    </CardHeader>
+               )
+             }
 
                <CardContent>
                     <Table>

@@ -506,7 +506,7 @@ const MyInvitationsCard = ({ invitations }: { invitations: Invitation[] }) => {
                 {/* FOOTER */}
                 <CardFooter className="w-full">
                   {isAccepted ? (
-                    <Button className="flex-1">
+                    <Button variant={"violet"} className="flex-1">
                       <Link href={`invitations/${event.id}`}>View Event</Link>
                     </Button>
                   ) : (
@@ -522,7 +522,6 @@ const MyInvitationsCard = ({ invitations }: { invitations: Invitation[] }) => {
                         </Button>
                       ) : (
                         <Button
-                          variant="secondary"
                           className="flex-1"
                           disabled={loadingId === item.eventId}
                           onClick={() =>
@@ -621,7 +620,7 @@ const MyInvitationsCard = ({ invitations }: { invitations: Invitation[] }) => {
                       {/* ACTIONS */}
                       <TableCell className="text-right">
                         {isAccepted ? (
-                          <Button asChild size={"sm"}>
+                          <Button variant={"violet"} asChild size={"sm"}>
                             <Link href={`invitations/${event.id}`}>View Event</Link>
                           </Button>
                         ) : (
@@ -636,7 +635,6 @@ const MyInvitationsCard = ({ invitations }: { invitations: Invitation[] }) => {
                               </Button>
                             ) : (
                               <Button
-                                variant="outline"
                                 size={"sm"}
                                 disabled={loadingId === item.eventId}
                                 onClick={() =>
