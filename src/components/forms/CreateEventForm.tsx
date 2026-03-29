@@ -400,7 +400,7 @@ const CreateEventForm = ({ categories }: { categories: Category[] }) => {
                               multiple
                          />
 
-                         <Button type="submit">Create Event</Button>
+                         <Button variant={"violet"} type="submit">Create Event</Button>
                     </form>
                </CardContent>
           </Card>

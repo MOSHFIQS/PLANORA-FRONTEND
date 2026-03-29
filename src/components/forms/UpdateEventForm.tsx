@@ -415,7 +415,9 @@ const UpdateEventForm = ({ event, categories }: Props) => {
                               multiple
                          />
 
-                         <Button type="submit">Update Event</Button>
+                         <Button variant={"violet"} type="submit">
+                              Update Event
+                         </Button>
                     </form>
                </CardContent>
           </Card>

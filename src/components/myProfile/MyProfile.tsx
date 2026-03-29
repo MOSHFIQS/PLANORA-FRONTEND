@@ -85,10 +85,10 @@ const MyProfile: React.FC<MyProfileProps> = ({ profileData }) => {
                               <div>
                                    <CardTitle className="text-3xl font-bold">{profile.name}</CardTitle>
                                    <div className="flex items-center gap-2 mt-1">
-                                        <Badge variant={profile.status === "ACTIVE" ? "default" : "outline"} className="bg-green-500 text-white">
+                                        <Badge variant={profile.status === "ACTIVE" ? "default" : "outline"} className="bg-blue-400 text-white">
                                              {profile.status}
                                         </Badge>
-                                        <Badge variant={profile.emailVerified ? "default" : "destructive"}>
+                                        <Badge variant={profile.emailVerified ? "default" : "default"}>
                                              {profile.emailVerified ? "Email Verified" : "Unverified"}
                                         </Badge>
                                    </div>
@@ -98,7 +98,7 @@ const MyProfile: React.FC<MyProfileProps> = ({ profileData }) => {
                          {/* Edit Profile Dialog */}
                          <Dialog open={open} onOpenChange={setOpen}>
                               <DialogTrigger asChild>
-                                   <Button variant="outline">Edit Profile</Button>
+                                   <Button  variant="violet">Edit Profile</Button>
                               </DialogTrigger>
                               <DialogContent className="sm:max-w-lg">
                                    <DialogHeader>
@@ -149,7 +149,7 @@ const MyProfile: React.FC<MyProfileProps> = ({ profileData }) => {
                               <p className="text-sm font-medium text-gray-500">Email</p>
                               <div className="flex items-center gap-2">
                                    <span className="text-lg font-semibold">{profile.email}</span>
-                                   <Badge variant={profile.emailVerified ? "default" : "destructive"}>
+                                   <Badge variant={profile.emailVerified ? "default" : "default"}>
                                         {profile.emailVerified ? "Verified" : "Unverified"}
                                    </Badge>
                               </div>

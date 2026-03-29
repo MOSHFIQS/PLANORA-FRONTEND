@@ -32,7 +32,7 @@ export const userRoutes: Route[] = [
     items: [
       {
         title: "Profile",
-        url: "/seller-dashboard/profile",
+        url: "/dashboard/profile",
         icon: User,
       },
     ],

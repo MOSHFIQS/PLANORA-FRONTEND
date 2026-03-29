@@ -8,10 +8,11 @@ import { Badge } from "@/components/ui/badge";
 import { Payment } from "@/types/payment.types";
 
 export default function PaymentsList({ payments }: { payments: Payment[] }) {
+     console.log(payments);
      return (
           <Card>
                <CardHeader>
-                    <CardTitle>My Payments</CardTitle>
+                    <CardTitle>Event Payments</CardTitle>
                </CardHeader>
 
                <CardContent>
@@ -19,6 +20,8 @@ export default function PaymentsList({ payments }: { payments: Payment[] }) {
                          <TableHeader>
                               <TableRow>
                                    <TableHead>Event</TableHead>
+                                   <TableHead>Name</TableHead>
+                                   <TableHead>Email</TableHead>
                                    <TableHead>Amount</TableHead>
                                    <TableHead>Status</TableHead>
                                    <TableHead>Transaction ID</TableHead>
@@ -32,6 +35,12 @@ export default function PaymentsList({ payments }: { payments: Payment[] }) {
                                         <TableRow key={payment.id}>
                                              <TableCell>
                                                   {payment.participation?.event?.title || "N/A"}
+                                             </TableCell>
+                                             <TableCell>
+                                                  {payment.user.name || "N/A"}
+                                             </TableCell>
+                                             <TableCell>
+                                                  {payment.user.email || "N/A"}
                                              </TableCell>
 
                                              <TableCell>
