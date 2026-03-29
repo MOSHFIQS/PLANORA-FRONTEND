@@ -22,14 +22,12 @@ type Props = {
 };
 
 const HomePageEvents = ({ events, categories }: Props) => {
+  console.log(events);
   const { user } = useAuth();
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const search = searchParams.get("search");
-  const categoryFromUrl = searchParams.get("categoryId");
-
-  const [selectedCategory, setSelectedCategory] = useState<string>("ALL");
+  const categoryFromUrl = searchParams.get("categoryId") || "ALL";
 
   const handleViewEvent = (eventId: string) => {
     if (!user) {
@@ -39,22 +37,17 @@ const HomePageEvents = ({ events, categories }: Props) => {
     }
   };
 
-  // sync state from URL
+  // sync UI when URL changes (optional for highlighting)
+  const [activeCategory, setActiveCategory] = useState<string>("ALL");
+
   useEffect(() => {
-    if (categoryFromUrl) {
-      setSelectedCategory(categoryFromUrl);
-    } else {
-      setSelectedCategory("ALL");
-    }
+    setActiveCategory(categoryFromUrl);
   }, [categoryFromUrl]);
 
-  // category click
   const handleCategoryChange = (categoryId: string) => {
-    setSelectedCategory(categoryId);
-
     const params = new URLSearchParams(searchParams.toString());
 
-    // remove search
+    // remove search when filtering category
     params.delete("search");
 
     if (categoryId === "ALL") {
@@ -66,39 +59,13 @@ const HomePageEvents = ({ events, categories }: Props) => {
     router.push(`?${params.toString()}`);
   };
 
-  // ALL click
-  const handleAllCategory = () => {
-    setSelectedCategory("ALL");
-
-    const params = new URLSearchParams(searchParams.toString());
-
-    params.delete("search");
-    params.delete("categoryId");
-
-    router.push(`?${params.toString()}`);
-  };
-
-  // active category from URL (source of truth)
-  const activeCategory = categoryFromUrl || selectedCategory;
-
-  // filtering
-  const filteredEvents = events?.filter((event) => {
-    const matchCategory =
-      activeCategory === "ALL"
-        ? true
-        : event.categoryId === activeCategory;
-
-    return matchCategory;
-  });
-
   return (
     <div className="space-y-6 mt-6">
       {/* CATEGORY FILTER */}
       <div className="flex flex-wrap gap-2">
         <Button
-
           variant={activeCategory === "ALL" ? "orange" : "outline"}
-          onClick={handleAllCategory}
+          onClick={() => handleCategoryChange("ALL")}
         >
           All
         </Button>
@@ -114,14 +81,14 @@ const HomePageEvents = ({ events, categories }: Props) => {
         ))}
       </div>
 
-      {/* GRID */}
-      {!filteredEvents?.length ? (
+      {/* EVENTS GRID */}
+      {!events?.length ? (
         <p className="text-center text-muted-foreground">
           No events found.
         </p>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {filteredEvents.map((event) => {
+          {events.map((event) => {
             const date = event?.dateTime
               ? new Date(event.dateTime)
               : null;
