@@ -65,6 +65,11 @@ export const adminRoutes: Route[] = [
         url: "/admin-dashboard/banner",
         icon: ImageIcon,
       },
+      {
+        title: "Manage Events",
+        url: "/admin-dashboard/events",
+        icon: List,
+      },
     ],
   },
 
@@ -88,7 +93,7 @@ export const adminRoutes: Route[] = [
         icon: Home,
       },
       {
-        title: "All Events",
+        title: "Browse Events",
         url: "/events",
         icon: List,
       },

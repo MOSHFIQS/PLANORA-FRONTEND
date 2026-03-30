@@ -47,7 +47,7 @@ export const userRoutes: Route[] = [
         icon: CalendarPlus,
       },
       {
-        title: "My Events",
+        title: "Manage Events",
         url: "/dashboard/event",
         icon: Calendar,
       },
@@ -120,7 +120,7 @@ export const userRoutes: Route[] = [
         icon: Home,
       },
       {
-        title: "All Events",
+        title: "Browse Events",
         url: "/events",
         icon: List,
       },
