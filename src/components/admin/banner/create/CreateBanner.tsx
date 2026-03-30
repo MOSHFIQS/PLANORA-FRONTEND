@@ -29,6 +29,7 @@ import {
 } from "@/components/ui/select";
 
 import { Event } from "@/types/event.types";
+import { AppImage } from "@/components/appImage/AppImage";
 
 export default function CreateBanner({
      featuredEvents,
@@ -164,17 +165,18 @@ export default function CreateBanner({
 
                               {/* EVENT IMAGES */}
                               {selectedEvent?.images?.length ? (
-                                   <div className="grid grid-cols-3 gap-3">
+                                   <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-7 gap-3">
+                                        <Label className="col-span-full">Select Image</Label>
                                         {selectedEvent.images.map((img) => (
                                              <div
                                                   key={img}
                                                   onClick={() => setSelectedImage(img)}
-                                                  className={`cursor-pointer border rounded-md p-1 ${selectedImage === img
-                                                            ? "border-blue-500"
-                                                            : "border-gray-200"
+                                                  className={`cursor-pointer border h-full rounded-md p-1 ${selectedImage === img
+                                                            ? "border-orange-400 border-4"
+                                                            : "border-gray-50 border-4"
                                                        }`}
                                              >
-                                                  <img
+                                                  <AppImage
                                                        src={img}
                                                        alt="event"
                                                        className="w-full h-24 object-cover rounded"

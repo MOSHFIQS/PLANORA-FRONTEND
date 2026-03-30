@@ -4,8 +4,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import ImageMagnifier from "../imageMagnifier/ImageMagnifier";
 import DescriptionViwer from "../descriptionViwer/DescriptionViwer";
-import { Event } from "@/types/event.types";
-import { EventType } from "@/types/banner.types";
 import { AppImage } from "../appImage/AppImage";
 
 export type EventType = "ONLINE" | "OFFLINE";
