@@ -1,11 +1,10 @@
-import { getMyEventsAction } from '@/actions/event.action';
-import MyEventsList from '@/components/myEventsList/MyEventsList';
+import { getAllEventsAdminAction } from '@/actions/event.action';
+import AllEventsList from '@/components/admin/allEventsList/AllEventsList';
 import GlobalPagination from '@/components/shared/GlobalPagination';
-import React from 'react';
 
-const MyEventsPage = async ({ searchParams }: { searchParams: Promise<{ page?: number; limit?: number }> }) => {
+const AllEventsPage = async ({ searchParams }: { searchParams: Promise<{ page?: number; limit?: number }> }) => {
      const { page, limit } = await searchParams
-     const res = await getMyEventsAction(page, limit);
+     const res = await getAllEventsAdminAction(page, limit);
      console.log(res.data);
 
      if (!res?.ok) {
@@ -18,7 +17,7 @@ const MyEventsPage = async ({ searchParams }: { searchParams: Promise<{ page?: n
 
    return (
   <div className="space-y-6 h-full flex flex-col justify-between">
-    <MyEventsList myEvents={res?.data?.data} />
+    <AllEventsList myEvents={res?.data?.data} />
 
     <GlobalPagination
       page={res.data?.meta?.page}
@@ -29,4 +28,4 @@ const MyEventsPage = async ({ searchParams }: { searchParams: Promise<{ page?: n
 );
 };
 
-export default MyEventsPage;
+export default AllEventsPage;

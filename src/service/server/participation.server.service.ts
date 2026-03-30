@@ -2,8 +2,8 @@ import { apiFetchServerMain } from "@/lib/apiFetchServer";
 
 export const participationService = {
      // 1. Get events the current user is participating in
-     getMyEvents: () =>
-          apiFetchServerMain("/participation/my-events", {
+     getMyEvents: (query?:string) =>
+          apiFetchServerMain(`/participation/my-events?${query || ""}`, {
                method: "GET",
           }),
      

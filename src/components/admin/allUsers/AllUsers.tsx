@@ -26,6 +26,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { AppImage } from "@/components/appImage/AppImage";
 
 type User = {
   id: string;
@@ -91,11 +92,13 @@ const AllUsers = ({ users }: { users: User[] }) => {
               return (
                 <TableRow key={user.id}>
                   {/* User */}
-                  <TableCell className="flex items-center gap-2">
-                    <img
+                  <TableCell className="flex items-center gap-2 ">
+                    <AppImage
                       src={user.image || "/default-profile.png"}
                       alt={user.name}
-                      className="h-10 w-10 rounded object-cover"
+                      width={50}
+                      height={50}
+                      className="h-10 w-10 rounded object-cover border"
                     />
                     {user.name}
                   </TableCell>

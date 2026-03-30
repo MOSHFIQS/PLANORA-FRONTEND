@@ -178,9 +178,21 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { AppImage } from "@/components/appImage/AppImage"
 import { format } from "date-fns"
+import { useAuth } from "@/context/AuthProvider"
+import { useRouter } from "next/navigation"
 
 export default function CarouselPlugin({ banners }: { banners: Banner[] }) {
+     const { user } = useAuth()
+     const router = useRouter();
      console.log(banners);
+
+     const handleViewEvent = (url: string) => {
+          if (!user) {
+               router.push(`/login?redirect=${encodeURIComponent(url)}`);
+          } else {
+               router.push(url);
+          }
+     };
 
      const plugin = React.useRef(
           Autoplay({ delay: 2000, stopOnInteraction: true })
@@ -255,10 +267,12 @@ export default function CarouselPlugin({ banners }: { banners: Banner[] }) {
 
                                                        {/* Button */}
                                                        {banner.buttonText && (
-                                                            <Button variant={"violet"} asChild className="text-white">
-                                                                 <Link href={banner.redirectUrl || "#"}>
-                                                                      {banner.buttonText}
-                                                                 </Link>
+                                                            <Button
+                                                                 variant={"violet"}
+                                                                 onClick={() => handleViewEvent(banner.redirectUrl || "#")}
+                                                                 className="text-white"
+                                                            >
+                                                                 {banner.buttonText}
                                                             </Button>
                                                        )}
                                                   </div>
@@ -325,8 +339,6 @@ export default function CarouselPlugin({ banners }: { banners: Banner[] }) {
                     </Carousel>
 
                </div>
-
-
 
           </div>
      )

@@ -27,8 +27,8 @@ export const eventService = {
         }),
 
     // my events
-    getMyEvents: () =>
-        apiFetchServerMain("/event/me/events", {
+    getMyEvents: (query?: string) =>
+        apiFetchServerMain(`/event/me/events?${query || ""}`, {
             method: "GET",
         }),
 
@@ -46,8 +46,26 @@ export const eventService = {
         }),
 
     // admin all events
-    getAllEventsAdmin: () =>
-        apiFetchServerMain("/event/admin/all", {
+    getAllEventsAdmin: (query?: string) =>
+        apiFetchServerMain(`/event/admin/all?${query || ""}`, {
+            method: "GET",
+        }),
+
+    // admin delete event
+    deleteEventByAdmin: (id: string) =>
+        apiFetchServerMain(`/event/admin/${id}`, {
+            method: "DELETE",
+        }),
+
+    // update featured status
+    updateFeaturedStatus: (id: string, isFeatured: boolean) =>
+        apiFetchServerMain(`/event/admin/feature/${id}`, {
+            method: "PATCH",
+            body: JSON.stringify({ isFeatured }),
+        }),
+
+    getFeaturedEvents: () =>
+        apiFetchServerMain("/event/featured", {
             method: "GET",
         }),
 };

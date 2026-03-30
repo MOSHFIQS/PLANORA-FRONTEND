@@ -1,10 +1,12 @@
 
 import { getOrganizerPaymentsAction } from '@/actions/payment.action';
 import PaymentsList from '@/components/payments/PaymentsList';
+import GlobalPagination from '@/components/shared/GlobalPagination';
 
-const EventPaymentsPage = async () => {
-     const res = await getOrganizerPaymentsAction();
-     console.log(res);
+const EventPaymentsPage = async ({ searchParams }: { searchParams: Promise<{ page?: number; limit?: number }> }) => {
+     const { page, limit } = await searchParams;
+     const res = await getOrganizerPaymentsAction(page, limit);
+     console.log(res.data);
 
      if (!res?.ok) {
           return (
@@ -14,7 +16,19 @@ const EventPaymentsPage = async () => {
           );
      }
 
-     return <PaymentsList payments={res?.data}  />;
+     return (
+          <div className="space-y-6 h-full flex flex-col justify-between">
+               <PaymentsList payments={res?.data?.data} />
+               <GlobalPagination
+                    page={res.data?.meta?.page}
+                    totalPages={res?.data?.meta?.totalPages}
+                    limit={res.data?.meta?.limit}
+               />
+          </div>
+
+     )
+
+     // return <PaymentsList payments={res?.data}  />;
 };
 
 export default EventPaymentsPage;

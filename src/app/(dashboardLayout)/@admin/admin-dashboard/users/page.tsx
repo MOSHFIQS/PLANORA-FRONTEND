@@ -1,9 +1,13 @@
 
 import { getAllUsersAction } from '@/actions/admin.action';
 import AllUsers from '@/components/admin/allUsers/AllUsers';
-const AllUsersPage = async () => {
+import GlobalPagination from '@/components/shared/GlobalPagination';
 
-     const res = await getAllUsersAction();
+
+const AllUsersPage = async ({ searchParams }: { searchParams: Promise<{ page?: number; limit?: number }> }) => {
+
+     const { page, limit } = await searchParams;
+     const res = await getAllUsersAction(page, limit);
      console.log(res.data);
 
      if (!res?.ok) {
@@ -14,7 +18,18 @@ const AllUsersPage = async () => {
           );
      }
 
-     return <AllUsers users={res?.data} />;
+     return (
+          <div className="space-y-6 h-full flex flex-col justify-between">
+               <AllUsers users={res?.data?.data} />
+               <GlobalPagination
+                    page={res.data?.meta?.page}
+                    totalPages={res?.data?.meta?.totalPages}
+                    limit={res.data?.meta?.limit}
+               />
+          </div>
+     )
+
+     // return <AllUsers users={res?.data?.data} />;
 };
 
 export default AllUsersPage;

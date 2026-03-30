@@ -17,6 +17,7 @@ export interface Event {
   organizer?: Organizer;
   fee: number;
   images: string[];
+  isFeatured: boolean;
   createdAt: string;
   updatedAt: string;
 }

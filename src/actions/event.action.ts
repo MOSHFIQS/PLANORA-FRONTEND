@@ -6,7 +6,7 @@ import { revalidatePath } from "next/cache";
 
 import { buildQueryString } from "@/utils/buildQueryString";
 
-export async function getAllEventsAction(searchTerm?: string, categoryId?: string , page?: number, limit?: number) {
+export async function getAllEventsAction(searchTerm?: string, categoryId?: string, page?: number, limit?: number) {
     try {
         const query = buildQueryString({
             searchTerm,
@@ -40,7 +40,7 @@ export async function getAllEventsAction(searchTerm?: string, categoryId?: strin
 export async function getSingleEventPublicAction(id: string) {
     try {
         const res = await eventService.getSingleEventPublic(id);
-        console.log("res",res);
+        console.log("res", res);
 
         if (!res?.ok) {
             return {
@@ -116,9 +116,13 @@ export async function createEventAction(payload: any) {
 }
 
 
-export async function getMyEventsAction() {
+export async function getMyEventsAction(page?: number, limit?: number) {
     try {
-        const res = await eventService.getMyEvents();
+        const query = buildQueryString({
+            page,
+            limit
+        });
+        const res = await eventService.getMyEvents(query);
 
         if (!res?.ok) {
             return {
@@ -192,14 +196,95 @@ export async function deleteEventAction(id: string) {
 }
 
 
-export async function getAllEventsAdminAction() {
+export async function getAllEventsAdminAction(page?: number, limit?: number) {
     try {
-        const res = await eventService.getAllEventsAdmin();
+        const query = buildQueryString({
+            page,
+            limit
+        });
+        const res = await eventService.getAllEventsAdmin(query);
 
         if (!res?.ok) {
             return {
                 ok: false,
                 message: res?.message || "Failed to fetch admin events",
+            };
+        }
+
+        return {
+            ok: true,
+            data: res.data,
+        };
+    } catch {
+        return {
+            ok: false,
+            message: "Something went wrong",
+        };
+    }
+}
+
+export async function deleteEventByAdminAction(id: string) {
+    try {
+        const res = await eventService.deleteEventByAdmin(id);
+
+        if (!res?.ok) {
+            return {
+                ok: false,
+                message: res?.message || "Admin delete failed",
+            };
+        }
+
+        revalidatePath("/admin-dashboard/events");
+
+        return {
+            ok: true,
+            message: res.message || "Event deleted by admin",
+        };
+    } catch {
+        return {
+            ok: false,
+            message: "Something went wrong",
+        };
+    }
+}
+
+
+export async function updateFeaturedStatusAction(id: string, isFeatured: boolean) {
+    try {
+        const res = await eventService.updateFeaturedStatus(id, isFeatured);
+
+        if (!res?.ok) {
+            return {
+                ok: false,
+                message: res?.message || "Update featured failed",
+            };
+        }
+
+        revalidatePath("/");
+        revalidatePath("/admin-dashboard/events");
+
+        return {
+            ok: true,
+            message: res.message || "Featured status updated",
+        };
+    } catch {
+        return {
+            ok: false,
+            message: "Something went wrong",
+        };
+    }
+}
+
+
+export async function getFeaturedEventsAction() {
+    try {
+        const res = await eventService.getFeaturedEvents();
+        console.log(res);
+
+        if (!res?.ok) {
+            return {
+                ok: false,
+                message: res?.message || "Failed to fetch featured events",
             };
         }
 

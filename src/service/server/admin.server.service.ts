@@ -2,12 +2,12 @@ import { apiFetchServerMain } from "@/lib/apiFetchServer";
 
 export const adminService = {
   // Get all users
-  getAllUsers: () =>
-    apiFetchServerMain("/admin/users", {
+  getAllUsers: (query?: string) =>
+    apiFetchServerMain(`/admin/users?${query || ''}`, {
       method: "GET",
     }),
-  getAllAdmins: () =>
-    apiFetchServerMain("/admin/admins", {
+  getAllAdmins: (query?: string) =>
+    apiFetchServerMain(`/admin/admins?${query || ''}`, {
       method: "GET",
     }),
 

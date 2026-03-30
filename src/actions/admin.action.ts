@@ -1,12 +1,17 @@
 "use server";
 
 import { adminService } from "@/service/server/admin.server.service";
+import { buildQueryString } from "@/utils/buildQueryString";
 import { revalidatePath } from "next/cache";
 
 // Get all users
-export async function getAllUsersAction() {
+export async function getAllUsersAction(page?: number, limit?: number) {
   try {
-    const res = await adminService.getAllUsers();
+    const query = buildQueryString({
+      page,
+      limit,
+    });
+    const res = await adminService.getAllUsers(query);
 
     if (!res?.ok) {
       return {
@@ -27,9 +32,13 @@ export async function getAllUsersAction() {
   }
 }
 // Get all admins
-export async function getAllAdminsAction() {
+export async function getAllAdminsAction(page?: number, limit?: number) {
   try {
-    const res = await adminService.getAllAdmins();
+    const query = buildQueryString({
+      page,
+      limit,
+    });
+    const res = await adminService.getAllAdmins(query);
 
     if (!res?.ok) {
       return {
@@ -143,6 +152,7 @@ export async function deleteUserAction(id: string) {
 //  Get admin stats
 export async function getAdminStatsAction() {
   try {
+
     const res = await adminService.getStats();
 
     if (!res?.ok) {

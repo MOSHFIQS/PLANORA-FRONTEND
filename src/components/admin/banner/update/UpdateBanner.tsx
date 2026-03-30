@@ -145,6 +145,7 @@ export default function UpdateBanner({ banner }: { banner: any }) {
                                              <div className="space-y-2">
                                                   <Label>Title</Label>
                                                   <Input
+                                                  disabled
                                                        value={field.state.value}
                                                        onChange={(e) =>
                                                             field.handleChange(e.target.value)
@@ -175,6 +176,7 @@ export default function UpdateBanner({ banner }: { banner: any }) {
                                              <div className="space-y-2">
                                                   <Label>Redirect URL</Label>
                                                   <Input
+                                                  disabled
                                                        type="url"
                                                        value={field.state.value}
                                                        onChange={(e) =>
@@ -245,9 +247,10 @@ export default function UpdateBanner({ banner }: { banner: any }) {
 
                                    <form.Field name="type">
                                         {(field) => (
-                                             <Field>
-                                                  <FieldLabel>Type</FieldLabel>
+                                             <Field className="gap-2">
+                                                  <Label>Type</Label>
                                                   <Select
+                                                  disabled
                                                        value={field.state.value}
                                                        onValueChange={(val: any) =>
                                                             field.handleChange(val)
@@ -292,7 +295,7 @@ export default function UpdateBanner({ banner }: { banner: any }) {
 
                               </div>
                               {/* DATE TIME */}
-                              <form.Field name="dateTime">
+                              {/* <form.Field name="dateTime">
                                    {(field) => (
                                         <FieldGroup className="flex-col">
                                              <div className="flex gap-4">
@@ -372,7 +375,7 @@ export default function UpdateBanner({ banner }: { banner: any }) {
                                              </div>
                                         </FieldGroup>
                                    )}
-                              </form.Field>
+                              </form.Field> */}
 
                               {/* IMAGE UPLOAD — FULL WIDTH */}
                               <div className="space-y-3 ">

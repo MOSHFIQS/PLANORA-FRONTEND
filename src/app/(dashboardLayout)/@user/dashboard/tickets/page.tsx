@@ -16,7 +16,7 @@ const MyTicketsPage = async () => {
      }
 
 
-     return <MyTickets data={res?.data} />;
+     return <MyTickets data={res?.data?.data} />;
 };
 
 export default MyTicketsPage;

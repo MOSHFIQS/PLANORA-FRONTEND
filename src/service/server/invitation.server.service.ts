@@ -24,8 +24,8 @@ export const invitationService = {
     }),
 
   // get my invitations
-  getMyInvitations: () =>
-    apiFetchServerMain("/invitation/my", {
+  getMyInvitations: (query?: string) =>
+    apiFetchServerMain(`/invitation/my?${query || ''}`, {
       method: "GET",
     }),
 };

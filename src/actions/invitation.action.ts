@@ -1,6 +1,7 @@
 "use server";
 
 import { invitationService } from "@/service/server/invitation.server.service";
+import { buildQueryString } from "@/utils/buildQueryString";
 import { revalidatePath } from "next/cache";
 
 // 1. Send Invitation
@@ -81,9 +82,13 @@ export async function cancelInvitationAction(id: string) {
 }
 
 // 4. Get My Invitations
-export async function getMyInvitationsAction() {
+export async function getMyInvitationsAction(page?: number, limit?: number) {
   try {
-    const res = await invitationService.getMyInvitations();
+    const query = buildQueryString({
+      page,
+      limit,
+    });
+    const res = await invitationService.getMyInvitations(query);
 
     if (!res?.ok) {
       return {

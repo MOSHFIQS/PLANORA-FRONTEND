@@ -11,17 +11,17 @@ export const paymentService = {
       body: JSON.stringify(payload),
     }),
 
-     getMyPayments: () =>
-          apiFetchServerMain("/payment/my", {
+     getMyPayments: (query?: string) =>
+          apiFetchServerMain(`/payment/my?${query || ""}`, {
                method: "GET",
           }),
 
-     getOrganizerPayments: () =>
-          apiFetchServerMain("/payment/organizer", {
+     getOrganizerPayments: (query?: string) =>
+          apiFetchServerMain(`/payment/organizer?${query || ""}`, {
                method: "GET",
           }),
-     getAllPayments: () =>
-          apiFetchServerMain("/payment/admin", {
+     getAllPayments: (query?: string) =>
+          apiFetchServerMain(`/payment/admin?${query || ""}`, {
                method: "GET",
           }),
 };
