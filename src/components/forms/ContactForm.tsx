@@ -5,8 +5,10 @@ import emailjs from "emailjs-com";
 import { toast } from "sonner";
 import SectionHeader from "../sectionHeader/SectionHeader";
 import { Button } from "../ui/button";
+import { useRouter } from "next/navigation";
 
 const ContactForm = () => {
+  const router = useRouter();
 
   const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -20,7 +22,8 @@ const ContactForm = () => {
       )
       .then(
         () => {
-          toast.success("Message sent successfully!");
+          toast.success("Message sent successfully We will get back to you soon!");
+          router.push("/");
         },
         () => {
           toast.error("Failed to send message");

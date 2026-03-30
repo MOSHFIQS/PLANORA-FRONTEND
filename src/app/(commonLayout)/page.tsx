@@ -6,8 +6,8 @@ import { getPublicStatsAction } from "@/actions/public.action";
 import CarouselPlugin from "@/components/home/banner/Banner";
 import CategoryCard from "@/components/home/categoryCard/CategoryCard";
 import EventsSlider from "@/components/home/eventsSlider/EventsSlider";
+import ImageMosaic from "@/components/home/imageMosaic/ImageMosaic";
 import PublicStatsCard from "@/components/home/publicStatsCard/PublicStatsCard";
-import HomePageEvents from "@/components/homePageEvents/HomePageEvents";
 import { Banner } from "@/types/banner.types";
 import { Event } from "@/types/event.types";
 
@@ -42,8 +42,15 @@ const HomePage = async () => {
                {/* <HomePageEvents events={events} search={""} categories={[]} /> */}
 
                <EventsSlider events={events} />
-               <CategoryCard categories={categoryRes.data}/>
-               <PublicStatsCard publicStats={publicStatsRes.data}/>
+               <CategoryCard categories={categoryRes.data} />
+               <PublicStatsCard publicStats={publicStatsRes.data} />
+               <ImageMosaic
+                    images={[
+                         "/img1.jpg",
+                         "/img2.jpg",
+                         "/img3.jpg",
+                    ]}
+               />
 
           </div>
      );

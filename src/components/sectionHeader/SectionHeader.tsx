@@ -23,8 +23,8 @@ const SectionHeader = ({
       : "text-left items-start";
 
   return (
-    <div className={cn("flex flex-col gap-2 my-10", alignClass, className)}>
-      <h2 className="text-2xl md:text-3xl font-bold tracking-tight">
+    <div className={cn("flex flex-col gap-2 my-16", alignClass, className)}>
+      <h2 className="text-2xl md:text-4xl font-bold tracking-tight">
         {title}
       </h2>
 

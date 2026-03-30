@@ -40,7 +40,7 @@ export default function PaymentsList({ payments }: { payments: Payment[] }) {
                               </TableRow>
                          </TableHeader>
 
-                         <TableBody>
+                         <TableBody className="text-gray-800">
                               {payments?.length > 0 ? (
                                    payments.map((payment: any) => (
                                         <TableRow key={payment.id}>
@@ -55,7 +55,7 @@ export default function PaymentsList({ payments }: { payments: Payment[] }) {
                                              </TableCell>
 
                                              <TableCell>
-                                                  ${payment?.amount}
+                                                  {payment?.amount} tk
                                              </TableCell>
 
                                              <TableCell>
