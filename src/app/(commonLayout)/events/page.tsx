@@ -1,33 +1,16 @@
 
 import { getAllCategoriesAction } from "@/actions/category.action";
 import { getAllEventsAction } from "@/actions/event.action";
+import CategoryButtons from "@/components/home/categoryButtons/CategoryButtons";
 import HomePageEvents from "@/components/homePageEvents/HomePageEvents";
+import GlobalPagination from "@/components/shared/GlobalPagination";
 
-const AllEventsPage = async ({ searchParams }: { searchParams: Promise<{ search?: string; categoryId?: string ; page?: number; limit?: number }> }) => {
+const AllEventsPage = async ({ searchParams }: { searchParams: Promise<{ search?: string; categoryId?: string; page?: number; limit?: number }> }) => {
      const { search, categoryId, page, limit } = await searchParams
      const searchText = search || "";
-     
-     console.log("catId",categoryId,searchText);
-     const res = await getAllEventsAction(searchText, categoryId, page, limit);
-     // console.log(res.data?.data);
 
-     console.log(res.data?.meta);
-//      page: 1, limit: 10, total: 7, totalPages: 1}
-// limit
-// : 
-// 10
-// page
-// : 
-// 1
-// total
-// : 
-// 7
-// totalPages
-// : 
-// 1
-// [[Prototype]]
-// : 
-// Object
+     console.log("catId", categoryId, searchText);
+     const res = await getAllEventsAction(searchText, categoryId, page, limit);
 
      const categoryRes = await getAllCategoriesAction();
 
@@ -42,8 +25,14 @@ const AllEventsPage = async ({ searchParams }: { searchParams: Promise<{ search?
           );
      }
      return (
-          <div>
-               <HomePageEvents events={res.data?.data}  categories={categories} meta={res.data?.meta} />
+          <div className="space-y-6">
+                <CategoryButtons categories={categoryRes.data || []} />
+               <HomePageEvents events={res.data?.data}  />
+               <GlobalPagination
+                    page={res.data?.meta?.page}
+                    totalPages={res?.data?.meta?.totalPages}
+                    limit={res.data?.meta?.limit}
+               />
           </div>
      );
 };

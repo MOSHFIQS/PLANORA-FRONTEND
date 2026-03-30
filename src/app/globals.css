@@ -95,9 +95,33 @@ img {
   color: white;
 }
 
-html {
-  overflow-y: scroll; /* always reserves space for scrollbar */
+
+
+::-webkit-scrollbar {
+  display: none;
 }
+
+/* Firefox */
+html {
+  scrollbar-width: none;
+}
+
+/* IE, Edge (old) */
+body {
+  -ms-overflow-style: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
