@@ -7,7 +7,7 @@ export default function CommonLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="max-w-[98vw] mx-auto min-h-screen flex flex-col space-y-5">
+    <div className="max-w-[98vw] mx-auto min-h-screen flex flex-col space-b-5">
       <Navbar />
 
       {/* Main Content */}

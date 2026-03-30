@@ -67,7 +67,7 @@ const Navbar = () => {
      }
 
      return (
-          <section className="py-4 border-b sticky top-0 z-50 bg-[#fdfaf6] ">
+          <section className="py-6 border-b sticky top-0 z-50 bg-white ">
                <div>
                     {/* ================= DESKTOP ================= */}
                     <nav className="hidden items-center justify-between lg:flex px-4">
@@ -105,7 +105,7 @@ const Navbar = () => {
                                    placeholder="Search Events..."
                                    value={search}
                                    onChange={(e) => handleSearch(e.target.value)}
-                                   className="w-56"
+                                   className="w-56 bg-white"
                               />
 
                               {user?.id ? (
@@ -177,7 +177,7 @@ const Navbar = () => {
                                              placeholder="Search Events..."
                                              value={search}
                                              onChange={(e) => handleSearch(e.target.value)}
-                                             className="w-full"
+                                             className="w-full bg-white"
                                         />
 
                                         {/* Menu */}

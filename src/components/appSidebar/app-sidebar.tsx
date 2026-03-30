@@ -22,7 +22,12 @@ import { userRoutes } from "@/routes/userRoutes";
 import { Route } from "@/types/routes.type";
 import { NavUser } from "../ui/nav-user";
 
-export function AppSidebar({ user, ...props }: { user: { role: string } & React.ComponentProps<typeof Sidebar> }) {
+export function AppSidebar({
+     user,
+     ...props
+}: {
+     user: { role: string } & React.ComponentProps<typeof Sidebar>;
+}) {
      const pathname = usePathname();
      let routes: Route[] = [];
 
@@ -39,52 +44,77 @@ export function AppSidebar({ user, ...props }: { user: { role: string } & React.
      }
 
      return (
-          <Sidebar  {...props}>
-               <SidebarContent >
-                    <Link href={"/"} className="flex items-center gap-2 justify-start pt-4 pl-4">
-                         <img
-                              src="/logo/logo.png"
-                              className="max-h-8 dark:invert"
-                              alt="logo"
-                         />
-                         <span className="text-lg font-semibold tracking-tighter">PLANORA</span>
-                    </Link>
+          <Sidebar {...props} >
+               <SidebarContent className="bg-[#eef0ff] rounded-lg flex flex-col justify-between px-2 py-3 overflow-y-auto 
+  [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
 
-                    {routes.map((group) => (
-                         <SidebarGroup key={group.title}>
-                              <SidebarGroupLabel>{group.title}</SidebarGroupLabel>
-                              <SidebarGroupContent >
-                                   <SidebarMenu>
-                                        {group.items.map((item) => {
-                                             const isActive = pathname === item.url;
-                                             const Icon = item.icon;
+                    {/* TOP */}
+                    <div className="space-y-6">
 
-                                             return (
-                                                  <SidebarMenuItem key={item.title}>
-                                                       <SidebarMenuButton
-                                                            asChild
-                                                            className={`text-[13px] uppercase font-bold rounded px-2 py-0
-        ${isActive
-                                                                      ? "bg-[#F97316] text-white cursor-default"
-                                                                      : "hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-black"
-                                                                 }`}
-                                                       >
-                                                            <Link href={item.url} className="flex items-center gap-2">
-                                                                 {Icon && <Icon size={18} />}
-                                                                 {item.title}
-                                                            </Link>
-                                                       </SidebarMenuButton>
-                                                  </SidebarMenuItem>
-                                             );
-                                        })}
-                                   </SidebarMenu>
-                              </SidebarGroupContent>
-                         </SidebarGroup>
-                    ))}
+                         {/* LOGO */}
+                         <Link href={"/"} className="flex items-center gap-2 px-3">
+                              <img
+                                   src="/logo/logo.png"
+                                   className="max-h-8 dark:invert"
+                                   alt="logo"
+                              />
+                              <span className="text-lg font-semibold tracking-tight">
+                                   PLANORA
+                              </span>
+                         </Link>
+
+                         {/* GROUPS */}
+                         <div className="space-y-2">
+                              {routes.map((group) => (
+                                   <SidebarGroup key={group.title}>
+
+                                        {/* GROUP TITLE */}
+                                        <SidebarGroupLabel className="px-3 mb-2 text-[10px] font-semibold text-gray-500 uppercase tracking-wide">
+                                             {group.title}
+                                        </SidebarGroupLabel>
+
+                                        <SidebarGroupContent>
+                                             <SidebarMenu >
+
+                                                  {group.items.map((item) => {
+                                                       const isActive = pathname === item.url;
+                                                       const Icon = item.icon;
+
+                                                       return (
+                                                            <SidebarMenuItem key={item.title}>
+                                                                 <SidebarMenuButton
+                                                                      asChild
+                                                                      className={`w-full px-3 py-2 font-bold rounded-md flex items-center gap-2 text-[13px] transition-all duration-200
+                                                                      ${
+                                                                           isActive
+                                                                                ? "bg-gray-500 text-white shadow-sm rounded-full"
+                                                                                : "text-gray-700 hover:bg-white/60 hover:text-black"
+                                                                      }`}
+                                                                 >
+                                                                      <Link href={item.url} className="flex items-center gap-2 w-full">
+                                                                           {Icon && <Icon size={18} />}
+                                                                           <span className="truncate">
+                                                                                {item.title}
+                                                                           </span>
+                                                                      </Link>
+                                                                 </SidebarMenuButton>
+                                                            </SidebarMenuItem>
+                                                       );
+                                                  })}
+
+                                             </SidebarMenu>
+                                        </SidebarGroupContent>
+                                   </SidebarGroup>
+                              ))}
+                         </div>
+                    </div>
+
+                    {/* FOOTER */}
+
                </SidebarContent>
-               <SidebarFooter>
-                    <NavUser />
-               </SidebarFooter>
+                    <SidebarFooter className="pt-4 border-t bg-[#eef0ff]">
+                         <NavUser />
+                    </SidebarFooter>
 
                <SidebarRail />
           </Sidebar>
