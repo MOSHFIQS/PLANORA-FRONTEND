@@ -39,7 +39,7 @@ export default function ImageMagnifier({ images, zoom = 1.1 }: Props) {
     <div className="space-y-4">
       {/* Main Image */}
       <Card
-        className="w-full h-140 rounded-lg overflow-hidden relative py-0"
+        className="w-full h-160 rounded-lg overflow-hidden relative py-0"
         onMouseMove={handleMouseMove}
         onMouseEnter={() => setShowMagnifier(true)}
         onMouseLeave={() => setShowMagnifier(false)}

@@ -16,7 +16,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
-
 import {
      Select,
      SelectContent,
@@ -24,48 +23,21 @@ import {
      SelectTrigger,
      SelectValue,
 } from "@/components/ui/select";
-import ImageUploader from "@/components/imageUploader/ImageUploader";
-import { useImageUpload } from "@/hooks/useImageUpload";
-import { updateBannerAction, } from "@/actions/banner.action";
-import { format } from "date-fns";
-import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
-import { Popover } from '@/components/ui/popover';
-import { PopoverContent } from '@/components/ui/popover';
-import { Calendar } from "@/components/ui/calendar";
-import { PopoverTrigger } from '@/components/ui/popover';
 
+import { updateBannerAction } from "@/actions/banner.action";
+import { AppImage } from "@/components/appImage/AppImage";
+import { Field } from "@/components/ui/field";
 
 export default function UpdateBanner({ banner }: { banner: any }) {
      const [loading, setLoading] = useState(false);
-     const bannerImages = useImageUpload({ max: 1, defaultImages: [banner.image] });
-     console.log(bannerImages.images);
      const router = useRouter();
 
 
-     const existingDate = banner?.dateTime ? new Date(banner.dateTime) : undefined;
 
-     const [selectedDate, setSelectedDate] = useState<Date | undefined>(
-          existingDate
+
+     const [selectedImage, setSelectedImage] = useState<string>(
+          banner?.image || ""
      );
-
-     const [selectedTime, setSelectedTime] = useState(
-          existingDate
-               ? format(existingDate, "HH:mm:ss")
-               : "10:30:00"
-     );
-
-     const [datePickerOpen, setDatePickerOpen] = useState(false);
-
-     const combineDateTime = (date?: Date, time?: string) => {
-          if (!date || !time) return "";
-
-          const [h, m, s] = time.split(":").map(Number);
-          const d = new Date(date);
-          d.setHours(h || 0, m || 0, s || 0);
-
-          return d.toISOString();
-     };
-
 
      const form = useForm({
           defaultValues: {
@@ -74,9 +46,6 @@ export default function UpdateBanner({ banner }: { banner: any }) {
                redirectUrl: banner?.redirectUrl ?? "",
                position: banner?.position ?? "MAIN",
                positionOrder: banner?.positionOrder ?? 1,
-               dateTime: banner?.dateTime
-                    ? new Date(banner.dateTime).toISOString()
-                    : "",
                type: banner?.type || "ONLINE",
                buttonText: banner?.buttonText ?? "",
                altText: banner?.altText ?? "",
@@ -86,15 +55,13 @@ export default function UpdateBanner({ banner }: { banner: any }) {
           onSubmit: async ({ value }) => {
                setLoading(true);
                try {
-
                     const bannerPayload = {
                          title: value.title,
                          description: value.description,
-                         image: bannerImages.images[0]?.img,
+                         image: selectedImage,
                          redirectUrl: value.redirectUrl,
                          position: value.position,
                          type: value.type,
-                         dateTime: new Date(value.dateTime),
                          positionOrder: Number(value.positionOrder),
                          buttonText: value.buttonText,
                          altText: value.altText,
@@ -102,12 +69,12 @@ export default function UpdateBanner({ banner }: { banner: any }) {
                     };
 
                     console.log(bannerPayload);
+
                     const res = await updateBannerAction(banner.id, bannerPayload);
 
                     if (!res?.ok) throw new Error(res?.message);
 
                     toast.success(res.message);
-
                     router.push("/admin-dashboard/banner");
                     form.reset();
                } catch (err: any) {
@@ -118,14 +85,15 @@ export default function UpdateBanner({ banner }: { banner: any }) {
           },
      });
 
-
      return (
-          <div className="">
+          <div>
                <Card className="pt-0">
                     <CardHeader className="px-6 py-4 border-b bg-gradient-to-r from-orange-50 to-white rounded-md">
-                         <CardTitle className="text-xl font-semibold text-gray-800">Update Banner</CardTitle>
+                         <CardTitle className="text-xl font-semibold text-gray-800">
+                              Update Banner
+                         </CardTitle>
                          <CardDescription>
-                              Add a Banner to Your HomePage
+                              Update your homepage banner
                          </CardDescription>
                     </CardHeader>
 
@@ -136,21 +104,46 @@ export default function UpdateBanner({ banner }: { banner: any }) {
                                    e.stopPropagation();
                                    form.handleSubmit();
                               }}
-                              className="flex gap-6 flex-col"
+                              className="flex flex-col gap-6"
                          >
+
+                              <div className="space-y-4">
+                                   <Label>Banner Image</Label>
+
+                                   
+
+                                   {/* Event Images */}
+                                   {banner?.event?.images?.length ? (
+                                        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-7 gap-3">
+                                             {banner.event.images.map((img: string) => (
+                                                  <div
+                                                       key={img}
+                                                       onClick={() => setSelectedImage(img)}
+                                                       className={`cursor-pointer rounded p-1 border-2 transition ${selectedImage === img
+                                                            ? "border-orange-500 scale-95 border-4"
+                                                            : "border-gray-50 hover:border-orange-300 border-4"
+                                                            }`}
+                                                  >
+                                                       <AppImage
+                                                            src={img}
+                                                            alt="event"
+                                                            className="w-full h-24 object-cover rounded"
+                                                       />
+                                                  </div>
+                                             ))}
+                                        </div>
+                                   ) : null}
+
+
+                              </div>
+                              {/* FORM FIELDS */}
                               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                    {/* TITLE */}
                                    <form.Field name="title">
                                         {(field) => (
                                              <div className="space-y-2">
                                                   <Label>Title</Label>
-                                                  <Input
-                                                  disabled
-                                                       value={field.state.value}
-                                                       onChange={(e) =>
-                                                            field.handleChange(e.target.value)
-                                                       }
-                                                  />
+                                                  <Input disabled value={field.state.value} />
                                              </div>
                                         )}
                                    </form.Field>
@@ -175,43 +168,10 @@ export default function UpdateBanner({ banner }: { banner: any }) {
                                         {(field) => (
                                              <div className="space-y-2">
                                                   <Label>Redirect URL</Label>
-                                                  <Input
-                                                  disabled
-                                                       type="url"
-                                                       value={field.state.value}
-                                                       onChange={(e) =>
-                                                            field.handleChange(e.target.value)
-                                                       }
-                                                  />
+                                                  <Input disabled value={field.state.value} />
                                              </div>
                                         )}
                                    </form.Field>
-
-                                   {/* POSITION */}
-                                   {/* <form.Field name="position">
-                                        {(field) => (
-                                             <div className="space-y-2 w-full">
-                                                  <Label>Position</Label>
-
-                                                  <Select
-                                                       value={field.state.value}
-                                                       onValueChange={(value) =>
-                                                            field.handleChange(value)
-                                                       }
-                                                  >
-                                                       <SelectTrigger className="w-full">
-                                                            <SelectValue placeholder="Select position" />
-                                                       </SelectTrigger>
-
-                                                       <SelectContent>
-                                                            <SelectItem value="MAIN">MAIN</SelectItem>
-                                                            <SelectItem value="SECONDARY">SECOND</SelectItem>
-                                                            <SelectItem value="THIRD">THIRD</SelectItem>
-                                                       </SelectContent>
-                                                  </Select>
-                                             </div>
-                                        )}
-                                   </form.Field> */}
 
                                    {/* POSITION ORDER */}
                                    <form.Field name="positionOrder">
@@ -244,13 +204,13 @@ export default function UpdateBanner({ banner }: { banner: any }) {
                                         )}
                                    </form.Field>
 
-
+                                   {/* TYPE */}
                                    <form.Field name="type">
                                         {(field) => (
                                              <Field className="gap-2">
                                                   <Label>Type</Label>
                                                   <Select
-                                                  disabled
+                                                       disabled
                                                        value={field.state.value}
                                                        onValueChange={(val: any) =>
                                                             field.handleChange(val)
@@ -260,12 +220,8 @@ export default function UpdateBanner({ banner }: { banner: any }) {
                                                             <SelectValue />
                                                        </SelectTrigger>
                                                        <SelectContent>
-                                                            <SelectItem value="ONLINE">
-                                                                 Online
-                                                            </SelectItem>
-                                                            <SelectItem value="OFFLINE">
-                                                                 Offline
-                                                            </SelectItem>
+                                                            <SelectItem value="ONLINE">Online</SelectItem>
+                                                            <SelectItem value="OFFLINE">Offline</SelectItem>
                                                        </SelectContent>
                                                   </Select>
                                              </Field>
@@ -275,7 +231,7 @@ export default function UpdateBanner({ banner }: { banner: any }) {
                                    {/* ALT TEXT */}
                                    <form.Field name="altText">
                                         {(field) => (
-                                             <div className="space-y-2 col-span-1 md:col-span-2">
+                                             <div className="space-y-2 md:col-span-2">
                                                   <Label>Alt Text</Label>
                                                   <Input
                                                        value={field.state.value}
@@ -286,116 +242,31 @@ export default function UpdateBanner({ banner }: { banner: any }) {
                                              </div>
                                         )}
                                    </form.Field>
+                                   {selectedImage && (
+                                        <div className="col-span-2">
+                                             <Label className="text-sm font-medium text-gray-700">
+                                                  Selected Image Preview
+                                             </Label>
 
+                                             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-7 gap-3 pt-2">
 
-
-
-
-
-
-                              </div>
-                              {/* DATE TIME */}
-                              {/* <form.Field name="dateTime">
-                                   {(field) => (
-                                        <FieldGroup className="flex-col">
-                                             <div className="flex gap-4">
-                                                  <Field>
-                                                       <FieldLabel>Date</FieldLabel>
-                                                       <Popover
-                                                            open={datePickerOpen}
-                                                            onOpenChange={
-                                                                 setDatePickerOpen
-                                                            }
-                                                       >
-                                                            <PopoverTrigger asChild>
-                                                                 <Button variant="outline">
-                                                                      {selectedDate
-                                                                           ? format(
-                                                                                selectedDate,
-                                                                                "PPP"
-                                                                           )
-                                                                           : "Select"}
-                                                                 </Button>
-                                                            </PopoverTrigger>
-
-                                                            <PopoverContent>
-                                                                 <Calendar
-                                                                      mode="single"
-                                                                      selected={
-                                                                           selectedDate
-                                                                      }
-                                                                      onSelect={(
-                                                                           date
-                                                                      ) => {
-                                                                           setSelectedDate(
-                                                                                date
-                                                                           );
-                                                                           const combined =
-                                                                                combineDateTime(
-                                                                                     date,
-                                                                                     selectedTime
-                                                                                );
-                                                                           if (
-                                                                                combined
-                                                                           )
-                                                                                field.handleChange(
-                                                                                     combined
-                                                                                );
-                                                                      }}
-                                                                 />
-                                                            </PopoverContent>
-                                                       </Popover>
-                                                  </Field>
-
-                                                  <Field>
-                                                       <FieldLabel>Time</FieldLabel>
-                                                       <Input
-                                                            type="time"
-                                                            step="1"
-                                                            value={selectedTime}
-                                                            onChange={(e) => {
-                                                                 const time =
-                                                                      e.target.value;
-                                                                 setSelectedTime(
-                                                                      time
-                                                                 );
-
-                                                                 const combined =
-                                                                      combineDateTime(
-                                                                           selectedDate,
-                                                                           time
-                                                                      );
-                                                                 if (combined)
-                                                                      field.handleChange(
-                                                                           combined
-                                                                      );
-                                                            }}
+                                                  <div className="p-1 border-4 border-orange-500 rounded">
+                                                       <AppImage
+                                                            src={selectedImage}
+                                                            alt="banner"
+                                                            className="w-full h-24 object-cover rounded"
                                                        />
-                                                  </Field>
+                                                  </div>
+
                                              </div>
-                                        </FieldGroup>
+                                        </div>
                                    )}
-                              </form.Field> */}
-
-                              {/* IMAGE UPLOAD — FULL WIDTH */}
-                              <div className="space-y-3 ">
-
-                                   <ImageUploader
-                                        label="Banner Image"
-                                        images={bannerImages.images}
-                                        onUpload={bannerImages.upload}
-                                        onDelete={bannerImages.remove}
-                                        multiple={false}
-                                   />
                               </div>
 
 
-                              {/* SUBMIT BUTTON — FULL WIDTH */}
-                              <Button
-                                   type="submit"
-                                   className="w-full md:col-span-2"
-                                   disabled={loading}
-                              >
+
+                              {/* SUBMIT */}
+                              <Button type="submit" disabled={loading}>
                                    {loading ? "Updating..." : "Update Banner"}
                               </Button>
                          </form>

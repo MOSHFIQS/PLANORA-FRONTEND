@@ -78,6 +78,7 @@ export default function CreateBanner({
                          type: value.type,
                          altText: value.altText,
                          isActive: value.isActive,
+                         eventId: selectedEvent?.id,
                     };
 
                     console.log(bannerPayload);
