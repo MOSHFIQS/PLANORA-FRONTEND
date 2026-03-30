@@ -237,7 +237,7 @@ export default function CarouselPlugin({ banners }: { banners: Banner[] }) {
                                                   className="object-cover w-full h-full "
                                              />
 
-                                             <div className="absolute inset-0 bg-[#fe78432a] " />
+                                             <div className="absolute inset-0 bg-[#00000075] " />
 
                                              <div className="absolute inset-0 flex items-center">
                                                   <div className="w-full ml-6 md:ml-12 p-6  rounded-md text-white space-y-4">

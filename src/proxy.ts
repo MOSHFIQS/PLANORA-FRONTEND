@@ -15,17 +15,17 @@ export async function proxy(request: NextRequest) {
      const isAdmin = role === Roles.admin;
      const isUser = role === Roles.user;
 
-     // ✅ Admin trying to access user dashboard
+     // Admin trying to access user dashboard
      if (isAdmin && pathname.startsWith("/dashboard")) {
           return NextResponse.redirect(new URL("/admin-dashboard", request.url));
      }
 
-     // ✅ User trying to access admin dashboard
+     //  User trying to access admin dashboard
      if (isUser && pathname.startsWith("/admin-dashboard")) {
           return NextResponse.redirect(new URL("/dashboard", request.url));
      }
 
-     // ✅ Unauthenticated user
+     //  Unauthenticated user
      if (
           !role &&
           (pathname.startsWith("/admin-dashboard") || pathname.startsWith("/dashboard"))
