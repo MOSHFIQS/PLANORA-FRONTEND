@@ -298,12 +298,12 @@ const CreateEventForm = ({ categories }: { categories: Category[] }) => {
                                                   {/* DATE */}
                                                   <Field>
                                                        <FieldLabel htmlFor="date">Date</FieldLabel>
-                                                       <Popover open={datePickerOpen} onOpenChange={setDatePickerOpen}>
+                                                       <Popover open={datePickerOpen} onOpenChange={setDatePickerOpen} >
                                                             <PopoverTrigger asChild>
                                                                  <Button
                                                                       variant="outline"
                                                                       id="date"
-                                                                      className="w-32 justify-between font-normal"
+                                                                      className="w-32 justify-between font-normal bg-[#f7f7f7]"
                                                                  >
                                                                       {selectedDate
                                                                            ? format(selectedDate, "PPP")
@@ -344,7 +344,7 @@ const CreateEventForm = ({ categories }: { categories: Category[] }) => {
                                                                  const combined = combineDateTime(selectedDate, time);
                                                                  if (combined) field.handleChange(combined);
                                                             }}
-                                                            className="appearance-none bg-background [&::-webkit-calendar-picker-indicator]:hidden"
+                                                            className="appearance-none  [&::-webkit-calendar-picker-indicator]:hidden"
                                                        />
                                                   </Field>
                                              </div>

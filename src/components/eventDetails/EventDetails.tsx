@@ -128,13 +128,13 @@ const EventDetails = ({ event }: { event: IEvent }) => {
 
                          {/* Date & Time */}
                          <p className="text-sm text-muted-foreground">
-                              📅 {new Date(event?.dateTime).toLocaleString()}
+                              {new Date(event?.dateTime).toLocaleString()}
                          </p>
 
                          {/* Venue / Meeting Link */}
                          {event?.type === "OFFLINE" ? (
                               <p>
-                                   <span className="font-medium">📍 Venue:</span>{" "}
+                                   <span className="font-medium"> Venue:</span>{" "}
                                    {event?.venue || "N/A"}
                               </p>
                          ) : event?.meetingLink ? (
@@ -153,7 +153,10 @@ const EventDetails = ({ event }: { event: IEvent }) => {
                          )}
 
 
-                        
+                        <div className="text-xs text-muted-foreground space-y-1">
+                              <p>Created: {new Date(event?.createdAt).toLocaleString()}</p>
+                              <p>Updated: {new Date(event?.updatedAt).toLocaleString()}</p>
+                         </div>
 
                          {/* Stats */}
                          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
@@ -169,10 +172,7 @@ const EventDetails = ({ event }: { event: IEvent }) => {
                          </div>
 
                          {/* Created / Updated */}
-                         <div className="text-xs text-muted-foreground space-y-1">
-                              <p>Created: {new Date(event?.createdAt).toLocaleString()}</p>
-                              <p>Updated: {new Date(event?.updatedAt).toLocaleString()}</p>
-                         </div>
+                         
                     </CardContent>
                </Card>
 

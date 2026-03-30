@@ -38,22 +38,33 @@ const EventDetailsSmart = ({ type, data }: Props) => {
     <div className="space-y-6 ">
       <Card className="shadow-lg border">
         {/* HEADER */}
-        <CardHeader>
-          <CardTitle className="text-2xl">{event?.title}</CardTitle>
+        <CardHeader className="space-y-2">
+          <CardTitle className="text-2xl font-semibold">
+            {event?.title}
+          </CardTitle>
 
-          <CardDescription>
-            Organized by: <strong>{event?.organizer?.name}</strong>
-          </CardDescription>
+          <div className="space-y-1 text-sm text-muted-foreground">
+            <p>
+              Organized by:{" "}
+              <span className="font-medium text-foreground">
+                {event?.organizer?.name}
+              </span>
+            </p>
 
-          {/* ONLY FULL */}
-          {isFull && user && (
-            <CardDescription>
-              Participant:{" "}
-              <strong>
-                {user?.name} ({user?.email})
-              </strong>
-            </CardDescription>
-          )}
+            {isFull && user && (
+              <div className="mt-2 rounded-lg border bg-[#f7f7f7] p-3">
+                <p className="text-xs uppercase tracking-wide text-muted-foreground">
+                  Participant
+                </p>
+                <p className="font-medium text-foreground">
+                  {user?.name}
+                </p>
+                <p className="text-xs text-muted-foreground">
+                  {user?.email}
+                </p>
+              </div>
+            )}
+          </div>
         </CardHeader>
 
         {/* IMAGES */}
@@ -65,7 +76,7 @@ const EventDetailsSmart = ({ type, data }: Props) => {
 
         <div className="px-4 space-y-4 pt-5">
           {/* MAIN INFO */}
-          <Card className="flex flex-col md:flex-row md:text-start text-center justify-between items-center gap-6 px-4">
+          <Card className="flex flex-col md:flex-row md:text-start text-center justify-between items-center gap-6 px-4 bg-[#f7f7f7]">
             <div className="space-y-3">
               {date && (
                 <p>
@@ -133,7 +144,7 @@ const EventDetailsSmart = ({ type, data }: Props) => {
               {payment.map((p: any) => (
                 <Card
                   key={p.id}
-                  className="grid grid-cols-1 xl:grid-cols-2 items-center  p-4"
+                  className="grid grid-cols-1 xl:grid-cols-2 items-center  p-4 bg-[#f7f7f7]"
                 >
 
                   <p>

@@ -14,17 +14,17 @@ export default function PaymentsList({ payments }: { payments: Payment[] }) {
      console.log(payments);
      return (
           <Card>
-             {
-               pathname === "/dashboard/payments" ? (
-                    <CardHeader>
-                         <CardTitle className="text-xl">My Payments</CardTitle>
-                    </CardHeader>
-               ): (
-                    <CardHeader>
-                         <CardTitle className="text-xl">Event Payments</CardTitle>
-                    </CardHeader>
-               )
-             }
+               {
+                    pathname === "/dashboard/payments" ? (
+                         <CardHeader>
+                              <CardTitle className="text-xl">My Payments</CardTitle>
+                         </CardHeader>
+                    ) : (
+                         <CardHeader>
+                              <CardTitle className="text-xl">Event Payments</CardTitle>
+                         </CardHeader>
+                    )
+               }
 
                <CardContent>
                     <Table>
@@ -44,21 +44,23 @@ export default function PaymentsList({ payments }: { payments: Payment[] }) {
                               {payments?.length > 0 ? (
                                    payments.map((payment: any) => (
                                         <TableRow key={payment.id}>
-                                             <TableCell>
+                                             <TableCell className="py-5">
                                                   {payment.participation?.event?.title || "N/A"}
                                              </TableCell>
-                                             <TableCell>
+
+                                             <TableCell className="py-5">
                                                   {payment?.user?.name || "N/A"}
                                              </TableCell>
-                                             <TableCell>
+
+                                             <TableCell className="py-5">
                                                   {payment?.user?.email || "N/A"}
                                              </TableCell>
 
-                                             <TableCell>
+                                             <TableCell className="py-5">
                                                   {payment?.amount} tk
                                              </TableCell>
 
-                                             <TableCell>
+                                             <TableCell className="py-5">
                                                   <Badge
                                                        className={
                                                             payment?.status === "SUCCESS"
@@ -72,18 +74,18 @@ export default function PaymentsList({ payments }: { payments: Payment[] }) {
                                                   </Badge>
                                              </TableCell>
 
-                                             <TableCell className="text-xs">
+                                             <TableCell className="py-5 text-xs">
                                                   {payment?.transactionId}
                                              </TableCell>
 
-                                             <TableCell>
+                                             <TableCell className="py-5">
                                                   {new Date(payment?.createdAt).toLocaleString()}
                                              </TableCell>
                                         </TableRow>
                                    ))
                               ) : (
                                    <TableRow>
-                                        <TableCell colSpan={5} className="text-center py-4">
+                                        <TableCell colSpan={7} className="text-center py-5">
                                              No payments found.
                                         </TableCell>
                                    </TableRow>
