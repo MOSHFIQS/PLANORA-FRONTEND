@@ -42,7 +42,7 @@ type User = {
 const AllUsers = ({ users }: { users: User[] }) => {
   const [isPending, startTransition] = useTransition();
   const [loadingId, setLoadingId] = useState<string | null>(null);
-  
+
 
 
 
@@ -70,7 +70,7 @@ const AllUsers = ({ users }: { users: User[] }) => {
         <CardTitle>All Users</CardTitle>
       </CardHeader>
 
-      <CardContent>
+      <CardContent >
         <Table>
           <TableHeader>
             <TableRow>
@@ -92,19 +92,24 @@ const AllUsers = ({ users }: { users: User[] }) => {
               return (
                 <TableRow key={user.id}>
                   {/* User */}
-                  <TableCell className="flex items-center gap-2 ">
-                    <AppImage
-                      src={user.image || "/default-profile.png"}
-                      alt={user.name}
-                      width={50}
-                      height={50}
-                      className="h-10 w-10 rounded object-cover border"
-                    />
-                    {user.name}
+                  <TableCell>
+                    <div className="flex items-center gap-2 min-w-0">
+                      <AppImage
+                        src={user.image || "/default-profile.png"}
+                        alt={user.name}
+                        width={40}
+                        height={40}
+                        className="h-10 w-10 rounded object-cover border shrink-0"
+                      />
+
+                      <span >
+                        {user.name}
+                      </span>
+                    </div>
                   </TableCell>
 
                   {/* Email */}
-                  <TableCell>{user.email}</TableCell>
+                  <TableCell className="whitespace-nowrap">{user.email}</TableCell>
 
                   {/* Role */}
                   <TableCell>
@@ -113,7 +118,7 @@ const AllUsers = ({ users }: { users: User[] }) => {
                       onValueChange={async (value) => {
                         setLoadingId(user.id);
 
-                        const res = await updateUserRoleAction(user.id,  value as "ADMIN" | "USER");
+                        const res = await updateUserRoleAction(user.id, value as "ADMIN" | "USER");
 
                         if (!res?.ok) {
                           toast.error(res?.message || "Failed to update");
@@ -187,7 +192,7 @@ const AllUsers = ({ users }: { users: User[] }) => {
                   {/* Actions */}
                   <TableCell className="text-right">
                     <div className="flex items-end justify-end gap-2">
-                   
+
 
                       {/* Delete */}
                       <Button
@@ -195,7 +200,7 @@ const AllUsers = ({ users }: { users: User[] }) => {
                         disabled={isLoading}
                         onClick={() => handleDelete(user.id)}
                       >
-                        {isLoading ? "..." : <Trash2  />}
+                        {isLoading ? "..." : <Trash2 />}
                       </Button>
                     </div>
                   </TableCell>
