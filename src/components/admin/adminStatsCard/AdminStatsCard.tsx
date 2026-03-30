@@ -146,7 +146,7 @@ const AdminStatsCard = ({ data }: Props) => {
 
   return (
     <div className="space-y-6 mb-6">
-      <Card className="border border-gray-200 p-4 sm:p-6 bg-[#EFE9E3] rounded-xl shadow-none">
+      <Card className="border border-gray-200 p-4 sm:p-6 bg-white  rounded-xl shadow-none">
         <h4 className="text-lg sm:text-xl lg:text-2xl font-bold mb-6">
           Dashboard Stats
         </h4>

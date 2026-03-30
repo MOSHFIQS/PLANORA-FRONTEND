@@ -37,7 +37,7 @@ export default function CarouselPlugin({ banners }: { banners: Banner[] }) {
           .sort((a, b) => a.positionOrder - b.positionOrder)
 
      return (
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-2 border rounded">
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-2 border rounded-xl overflow-hidden">
 
                {/* Styles */}
                <style jsx>{`
@@ -80,7 +80,7 @@ export default function CarouselPlugin({ banners }: { banners: Banner[] }) {
                     }
                `}</style>
 
-               <div className="lg:col-span-4">
+               <div className="lg:col-span-4 ">
                     <Carousel
                          plugins={[plugin.current]}
                          className="w-full overflow-hidden"
@@ -94,13 +94,13 @@ export default function CarouselPlugin({ banners }: { banners: Banner[] }) {
                               })
                          }}
                     >
-                         <CarouselContent className="h-[400px] sm:h-[450px] md:h-[500px] lg:h-[600px] xl:h-[700px] m-0 w-full">
+                         <CarouselContent className="h-[400px] sm:h-[450px] md:h-[500px] lg:h-[600px] xl:h-[700px] m-0 w-full ">
 
                               {mainBanners.map((banner, index) => {
                                    const isActive = index === activeIndex
 
                                    return (
-                                        <CarouselItem key={banner.id} className="h-full p-0">
+                                        <CarouselItem key={banner.id} className="h-full p-0 ">
                                              <div className="relative h-full overflow-hidden">
 
                                                   {/* Background */}
@@ -109,7 +109,7 @@ export default function CarouselPlugin({ banners }: { banners: Banner[] }) {
                                                             src={banner.image}
                                                             priority
                                                             loading="eager"
-                                                            className="object-cover w-full h-full"
+                                                            className="object-cover w-full h-full "
                                                        />
                                                   </div>
 

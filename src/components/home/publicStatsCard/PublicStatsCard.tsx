@@ -21,7 +21,7 @@ const PublicStatsCard = ({ publicStats }: { publicStats: PublicStats }) => {
         title="Events By Category"
         description="Discover events based on your interests and join amazing experiences."
       /> */}
-      <div className="relative w-full h-[320px] overflow-hidden ">
+      <div className="relative w-full h-[320px] rounded-lg overflow-hidden ">
 
         {/* Background Image */}
         <Image

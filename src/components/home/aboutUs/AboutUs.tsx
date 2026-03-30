@@ -12,10 +12,10 @@ export default function AboutUs({ statData }: { statData: PublicStats }) {
   const stats = statData;
 
   return (
-    <div className="min-h-screen bg-[#fdfaf6] ">
+    <div className="min-h-screen bg-[#fdfaf6] opacity-85">
 
       {/* HERO SECTION */}
-      <section className="relative py-40 text-center bg-gradient-to-b from-black via-black to-[#fdfaf6] text-white">
+      <section className="relative py-40 text-center bg-gradient-to-b from-black via-black to-[#fdfaf6]  text-white">
         <div className="max-w-4xl mx-auto px-4 space-y-6">
 
           <h1 className="text-4xl md:text-5xl font-bold">

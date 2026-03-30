@@ -41,7 +41,7 @@ const CategoryCard = ({ categories }: { categories: Category[] }) => {
             <div
               key={category.id}
               onClick={() => router.push(`/events?categoryId=${category.id}`)}
-              className="relative h-40 overflow-hidden cursor-pointer group"
+              className="relative h-40 overflow-hidden rounded-lg cursor-pointer group"
             >
               <Image
                 src={category.image}

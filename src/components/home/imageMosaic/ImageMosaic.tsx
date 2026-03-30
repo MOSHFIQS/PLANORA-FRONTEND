@@ -19,8 +19,8 @@ const ImageMosaic = ({ images }: Props) => {
       <div className="max-w-6xl mx-auto relative">
 
         {/* Background glow */}
-        <div className="absolute -top-20 -left-20 w-72 h-72 bg-purple-300/30 blur-3xl rounded-full" />
-        <div className="absolute -bottom-20 -right-20 w-72 h-72 bg-indigo-300/30 blur-3xl rounded-full" />
+        <div className="absolute -top-20 -left-20 w-72 h-72 bg-purple-300/20 blur-3xl rounded-full" />
+        <div className="absolute -bottom-20 -right-20 w-72 h-72 bg-indigo-300/20 blur-3xl rounded-full" />
 
      
 

@@ -54,7 +54,7 @@ export default function EventsSlider({ events }: Props) {
           {visibleEvents.map((event) => {
             const date = event?.dateTime ? new Date(event.dateTime) : null;
             return (
-              <Card key={event.id} className="overflow-hidden flex flex-col p-0 rounded">
+              <Card key={event.id} className="overflow-hidden flex flex-col p-0 rounded-lg">
                 <Link href={`/events/${event.id}`} className="relative  h-50 xl:h-70 w-full overflow-hidden border-b-1">
                   {event?.images?.[0] && (
                     <AppImage
@@ -104,7 +104,7 @@ export default function EventsSlider({ events }: Props) {
                 const date = event?.dateTime ? new Date(event.dateTime) : null;
                 return (
                   <CarouselItem key={event.id} className="pl-3 basis-1/1 sm:basis-1/2 md:basis-1/2 lg:basis-1/3 xl:basis-1/4 ">
-                    <Card className="overflow-hidden flex flex-col p-0 rounded">
+                    <Card className="overflow-hidden flex flex-col p-0 rounded-t-2xl">
                       <Link href={`/events/${event.id}`} className="relative h-50 xl:h-55 w-full overflow-hidden border-b-1">
                         {event?.images?.[0] && (
                           <AppImage
