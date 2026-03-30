@@ -70,139 +70,145 @@ export function LoginForm({ ...props }: React.ComponentProps<typeof Card>) {
   })
 
   return (
-    <div className="flex flex-col gap-6 max-w-5xl mx-auto w-full" {...props}>
-      <Card className="overflow-hidden p-4">
-        <CardContent className="grid p-0 md:grid-cols-2">
+    <div
+  className="flex flex-col gap-6 max-w-5xl mx-auto w-full  justify-center"
+  {...props}
+>
+  <Card className="overflow-hidden p-4 min-h-[600px]">
+    <CardContent className="grid p-0 md:grid-cols-2 min-h-[600px]">
 
-          {/* LEFT FORM SIDE */}
-          <form
-            className="p-6 md:p-8"
-            id="login-form"
-            onSubmit={(e) => {
-              e.preventDefault()
-              form.handleSubmit()
-            }}
-          >
-            <FieldGroup>
+      {/* LEFT FORM SIDE */}
+      <form
+        className="p-6 md:p-8 flex flex-col justify-center"
+        id="login-form"
+        onSubmit={(e) => {
+          e.preventDefault();
+          form.handleSubmit();
+        }}
+      >
+        <FieldGroup>
 
-              {/* HEADER */}
-              <div className="flex flex-col items-center gap-2 text-center mb-4">
-                <h1 className="text-2xl font-bold">Welcome back</h1>
-                <p className="text-muted-foreground">
-                  Login to your account
-                </p>
-              </div>
-
-              {/* EMAIL */}
-              <form.Field
-                name="email"
-                children={(field) => {
-                  const isInvalid =
-                    field.state.meta.isTouched &&
-                    !field.state.meta.isValid
-
-                  return (
-                    <Field data-invalid={isInvalid}>
-                      <FieldLabel htmlFor={field.name}>
-                        Email
-                      </FieldLabel>
-
-                      <Input
-                        type="email"
-                        id={field.name}
-                        name={field.name}
-                        value={field.state.value}
-                        onChange={(e) =>
-                          field.handleChange(e.target.value)
-                        }
-                        placeholder="m@example.com"
-                      />
-
-                      {isInvalid && (
-                        <FieldError errors={field.state.meta.errors} />
-                      )}
-                    </Field>
-                  )
-                }}
-              />
-
-              {/* PASSWORD */}
-              <form.Field
-                name="password"
-                children={(field) => {
-                  const isInvalid =
-                    field.state.meta.isTouched &&
-                    !field.state.meta.isValid
-
-                  return (
-                    <Field data-invalid={isInvalid}>
-                      <div className="flex items-center">
-                        <FieldLabel htmlFor={field.name}>
-                          Password
-                        </FieldLabel>
-
-                      </div>
-
-                      <Input
-                        type="password"
-                        id={field.name}
-                        name={field.name}
-                        value={field.state.value}
-                        onChange={(e) =>
-                          field.handleChange(e.target.value)
-                        }
-                      />
-
-                      {isInvalid && (
-                        <FieldError errors={field.state.meta.errors} />
-                      )}
-                    </Field>
-                  )
-                }}
-              />
-
-              {/* BUTTON */}
-              <Field>
-                <Button type="submit" variant={"violet"} className="w-full">
-                  Login
-                </Button>
-              </Field>
-
-              {/* FOOTER LINK */}
-              <div className="text-center text-sm text-muted-foreground">
-                Don&apos;t have an account?{" "}
-                <Link
-                  href={`/register?redirect=${encodeURIComponent(
-                    redirectUrl
-                  )}`}
-                  className="underline hover:text-primary"
-                >
-                  Sign up
-                </Link>
-              </div>
-            </FieldGroup>
-          </form>
-
-          {/* RIGHT IMAGE SIDE */}
-          <div className="relative hidden bg-muted md:block">
-            <img
-              src="/gradient.jpg"
-              alt="Login"
-              className="absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale rounded-lg"
-            />
-
-            <div className="relative z-10 p-6 md:p-8 lg:p-12 text-white flex flex-col gap-4 h-full justify-end">
-              <h2 className="text-3xl font-bold">
-                Join Planora Today!
-              </h2>
-              <p className="text-xs">
-                Discover unforgettable events, connect with like-minded people, and create lasting memories. Your next adventure awaits!
-              </p>
-            </div>
-
+          {/* HEADER */}
+          <div className="flex flex-col items-center gap-2 text-center mb-6">
+            <h1 className="text-2xl font-bold">Welcome back</h1>
+            <p className="text-muted-foreground">
+              Login to your account
+            </p>
           </div>
-        </CardContent>
-      </Card>
-    </div>
+
+          {/* EMAIL */}
+          <form.Field
+            name="email"
+            children={(field) => {
+              const isInvalid =
+                field.state.meta.isTouched &&
+                !field.state.meta.isValid;
+
+              return (
+                <Field data-invalid={isInvalid}>
+                  <FieldLabel htmlFor={field.name}>
+                    Email
+                  </FieldLabel>
+
+                  <Input
+                    type="email"
+                    id={field.name}
+                    name={field.name}
+                    value={field.state.value}
+                    onChange={(e) =>
+                      field.handleChange(e.target.value)
+                    }
+                    placeholder="m@example.com"
+                  />
+
+                  {isInvalid && (
+                    <FieldError errors={field.state.meta.errors} />
+                  )}
+                </Field>
+              );
+            }}
+          />
+
+          {/* PASSWORD */}
+          <form.Field
+            name="password"
+            children={(field) => {
+              const isInvalid =
+                field.state.meta.isTouched &&
+                !field.state.meta.isValid;
+
+              return (
+                <Field data-invalid={isInvalid}>
+                  <FieldLabel htmlFor={field.name}>
+                    Password
+                  </FieldLabel>
+
+                  <Input
+                    type="password"
+                    id={field.name}
+                    name={field.name}
+                    value={field.state.value}
+                    onChange={(e) =>
+                      field.handleChange(e.target.value)
+                    }
+                  />
+
+                  {isInvalid && (
+                    <FieldError errors={field.state.meta.errors} />
+                  )}
+                </Field>
+              );
+            }}
+          />
+
+          {/* BUTTON */}
+          <Field>
+            <Button
+              type="submit"
+              variant={"violet"}
+              className="w-full mt-2"
+            >
+              Login
+            </Button>
+          </Field>
+
+          {/* FOOTER LINK */}
+          <div className="text-center text-sm text-muted-foreground mt-4">
+            Don&apos;t have an account?{" "}
+            <Link
+              href={`/register?redirect=${encodeURIComponent(
+                redirectUrl
+              )}`}
+              className="underline hover:text-primary"
+            >
+              Sign up
+            </Link>
+          </div>
+        </FieldGroup>
+      </form>
+
+      {/* RIGHT IMAGE SIDE */}
+      <div className="relative hidden md:block min-h-full">
+
+        <img
+          src="/gradient.jpg"
+          alt="Login"
+          className="absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale rounded-lg"
+        />
+
+        <div className="relative z-10 p-6 md:p-8 lg:p-12 text-white flex flex-col gap-4 h-full justify-end">
+          <h2 className="text-3xl font-bold">
+            Join Planora Today!
+          </h2>
+          <p className="text-xs">
+            Discover unforgettable events, connect with like-minded people, and create lasting memories. Your next adventure awaits!
+          </p>
+        </div>
+
+      </div>
+
+    </CardContent>
+  </Card>
+</div>
   )
 }

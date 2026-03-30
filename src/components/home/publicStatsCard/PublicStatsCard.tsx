@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 
 const CountUp = dynamic(() => import("react-countup"), { ssr: false });
 
-type PublicStats = {
+export type PublicStats = {
   totalActiveUsers: number;
   totalEventsDone: number;
   totalTicketsCreated: number;
@@ -28,12 +28,12 @@ const PublicStatsCard = ({ publicStats }: { publicStats: PublicStats }) => {
           src="/stats.jpg"
           alt="Stats Background"
           fill
-          className="object-cover"
+          className="object-cover duration-700 hover:scale-115"
           priority
         />
 
         {/* Overlay */}
-        <div className="absolute inset-0 bg-[#202022d5] flex items-center justify-center">
+        <div className="absolute inset-0 bg-[#202022d5] flex items-center justify-center pointer-events-none">
 
           <div className="grid grid-cols-4 gap-16 text-center text-white px-10 w-full max-w-5xl">
 

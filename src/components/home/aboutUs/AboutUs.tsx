@@ -4,10 +4,11 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import dynamic from "next/dynamic";
+import { PublicStats } from "../publicStatsCard/PublicStatsCard";
 
 const CountUp = dynamic(() => import("react-countup"), { ssr: false });
 
-export default function AboutUs({ statData }: { statData: any }) {
+export default function AboutUs({ statData }: { statData: PublicStats }) {
   const stats = statData;
 
   return (
