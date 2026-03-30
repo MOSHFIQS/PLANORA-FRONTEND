@@ -38,6 +38,7 @@ const Navbar = () => {
           { title: "All Events", url: "/events" },
           { title: "Contact Us", url: "/contact" },
           { title: "Find Us", url: "/find-us" },
+          { title: "About Us", url: "/about-us" },
      ];
 
      const handleSearch = (value: string) => {
@@ -75,7 +76,7 @@ const Navbar = () => {
                               {/* Logo */}
                               <Link href="/" className="flex items-center gap-2">
                                    <img src="/logo/logo.png" className="max-h-8" />
-                                   <span className="text-lg font-bold">PLANORA</span>
+                                   <span className="text-lg font-semibold">PLANORA</span>
                               </Link>
 
                               {/* Menu */}
@@ -84,9 +85,9 @@ const Navbar = () => {
                                         <button key={item.title} className={""}>
                                              <Link
                                                   href={item.url}
-                                                  className={`px-2 py-1 text-sm font-medium border  transition
+                                                  className={`px-2 py-1 text-md font-medium   transition
                                              ${isActive(item.url)
-                                                            ? "bg-[#FE7743] text-white"
+                                                            ? "bg-[#FE7743] text-white rounded-full"
                                                             : "bg-gray-50 hover:bg-muted"
                                                        }
                                              `}

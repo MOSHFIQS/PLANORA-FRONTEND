@@ -19,7 +19,7 @@ const HomePage = async () => {
      const bannerRes = await getAllBannersAction()
      const categoryRes = await getAllCategoriesAction()
      const publicStatsRes = await getPublicStatsAction()
-     // console.log(publicStatsRes);
+     console.log(publicStatsRes);
      // console.log(categoryRes);
      // console.log(res.data);
      const events = res?.data?.data as Event[];
