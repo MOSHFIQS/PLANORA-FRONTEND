@@ -85,10 +85,10 @@ export default function PaymentsList({ payments }: { payments: Payment[] }) {
                                                   <Badge
                                                        className={
                                                             payment?.status === "SUCCESS"
-                                                                 ? "bg-green-500"
+                                                                 ? "bg-green-400"
                                                                  : payment.status === "PENDING"
-                                                                      ? "bg-yellow-500"
-                                                                      : "bg-red-500"
+                                                                      ? "bg-yellow-400"
+                                                                      : "bg-red-400"
                                                        }
                                                   >
                                                        {payment?.status}

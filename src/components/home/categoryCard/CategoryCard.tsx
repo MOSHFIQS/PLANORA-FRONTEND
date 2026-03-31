@@ -26,14 +26,14 @@ const CategoryCard = ({ categories }: { categories: Category[] }) => {
   const limitedCategories = categories?.slice(0, 8);
 
   return (
-    <div className="max-w-7xl mx-auto px-4">
+    <div className="max-w-7xl mx-auto ">
       <SectionHeader
         align="center"
         title="Events By Category"
         description="Discover events based on your interests and join amazing experiences."
       />
 
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 md:gap-3 lg:gap-5">
         {limitedCategories?.map((category, index) => {
           const color = colors[index % colors.length];
 
