@@ -52,7 +52,7 @@ export default function EventsSlider({ events }: Props) {
       />
       <div className="space-y-6 mt-6">
         {/* GRID FOR SMALL SCREENS */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:hidden gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:hidden gap-4">
           {visibleEvents.map((event) => {
             const date = event?.dateTime ? new Date(event.dateTime) : null;
             return (

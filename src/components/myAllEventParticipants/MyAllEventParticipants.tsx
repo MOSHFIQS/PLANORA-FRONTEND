@@ -557,7 +557,7 @@ export default function MyAllEventParticipants({
 
       {/* CARD / GRID VIEW */}
       {viewMode === "card" && (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {participants.length === 0 && (
             <p className="col-span-full text-center text-muted-foreground">
               No participants found.
@@ -566,144 +566,143 @@ export default function MyAllEventParticipants({
 
           {participants.map((p) => (
             <div
-  key={p.id}
-  className="p-4 rounded-4xl bg-muted/40 border-2 border-gray-300 flex flex-col justify-between gap-4"
->
-  <div className="flex flex-col gap-3">
-    {/* Header */}
-    <div className="flex items-center gap-4">
-      <AppImage
-        src={p.image ?? "/default-avatar.png"}
-        alt={p.name}
-        width={50}
-        height={50}
-        className="h-12 w-12 rounded-full object-cover border-2 border-white shadow"
-      />
+              key={p.id}
+              className="p-4 rounded-4xl bg-muted/40 border-2 border-gray-300 flex flex-col justify-between gap-4"
+            >
+              <div className="flex flex-col gap-3">
+                {/* Header */}
+                <div className="flex items-center gap-4">
+                  <AppImage
+                    src={p.image ?? "/default-avatar.png"}
+                    alt={p.name}
+                    width={50}
+                    height={50}
+                    className="h-12 w-12 rounded-full object-cover border-2 border-white shadow"
+                  />
 
-      <div>
-        <h3 className="font-semibold text-base">{p.name}</h3>
-        <p className="text-sm text-muted-foreground line-clamp-1">
-          {p.email}
-        </p>
-      </div>
-    </div>
+                  <div>
+                    <h3 className="font-semibold text-base">{p.name}</h3>
+                    <p className="text-sm text-muted-foreground line-clamp-1">
+                      {p.email}
+                    </p>
+                  </div>
+                </div>
 
-    {/* Events */}
-    <div>
-      <h4 className="text-xs text-muted-foreground mb-2">
-        Events
-      </h4>
+                {/* Events */}
+                <div>
+                  <h4 className="text-xs text-muted-foreground mb-2">
+                    Events
+                  </h4>
 
-      <div className="flex flex-wrap gap-2">
-        {p.events?.map((e, index) => (
-          <span
-            key={`${e.eventId}-${index}`}
-            className={`flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium ${
-              e.invited
-                ? "bg-yellow-100 text-yellow-800"
-                : "bg-green-100 text-green-800"
-            }`}
-            title={
-              e.invited
-                ? `Invitation Status: ${e.invitationStatus}`
-                : `Participation Status: ${e.participationStatus}`
-            }
-          >
-            {e.invited ? (
-              <Clock className="w-3 h-3" />
-            ) : (
-              <Check className="w-3 h-3" />
-            )}
-            {e.title}
-          </span>
-        ))}
-      </div>
-    </div>
-  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {p.events?.map((e, index) => (
+                      <span
+                        key={`${e.eventId}-${index}`}
+                        className={`flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium ${e.invited
+                            ? "bg-yellow-100 text-yellow-800"
+                            : "bg-green-100 text-green-800"
+                          }`}
+                        title={
+                          e.invited
+                            ? `Invitation Status: ${e.invitationStatus}`
+                            : `Participation Status: ${e.participationStatus}`
+                        }
+                      >
+                        {e.invited ? (
+                          <Clock className="w-3 h-3" />
+                        ) : (
+                          <Check className="w-3 h-3" />
+                        )}
+                        {e.title}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
 
-  {/* Action */}
-  <AlertDialog
-    open={openDialogId === p.id}
-    onOpenChange={(isOpen) => !isOpen && setOpenDialogId(null)}
-  >
-    <AlertDialogTrigger asChild>
-      <Button
-        variant="violet"
-        className="w-full rounded-4xl"
-        disabled={privateEvents.length === 0}
-        onClick={() => setOpenDialogId(p.id)}
-      >
-        Send Invite
-      </Button>
-    </AlertDialogTrigger>
-
-    <AlertDialogContent>
-      <AlertDialogHeader>
-        <AlertDialogTitle>Send Invitation</AlertDialogTitle>
-        <AlertDialogDescription>
-          Select an event to send invitation to{" "}
-          <span className="font-medium">{p.name}</span>
-        </AlertDialogDescription>
-      </AlertDialogHeader>
-
-      {/* Select */}
-      <div className="mt-4">
-        <Select
-          value={selectedEventId}
-          onValueChange={(val) => setSelectedEventId(val)}
-        >
-          <SelectTrigger className="w-full">
-            <SelectValue placeholder="Select event" />
-          </SelectTrigger>
-
-          <SelectContent>
-            {privateEvents.length > 0 ? (
-              privateEvents.map((event) => {
-                const isDisabled = p.events.some(
-                  (e) =>
-                    e.eventId === event.id &&
-                    (e.invited ||
-                      e.participationStatus === "APPROVED")
-                );
-
-                return (
-                  <SelectItem
-                    key={event.id}
-                    value={event.id}
-                    disabled={isDisabled}
+              {/* Action */}
+              <AlertDialog
+                open={openDialogId === p.id}
+                onOpenChange={(isOpen) => !isOpen && setOpenDialogId(null)}
+              >
+                <AlertDialogTrigger asChild>
+                  <Button
+                    variant="violet"
+                    className="w-full rounded-4xl"
+                    disabled={privateEvents.length === 0}
+                    onClick={() => setOpenDialogId(p.id)}
                   >
-                    {event.title}
-                  </SelectItem>
-                );
-              })
-            ) : (
-              <SelectItem value="no-events" disabled>
-                No events found
-              </SelectItem>
-            )}
-          </SelectContent>
-        </Select>
-      </div>
+                    Send Invite
+                  </Button>
+                </AlertDialogTrigger>
 
-      <AlertDialogFooter className="mt-4 flex justify-end gap-2">
-        <Button
-          variant="outline"
-          onClick={() => setOpenDialogId(null)}
-        >
-          <X size={14} /> Cancel
-        </Button>
+                <AlertDialogContent>
+                  <AlertDialogHeader>
+                    <AlertDialogTitle>Send Invitation</AlertDialogTitle>
+                    <AlertDialogDescription>
+                      Select an event to send invitation to{" "}
+                      <span className="font-medium">{p.name}</span>
+                    </AlertDialogDescription>
+                  </AlertDialogHeader>
 
-        <Button
-          variant="violet"
-          onClick={() => handleSendInvite(p.id)}
-          disabled={isPending || !selectedEventId}
-        >
-          Send
-        </Button>
-      </AlertDialogFooter>
-    </AlertDialogContent>
-  </AlertDialog>
-</div>
+                  {/* Select */}
+                  <div className="mt-4">
+                    <Select
+                      value={selectedEventId}
+                      onValueChange={(val) => setSelectedEventId(val)}
+                    >
+                      <SelectTrigger className="w-full">
+                        <SelectValue placeholder="Select event" />
+                      </SelectTrigger>
+
+                      <SelectContent>
+                        {privateEvents.length > 0 ? (
+                          privateEvents.map((event) => {
+                            const isDisabled = p.events.some(
+                              (e) =>
+                                e.eventId === event.id &&
+                                (e.invited ||
+                                  e.participationStatus === "APPROVED")
+                            );
+
+                            return (
+                              <SelectItem
+                                key={event.id}
+                                value={event.id}
+                                disabled={isDisabled}
+                              >
+                                {event.title}
+                              </SelectItem>
+                            );
+                          })
+                        ) : (
+                          <SelectItem value="no-events" disabled>
+                            No events found
+                          </SelectItem>
+                        )}
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  <AlertDialogFooter className="mt-4 flex justify-end gap-2">
+                    <Button
+                      variant="outline"
+                      onClick={() => setOpenDialogId(null)}
+                    >
+                      <X size={14} /> Cancel
+                    </Button>
+
+                    <Button
+                      variant="violet"
+                      onClick={() => handleSendInvite(p.id)}
+                      disabled={isPending || !selectedEventId}
+                    >
+                      Send
+                    </Button>
+                  </AlertDialogFooter>
+                </AlertDialogContent>
+              </AlertDialog>
+            </div>
           ))}
         </div>
       )}
@@ -756,11 +755,10 @@ export default function MyAllEventParticipants({
                         {p.events?.map((e, index) => (
                           <span
                             key={`${e.eventId}-${index}`}
-                            className={`flex items-center gap-1 px-2 py-1 rounded-md text-xs font-medium ${
-                              e.invited
+                            className={`flex items-center gap-1 px-2 py-1 rounded-md text-xs font-medium ${e.invited
                                 ? "bg-yellow-100 text-yellow-800"
                                 : "bg-green-100 text-green-800"
-                            }`}
+                              }`}
                             title={
                               e.invited
                                 ? `Invitation Status: ${e.invitationStatus}`

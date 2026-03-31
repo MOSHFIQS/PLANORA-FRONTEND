@@ -461,7 +461,7 @@ const MyInvitationsCard = ({ invitations }: { invitations: Invitation[] }) => {
 
       {/* CARD VIEW */}
       {viewMode === "card" && (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {invitations.map((item) => {
             const { event, status } = item;
             const date = event?.dateTime ? new Date(event.dateTime) : null;
@@ -470,108 +470,108 @@ const MyInvitationsCard = ({ invitations }: { invitations: Invitation[] }) => {
 
             return (
               <Card
-  key={item.id}
-  className="p-3 rounded-4xl bg-muted/40 border-2 border-gray-300 flex flex-col gap-3"
->
-  {/* Image */}
-  <div className="relative h-60 w-full overflow-hidden rounded-2xl group">
-    {event?.images?.[0] && (
-      <AppImage
-        src={event.images[0]}
-        className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-      />
-    )}
+                key={item.id}
+                className="p-3 rounded-4xl bg-muted/40 border-2 border-gray-300 flex flex-col gap-3"
+              >
+                {/* Image */}
+                <div className="relative h-60 w-full overflow-hidden rounded-2xl group">
+                  {event?.images?.[0] && (
+                    <AppImage
+                      src={event.images[0]}
+                      className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    />
+                  )}
 
-    {/* Overlay */}
-    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/40 to-transparent pointer-events-none" />
+                  {/* Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/40 to-transparent pointer-events-none" />
 
-    {/* Type */}
-    {event?.type && (
-      <span className="absolute top-3 left-3 bg-white/80 backdrop-blur px-3 py-1 text-xs rounded-full font-medium">
-        {event.type}
-      </span>
-    )}
+                  {/* Type */}
+                  {event?.type && (
+                    <span className="absolute top-3 left-3 bg-white/80 backdrop-blur px-3 py-1 text-xs rounded-full font-medium">
+                      {event.type}
+                    </span>
+                  )}
 
-    {/* Status */}
-    <span className="absolute top-3 right-3 bg-white/80 backdrop-blur px-3 py-1 text-xs rounded-full">
-      {isAccepted
-        ? "Accepted"
-        : isPending
-        ? "Pending"
-        : "Rejected"}
-    </span>
-  </div>
+                  {/* Status */}
+                  <span className="absolute top-3 right-3 bg-white/80 backdrop-blur px-3 py-1 text-xs rounded-full">
+                    {isAccepted
+                      ? "Accepted"
+                      : isPending
+                        ? "Pending"
+                        : "Rejected"}
+                  </span>
+                </div>
 
-  {/* Content */}
-  <CardContent className="pl-2 flex items-center justify-between gap-3">
-    <div className="space-y-1">
-      <h3 className="font-semibold text-base line-clamp-1">
-        {event?.title}
-      </h3>
+                {/* Content */}
+                <CardContent className="pl-2 flex items-center justify-between gap-3">
+                  <div className="space-y-1">
+                    <h3 className="font-semibold text-base line-clamp-1">
+                      {event?.title}
+                    </h3>
 
-      {date && (
-        <p className="text-sm text-muted-foreground">
-          {format(date, "PPP • p")}
-        </p>
-      )}
-    </div>
+                    {date && (
+                      <p className="text-sm text-muted-foreground">
+                        {format(date, "PPP • p")}
+                      </p>
+                    )}
+                  </div>
 
-    {/* Price */}
-    <span className="text-lg font-bold text-purple-500 whitespace-nowrap">
-      {event?.fee === 0 ? "Free" : `${event?.fee} tk`}
-    </span>
-  </CardContent>
+                  {/* Price */}
+                  <span className="text-lg font-bold text-purple-500 whitespace-nowrap">
+                    {event?.fee === 0 ? "Free" : `${event?.fee} tk`}
+                  </span>
+                </CardContent>
 
-  {/* Footer */}
-  <CardFooter className="mt-auto p-0 w-full">
-    {isAccepted ? (
-      <Button
-        variant="violet"
-        className="w-full rounded-4xl"
-      >
-        <Link href={`invitations/${event.id}`}>
-          View Event
-        </Link>
-      </Button>
-    ) : (
-      <div className="flex w-full gap-2">
-        {event.fee === 0 ? (
-          <Button
-            className="flex-1 rounded-4xl"
-            onClick={() =>
-              handlePayment({ invitationId: item.id })
-            }
-          >
-            Join Free
-          </Button>
-        ) : (
-          <Button
-            className="flex-1 rounded-4xl"
-            disabled={loadingId === item.eventId}
-            onClick={() =>
-              handlePayment({ invitationId: item.id })
-            }
-          >
-            {loadingId === item.eventId
-              ? "Processing..."
-              : `Pay ${event.fee} tk`}
-          </Button>
-        )}
+                {/* Footer */}
+                <CardFooter className="mt-auto p-0 w-full">
+                  {isAccepted ? (
+                    <Button
+                      variant="violet"
+                      className="w-full rounded-4xl"
+                    >
+                      <Link href={`invitations/${event.id}`}>
+                        View Event
+                      </Link>
+                    </Button>
+                  ) : (
+                    <div className="flex w-full gap-2">
+                      {event.fee === 0 ? (
+                        <Button
+                          className="flex-1 rounded-4xl"
+                          onClick={() =>
+                            handlePayment({ invitationId: item.id })
+                          }
+                        >
+                          Join Free
+                        </Button>
+                      ) : (
+                        <Button
+                          className="flex-1 rounded-4xl"
+                          disabled={loadingId === item.eventId}
+                          onClick={() =>
+                            handlePayment({ invitationId: item.id })
+                          }
+                        >
+                          {loadingId === item.eventId
+                            ? "Processing..."
+                            : `Pay ${event.fee} tk`}
+                        </Button>
+                      )}
 
-        <Button
-          variant="destructive"
-          className="flex-1 rounded-4xl"
-          disabled={rejectingId === item.id}
-          onClick={() => handleReject(item.id)}
-        >
-          {rejectingId === item.id
-            ? "Rejecting..."
-            : "Reject"}
-        </Button>
-      </div>
-    )}
-  </CardFooter>
-</Card>
+                      <Button
+                        variant="destructive"
+                        className="flex-1 rounded-4xl"
+                        disabled={rejectingId === item.id}
+                        onClick={() => handleReject(item.id)}
+                      >
+                        {rejectingId === item.id
+                          ? "Rejecting..."
+                          : "Reject"}
+                      </Button>
+                    </div>
+                  )}
+                </CardFooter>
+              </Card>
             );
           })}
         </div>
@@ -638,8 +638,8 @@ const MyInvitationsCard = ({ invitations }: { invitations: Invitation[] }) => {
                           {isAccepted
                             ? "Accepted"
                             : isPending
-                            ? "Pending"
-                            : "Rejected"}
+                              ? "Pending"
+                              : "Rejected"}
                         </Badge>
                       </TableCell>
 
@@ -674,7 +674,7 @@ const MyInvitationsCard = ({ invitations }: { invitations: Invitation[] }) => {
                             )}
 
                             <Button
-                            size={"sm"}
+                              size={"sm"}
                               variant="destructive"
                               disabled={rejectingId === item.id}
                               onClick={() => handleReject(item.id)}

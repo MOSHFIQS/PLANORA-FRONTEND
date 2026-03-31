@@ -38,7 +38,7 @@ const EventDetailsSmart = ({ type, data }: Props) => {
 
   return (
     <div className="space-y-6 ">
-      <Card className="shadow-lg border">
+      <Card className=" border">
         {/* HEADER */}
         <CardHeader className="space-y-2">
           <CardTitle className="text-2xl font-semibold">
@@ -78,7 +78,7 @@ const EventDetailsSmart = ({ type, data }: Props) => {
 
         <div className="px-4 space-y-4 pt-5">
           {/* MAIN INFO */}
-          <Card className="flex flex-col md:flex-row md:text-start text-center justify-between items-center gap-6 px-4 bg-[#f7f7f7]">
+          <Card className="flex flex-col md:flex-row md:text-start text-center justify-between items-center gap-4 px-4 bg-[#f7f7f7]">
             <div className="space-y-3">
               {date && (
                 <p>
@@ -204,8 +204,8 @@ const EventDetailsSmart = ({ type, data }: Props) => {
 
         {!isFull && (
           <CardFooter className="px-4">
-            <Button variant={"orange"}
-              className={`w-full`}
+            <Button variant={"violet"}
+              className={`w-full rounded-full`}
               disabled={loadingId === event?.id || !event?.id}
               onClick={() => {
                 if (!event?.id) {

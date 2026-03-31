@@ -184,7 +184,7 @@ const MyParticipatedEventsCard = ({ myEvents }: Props) => {
 
       {/* CARD / GRID VIEW */}
       {viewMode === "card" && (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {myEvents.map((item) => {
             const { event, payment, status } = item;
             const date = event?.dateTime ? new Date(event.dateTime) : null;
@@ -194,101 +194,101 @@ const MyParticipatedEventsCard = ({ myEvents }: Props) => {
 
             return (
               <Card
-  key={item.id}
-  className="p-3 rounded-4xl bg-muted/40 border-2 border-gray-300 flex flex-col gap-3"
->
-  {/* Image Section */}
-  <div className="relative h-60 w-full overflow-hidden rounded-2xl group">
-    {event?.images?.[0] && (
-      <AppImage
-        src={event.images[0]}
-        className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-      />
-    )}
+                key={item.id}
+                className="p-3 rounded-4xl bg-muted/40 border-2 border-gray-300 flex flex-col gap-3"
+              >
+                {/* Image Section */}
+                <div className="relative h-60 w-full overflow-hidden rounded-2xl group">
+                  {event?.images?.[0] && (
+                    <AppImage
+                      src={event.images[0]}
+                      className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    />
+                  )}
 
-    {/* Black Gradient Overlay */}
-    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/40 to-transparent pointer-events-none" />
+                  {/* Black Gradient Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/40 to-transparent pointer-events-none" />
 
-    {/* Status Badge (top right) */}
-    <span className="absolute top-3 right-3 bg-white/80 backdrop-blur px-3 py-1 text-xs rounded-full">
-      {isApproved ? "Approved" : "Pending"}
-    </span>
+                  {/* Status Badge (top right) */}
+                  <span className="absolute top-3 right-3 bg-white/80 backdrop-blur px-3 py-1 text-xs rounded-full">
+                    {isApproved ? "Approved" : "Pending"}
+                  </span>
 
-    {/* Optional Type Badge (top left) */}
-    {event?.type && (
-      <span className="absolute top-3 left-3 bg-white/80 backdrop-blur px-3 py-1 text-xs rounded-full font-medium">
-        {event.type}
-      </span>
-    )}
-  </div>
+                  {/* Optional Type Badge (top left) */}
+                  {event?.type && (
+                    <span className="absolute top-3 left-3 bg-white/80 backdrop-blur px-3 py-1 text-xs rounded-full font-medium">
+                      {event.type}
+                    </span>
+                  )}
+                </div>
 
-  {/* Content */}
-  <CardContent className="pl-2 flex items-center justify-between gap-3">
-    <div className="space-y-1">
-      {/* Date */}
-      {date && (
-        <p className="text-sm text-muted-foreground">
-          {format(date, "PPP • p")}
-        </p>
-      )}
+                {/* Content */}
+                <CardContent className="pl-2 flex items-center justify-between gap-3">
+                  <div className="space-y-1">
+                    {/* Date */}
+                    {date && (
+                      <p className="text-sm text-muted-foreground">
+                        {format(date, "PPP • p")}
+                      </p>
+                    )}
 
-      {/* Title */}
-      <h3 className="font-semibold text-base line-clamp-1">
-        {event?.title}
-      </h3>
+                    {/* Title */}
+                    <h3 className="font-semibold text-base line-clamp-1">
+                      {event?.title}
+                    </h3>
 
-      {/* Location */}
-      {event?.venue && (
-        <p className="text-sm text-muted-foreground flex items-center gap-1 line-clamp-1">
-          <Map className="w-4 h-4" />
-          {event.venue}
-        </p>
-      )}
-    </div>
+                    {/* Location */}
+                    {event?.venue && (
+                      <p className="text-sm text-muted-foreground flex items-center gap-1 line-clamp-1">
+                        <Map className="w-4 h-4" />
+                        {event.venue}
+                      </p>
+                    )}
+                  </div>
 
-    {/* Price */}
-    <span className="text-lg font-bold text-purple-500 whitespace-nowrap">
-      {event?.fee === 0 ? "Free" : `$${event?.fee}`}
-    </span>
-  </CardContent>
+                  {/* Price */}
+                  <span className="text-lg font-bold text-purple-500 whitespace-nowrap">
+                    {event?.fee === 0 ? "Free" : `$${event?.fee}`}
+                  </span>
+                </CardContent>
 
-  {/* Footer / Actions */}
-  <CardFooter className="mt-auto p-0">
-    {isApproved ? (
-      <div className="flex gap-2 w-full">
-        <Button asChild className="flex-1 rounded-4xl" variant="violet">
-          <Link href={`/dashboard/participants/my-participated-events/${event?.id}`}>
-            View Event
-          </Link>
-        </Button>
+                {/* Footer / Actions */}
+                <CardFooter className="mt-auto p-0">
+                  {isApproved ? (
+                    <div className="flex gap-2 w-full">
+                      <Button asChild className="flex-1 rounded-4xl" variant="violet">
+                        <Link href={`/dashboard/participants/my-participated-events/${event?.id}`}>
+                          View Event
+                        </Link>
+                      </Button>
 
-        {event?.id && (
-          <ReviewDialog eventId={event.id}>
-            <Button
-              disabled={isReviewed}
-              className="flex-1 rounded-4xl"
-            >
-              {isReviewed ? "Reviewed" : "Review"}
-            </Button>
-          </ReviewDialog>
-        )}
-      </div>
-    ) : (
-      <Button
-        variant="secondary"
-        className="w-full rounded-4xl"
-        disabled={loadingId === item.eventId}
-        onClick={() =>
-          handlePayment({
-            eventId: item.eventId,
-          })
-        }
-      >
-        {loadingId === item.eventId ? "Processing..." : "Pay Now"}
-      </Button>
-    )}
-  </CardFooter>
-</Card>
+                      {event?.id && (
+                        <ReviewDialog eventId={event.id}>
+                          <Button
+                            disabled={isReviewed}
+                            className="flex-1 rounded-4xl"
+                          >
+                            {isReviewed ? "Reviewed" : "Review"}
+                          </Button>
+                        </ReviewDialog>
+                      )}
+                    </div>
+                  ) : (
+                    <Button
+                      variant="secondary"
+                      className="w-full rounded-4xl"
+                      disabled={loadingId === item.eventId}
+                      onClick={() =>
+                        handlePayment({
+                          eventId: item.eventId,
+                        })
+                      }
+                    >
+                      {loadingId === item.eventId ? "Processing..." : "Pay Now"}
+                    </Button>
+                  )}
+                </CardFooter>
+              </Card>
             );
           })}
         </div>
