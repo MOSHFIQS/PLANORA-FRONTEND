@@ -67,9 +67,9 @@ const Navbar = () => {
      }
 
      return (
-          <section className="py-6 border-b sticky top-0 z-50 bg-[#f7f7f7] ">
+          <section className="py-6 border-b sticky top-0 z-50 bg-[#F3F2EC] ">
                <div>
-                    {/* ================= DESKTOP ================= */}
+                 
                     <nav className="hidden items-center justify-between lg:flex px-4">
 
                          <div className="flex items-center justify-center gap-10">
@@ -105,19 +105,20 @@ const Navbar = () => {
                                    placeholder="Search Events..."
                                    value={search}
                                    onChange={(e) => handleSearch(e.target.value)}
-                                   className="w-56 bg-white"
+                                   className="w-56 bg-white rounded-full pl-5"
                               />
 
                               {user?.id ? (
                                    <>
                                         <Button
                                              variant="outline"
+                                             className="rounded-full"
                                              onClick={() => router.push("/dashboard")}
                                         >
                                              Dashboard
                                         </Button>
 
-                                        <Button variant="outline" onClick={handleLogout}>
+                                        <Button variant="outline" className="rounded-full" onClick={handleLogout}>
                                              Logout
                                         </Button>
                                         <div className="rounded-full border border-gray-300 w-[35px] h-[35px] overflow-hidden">
@@ -135,11 +136,11 @@ const Navbar = () => {
                                    </>
                               ) : (
                                    <>
-                                        <Button asChild variant="outline">
+                                        <Button asChild variant="outline" className="rounded-full">
                                              <Link href={`/login?redirect=${pathname}`}>Login</Link>
                                         </Button>
 
-                                        <Button asChild>
+                                        <Button asChild variant={"outline"} className="rounded-full">
                                              <Link href="/register">Register</Link>
                                         </Button>
                                    </>
@@ -203,14 +204,15 @@ const Navbar = () => {
                                                   <>
                                                        <Button
                                                             variant="violet"
-                                                            className="w-full"
+                                                            className="w-full rounded-full"
+
                                                             onClick={() => router.push("/dashboard")}
                                                        >
                                                             Dashboard
                                                        </Button>
 
                                                        <Button
-                                                            className="w-full"
+                                                            className="w-full rounded-full"
                                                             onClick={handleLogout}
                                                        >
                                                             Logout
@@ -218,13 +220,13 @@ const Navbar = () => {
                                                   </>
                                              ) : (
                                                   <>
-                                                       <Button asChild variant="outline" className="w-full">
+                                                       <Button asChild variant="outline" className="w-full rounded-full">
                                                             <Link href={`/login?redirect=${pathname}`}>
                                                                  Login
                                                             </Link>
                                                        </Button>
 
-                                                       <Button asChild className="w-full">
+                                                       <Button asChild className="w-full rounded-full">
                                                             <Link href="/register">Register</Link>
                                                        </Button>
                                                   </>

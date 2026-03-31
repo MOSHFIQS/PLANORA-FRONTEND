@@ -31,7 +31,7 @@ export default function MyTickets({ data }: Props) {
       {data.map((ticket) => (
         <Card
   key={ticket.id}
-  className="p-4 rounded-4xl bg-muted/40 border-2 border-gray-300 flex flex-col items-center justify-center gap-4"
+  className="p-4 rounded-4xl  border-2 border-gray-300 flex flex-col items-center justify-center gap-4"
 >
   <CardContent className="p-0 flex flex-col items-center gap-4">
     

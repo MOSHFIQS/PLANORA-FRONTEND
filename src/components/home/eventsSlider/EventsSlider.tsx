@@ -58,7 +58,7 @@ export default function EventsSlider({ events }: Props) {
             return (
               <Card
                 key={event.id}
-                className="p-3 rounded-4xl bg-muted/40 border shadow flex flex-col gap-3"
+                className="p-3 rounded-4xl  border shadow flex flex-col gap-3"
               >
                 {/* Image Section */}
                 <Link
@@ -151,7 +151,7 @@ export default function EventsSlider({ events }: Props) {
                   <CarouselItem key={event.id} className="pl-3 basis-1/1 sm:basis-1/2 md:basis-1/2 lg:basis-1/3 xl:basis-1/4 ">
                     <Card
                       key={event.id}
-                      className="p-3 rounded-4xl bg-muted/40 border-2  border-gray-300 flex flex-col gap-3"
+                      className="p-3 rounded-4xl  border-2  border-gray-300 flex flex-col gap-3"
                     >
                       {/* Image Section */}
                       <Link

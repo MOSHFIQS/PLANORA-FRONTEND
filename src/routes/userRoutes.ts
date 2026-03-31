@@ -57,7 +57,7 @@ export const userRoutes: Route[] = [
         icon: Users,
       },
       {
-        title: "My Participated Events",
+        title: "Participated Events",
         url: "/dashboard/participants/my-participated-events",
         icon: Heart,
       },

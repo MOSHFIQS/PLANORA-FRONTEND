@@ -471,7 +471,7 @@ const MyInvitationsCard = ({ invitations }: { invitations: Invitation[] }) => {
             return (
               <Card
                 key={item.id}
-                className="p-3 rounded-4xl bg-muted/40 border-2 border-gray-300 flex flex-col gap-3"
+                className="p-3 rounded-4xl  border-2 border-gray-300 flex flex-col gap-3"
               >
                 {/* Image */}
                 <div className="relative h-60 w-full overflow-hidden rounded-2xl group">

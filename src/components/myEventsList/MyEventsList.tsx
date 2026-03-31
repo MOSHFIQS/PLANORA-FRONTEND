@@ -298,7 +298,7 @@ export default function MyEventsList({ myEvents }: { myEvents: Event[] }) {
           {myEvents?.map((event) => (
             <Card
               key={event.id}
-              className="p-3 rounded-4xl bg-muted/40 border-2 border-gray-300 flex flex-col gap-3"
+              className="p-3 rounded-4xl  border-2 border-gray-300 flex flex-col gap-3"
             >
               {/* Image */}
               <div className="relative h-52 w-full overflow-hidden rounded-2xl group">

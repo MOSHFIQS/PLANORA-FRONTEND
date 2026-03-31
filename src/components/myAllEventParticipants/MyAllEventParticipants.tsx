@@ -567,7 +567,7 @@ export default function MyAllEventParticipants({
           {participants.map((p) => (
             <div
               key={p.id}
-              className="p-4 rounded-4xl bg-muted/40 border-2 border-gray-300 flex flex-col justify-between gap-4"
+              className="p-4 rounded-4xl  border-2 border-gray-300 flex flex-col justify-between gap-4"
             >
               <div className="flex flex-col gap-3">
                 {/* Header */}

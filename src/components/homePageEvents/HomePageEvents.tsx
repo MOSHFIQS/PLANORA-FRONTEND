@@ -104,7 +104,7 @@ const HomePageEvents = ({ events }: Props) => {
 
           <Card
             key={event.id}
-            className="p-3 rounded-4xl bg-muted/40 border shadow flex flex-col gap-3"
+            className="p-3 rounded-4xl  border shadow flex flex-col gap-3"
           >
             {/* Image Section */}
             <Link

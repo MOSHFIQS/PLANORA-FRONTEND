@@ -311,7 +311,7 @@ const UpdateEventForm = ({ event, categories }: Props) => {
                                                        }
                                                   >
                                                        <PopoverTrigger asChild>
-                                                            <Button variant="outline" className="w-32 justify-center font-normal   bg-[#f7f7f7]">
+                                                            <Button variant="outline" className="w-32 justify-center font-normal   bg-[#F3F2EC]">
                                                                  {selectedDate
                                                                       ? format(
                                                                            selectedDate,
