@@ -37,7 +37,7 @@ export default function CarouselPlugin({ banners }: { banners: Banner[] }) {
           .sort((a, b) => a.positionOrder - b.positionOrder)
 
      return (
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-2 border rounded-xl overflow-hidden">
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-2 border rounded-xl overflow-hidden ">
 
                {/* Styles */}
                <style jsx>{`

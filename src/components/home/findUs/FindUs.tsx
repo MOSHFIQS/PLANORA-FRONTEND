@@ -3,7 +3,7 @@ import React from 'react';
 
 const Map = () => {
      return (
-          <div className="w-full py-3 md:py-0">
+          <div className="w-full py-3 mb-20 md:py-0">
                {/* Heading Section */}
                <SectionHeader
                     align="center"
@@ -13,7 +13,7 @@ const Map = () => {
 
 
                {/* Info + Map Section */}
-               <div className="w-full relative flex flex-col lg:flex-row items-center justify-center gap-5  py-2 bg-white dark:bg-black text-white ">
+               <div className="w-full relative flex flex-col lg:flex-row items-center justify-center gap-5  py-2  dark:bg-black text-white ">
                     <div className="w-full h-96 md:h-[600px] lg:h-[700px] relative overflow-hidden  border-4 dark:border-[#b99d75]   transition-all duration-500 group">
                          {/* Animated border glow */}
                          <div className="absolute inset-0  border-2 border-transparent group-hover:border-[#b99d75] animate-pulse pointer-events-none z-10"></div>
