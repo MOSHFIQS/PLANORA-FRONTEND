@@ -219,7 +219,7 @@ import {
 } from "@/components/ui/table";
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Pencil, Trash2, Eye, Plus, MessageSquareText } from "lucide-react";
+import { Pencil, Trash2, Eye, Plus, MessageSquareText, Map } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import Link from "next/link";
@@ -286,108 +286,121 @@ export default function AllEventsList({ myEvents }: { myEvents: Event[] }) {
                                         : "Switch to Table View"}
                               </Button>
 
-                              {/* CREATE */}
-                              <Button onClick={() => router.push("/dashboard/event/create")}>
-                                   <Plus className="w-4 h-4 mr-2" />
-                                   Create Event
-                              </Button>
+
                          </div>
                     </CardHeader>
                </Card>
 
                {/* ================= CARD VIEW ================= */}
                {viewMode === "card" && (
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                          {myEvents?.map((event) => (
-                              <Card key={event.id} className="flex flex-col overflow-hidden pt-0">
-                                   {/* IMAGE */}
-                                   <div className="h-52 w-full overflow-hidden border-b">
+                              <Card key={event.id} className="p-3 rounded-4xl border  flex flex-col gap-3  ">
+                                   {/* IMAGE + OVERLAY + BADGES */}
+                                   <div className="relative h-52 xl:h-64 w-full overflow-hidden rounded-2xl group">
                                         {event?.images?.[0] ? (
                                              <AppImage
                                                   src={event.images[0]}
-                                                  className="h-full w-full object-cover hover:scale-105 duration-300"
+                                                  alt={event.title}
+                                                  className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
                                              />
                                         ) : (
                                              <div className="h-full flex items-center justify-center text-sm text-muted-foreground">
                                                   No Image
                                              </div>
                                         )}
+
+                                        {/* Black Gradient Overlay */}
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/40 to-transparent pointer-events-none" />
+
+                                        {/* Top Left Badge */}
+                                        {event.type && (
+                                             <span className="absolute top-3 left-3 bg-white/80 backdrop-blur px-3 py-1 text-xs rounded-full font-medium">
+                                                  {event.type}
+                                             </span>
+                                        )}
+
+                                        {/* Top Right Status */}
+                                        <span className="absolute top-3 right-3 bg-white/80 backdrop-blur px-3 py-1 text-xs rounded-full flex items-center gap-1">
+                                             <span className="w-2 h-2 bg-pink-500 rounded-full"></span>
+                                             Active
+                                        </span>
                                    </div>
 
                                    {/* CONTENT */}
-                                   <CardContent className="space-y-2 pt-4">
-                                        <h3 className="font-semibold line-clamp-1">
-                                             {event.title}
-                                        </h3>
+                                   <CardContent className="pl-2 space-y-2 flex flex-col justify-between">
+                                        {/* Date */}
+                                        {event.dateTime && (
+                                             <p className="text-sm text-muted-foreground">
+                                                  {new Date(event.dateTime).toLocaleString()}
+                                             </p>
+                                        )}
 
-                                        <p className="text-sm text-muted-foreground">
-                                             {new Date(event.dateTime).toLocaleString()}
-                                        </p>
+                                        {/* Title */}
+                                        <h3 className="font-semibold text-base line-clamp-1">{event.title}</h3>
 
-                                        <div className="flex justify-between text-sm">
-                                             <span>{event.type}</span>
-                                             <span>{event.fee} tk</span>
+                                        {/* Location */}
+                                        {event.venue && (
+                                             <p className="text-sm text-muted-foreground flex items-center gap-1">
+                                                  <Map className="w-4 h-4" />
+                                                  {event.venue}
+                                             </p>
+                                        )}
+
+                                        {/* Type + Fee */}
+                                        <div className="flex justify-between items-center mt-1">
+                                             {event.type && (
+                                                  <span className="bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded-full font-medium">
+                                                       {event.type}
+                                                  </span>
+                                             )}
+                                             <span className="text-lg font-bold text-purple-500">
+                                                  {event.fee === 0 ? "Free" : `${event.fee} tk`}
+                                             </span>
                                         </div>
 
-                                        <p className="text-xs text-muted-foreground">
-                                             {event.visibility}
-                                        </p>
+                                        {/* View Event Button */}
+
                                    </CardContent>
 
-                                   {/* FOOTER */}
-                                   <CardFooter className="mt-auto flex gap-2">
+                                   {/* ADMIN FOOTER */}
+                                   <CardFooter className="flex gap-3 px-0">
+                                        {/* VIEW BUTTON */}
                                         <Button
-                                             size="icon"
-                                             variant="outline"
-                                             className="flex-1"
-                                             onClick={() =>
-                                                  router.push(`/admin-dashboard/events/${event.id}`)
-                                             }
+                                             className="flex-1 rounded-4xl"
+                                             variant="violet"
+                                             onClick={() => router.push(`/admin-dashboard/events/${event.id}`)}
                                         >
-                                             <Eye className="w-4 h-4" />
+                                             View Event Info
                                         </Button>
 
-                                        
-
-
-                                        {/* DELETE */}
+                                        {/* DELETE BUTTON */}
                                         <AlertDialog
                                              open={openDialogId === event.id}
-                                             onOpenChange={(isOpen) =>
-                                                  !isOpen && setOpenDialogId(null)
-                                             }
+                                             onOpenChange={(isOpen) => !isOpen && setOpenDialogId(null)}
                                         >
                                              <AlertDialogTrigger asChild>
                                                   <Button
-                                                       size="icon"
-                                                       className="flex-1"
+                                                       className="flex-1 rounded-4xl"
                                                        variant="destructive"
                                                        onClick={() => setOpenDialogId(event.id)}
                                                   >
-                                                       <Trash2 className="w-4 h-4" />
+                                                       Delete Event
                                                   </Button>
                                              </AlertDialogTrigger>
 
                                              <AlertDialogContent>
                                                   <AlertDialogHeader>
-                                                       <AlertDialogTitle>
-                                                            Delete Event?
-                                                       </AlertDialogTitle>
-
+                                                       <AlertDialogTitle>Delete Event?</AlertDialogTitle>
                                                        <AlertDialogDescription>
-                                                            Are you sure you want to delete "
-                                                            {event.title}"?
+                                                            Are you sure you want to delete "{event.title}"?
                                                        </AlertDialogDescription>
                                                   </AlertDialogHeader>
 
-                                                  <AlertDialogFooter>
-                                                       <Button
-                                                            variant="outline"
-                                                            onClick={() => setOpenDialogId(null)}
-                                                       >
+                                                  <AlertDialogFooter className="flex justify-end gap-2">
+                                                       <Button variant="outline" onClick={() => setOpenDialogId(null)}>
                                                             Cancel
                                                        </Button>
-
                                                        <Button
                                                             variant="destructive"
                                                             onClick={() => handleDelete(event.id)}
