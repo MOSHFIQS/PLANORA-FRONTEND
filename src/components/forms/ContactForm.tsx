@@ -34,7 +34,7 @@ const ContactForm = () => {
   };
 
   return (
-    <div className="px-2">
+    <div className="px-2 pb-24">
       <SectionHeader
         align="center"
         title="Get In Touch With Us"
@@ -46,22 +46,22 @@ const ContactForm = () => {
           className="grid grid-cols-1 md:grid-cols-2 gap-6"
           onSubmit={sendEmail}
         >
-          <input type="text" name="name" placeholder="Enter Your Name" className="p-3 border" />
-          <input type="email" name="email" placeholder="Enter Your Email" className="p-3 border" />
-          <input type="text" name="phone" placeholder="Enter Your Phone no" className="p-3 border" />
-          <input type="text" name="subject" placeholder="Subject" className="p-3 border" />
+          <input type="text" name="name" placeholder="Enter Your Name" className="p-3 border w-full" />
+          <input type="email" name="email" placeholder="Enter Your Email" className="p-3 border w-full" />
+          <input type="text" name="phone" placeholder="Enter Your Phone no" className="p-3 border w-full" />
+          <input type="text" name="subject" placeholder="Subject" className="p-3 border w-full" />
 
           <textarea
             name="message"
             placeholder="Additional Message"
             rows={4}
-            className="p-3 border col-span-2"
+            className="p-3 border w-full col-span-1 md:col-span-2"
           />
 
           <Button
             variant="violet"
             type="submit"
-            className="col-span-2 text-white py-3 font-medium uppercase"
+            className="col-span-1 md:col-span-2 text-white py-3 font-medium uppercase"
           >
             Send Message Now
           </Button>

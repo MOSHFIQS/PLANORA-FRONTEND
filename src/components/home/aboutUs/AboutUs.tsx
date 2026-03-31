@@ -76,7 +76,7 @@ export default function AboutUs({ statData }: { statData: PublicStats }) {
 
       {/* STATS SECTION (WITH COUNTUP) */}
       <section className="py-16 bg-muted/80">
-        <div className="max-w-6xl mx-auto px-4 grid grid-cols-2 md:grid-cols-5 gap-6 text-center">
+        <div className="max-w-6xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
 
           <div>
             <h2 className="text-5xl font-extrabold text-orange-500">
@@ -115,7 +115,7 @@ export default function AboutUs({ statData }: { statData: PublicStats }) {
             <p className="text-lg text-muted-foreground">Organizers</p>
           </div>
 
-          <div>
+          {/* <div>
             <h2 className="text-5xl font-extrabold text-orange-500">
               <CountUp
                 end={stats?.totalParticipants || 0}
@@ -125,7 +125,7 @@ export default function AboutUs({ statData }: { statData: PublicStats }) {
               />
             </h2>
             <p className="text-lg text-muted-foreground">Participants</p>
-          </div>
+          </div> */}
 
           <div>
             <h2 className="text-5xl font-extrabold text-orange-500">
