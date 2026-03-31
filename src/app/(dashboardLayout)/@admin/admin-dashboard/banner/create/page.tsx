@@ -5,7 +5,7 @@ import CreateBanner from "@/components/admin/banner/create/CreateBanner";
 const CreateBannerPage = async () => {
   const res = await getFeaturedEventsAction();
 
-  console.log("res", res);
+  // console.log("res", res);
   
     if (!res?.ok) {
       return (

@@ -4,7 +4,7 @@ import AdminStatsCard from '@/components/admin/adminStatsCard/AdminStatsCard';
 const AdminStatsPage = async () => {
 
      const res = await getAdminStatsAction();
-     console.log(res.data);
+     // console.log(res.data);
 
      if (!res?.ok) {
           return (

@@ -33,7 +33,7 @@ export async function logInAction(data: { email: string; password: string }) {
 export async function registerAction(data: { email: string; password: string }) {
      try {
           const res = await authService.register(data);
-          console.log(res);
+          // console.log(res);
 
           if (!res?.ok) {
                return {

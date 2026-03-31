@@ -68,7 +68,7 @@ export default function UpdateBanner({ banner }: { banner: any }) {
                          isActive: value.isActive,
                     };
 
-                    console.log(bannerPayload);
+                    // console.log(bannerPayload);
 
                     const res = await updateBannerAction(banner.id, bannerPayload);
 

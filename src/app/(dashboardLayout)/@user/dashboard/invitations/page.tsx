@@ -12,7 +12,7 @@ const MyInvitationsPage = async ({ searchParams }: { searchParams: Promise<{ pag
      const { page, limit } = await searchParams;
      const res = await getMyInvitationsAction(page, limit);
      const invitations = res?.data?.data as Invitation[];
-     console.log(res);
+     // console.log(res);
 
      return (
           <div className="space-y-6 h-full flex flex-col justify-between">

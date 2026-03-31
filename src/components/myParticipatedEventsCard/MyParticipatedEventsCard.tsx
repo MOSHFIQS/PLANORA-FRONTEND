@@ -155,7 +155,7 @@ type Props = {
 };
 
 const MyParticipatedEventsCard = ({ myEvents }: Props) => {
-  console.log(myEvents);
+  // console.log(myEvents);
   const { handlePayment, loadingId } = usePayment();
   const [viewMode, setViewMode] = useState<"card" | "table">("card");
 

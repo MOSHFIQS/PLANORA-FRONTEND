@@ -81,10 +81,10 @@ export default function CreateBanner({
                          eventId: selectedEvent?.id,
                     };
 
-                    console.log(bannerPayload);
+                    // console.log(bannerPayload);
 
                     const res = await createBannerAction(bannerPayload);
-                    console.log(res);
+                    // console.log(res);
 
                     if (!res?.ok) throw new Error(res?.message);
 

@@ -4,7 +4,7 @@ import MyProfile from '@/components/myProfile/MyProfile';
 const AdminProfilePage = async () => {
 
      const res = await getMyProfileAction();
-     console.log(res.data);
+     // console.log(res.data);
 
      if (!res?.ok) {
           return (

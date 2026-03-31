@@ -6,7 +6,7 @@ const AllAdminsPage = async ({ searchParams }: { searchParams: Promise<{ page?: 
 
      const { page, limit } = await searchParams;
      const res = await getAllAdminsAction(page, limit);
-     console.log(res.data);
+     // console.log(res.data);
 
      if (!res?.ok) {
           return (

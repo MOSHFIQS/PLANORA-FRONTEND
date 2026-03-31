@@ -17,7 +17,7 @@ import { deleteCategoryAction } from "@/actions/category.action";
 import { AppImage } from "@/components/appImage/AppImage";
 
 export default function AllCategories({ categories }: any) {
-     console.log(categories);
+     // console.log(categories);
      const router = useRouter();
      const [openDialogId, setOpenDialogId] = React.useState<string | null>(null);
      const [isPending, startTransition] = useTransition();
@@ -26,7 +26,7 @@ export default function AllCategories({ categories }: any) {
           startTransition(async () => {
                try {
                     const res = await deleteCategoryAction(id);
-                    console.log(res.ok);
+                    // console.log(res.ok);
                     if (!res.ok) {
                          throw new Error(res.message);
                     }

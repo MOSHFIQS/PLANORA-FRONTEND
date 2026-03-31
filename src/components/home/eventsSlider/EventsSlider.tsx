@@ -21,7 +21,7 @@ type Props = {
 };
 
 export default function EventsSlider({ events }: Props) {
-  console.log(events);
+  // console.log(events);
 
   const router = useRouter();
   const { user } = useAuth();

@@ -33,7 +33,7 @@ const EventDetailsSmart = ({ type, data }: Props) => {
   const user = isFull ? data?.user : null;
   const status = isFull ? data?.status : null;
 
-  console.log(payment);
+  // console.log(payment);
 
   const date = event?.dateTime ? new Date(event.dateTime) : null;
   const isFree = event?.fee === 0;

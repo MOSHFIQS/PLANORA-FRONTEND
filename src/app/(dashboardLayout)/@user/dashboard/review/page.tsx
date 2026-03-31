@@ -4,7 +4,7 @@ import EventReviews from '@/components/eventReviews/EventReviews';
 
 const MyReviewsPage = async () => {
      const res = await getMyReviews();
-     console.log(res);
+     // console.log(res);
 
      if (!res?.ok) {
           return (

@@ -9,7 +9,7 @@ const AllEventsPage = async ({ searchParams }: { searchParams: Promise<{ search?
      const { search, categoryId, page, limit } = await searchParams
      const searchText = search || "";
 
-     console.log("catId", categoryId, searchText);
+     // console.log("catId", categoryId, searchText);
      const res = await getAllEventsAction(searchText, categoryId, page, limit);
 
      const categoryRes = await getAllCategoriesAction();

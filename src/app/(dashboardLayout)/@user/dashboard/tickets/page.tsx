@@ -5,7 +5,7 @@ import MyTickets from '@/components/myTickets/MyTickets';
 const MyTicketsPage = async () => {
 
      const res = await getMyTicketsAction();
-     console.log(res.data);
+     // console.log(res.data);
 
      if (!res?.ok) {
           return (

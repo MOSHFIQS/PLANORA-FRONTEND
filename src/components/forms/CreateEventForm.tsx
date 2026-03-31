@@ -47,7 +47,7 @@ type Category = {
 
 
 const CreateEventForm = ({ categories }: { categories: Category[] }) => {
-     console.log(categories);
+     // console.log(categories);
      const router = useRouter();
      const eventImages = useImageUpload({ max: 10 });
      const [datePickerOpen, setDatePickerOpen] = useState(false);
@@ -90,7 +90,7 @@ const CreateEventForm = ({ categories }: { categories: Category[] }) => {
                               .filter((img) => !img.imageUploading)
                               .map((img) => img.img),
                     };
-                    console.log(payload);
+                    // console.log(payload);
 
 
                     const res = await createEventAction(payload);
@@ -98,7 +98,7 @@ const CreateEventForm = ({ categories }: { categories: Category[] }) => {
                          toast.error(res?.message, { id: toastId });
                          return;
                     }
-                    console.log(res);
+                    // console.log(res);
                     toast.success("Event created successfully", { id: toastId });
                     router.push("/dashboard/event");
                } catch (err: any) {

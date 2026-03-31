@@ -67,7 +67,7 @@ export async function updateUserStatusAction(
   try {
     const res = await adminService.updateUserStatus(id, payload);
     revalidatePath("/admin-dashboard/users");
-    console.log("res", res);
+    // console.log("res", res);
 
     if (!res?.ok) {
       return {

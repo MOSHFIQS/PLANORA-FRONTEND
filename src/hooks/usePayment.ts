@@ -28,7 +28,7 @@ export const usePayment = () => {
     try {
       const res = await initiatePaymentAction(payload);
 
-      console.log(res);
+      // console.log(res);
       if (!res?.ok) {
         toast.error(res?.message || "Failed", { id: toastId });
         setLoadingId(null);

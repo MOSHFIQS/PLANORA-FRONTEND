@@ -4,11 +4,11 @@ import EventDetailsSmart from "@/components/eventDetailsSmart/EventDetailsSmart"
 
 const MyParticipatedEventDetailsPage = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params;
-  console.log(id);
+  // console.log(id);
   const res = await getSingleEventPublicAction(id);
-  console.log(res);
+  // console.log(res);
   const event = res?.ok ? res?.data : null;
-  console.log(event);
+  // console.log(event);
 
   if (!event) return <p className="p-6">Event not found</p>;
 

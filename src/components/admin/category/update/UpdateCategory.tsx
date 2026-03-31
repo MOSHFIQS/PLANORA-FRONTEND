@@ -22,7 +22,7 @@ export default function UpdateCategory({ category }: { category: any }) {
      const [loading, setLoading] = useState(false);
      const categoryImages = useImageUpload({ max: 1,defaultImages: [category?.image] });
 
-     console.log(categoryImages.images[0]?.img);
+     // console.log(categoryImages.images[0]?.img);
 
      const router = useRouter();
 
@@ -39,7 +39,7 @@ export default function UpdateCategory({ category }: { category: any }) {
                          ...value,
                          image: categoryImages.images[0]?.img
                     }
-                    console.log(payload);
+                    // console.log(payload);
 
 
 
@@ -52,7 +52,7 @@ export default function UpdateCategory({ category }: { category: any }) {
                     toast.success(res.message);
                     form.reset();
                } catch (err: any) {
-                    console.log(err);
+                    // console.log(err);
                     toast.error(err.message);
                } finally {
                     setLoading(false);

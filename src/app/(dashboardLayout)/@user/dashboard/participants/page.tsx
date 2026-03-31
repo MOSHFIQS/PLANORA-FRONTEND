@@ -13,8 +13,8 @@ const MyAllEventParticipantsPage = async () => {
      const eventsRes = await getMyEventsAction();
      const participants = res?.data 
      const events = eventsRes?.data?.data
-     console.log(participants);
-     console.log(events);
+     // console.log(participants);
+     // console.log(events);
 
      return (
           <MyAllEventParticipants

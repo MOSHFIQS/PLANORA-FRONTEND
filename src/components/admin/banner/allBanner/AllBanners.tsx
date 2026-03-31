@@ -27,7 +27,7 @@ import { AppImage } from "@/components/appImage/AppImage";
 import { format } from "date-fns";
 
 export default function AllBanners({ banners }: any) {
-     console.log(banners);
+     // console.log(banners);
      const router = useRouter();
 
      const [openDialogId, setOpenDialogId] = React.useState<string | null>(null);
@@ -119,7 +119,7 @@ export default function AllBanners({ banners }: any) {
 
                                                             startTransition(async () => {
                                                                  try {
-                                                                      console.log(isActive);
+                                                                      // console.log(isActive);
                                                                       const res = await updateBannerStatusAction(
                                                                            banner.id,
                                                                            isActive

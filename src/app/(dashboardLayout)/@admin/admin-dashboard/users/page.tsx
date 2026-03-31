@@ -8,7 +8,7 @@ const AllUsersPage = async ({ searchParams }: { searchParams: Promise<{ page?: n
 
      const { page, limit } = await searchParams;
      const res = await getAllUsersAction(page, limit);
-     console.log(res.data);
+     // console.log(res.data);
 
      if (!res?.ok) {
           return (

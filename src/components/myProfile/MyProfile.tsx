@@ -41,7 +41,7 @@ const MyProfile: React.FC<MyProfileProps> = ({ profileData }) => {
      const [isUpdating, setIsUpdating] = useState(false);
      const [newName, setNewName] = useState(profileData.name);
      const profileImage = useImageUpload({ max: 1 });
-     console.log(profileImage.images[0]?.img);
+     // console.log(profileImage.images[0]?.img);
      const [open, setOpen] = useState(false);
 
      const handleUpdate = async () => {

@@ -4,9 +4,9 @@ import EventReviews from '@/components/eventReviews/EventReviews';
 
 const OrganizersReviewsPage = async ({ params }: { params: Promise<{ id: string }> }) => {
      const { id } = await params
-     console.log(id);
+     // console.log(id);
      const res = await getOrganizerEventReviewsByEventId(id);
-     console.log(res);
+     // console.log(res);
 
      if (!res?.ok) {
           return (

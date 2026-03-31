@@ -6,7 +6,7 @@ import GlobalPagination from '@/components/shared/GlobalPagination';
 const AllPaymentsPage = async ({ searchParams }: { searchParams: Promise<{ page?: number; limit?: number }> }) => {
      const { page, limit } = await searchParams;
      const res = await getAllPaymentsAction(page, limit);
-     console.log(res.data);
+     // console.log(res.data);
 
      if (!res?.ok) {
           return (

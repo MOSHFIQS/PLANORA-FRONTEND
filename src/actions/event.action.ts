@@ -40,7 +40,7 @@ export async function getAllEventsAction(searchTerm?: string, categoryId?: strin
 export async function getSingleEventPublicAction(id: string) {
     try {
         const res = await eventService.getSingleEventPublic(id);
-        console.log("res", res);
+        // console.log("res", res);
 
         if (!res?.ok) {
             return {
@@ -90,7 +90,7 @@ export async function getOrganizersEventByIdAction(id: string) {
 export async function createEventAction(payload: any) {
     try {
         const res = await eventService.createEvent(payload);
-        console.log(res);
+        // console.log(res);
 
         if (!res?.ok) {
             return {
@@ -279,7 +279,7 @@ export async function updateFeaturedStatusAction(id: string, isFeatured: boolean
 export async function getFeaturedEventsAction() {
     try {
         const res = await eventService.getFeaturedEvents();
-        console.log(res);
+        // console.log(res);
 
         if (!res?.ok) {
             return {

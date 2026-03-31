@@ -22,7 +22,7 @@ export default function CreateCategory() {
      const [loading, setLoading] = useState(false);
      const categoryImages = useImageUpload({ max: 1 });
 
-     console.log(categoryImages.images[0]?.img);
+     // console.log(categoryImages.images[0]?.img);
 
      const router = useRouter();
 
@@ -52,7 +52,7 @@ export default function CreateCategory() {
                     toast.success(res.message);
                     form.reset();
                } catch (err: any) {
-                    console.log(err);
+                    // console.log(err);
                     toast.error(err.message);
                } finally {
                     setLoading(false);
