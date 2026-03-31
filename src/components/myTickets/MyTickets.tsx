@@ -30,32 +30,33 @@ export default function MyTickets({ data }: Props) {
     <div className="p-6 grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
       {data.map((ticket) => (
         <Card
-          key={ticket.id}
-          className="shadow-md border rounded flex flex-col items-center justify-center "
-        >
-          <CardContent className="flex flex-col items-center gap-4">
-            
-            {/* Event Name */}
-            <h2 className="text-lg font-semibold text-center">
-              {ticket.event?.title}
-            </h2>
+  key={ticket.id}
+  className="p-4 rounded-4xl bg-muted/40 border-2 border-gray-300 flex flex-col items-center justify-center gap-4"
+>
+  <CardContent className="p-0 flex flex-col items-center gap-4">
+    
+    {/* Event Name */}
+    <h2 className="text-base font-semibold text-center line-clamp-2">
+      {ticket.event?.title}
+    </h2>
 
-            {/* QR Code */}
-            <QRCodeCanvas value={ticket.qrCode} size={160} />
+    {/* QR Wrapper (styled like image container) */}
+    <div className="relative p-3 rounded-2xl bg-white border shadow-sm">
+      <QRCodeCanvas value={ticket.qrCode} size={140} />
+    </div>
 
-            {/* Status */}
-            <Badge
-              variant="outline"
-              className={
-                ticket.status === "VALID"
-                  ? "text-green-600 border-green-600"
-                  : "text-red-500 border-red-500"
-              }
-            >
-              {ticket.status}
-            </Badge>
-          </CardContent>
-        </Card>
+    {/* Status */}
+    <span
+      className={`px-4 py-1 rounded-full text-xs font-medium ${
+        ticket.status === "VALID"
+          ? "bg-green-100 text-green-700"
+          : "bg-red-100 text-red-600"
+      }`}
+    >
+      {ticket.status}
+    </span>
+  </CardContent>
+</Card>
       ))}
     </div>
   );

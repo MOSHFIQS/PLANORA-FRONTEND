@@ -66,22 +66,27 @@ export default function GlobalPagination({
   return (
     <div className="flex items-center justify-between gap-4">
       {/* LIMIT */}
-      <Field orientation="horizontal" className="w-fit">
-        <FieldLabel htmlFor="select-rows-per-page">
-          Rows per page
+      <Field
+        orientation="horizontal"
+        className="w-fit items-center gap-2 px-2 py-1 rounded-lg border bg-[#eef0ff] dark:bg-white/5 backdrop-blur-sm"
+      >
+        <FieldLabel
+          htmlFor="select-rows-per-page"
+          className="text-xs text-gray-500 dark:text-gray-400"
+        >
+          Rows
         </FieldLabel>
 
-        <Select
-          value={String(limit)}
-          onValueChange={handleLimitChange}
-        >
-          <SelectTrigger className="w-20" id="select-rows-per-page">
-            <SelectValue />
+        <Select value={String(limit)} onValueChange={handleLimitChange}>
+          <SelectTrigger
+            id="select-rows-per-page"
+            className="h-7 w-[70px] text-xs rounded-md border border-purple-200 bg-[#eef0ff] shadow  dark:bg-[#1f1f23] focus:ring-1 focus:ring-violet-500"
+          >
+            <SelectValue placeholder="10" />
           </SelectTrigger>
 
-          <SelectContent align="start">
+          <SelectContent align="end" className="rounded-md text-xs bg-[#eef0ff] dark:bg-[#1f1f23]">
             <SelectGroup>
-              <SelectItem value="2">2</SelectItem>
               <SelectItem value="5">5</SelectItem>
               <SelectItem value="10">10</SelectItem>
               <SelectItem value="20">20</SelectItem>
@@ -93,32 +98,32 @@ export default function GlobalPagination({
 
       {/* PAGINATION */}
       <Pagination className="mx-0 w-auto">
-        <PaginationContent>
+        <PaginationContent className="flex items-center gap-2 px-2 py-1 rounded-lg border bg-[#eef0ff] dark:bg-white/5 backdrop-blur-sm">
+
           <PaginationItem>
             <PaginationPrevious
               onClick={() => handlePageChange("prev")}
-              className={
-                page === 1
-                  ? "pointer-events-none opacity-50"
-                  : "cursor-pointer"
-              }
+              className={`h-7 px-2 text-xs rounded-md transition ${page === 1
+                  ? "pointer-events-none opacity-40"
+                  : "cursor-pointer hover:bg-gray-100 dark:hover:bg-[#1f1f23]"
+                }`}
             />
           </PaginationItem>
 
-          <span className="px-3 text-sm text-muted-foreground">
-            Page {page} / {totalPages}
+          <span className="px-2 text-xs text-gray-500 dark:text-gray-400">
+            {page} / {totalPages}
           </span>
 
           <PaginationItem>
             <PaginationNext
               onClick={() => handlePageChange("next")}
-              className={
-                page === totalPages
-                  ? "pointer-events-none opacity-50"
-                  : "cursor-pointer"
-              }
+              className={`h-7 px-2 text-xs rounded-md transition ${page === totalPages
+                  ? "pointer-events-none opacity-40"
+                  : "cursor-pointer hover:bg-gray-100 dark:hover:bg-[#1f1f23]"
+                }`}
             />
           </PaginationItem>
+
         </PaginationContent>
       </Pagination>
     </div>

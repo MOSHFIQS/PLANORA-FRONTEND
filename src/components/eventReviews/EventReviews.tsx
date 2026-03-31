@@ -80,22 +80,23 @@ const EventReviews: React.FC<EventReviewsProps> = ({ organizersReviews }) => {
       {reviews.map((review) => (
         <Card
           key={review.id}
-          className="hover:shadow transition-shadow duration-300"
+          className="p-4 rounded-2xl border-2 border-gray-300 flex flex-col gap-3 transition hover:shadow-md hover:border-purple-400"
         >
-          <CardHeader className="flex items-center gap-2">
-            <div className="border rounded-full">
-              <AppImage
-                src={review.user?.image}
-                alt={review.user?.name}
-                className="w-10 h-10 rounded-full"
-              />
-            </div>
+          {/* Header */}
+          <CardHeader className="p-0 flex items-center gap-3">
+            {/* Avatar */}
+            <AppImage
+              src={review.user?.image}
+              alt={review.user?.name}
+              className="w-10 h-10 rounded-full object-cover border-2  "
+            />
 
+            {/* User Info */}
             <div>
               <CardTitle className="text-sm font-semibold">
                 {review.user?.name}
               </CardTitle>
-              <p className="text-xs text-gray-500">
+              <p className="text-xs text-muted-foreground">
                 {new Date(review.createdAt).toLocaleDateString(undefined, {
                   day: "numeric",
                   month: "short",
@@ -104,7 +105,7 @@ const EventReviews: React.FC<EventReviewsProps> = ({ organizersReviews }) => {
               </p>
             </div>
 
-            {/* RIGHT ACTIONS */}
+            {/* Actions */}
             <div className="ml-auto flex items-center gap-2">
               {/* UPDATE */}
               {pathname === "/dashboard/review" && (
@@ -128,13 +129,14 @@ const EventReviews: React.FC<EventReviewsProps> = ({ organizersReviews }) => {
                 onOpenChange={setDialogOpen}
               >
                 <DialogTrigger asChild>
-                  <button
+                  <Button
+                  variant={"outline"}
                     onClick={() => setSelectedReviewId(review.id)}
-                    className="text-red-500 hover:text-red-700 transition"
+                    className="p-0 rounded hover:bg-red-100 transition"
                     aria-label="Delete review"
                   >
-                    <Trash2 size={18} />
-                  </button>
+                    <Trash2 size={19} className="text-red-500" />
+                  </Button>
                 </DialogTrigger>
 
                 <DialogContent>
@@ -155,7 +157,7 @@ const EventReviews: React.FC<EventReviewsProps> = ({ organizersReviews }) => {
                     </Button>
 
                     <Button
-                      className="bg-red-500 hover:bg-red-600"
+                      variant="destructive"
                       onClick={handleDelete}
                       disabled={deleting}
                     >
@@ -167,8 +169,10 @@ const EventReviews: React.FC<EventReviewsProps> = ({ organizersReviews }) => {
             </div>
           </CardHeader>
 
-          <CardContent>
-            <div className="flex mb-2">
+          {/* Content */}
+          <CardContent className="p-0 space-y-2">
+            {/* Rating */}
+            <div className="flex gap-1">
               {Array.from({ length: 5 }).map((_, i) => (
                 <Star
                   key={i}
@@ -182,8 +186,9 @@ const EventReviews: React.FC<EventReviewsProps> = ({ organizersReviews }) => {
               ))}
             </div>
 
+            {/* Comment */}
             {review.comment && (
-              <p className="text-gray-700">
+              <p className="text-sm text-muted-foreground leading-relaxed">
                 {review.comment}
               </p>
             )}

@@ -296,120 +296,137 @@ export default function MyEventsList({ myEvents }: { myEvents: Event[] }) {
       {viewMode === "card" && (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {myEvents?.map((event) => (
-            <Card key={event.id} className="flex flex-col overflow-hidden pt-0">
-              {/* IMAGE */}
-              <div className="h-52 w-full overflow-hidden border-b">
-                {event?.images?.[0] ? (
-                  <AppImage
-                    src={event.images[0]}
-                    className="h-full w-full object-cover hover:scale-105 duration-300"
-                  />
-                ) : (
-                  <div className="h-full flex items-center justify-center text-sm text-muted-foreground">
-                    No Image
-                  </div>
-                )}
-              </div>
+            <Card
+  key={event.id}
+  className="p-3 rounded-4xl bg-muted/40 border-2 border-gray-300 flex flex-col gap-3"
+>
+  {/* Image */}
+  <div className="relative h-52 w-full overflow-hidden rounded-2xl group">
+    {event?.images?.[0] ? (
+      <AppImage
+        src={event.images[0]}
+        className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+      />
+    ) : (
+      <div className="h-full flex items-center justify-center text-sm text-muted-foreground">
+        No Image
+      </div>
+    )}
 
-              {/* CONTENT */}
-              <CardContent className="space-y-2 pt-4">
-                <h3 className="font-semibold line-clamp-1">
-                  {event.title}
-                </h3>
+    {/* Overlay */}
+    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/40 to-transparent pointer-events-none" />
 
-                <p className="text-sm text-muted-foreground">
-                  {new Date(event.dateTime).toLocaleString()}
-                </p>
+    {/* Type */}
+    {event.type && (
+      <span className="absolute top-3 left-3 bg-white/80 backdrop-blur px-3 py-1 text-xs rounded-full font-medium">
+        {event.type}
+      </span>
+    )}
 
-                <div className="flex justify-between text-sm">
-                  <span>{event.type}</span>
-                  <span>{event.fee} tk</span>
-                </div>
+    {/* Visibility */}
+    <span className="absolute top-3 right-3 bg-white/80 backdrop-blur px-3 py-1 text-xs rounded-full">
+      {event.visibility}
+    </span>
+  </div>
 
-                <p className="text-xs text-muted-foreground">
-                  {event.visibility}
-                </p>
-              </CardContent>
+  {/* Content */}
+  <CardContent className="pl-2 flex items-center justify-between gap-3">
+    <div className="space-y-1">
+      {/* Title */}
+      <h3 className="font-semibold text-base line-clamp-1">
+        {event.title}
+      </h3>
 
-              {/* FOOTER */}
-              <CardFooter className="mt-auto flex gap-2">
-                <Button
-                  size="icon"
-                  variant="outline"
-                  className="flex-1"
-                  onClick={() =>
-                    router.push(`/dashboard/event/${event.id}`)
-                  }
-                >
-                  <Eye className="w-4 h-4" />
-                </Button>
+      {/* Date */}
+      <p className="text-sm text-muted-foreground">
+        {new Date(event.dateTime).toLocaleString()}
+      </p>
+    </div>
 
-                <Button
-                  size="icon"
-                  className="flex-1"
-                  onClick={() =>
-                    router.push(`/dashboard/event/update/${event.id}`)
-                  }
-                >
-                  <Pencil className="w-4 h-4" />
-                </Button>
+    {/* Price */}
+    <span className="text-lg font-bold text-purple-500 whitespace-nowrap">
+      {event.fee === 0 ? "Free" : `$${event.fee}`}
+    </span>
+  </CardContent>
 
-                <Button asChild className="flex-1" variant={"violet"}>
-                  <Link href={`/dashboard/review/event/${event.id}`}>
-                    <MessageSquareText size={18} />
-                  </Link>
-                </Button>
+  {/* Actions */}
+  <CardFooter className="mt-auto p-0 flex gap-2">
+    <Button
+      size="icon"
+      variant="outline"
+      className="flex-1 rounded-4xl"
+      onClick={() => router.push(`/dashboard/event/${event.id}`)}
+    >
+      <Eye className="w-4 h-4" />
+    </Button>
 
-                {/* DELETE */}
-                <AlertDialog
-                  open={openDialogId === event.id}
-                  onOpenChange={(isOpen) =>
-                    !isOpen && setOpenDialogId(null)
-                  }
-                >
-                  <AlertDialogTrigger asChild>
-                    <Button
-                      size="icon"
-                      className="flex-1"
-                      variant="destructive"
-                      onClick={() => setOpenDialogId(event.id)}
-                    >
-                      <Trash2 className="w-4 h-4" />
-                    </Button>
-                  </AlertDialogTrigger>
+    <Button
+      size="icon"
+      className="flex-1 rounded-4xl"
+      onClick={() =>
+        router.push(`/dashboard/event/update/${event.id}`)
+      }
+    >
+      <Pencil className="w-4 h-4" />
+    </Button>
 
-                  <AlertDialogContent>
-                    <AlertDialogHeader>
-                      <AlertDialogTitle>
-                        Delete Event?
-                      </AlertDialogTitle>
+    <Button
+      asChild
+      className="flex-1 rounded-4xl"
+      variant="violet"
+    >
+      <Link href={`/dashboard/review/event/${event.id}`}>
+        <MessageSquareText size={18} />
+      </Link>
+    </Button>
 
-                      <AlertDialogDescription>
-                        Are you sure you want to delete "
-                        {event.title}"?
-                      </AlertDialogDescription>
-                    </AlertDialogHeader>
+    {/* Delete */}
+    <AlertDialog
+      open={openDialogId === event.id}
+      onOpenChange={(isOpen) => !isOpen && setOpenDialogId(null)}
+    >
+      <AlertDialogTrigger asChild>
+        <Button
+          size="icon"
+          className="flex-1 rounded-4xl"
+          variant="destructive"
+          onClick={() => setOpenDialogId(event.id)}
+        >
+          <Trash2 className="w-4 h-4" />
+        </Button>
+      </AlertDialogTrigger>
 
-                    <AlertDialogFooter>
-                      <Button
-                        variant="outline"
-                        onClick={() => setOpenDialogId(null)}
-                      >
-                        Cancel
-                      </Button>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>
+            Delete Event?
+          </AlertDialogTitle>
 
-                      <Button
-                        variant="destructive"
-                        onClick={() => handleDelete(event.id)}
-                        disabled={isPending}
-                      >
-                        Delete
-                      </Button>
-                    </AlertDialogFooter>
-                  </AlertDialogContent>
-                </AlertDialog>
-              </CardFooter>
-            </Card>
+          <AlertDialogDescription>
+            Are you sure you want to delete "{event.title}"?
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+
+        <AlertDialogFooter>
+          <Button
+            variant="outline"
+            onClick={() => setOpenDialogId(null)}
+          >
+            Cancel
+          </Button>
+
+          <Button
+            variant="destructive"
+            onClick={() => handleDelete(event.id)}
+            disabled={isPending}
+          >
+            Delete
+          </Button>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+  </CardFooter>
+</Card>
           ))}
         </div>
       )}

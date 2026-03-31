@@ -14,12 +14,14 @@ import { Event } from "@/types/event.types";
 import SectionHeader from "@/components/sectionHeader/SectionHeader";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthProvider";
+import { Locate, LocateIcon, Map } from "lucide-react";
 
 type Props = {
   events: Event[];
 };
 
 export default function EventsSlider({ events }: Props) {
+  console.log(events);
 
   const router = useRouter();
   const { user } = useAuth();
@@ -54,30 +56,73 @@ export default function EventsSlider({ events }: Props) {
           {visibleEvents.map((event) => {
             const date = event?.dateTime ? new Date(event.dateTime) : null;
             return (
-              <Card key={event.id} className="overflow-hidden flex flex-col p-0 rounded-lg">
-                <Link href={`/events/${event.id}`} className="relative  h-50 xl:h-70 w-full overflow-hidden border-b-1">
+              <Card
+                key={event.id}
+                className="p-3 rounded-4xl bg-muted/40 border shadow flex flex-col gap-3"
+              >
+                {/* Image Section */}
+                <Link
+                  href={`/events/${event.id}`}
+                  className="relative h-52 xl:h-64 w-full overflow-hidden rounded-2xl group"
+                >
                   {event?.images?.[0] && (
                     <AppImage
                       src={event.images[0]}
-                      className="h-full w-full object-cover hover:scale-105 duration-300"
+                      className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
                     />
                   )}
+
+                  {/* 🔥 Black Gradient Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/40 to-transparent pointer-events-none" />
+
+                  {/* Top Left Badge */}
+                  {event.type && (
+                    <span className="absolute top-3 left-3 bg-white/80 backdrop-blur px-3 py-1 text-xs rounded-full font-medium">
+                      {event.type}
+                    </span>
+                  )}
+
+                  {/* Top Right Status */}
+                  <span className="absolute top-3 right-3 bg-white/80 backdrop-blur px-3 py-1 text-xs rounded-full flex items-center gap-1">
+                    <span className="w-2 h-2 bg-pink-500 rounded-full"></span>
+                    Active
+                  </span>
                 </Link>
-                <CardContent className="space-y-3 pt-4">
-                  <h3 className="font-semibold text-base line-clamp-1">{event.title}</h3>
-                  {date && <p className="text-sm text-muted-foreground">{format(date, "PPP • p")}</p>}
-                  <div className="flex items-center justify-between text-sm">
-                    {event.type && <Badge variant="outline">{event.type}</Badge>}
-                    {event.fee === 0 ? (
-                      <span className="px-3 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-700">Free</span>
-                    ) : (
-                      <span className="px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-700">{event.fee} tk</span>
+
+                {/* Content */}
+                <CardContent className="pl-2 space-y-2 flex gap-2 justify-between items-center">
+                  <div>
+                    {/* Date */}
+                    {date && (
+                      <p className="text-sm text-muted-foreground">
+                        {format(date, "PPP • p")}
+                      </p>
+                    )}
+
+                    {/* Title */}
+                    <h3 className="font-semibold text-base line-clamp-1">
+                      {event.title}
+                    </h3>
+
+                    {/* Location */}
+                    {event.venue && (
+                      <p className="text-sm text-muted-foreground flex items-center gap-1">
+                        <Map className="w-4 h-4" />
+                        {event.venue}
+                      </p>
                     )}
                   </div>
+                  <span className="text-lg font-bold text-purple-500">
+                    {event.fee === 0 ? "Free" : `$${event.fee}`}
+                  </span>
+
+
                 </CardContent>
+
+                {/* Button */}
                 <Button
-                  className="w-full"
-                  variant={"violet"}
+                  className="w-full rounded-4xl"
+                  variant="violet"
                   onClick={() => handleViewEvent(event.id)}
                 >
                   View Event Info
@@ -104,30 +149,73 @@ export default function EventsSlider({ events }: Props) {
                 const date = event?.dateTime ? new Date(event.dateTime) : null;
                 return (
                   <CarouselItem key={event.id} className="pl-3 basis-1/1 sm:basis-1/2 md:basis-1/2 lg:basis-1/3 xl:basis-1/4 ">
-                    <Card className="overflow-hidden flex flex-col p-0 rounded-t-2xl">
-                      <Link href={`/events/${event.id}`} className="relative h-50 xl:h-55 w-full overflow-hidden border-b-1">
+                    <Card
+                      key={event.id}
+                      className="p-3 rounded-4xl bg-muted/40 border-2  border-gray-300 flex flex-col gap-3"
+                    >
+                      {/* Image Section */}
+                      <Link
+                        href={`/events/${event.id}`}
+                        className="relative h-50 xl:h-55 w-full overflow-hidden rounded-2xl group"
+                      >
                         {event?.images?.[0] && (
                           <AppImage
                             src={event.images[0]}
-                            className="h-full w-full object-cover hover:scale-105 duration-300"
+                            className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
                           />
                         )}
+
+                        {/* Black Gradient Overlay */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/40 to-transparent pointer-events-none" />
+
+                        {/* Type Badge */}
+                        {event.type && (
+                          <span className="absolute top-3 left-3 bg-white/80 backdrop-blur px-3 py-1 text-xs rounded-full font-medium">
+                            {event.type}
+                          </span>
+                        )}
+
+                        {/* Status */}
+                        <span className="absolute top-3 right-3 bg-white/80 backdrop-blur px-3 py-1 text-xs rounded-full flex items-center gap-1">
+                          <span className="w-2 h-2 bg-pink-500 rounded-full"></span>
+                          Active
+                        </span>
                       </Link>
-                      <CardContent className="space-y-3 pt-4">
-                        <h3 className="font-semibold text-base line-clamp-1">{event.title}</h3>
-                        {date && <p className="text-sm text-muted-foreground">{format(date, "PPP • p")}</p>}
-                        <div className="flex items-center justify-between text-sm">
-                          {event.type && <Badge variant="outline">{event.type}</Badge>}
-                          {event.fee === 0 ? (
-                            <span className="px-3 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-700">Free</span>
-                          ) : (
-                            <span className="px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-700">{event.fee} tk</span>
+
+                      {/* Content */}
+                      <CardContent className="pl-2 flex items-center justify-between gap-3">
+                        <div className="space-y-1">
+                          {/* Date */}
+                          {date && (
+                            <p className="text-sm text-muted-foreground">
+                              {format(date, "PPP • p")}
+                            </p>
+                          )}
+
+                          {/* Title */}
+                          <h3 className="font-semibold text-base line-clamp-1">
+                            {event.title}
+                          </h3>
+
+                          {/* Location */}
+                          {event.venue && (
+                            <p className="text-sm text-muted-foreground flex items-center gap-1">
+                              <Map className="w-4 h-4" />
+                              {event.venue}
+                            </p>
                           )}
                         </div>
+
+                        {/* Price */}
+                        <span className="text-lg font-bold text-purple-500 whitespace-nowrap">
+                          {event.fee === 0 ? "Free" : `$${event.fee}`}
+                        </span>
                       </CardContent>
+
+                      {/* Button */}
                       <Button
-                        className="w-full"
-                        variant={"violet"}
+                        className="w-full rounded-4xl"
+                        variant="violet"
                         onClick={() => handleViewEvent(event.id)}
                       >
                         View Event Info
