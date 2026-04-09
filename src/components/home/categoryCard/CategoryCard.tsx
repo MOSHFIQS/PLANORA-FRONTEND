@@ -33,7 +33,7 @@ const CategoryCard = ({ categories }: { categories: Category[] }) => {
         description="Discover events based on your interests and join amazing experiences."
       />
 
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 md:gap-3 lg:gap-5">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 md:gap-3 lg:gap-4">
         {limitedCategories?.map((category, index) => {
           const color = colors[index % colors.length];
 
@@ -41,7 +41,7 @@ const CategoryCard = ({ categories }: { categories: Category[] }) => {
             <div
               key={category.id}
               onClick={() => router.push(`/events?categoryId=${category.id}`)}
-              className="relative h-40 overflow-hidden rounded-lg cursor-pointer group"
+              className="relative h-40 overflow-hidden rounded cursor-pointer group"
             >
               <Image
                 src={category.image}

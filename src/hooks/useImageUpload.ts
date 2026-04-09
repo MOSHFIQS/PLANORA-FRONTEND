@@ -27,6 +27,13 @@ export const useImageUpload = ({ max = 5, defaultImages = [] }: Options = {}) =>
      );
 
      const upload = async (file: File) => {
+          const MAX_SIZE = 4 * 1024 * 1024; // 4 MB in bytes
+
+          // 🔴 Size validation
+          if (file.size > MAX_SIZE) {
+               toast.error("Image size must be less than 4 MB");
+               return;
+          }
           if (images.length >= max) {
                toast.error(`Maximum ${max} images allowed`);
                return;

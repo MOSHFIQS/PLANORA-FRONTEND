@@ -8,9 +8,14 @@ import CategoryCard from "@/components/home/categoryCard/CategoryCard";
 import EventsSlider from "@/components/home/eventsSlider/EventsSlider";
 import ImageMosaic from "@/components/home/imageMosaic/ImageMosaic";
 import PublicStatsCard from "@/components/home/publicStatsCard/PublicStatsCard";
+import Features from "@/components/home/features/Features";
+import Services from "@/components/home/services/Services";
+import HowItWorks from "@/components/home/howItWorks/HowItWorks";
+import Testimonials from "@/components/home/testimonials/Testimonials";
+import Newsletter from "@/components/home/newsletter/Newsletter";
+import FAQ from "@/components/home/faq/FAQ";
 import { Banner } from "@/types/banner.types";
 import { Event } from "@/types/event.types";
-
 const HomePage = async () => {
      // const data = await sessionService.getUserFromToken()
      // console.log(data);
@@ -39,11 +44,25 @@ const HomePage = async () => {
 
 
                <CarouselPlugin banners={banners} />
-               {/* <HomePageEvents events={events} search={""} categories={[]} /> */}
+
+               {/* New Section 1: Features */}
+               <Features />
 
                <EventsSlider events={events} />
+
+               {/* New Section 2: Services */}
+               <Services />
+
                <CategoryCard categories={categoryRes.data} />
+               
+               {/* New Section 3: How It Works */}
+               <HowItWorks />
+
                <PublicStatsCard publicStats={publicStatsRes.data} />
+
+               {/* New Section 4: Testimonials */}
+               <Testimonials />
+
                <ImageMosaic
                     images={[
                          "/img1.jpg",
@@ -51,6 +70,12 @@ const HomePage = async () => {
                          "/img3.jpg",
                     ]}
                />
+
+               {/* New Section 5: FAQ */}
+               <FAQ />
+
+               {/* New Section 6: Newsletter */}
+               <Newsletter />
 
           </div>
      );

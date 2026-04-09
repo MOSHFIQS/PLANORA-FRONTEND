@@ -7,7 +7,7 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   experimental: {
     serverActions: {
-      bodySizeLimit: "10mb", // <-- increase limit here
+      bodySizeLimit: "4mb", // <-- increase limit here
       // allowedOrigins?: ["https://yourdomain.com"] // optional
     },
   },

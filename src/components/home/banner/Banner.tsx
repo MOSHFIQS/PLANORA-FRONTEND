@@ -8,17 +8,17 @@ import {
 } from "@/components/ui/carousel"
 import Autoplay from "embla-carousel-autoplay"
 import { Banner } from "@/types/banner.types"
-import { Button } from "@/components/ui/button"
 import { AppImage } from "@/components/appImage/AppImage"
 import { format } from "date-fns"
 import { useAuth } from "@/context/AuthProvider"
 import { useRouter } from "next/navigation"
+import { CalendarDays, ArrowRight, MapPin } from "lucide-react"
 
 export default function CarouselPlugin({ banners }: { banners: Banner[] }) {
      const { user } = useAuth()
      const router = useRouter()
-
      const [activeIndex, setActiveIndex] = React.useState(0)
+     const [prevIndex, setPrevIndex] = React.useState(-1)
 
      const handleViewEvent = (url: string) => {
           if (!user) {
@@ -29,7 +29,7 @@ export default function CarouselPlugin({ banners }: { banners: Banner[] }) {
      }
 
      const plugin = React.useRef(
-          Autoplay({ delay: 3000, stopOnInteraction: true })
+          Autoplay({ delay: 4500, stopOnInteraction: true })
      )
 
      const mainBanners = banners
@@ -37,120 +37,147 @@ export default function CarouselPlugin({ banners }: { banners: Banner[] }) {
           .sort((a, b) => a.positionOrder - b.positionOrder)
 
      return (
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-2 border rounded-xl overflow-hidden ">
-
-               {/* Styles */}
-               <style jsx>{`
-                    .bg-zoom {
-                         animation: bgZoom 8s ease-in-out infinite alternate;
-                    }
-
-                    .overlay {
-                         animation: fadeIn 0.8s ease forwards;
-                    }
-
-                    .content {
-                         opacity: 0;
-                         transform: translateY(30px) scale(0.98);
-                         filter: blur(10px);
-                         animation: contentIn 0.9s ease forwards;
-                    }
-
+          <>
+               <style jsx global>{`
                     @keyframes bgZoom {
-                         from { transform: scale(1); }
-                         to { transform: scale(1.08); }
+                         0% { transform: scale(1); }
+                         100% { transform: scale(1.07); }
+                    }
+                    @keyframes slideUp {
+                         0% { opacity: 0; transform: translateY(28px); filter: blur(6px); }
+                         100% { opacity: 1; transform: translateY(0); filter: blur(0); }
+                    }
+                    @keyframes fadeInOverlay {
+                         0% { opacity: 0; }
+                         100% { opacity: 1; }
+                    }
+                    @keyframes progressBar {
+                         0% { width: 0%; }
+                         100% { width: 100%; }
+                    }
+                    @keyframes pillIn {
+                         0% { opacity: 0; transform: translateX(-12px); }
+                         100% { opacity: 1; transform: translateX(0); }
                     }
 
-                    @keyframes fadeIn {
-                         from { opacity: 0; }
-                         to { opacity: 1; }
+                    .slide-bg-active {
+                         animation: bgZoom 6s ease-in-out forwards;
                     }
+                    .slide-overlay-active {
+                         animation: fadeInOverlay 0.7s ease forwards;
+                    }
+                    .slide-content-1 { animation: slideUp 0.7s 0.1s ease both; }
+                    .slide-content-2 { animation: slideUp 0.7s 0.25s ease both; }
+                    .slide-content-3 { animation: slideUp 0.7s 0.4s ease both; }
+                    .slide-content-4 { animation: slideUp 0.7s 0.55s ease both; }
+                    .slide-content-5 { animation: slideUp 0.7s 0.68s ease both; }
+                    .slide-pill { animation: pillIn 0.5s 0.05s ease both; }
 
-                    @keyframes contentIn {
-                         0% {
-                              opacity: 0;
-                              transform: translateY(30px) scale(0.98);
-                              filter: blur(10px);
-                         }
-                         100% {
-                              opacity: 1;
-                              transform: translateY(0) scale(1);
-                              filter: blur(0);
-                         }
+                    .progress-bar-active {
+                         animation: progressBar 4.5s linear forwards;
                     }
                `}</style>
 
-               <div className="lg:col-span-4 ">
+               <div className="relative w-full overflow-hidden rounded">
                     <Carousel
                          plugins={[plugin.current]}
-                         className="w-full overflow-hidden"
+                         className="w-full"
                          onMouseEnter={plugin.current.stop}
                          onMouseLeave={plugin.current.reset}
                          opts={{ align: "start", loop: true }}
                          setApi={(api: any) => {
                               if (!api) return
                               api.on("select", () => {
+                                   setPrevIndex(activeIndex)
                                    setActiveIndex(api.selectedScrollSnap())
                               })
                          }}
                     >
-                         <CarouselContent className="h-[400px] sm:h-[450px] md:h-[500px] lg:h-[600px] xl:h-[700px] m-0 w-full ">
-
+                         <CarouselContent className="h-[480px] sm:h-[540px] md:h-[580px] lg:h-[680px] xl:h-[780px] m-0">
                               {mainBanners.map((banner, index) => {
                                    const isActive = index === activeIndex
 
                                    return (
-                                        <CarouselItem key={banner.id} className="h-full p-0 ">
+                                        <CarouselItem key={banner.id} className="h-full p-0">
                                              <div className="relative h-full overflow-hidden">
 
-                                                  {/* Background */}
-                                                  <div className={`absolute inset-0 ${isActive ? "bg-zoom" : ""}`}>
+                                                  {/* Background image */}
+                                                  <div className={`absolute inset-0 ${isActive ? "slide-bg-active" : ""}`}>
                                                        <AppImage
                                                             src={banner.image}
                                                             priority
                                                             loading="eager"
-                                                            className="object-cover w-full h-full "
+                                                            className="object-cover w-full h-full"
                                                        />
                                                   </div>
 
-                                                  {/* Overlay */}
-                                                  <div className={`absolute inset-0 bg-black/60 ${isActive ? "overlay" : ""}`} />
+                                                  {/* Multi-layer overlay */}
+                                                  <div className={`absolute inset-0 ${isActive ? "slide-overlay-active" : "opacity-0"}`}>
+                                                       {/* Bottom-heavy cinematic gradient */}
+                                                       <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-950/50 to-gray-950/10" />
+                                                       {/* Left vignette for text legibility */}
+                                                       <div className="absolute inset-0 bg-gradient-to-r from-gray-950/80 via-gray-950/30 to-transparent" />
+                                                  </div>
 
                                                   {/* Content */}
-                                                  <div className="absolute inset-0 flex items-center">
-                                                       <div className={`w-full ml-6 md:ml-12 p-6 text-white space-y-4 ${isActive ? "content" : ""}`}>
+                                                  {isActive && (
+                                                       <div className="absolute inset-0 flex items-end pb-12 md:pb-16">
+                                                            <div className="w-full max-w-2xl px-8 md:px-14 space-y-4">
 
-                                                            <span className="inline-block px-3 py-1 text-xs font-semibold rounded-full bg-blue-400/80">
-                                                                 {banner.type} EVENT
-                                                            </span>
+                                                                 {/* Type pill */}
+                                                                 <div className="slide-pill">
+                                                                      <span className="inline-flex items-center gap-1.5 px-3 py-1 text-[10px] font-black tracking-[0.2em] uppercase rounded-full border border-teal-400/40 bg-teal-400/10 text-teal-400">
+                                                                           <span className="w-1.5 h-1.5 rounded-full bg-teal-400 animate-pulse" />
+                                                                           {banner.type} Event
+                                                                      </span>
+                                                                 </div>
 
-                                                            <h2 className="text-3xl md:text-5xl font-bold leading-tight">
-                                                                 {banner.title}
-                                                            </h2>
+                                                                 {/* Title */}
+                                                                 <h2 className="slide-content-2 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white leading-[1.05] tracking-tight">
+                                                                      {banner.title}
+                                                                 </h2>
 
-                                                            <p className="text-sm md:text-base font-medium">
-                                                                 {banner.description}
-                                                            </p>
+                                                                 {/* Description */}
+                                                                 <p className="slide-content-3 text-gray-300 text-sm md:text-base leading-relaxed max-w-lg line-clamp-2">
+                                                                      {banner.description}
+                                                                 </p>
 
-                                                            <p className="text-xs text-gray-200">
-                                                                 {banner.altText}
-                                                            </p>
+                                                                 {/* Meta row */}
+                                                                 <div className="slide-content-4 flex flex-wrap items-center gap-4 text-xs text-gray-400">
+                                                                      <span className="flex items-center gap-1.5">
+                                                                           <CalendarDays className="w-3.5 h-3.5 text-teal-400" />
+                                                                           {format(new Date(banner.dateTime), "PPP 'at' p")}
+                                                                      </span>
+                                                                      {banner.altText && (
+                                                                           <span className="flex items-center gap-1.5">
+                                                                                <MapPin className="w-3.5 h-3.5 text-teal-400" />
+                                                                                {banner.altText}
+                                                                           </span>
+                                                                      )}
+                                                                 </div>
 
-                                                            <p className="text-sm font-semibold">
-                                                                 {format(new Date(banner.dateTime), "PPP 'at' p")}
-                                                            </p>
-
-                                                            {banner.buttonText && (
-                                                                 <Button
-                                                                      variant={"orange"}
-                                                                      onClick={() => handleViewEvent(banner.redirectUrl || "#")}
-                                                                      className="text-white transition-transform duration-300 hover:scale-105 active:scale-95"
-                                                                 >
-                                                                      {banner.buttonText}
-                                                                 </Button>
-                                                            )}
+                                                                 {/* CTA */}
+                                                                 {banner.buttonText && (
+                                                                      <div className="slide-content-5 pt-1">
+                                                                           <button
+                                                                                onClick={() => handleViewEvent(banner.redirectUrl || "#")}
+                                                                                className="group inline-flex items-center gap-2.5 px-6 py-3 bg-teal-500 hover:bg-teal-400 text-gray-950 text-sm font-black rounded-xl transition-all duration-200 hover:gap-4 active:scale-95"
+                                                                           >
+                                                                                {banner.buttonText}
+                                                                                <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5" />
+                                                                           </button>
+                                                                      </div>
+                                                                 )}
+                                                            </div>
                                                        </div>
-                                                  </div>
+                                                  )}
+
+                                                  {/* Progress bar — bottom edge */}
+                                                  {isActive && (
+                                                       <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-white/10">
+                                                            <div className="h-full bg-teal-400 progress-bar-active" />
+                                                       </div>
+                                                  )}
 
                                              </div>
                                         </CarouselItem>
@@ -158,7 +185,21 @@ export default function CarouselPlugin({ banners }: { banners: Banner[] }) {
                               })}
                          </CarouselContent>
                     </Carousel>
+
+                    {/* Slide indicators */}
+                    <div className="absolute bottom-5 right-8 flex items-center gap-2 z-20">
+                         {mainBanners.map((_, i) => (
+                              <div
+                                   key={i}
+                                   className={`rounded-full transition-all duration-300 ${
+                                        i === activeIndex
+                                             ? "w-6 h-1.5 bg-teal-400"
+                                             : "w-1.5 h-1.5 bg-white/30 hover:bg-white/60"
+                                   }`}
+                              />
+                         ))}
+                    </div>
                </div>
-          </div>
+          </>
      )
 }
