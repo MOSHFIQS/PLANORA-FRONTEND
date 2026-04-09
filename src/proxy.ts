@@ -15,6 +15,11 @@ export async function proxy(request: NextRequest) {
      const isAdmin = role === Roles.admin;
      const isUser = role === Roles.user;
 
+     // If user is already logged in, redirect from login/register page
+     if (role && (pathname === "/login" || pathname === "/register")) {
+          return NextResponse.redirect(new URL("/dashboard", request.url));
+     }
+
      // Admin trying to access user dashboard
      if (isAdmin && pathname.startsWith("/dashboard")) {
           return NextResponse.redirect(new URL("/admin-dashboard", request.url));
@@ -39,5 +44,7 @@ export const config = {
      matcher: [
           "/admin-dashboard/:path*",
           "/dashboard/:path*",
+          "/login",
+          "/register",
      ],
 }
