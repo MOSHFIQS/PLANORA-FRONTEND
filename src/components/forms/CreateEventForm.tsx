@@ -270,7 +270,7 @@ const CreateEventForm = ({ categories }: { categories: Category[] }) => {
                                         <Field >
                                              <FieldLabel htmlFor={field.name}>Description</FieldLabel>
                                              <TextEditor
-                                                  placeholder="Style your product description here..."
+                                                  placeholder="Style your event description here..."
                                                   value={field.state.value}
                                                   onChange={field.handleChange}
                                                   // error={

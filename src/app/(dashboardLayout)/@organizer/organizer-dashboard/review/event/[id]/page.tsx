@@ -1,6 +1,6 @@
 
 import { getOrganizerEventReviewsByEventId } from '@/actions/review.action';
-import EventReviews from '@/components/common/eventReviews/EventReviews';
+import EventReviews from '@/components/organizer/eventReviews/EventReviews';
 
 const OrganizersReviewsPage = async ({ params }: { params: Promise<{ id: string }> }) => {
      const { id } = await params

@@ -284,7 +284,7 @@ export default function MyEventsList({ myEvents }: { myEvents: Event[] }) {
             </Button>
 
             {/* CREATE */}
-            <Button onClick={() => router.push("/dashboard/event/create")}>
+            <Button onClick={() => router.push("/organizer-dashboard/events/create")}>
               <Plus className="w-4 h-4 mr-2" />
               Create Event
             </Button>
@@ -480,7 +480,7 @@ export default function MyEventsList({ myEvents }: { myEvents: Event[] }) {
                           size="icon"
                           variant="outline"
                           onClick={() =>
-                            router.push(`/dashboard/event/${event.id}`)
+                            router.push(`/organizer-dashboard/events/${event.id}`)
                           }
                         >
                           <Eye className="w-4 h-4" />
@@ -489,14 +489,14 @@ export default function MyEventsList({ myEvents }: { myEvents: Event[] }) {
                         <Button
                           size="icon"
                           onClick={() =>
-                            router.push(`/dashboard/event/update/${event.id}`)
+                            router.push(`/organizer-dashboard/events/update/${event.id}`)
                           }
                         >
                           <Pencil className="w-4 h-4" />
                         </Button>
 
                         <Button asChild variant={"violet"}>
-                          <Link href={`/dashboard/review/event/${event.id}`}>
+                          <Link href={`/organizer-dashboard/review/event/${event.id}`}>
                             <MessageSquareText size={18} />
                           </Link>
                         </Button>

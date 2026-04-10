@@ -33,7 +33,7 @@ export const organizerRoutes: Route[] = [
           items: [
                {
                     title: "Profile",
-                    url: "/dashboard/profile",
+                    url: "/organizer-dashboard/profile",
                     icon: User,
                },
           ],
@@ -43,22 +43,22 @@ export const organizerRoutes: Route[] = [
           items: [
                {
                     title: "Create Event",
-                    url: "/dashboard/event/create",
+                    url: "/organizer-dashboard/events/create",
                     icon: CalendarPlus,
                },
                {
                     title: "Manage Events",
-                    url: "/dashboard/event",
+                    url: "/organizer-dashboard/events",
                     icon: Calendar,
                },
                {
                     title: "Participants",
-                    url: "/dashboard/participants",
+                    url: "/organizer-dashboard/participants",
                     icon: Users,
                },
                {
                     title: "Participated Events",
-                    url: "/dashboard/participants/my-participated-events",
+                    url: "/organizer-dashboard/my/participated-events",
                     icon: Heart,
                },
           ],
@@ -69,12 +69,12 @@ export const organizerRoutes: Route[] = [
           items: [
                {
                     title: "My Payments",
-                    url: "/dashboard/payments",
+                    url: "/organizer-dashboard/my/payments",
                     icon: CreditCard,
                },
                {
                     title: "Event Payments",
-                    url: "/dashboard/payments/event-payments",
+                    url: "/organizer-dashboard/payments/event-payments",
                     icon: Wallet,
                },
           ],
@@ -85,12 +85,12 @@ export const organizerRoutes: Route[] = [
           items: [
                {
                     title: "My Tickets",
-                    url: "/dashboard/tickets",
+                    url: "/organizer-dashboard/my/tickets",
                     icon: Ticket,
                },
                {
                     title: "Scan Tickets",
-                    url: "/dashboard/tickets/scan",
+                    url: "/organizer-dashboard/tickets/scan",
                     icon: ScanLine,
                },
           ],
@@ -101,12 +101,12 @@ export const organizerRoutes: Route[] = [
           items: [
                {
                     title: "My Invitations",
-                    url: "/dashboard/invitations",
+                    url: "/organizer-dashboard/my/invitations",
                     icon: Mail,
                },
                {
                     title: "My Reviews",
-                    url: "/dashboard/review",
+                    url: "/organizer-dashboard/my/reviews",
                     icon: Star,
                },
           ],

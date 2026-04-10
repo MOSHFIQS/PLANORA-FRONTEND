@@ -1,6 +1,6 @@
 
-import { getMyReviews, getOrganizerEventReviewsByEventId } from '@/actions/review.action';
-import EventReviews from '@/components/common/eventReviews/EventReviews';
+import { getMyReviews } from '@/actions/review.action';
+import MyReviews from '@/components/common/myReviews/MyReviews';
 
 const MyReviewsPage = async () => {
      const res = await getMyReviews();
@@ -14,7 +14,7 @@ const MyReviewsPage = async () => {
           );
      }
 
-     return <EventReviews organizersReviews={res?.data} />;
+     return <MyReviews myReviews={res?.data} />;
 };
 
 export default MyReviewsPage;

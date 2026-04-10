@@ -35,15 +35,15 @@ type Review = {
 };
 
 type EventReviewsProps = {
-  organizersReviews: Review[];
+  myReviews: Review[];
 };
 
-const EventReviews: React.FC<EventReviewsProps> = ({ organizersReviews }) => {
-  const [reviews, setReviews] = useState(organizersReviews);
+const MyReviews: React.FC<EventReviewsProps> = ({ myReviews }) => {
+  const [reviews, setReviews] = useState(myReviews);
   const [selectedReviewId, setSelectedReviewId] = useState<string | null>(null);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [deleting, setDeleting] = useState(false);
-  const pathname = usePathname()
+  
 
   const handleDelete = async () => {
     if (!selectedReviewId) return;
@@ -108,20 +108,19 @@ const EventReviews: React.FC<EventReviewsProps> = ({ organizersReviews }) => {
             {/* Actions */}
             <div className="ml-auto flex items-center gap-2">
               {/* UPDATE */}
-              {pathname === "/dashboard/my/reviews" && (
-                <UpdateReviewDialog
-                  review={review}
-                  onUpdated={(updatedReview) => {
-                    setReviews((prev) =>
-                      prev.map((r) =>
-                        r.id === updatedReview.id
-                          ? { ...r, ...updatedReview }
-                          : r
-                      )
-                    );
-                  }}
-                />
-              )}
+              <UpdateReviewDialog
+                review={review}
+                onUpdated={(updatedReview) => {
+                  setReviews((prev) =>
+                    prev.map((r) =>
+                      r.id === updatedReview.id
+                        ? { ...r, ...updatedReview }
+                        : r
+                    )
+                  );
+                }}
+              />
+
 
               {/* DELETE */}
               <Dialog
@@ -199,4 +198,4 @@ const EventReviews: React.FC<EventReviewsProps> = ({ organizersReviews }) => {
   );
 };
 
-export default EventReviews;
+export default MyReviews;
