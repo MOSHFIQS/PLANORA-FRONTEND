@@ -16,7 +16,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
-import { useImageUpload } from "@/hooks/useImageUpload";
 import { createBannerAction } from "@/actions/banner.action";
 import { Field } from "@/components/ui/field";
 
@@ -39,7 +38,6 @@ export default function CreateBanner({
      const [loading, setLoading] = useState(false);
      const router = useRouter();
 
-     const bannerImages = useImageUpload({ max: 1 });
 
      const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
      const [selectedImage, setSelectedImage] = useState<string>("");
@@ -47,13 +45,13 @@ export default function CreateBanner({
      const [selectedDate, setSelectedDate] = useState<Date | undefined>();
      const [selectedTime, setSelectedTime] = useState("10:30:00");
 
-     const BASE_URL = "https://assignment-5-frontend-nu.vercel.app";
+     const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://planora-frontend-1.vercel.app";
 
      const form = useForm({
           defaultValues: {
                title: "",
                position: "MAIN",
-               description: "", // ✅ manual input
+               description: "",
                redirectUrl: "",
                positionOrder: 1,
                buttonText: "",

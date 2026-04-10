@@ -7,7 +7,7 @@ export type User = {
      image: string ;
      createdAt: string;
      updatedAt: string;
-     role: "USER" | "ADMIN"; // adjust if more roles exist
+     role: "USER" | "ADMIN" | "ORGANIZER" | "SUPERADMIN"; 
      status: string;
      isDeleted: boolean;
      deletedAt: string | null;
