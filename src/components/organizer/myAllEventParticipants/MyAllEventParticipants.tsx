@@ -565,7 +565,7 @@ export default function MyAllEventParticipants({
           )}
 
           {participants.map((p) => (
-            <div
+            <Card
               key={p.id}
               className="p-4 rounded-4xl  border-2 border-gray-300 flex flex-col justify-between gap-4"
             >
@@ -702,7 +702,7 @@ export default function MyAllEventParticipants({
                   </AlertDialogFooter>
                 </AlertDialogContent>
               </AlertDialog>
-            </div>
+            </Card>
           ))}
         </div>
       )}

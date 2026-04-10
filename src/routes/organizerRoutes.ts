@@ -33,7 +33,7 @@ export const organizerRoutes: Route[] = [
           items: [
                {
                     title: "Profile",
-                    url: "/organizer-dashboard/profile",
+                    url: "/organizer-dashboard/my/profile",
                     icon: User,
                },
           ],
