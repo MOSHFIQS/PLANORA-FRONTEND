@@ -14,6 +14,8 @@ export async function proxy(request: NextRequest) {
 
      const isAdmin = role === Roles.admin;
      const isUser = role === Roles.user;
+     const isOrganizer = role === Roles.organizer;
+     const isSuperAdmin = role === Roles.superAdmin;
 
      // If user is already logged in, redirect from login/register page
      if (role && (pathname === "/login" || pathname === "/register")) {
@@ -21,19 +23,29 @@ export async function proxy(request: NextRequest) {
      }
 
      // Admin trying to access user dashboard
-     if (isAdmin && pathname.startsWith("/dashboard")) {
+     if (isAdmin && pathname.startsWith("/dashboard") || pathname.startsWith("/organizer-dashboard") || pathname.startsWith("/super-admin-dashboard")) {
           return NextResponse.redirect(new URL("/admin-dashboard", request.url));
      }
 
      //  User trying to access admin dashboard
-     if (isUser && pathname.startsWith("/admin-dashboard")) {
+     if (isUser && pathname.startsWith("/admin-dashboard") || pathname.startsWith("/organizer-dashboard") || pathname.startsWith("/super-admin-dashboard")) {
           return NextResponse.redirect(new URL("/dashboard", request.url));
+     }
+
+     //  Organizer trying to access admin dashboard
+     if (isOrganizer && pathname.startsWith("/admin-dashboard") || pathname.startsWith("/dashboard") || pathname.startsWith("/super-admin-dashboard")) {
+          return NextResponse.redirect(new URL("/organizer-dashboard", request.url));
+     }
+
+     //  Super Admin trying to access admin dashboard
+     if (isSuperAdmin && pathname.startsWith("/admin-dashboard") || pathname.startsWith("/dashboard") || pathname.startsWith("/organizer-dashboard")) {
+          return NextResponse.redirect(new URL("/super-admin-dashboard", request.url));
      }
 
      //  Unauthenticated user
      if (
           !role &&
-          (pathname.startsWith("/admin-dashboard") || pathname.startsWith("/dashboard"))
+          (pathname.startsWith("/admin-dashboard") || pathname.startsWith("/dashboard") || pathname.startsWith("/organizer-dashboard") || pathname.startsWith("/super-admin-dashboard"))
      ) {
           return NextResponse.redirect(new URL("/", request.url));
      }
@@ -44,6 +56,8 @@ export const config = {
      matcher: [
           "/admin-dashboard/:path*",
           "/dashboard/:path*",
+          "/organizer-dashboard/:path*",
+          "/super-admin-dashboard/:path*",
           "/login",
           "/register",
      ],

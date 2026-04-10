@@ -17,7 +17,7 @@ import {
      MapPin,
 } from "lucide-react";
 
-export const userRoutes: Route[] = [
+export const organizerRoutes: Route[] = [
      {
           title: "Dashboard",
           items: [

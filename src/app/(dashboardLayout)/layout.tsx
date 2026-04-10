@@ -10,7 +10,7 @@ import { redirect } from "next/navigation";
 import { AppSidebar } from "@/components/appSidebar/app-sidebar"
 import { sessionService } from "@/service/server/token.service";
 
-export default async  function DashboardLayout({ admin, user }: { admin: ReactNode, user: ReactNode }) {
+export default async  function DashboardLayout({ admin, user, organizer, superAdmin }: { admin: ReactNode, user: ReactNode, organizer: ReactNode, superAdmin: ReactNode }) {
 
      const data = await sessionService.getUserFromToken()
      // console.log("token",data);
@@ -44,6 +44,12 @@ export default async  function DashboardLayout({ admin, user }: { admin: ReactNo
                break
           case Roles.user:
                content = user
+               break
+          case Roles.organizer:
+               content = organizer
+               break
+          case Roles.superAdmin:
+               content = superAdmin
                break
           default:
                content = null
