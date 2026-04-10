@@ -1,4 +1,4 @@
-import SectionHeader from '@/components/sectionHeader/SectionHeader';
+import SectionHeader from '@/components/shared/sectionHeader/SectionHeader';
 import React from 'react';
 
 const Map = () => {
@@ -32,7 +32,7 @@ const Map = () => {
                     </div>
 
                </div>
-                    
+
 
           </div>
      );

@@ -14,7 +14,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Field, FieldLabel, FieldError, FieldGroup } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import ImageUploader from "@/components/imageUploader/ImageUploader";
+import ImageUploader from "@/components/shared/imageUtils/imageUploader/ImageUploader";
 import {
      Select,
      SelectContent,
@@ -22,7 +22,7 @@ import {
      SelectTrigger,
      SelectValue,
 } from "@/components/ui/select";
-import TextEditor from "../textEditor/TextEditor";
+import TextEditor from "../shared/textEditor/TextEditor";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Calendar } from "../ui/calendar";
 import { Label } from "../ui/label";

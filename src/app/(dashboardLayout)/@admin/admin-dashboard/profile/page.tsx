@@ -1,6 +1,6 @@
 
 import { getMyProfileAction } from '@/actions/profile.action';
-import MyProfile from '@/components/myProfile/MyProfile';
+import MyProfile from '@/components/shared/myProfile/MyProfile';
 const AdminProfilePage = async () => {
 
      const res = await getMyProfileAction();

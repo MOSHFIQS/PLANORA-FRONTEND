@@ -1,6 +1,6 @@
 
 import { getOrganizerEventReviewsByEventId } from '@/actions/review.action';
-import EventReviews from '@/components/eventReviews/EventReviews';
+import EventReviews from '@/components/common/eventReviews/EventReviews';
 
 const OrganizersReviewsPage = async ({ params }: { params: Promise<{ id: string }> }) => {
      const { id } = await params
@@ -16,7 +16,7 @@ const OrganizersReviewsPage = async ({ params }: { params: Promise<{ id: string 
           );
      }
 
-     return <EventReviews organizersReviews={res?.data}  />;
+     return <EventReviews organizersReviews={res?.data} />;
 };
 
 export default OrganizersReviewsPage;

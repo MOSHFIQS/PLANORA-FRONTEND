@@ -1,7 +1,7 @@
 
 
 import { getAdminStatsAction } from '@/actions/stat.action';
-import AdminStatsCard from '@/components/admin/adminStatsCard/AdminStatsCard';
+import AdminStatsCard from '@/components/stats/AdminStatsCard';
 const AdminStatsPage = async () => {
 
      const res = await getAdminStatsAction();

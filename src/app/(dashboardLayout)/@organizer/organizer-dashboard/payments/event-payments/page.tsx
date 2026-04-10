@@ -1,6 +1,6 @@
 
 import { getOrganizerPaymentsAction } from '@/actions/payment.action';
-import PaymentsList from '@/components/payments/PaymentsList';
+import PaymentsList from '@/components/common/payments/PaymentsList';
 import GlobalPagination from '@/components/shared/GlobalPagination';
 
 const EventPaymentsPage = async ({ searchParams }: { searchParams: Promise<{ page?: number; limit?: number }> }) => {

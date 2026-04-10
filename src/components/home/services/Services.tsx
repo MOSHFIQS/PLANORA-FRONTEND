@@ -1,4 +1,4 @@
-import SectionHeader from "@/components/sectionHeader/SectionHeader";
+import SectionHeader from "@/components/shared/sectionHeader/SectionHeader";
 import { CalendarDays, MapPin, Camera, Mic, Palette, Video } from "lucide-react";
 
 const services = [

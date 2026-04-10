@@ -16,7 +16,7 @@ import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { createCategoryAction } from "@/actions/category.action";
 import { useImageUpload } from "@/hooks/useImageUpload";
-import ImageUploader from "@/components/imageUploader/ImageUploader";
+import ImageUploader from "@/components/shared/imageUtils/imageUploader/ImageUploader";
 
 export default function CreateCategory() {
      const [loading, setLoading] = useState(false);

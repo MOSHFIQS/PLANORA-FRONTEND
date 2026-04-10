@@ -1,5 +1,5 @@
 import { getSingleEventPublicAction } from "@/actions/event.action";
-import EventDetailsSmart from "@/components/eventDetailsSmart/EventDetailsSmart";
+import EventDetailsSmart from "@/components/common/eventDetailsSmart/EventDetailsSmart";
 
 
 const MyInvitationEventDetailsPage = async ({ params }: { params: Promise<{ id: string }> }) => {

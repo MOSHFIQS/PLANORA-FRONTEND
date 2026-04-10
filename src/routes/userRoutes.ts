@@ -33,32 +33,17 @@ export const userRoutes: Route[] = [
           items: [
                {
                     title: "Profile",
-                    url: "/dashboard/profile",
+                    url: "/dashboard/my/profile",
                     icon: User,
                },
           ],
      },
      {
-          title: "Events",
+          title: "My Events",
           items: [
                {
-                    title: "Create Event",
-                    url: "/dashboard/event/create",
-                    icon: CalendarPlus,
-               },
-               {
-                    title: "Manage Events",
-                    url: "/dashboard/event",
-                    icon: Calendar,
-               },
-               {
-                    title: "Participants",
-                    url: "/dashboard/participants",
-                    icon: Users,
-               },
-               {
                     title: "Participated Events",
-                    url: "/dashboard/participants/my-participated-events",
+                    url: "/dashboard/my/participated-events",
                     icon: Heart,
                },
           ],
@@ -69,14 +54,9 @@ export const userRoutes: Route[] = [
           items: [
                {
                     title: "My Payments",
-                    url: "/dashboard/payments",
+                    url: "/dashboard/my/payments",
                     icon: CreditCard,
-               },
-               {
-                    title: "Event Payments",
-                    url: "/dashboard/payments/event-payments",
-                    icon: Wallet,
-               },
+               }
           ],
      },
 
@@ -85,14 +65,9 @@ export const userRoutes: Route[] = [
           items: [
                {
                     title: "My Tickets",
-                    url: "/dashboard/tickets",
+                    url: "/dashboard/my/tickets",
                     icon: Ticket,
-               },
-               {
-                    title: "Scan Tickets",
-                    url: "/dashboard/tickets/scan",
-                    icon: ScanLine,
-               },
+               }
           ],
      },
 
@@ -101,12 +76,12 @@ export const userRoutes: Route[] = [
           items: [
                {
                     title: "My Invitations",
-                    url: "/dashboard/invitations",
+                    url: "/dashboard/my/invitations",
                     icon: Mail,
                },
                {
                     title: "My Reviews",
-                    url: "/dashboard/review",
+                    url: "/dashboard/my/reviews",
                     icon: Star,
                },
           ],

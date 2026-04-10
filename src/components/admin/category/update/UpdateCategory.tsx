@@ -16,11 +16,11 @@ import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { createCategoryAction, updateCategoryAction } from "@/actions/category.action";
 import { useImageUpload } from "@/hooks/useImageUpload";
-import ImageUploader from "@/components/imageUploader/ImageUploader";
+import ImageUploader from "@/components/shared/imageUtils/imageUploader/ImageUploader";
 
 export default function UpdateCategory({ category }: { category: any }) {
      const [loading, setLoading] = useState(false);
-     const categoryImages = useImageUpload({ max: 1,defaultImages: [category?.image] });
+     const categoryImages = useImageUpload({ max: 1, defaultImages: [category?.image] });
 
      // console.log(categoryImages.images[0]?.img);
 
