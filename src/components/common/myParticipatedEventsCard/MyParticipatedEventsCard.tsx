@@ -1,136 +1,3 @@
-// "use client";
-
-// import { format } from "date-fns";
-// import { Card, CardContent, CardFooter } from "@/components/ui/card";
-// import { Badge } from "@/components/ui/badge";
-// import { Button } from "@/components/ui/button";
-// import { MyJoinedEvent } from "@/types/joinedEvent.types";
-// import { AppImage } from "../appImage/AppImage";
-// import Link from "next/link";
-// import { usePayment } from "@/hooks/usePayment";
-
-// type Props = {
-//   myEvents: MyJoinedEvent[];
-// };
-
-// const MyParticipatedEventsCard = ({ myEvents }: Props) => {
-//   const { handlePayment, loadingId } = usePayment();
-
-//   console.log(myEvents);
-
-//   if (!myEvents?.length) {
-//     return (
-//       <p className="p-6 text-center text-muted-foreground">
-//         You haven't joined any events yet.
-//       </p>
-//     );
-//   }
-
-
-
-//   return (
-//     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-//       {myEvents.map((item) => {
-//         const { event, payment, status } = item;
-//         console.log(item?.event?.id);
-
-//         const date = event?.dateTime ? new Date(event.dateTime) : null;
-
-//         const isPaid =
-//           payment?.some((p) => p.status === "SUCCESS") || false;
-
-//         const isApproved = status === "APPROVED" || isPaid;
-
-//         return (
-//           <Card key={item.id} className="overflow-hidden flex flex-col pt-0">
-//             {/* IMAGE */}
-//             <div className="relative h-60 w-full">
-//               {event?.images?.[0] && (
-//                 <AppImage
-//                   src={event.images[0]}
-//                   className="h-full w-full object-cover"
-//                 />
-//               )}
-
-//               <div className="absolute top-3 right-3">
-//                 <Badge variant={isApproved ? "default" : "secondary"}>
-//                   {isApproved ? "Approved" : "Pending"}
-//                 </Badge>
-//               </div>
-//             </div>
-
-//             {/* CONTENT */}
-//             <CardContent className="space-y-3 pt-4">
-//               <h3 className="font-semibold text-base line-clamp-1">
-//                 {event?.title}
-//               </h3>
-
-//               {date && (
-//                 <p className="text-sm text-muted-foreground">
-//                   {format(date, "PPP • p")}
-//                 </p>
-//               )}
-
-//               <div className="flex items-center justify-between text-sm">
-//                 {event?.type && (
-//                   <Badge variant="outline">{event.type}</Badge>
-//                 )}
-
-//                 <span className="font-medium">{event?.fee} tk</span>
-//               </div>
-
-//               {event?.venue && (
-//                 <p className="text-sm text-muted-foreground line-clamp-1">
-//                   {event.venue}
-//                 </p>
-//               )}
-//             </CardContent>
-
-//             {/* FOOTER */}
-//             <CardFooter className="mt-auto">
-//               {isApproved ? (
-//                 <Button className="w-full">
-//                   <Link href={`/dashboard/participants/my-participated-events/${item?.event?.id}`}>
-//                     View Event
-//                   </Link>
-//                 </Button>
-//               ) : (
-//                 <Button
-//                   variant="secondary"
-//                   className="w-full"
-//                   disabled={loadingId === item.eventId}
-//                   onClick={() =>
-//                     handlePayment({
-//                       eventId: item.eventId,
-//                     })
-//                   }
-//                 >
-//                   {loadingId === item.eventId ? "Processing..." : "Pay Now"}
-//                 </Button>
-//               )}
-//             </CardFooter>
-//           </Card>
-//         );
-//       })}
-//     </div>
-//   );
-// };
-
-// export default MyParticipatedEventsCard;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -149,6 +16,7 @@ import { useState } from "react";
 import ReviewDialog from "../reviewDialog/ReviewDialog";
 import { Map } from "lucide-react";
 import { AppImage } from "@/components/appImage/AppImage";
+import { usePathname } from "next/navigation";
 
 type Props = {
   myEvents: MyJoinedEvent[];
@@ -158,6 +26,18 @@ const MyParticipatedEventsCard = ({ myEvents }: Props) => {
   // console.log(myEvents);
   const { handlePayment, loadingId } = usePayment();
   const [viewMode, setViewMode] = useState<"card" | "table">("card");
+  const pathname = usePathname();
+
+  let basePath = "/dashboard";
+
+  if (pathname?.includes("organizer-dashboard")) {
+    basePath = "/organizer-dashboard";
+  } else if (pathname?.includes("admin-dashboard")) {
+    basePath = "/admin-dashboard";
+  } else if (pathname?.includes("super-admin-dashboard")) {
+    basePath = "/super-admin-dashboard";
+  }
+  console.log(basePath);
 
   if (!myEvents?.length) {
     return (
@@ -257,7 +137,7 @@ const MyParticipatedEventsCard = ({ myEvents }: Props) => {
                   {isApproved ? (
                     <div className="flex gap-2 w-full">
                       <Button asChild className="flex-1 rounded-4xl" variant="violet">
-                        <Link href={`/dashboard/my/participated-events/${event?.id}`}>
+                        <Link href={`${basePath}/my/participated-events/${event?.id}`}>
                           View Event
                         </Link>
                       </Button>
@@ -349,7 +229,7 @@ const MyParticipatedEventsCard = ({ myEvents }: Props) => {
                         {isApproved ? (
                           <div className="flex items-end justify-end gap-2 ">
                             <Button variant={"violet"} asChild size="xs">
-                              <Link href={`/dashboard/participants/my-participated-events/${event?.id}`}>
+                              <Link href={`${basePath}/my/participated-events/${event?.id}`}>
                                 View Event
                               </Link>
                             </Button>

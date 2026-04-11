@@ -27,6 +27,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { AppImage } from "@/components/appImage/AppImage";
+import { useAuth } from "@/context/AuthProvider";
 
 type User = {
   id: string;
@@ -42,6 +43,7 @@ type User = {
 const AllUsers = ({ users }: { users: User[] }) => {
   const [isPending, startTransition] = useTransition();
   const [loadingId, setLoadingId] = useState<string | null>(null);
+  const { user } = useAuth();
 
 
 
@@ -136,8 +138,13 @@ const AllUsers = ({ users }: { users: User[] }) => {
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="ADMIN">ADMIN</SelectItem>
+                        {
+                          user.role === "SUPERADMIN" && (
+                            <SelectItem value="ADMIN">ADMIN</SelectItem>
+                          )
+                        }
                         <SelectItem value="USER">USER</SelectItem>
+                        <SelectItem value="ORGANIZER">ORGANIZER</SelectItem>
                       </SelectContent>
                     </Select>
                   </TableCell>
