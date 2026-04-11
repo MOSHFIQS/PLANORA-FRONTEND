@@ -4,10 +4,11 @@ import { buildQueryString } from "@/utils/buildQueryString";
 
 
 
-export async function getMyEventsAction(page?: number, limit?: number) {
+export async function getMyEventsAction(page?: number, limit?: number, searchTerm?: string) {
      const query = buildQueryString({
           page,
           limit,
+          searchTerm
      });
      try {
           const res = await participationService.getMyEvents(query);

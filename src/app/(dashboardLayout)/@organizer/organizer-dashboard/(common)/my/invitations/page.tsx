@@ -7,10 +7,10 @@ import { Invitation } from "@/types/invitation.types";
 
 
 
-const MyInvitationsPage = async ({ searchParams }: { searchParams: Promise<{ page?: number; limit?: number }> }) => {
-
-     const { page, limit } = await searchParams;
-     const res = await getMyInvitationsAction(page, limit);
+const MyInvitationsPage = async ({ searchParams }: { searchParams: Promise<{ page?: number; limit?: number; search?: string }> }) => {
+     const { page, limit, search } = await searchParams
+     const searchTerm = search || "";
+     const res = await getMyInvitationsAction(page, limit, searchTerm);
      const invitations = res?.data?.data as Invitation[];
      // console.log(res);
 

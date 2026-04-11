@@ -1,5 +1,5 @@
 
-import { getMyReviews } from '@/actions/review.action';
+import { getMyReviews} from '@/actions/review.action';
 import MyReviews from '@/components/common/myReviews/MyReviews';
 
 const MyReviewsPage = async () => {

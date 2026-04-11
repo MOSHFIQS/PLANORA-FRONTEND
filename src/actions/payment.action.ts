@@ -30,11 +30,12 @@ export async function initiatePaymentAction(payload: {
 }
 
 
-export async function getMyPaymentsAction(page?: number, limit?: number) {
+export async function getMyPaymentsAction(page?: number, limit?: number, searchTerm?: string) {
   try {
     const query = buildQueryString({
           page,
           limit,
+          searchTerm
      });
     const res = await paymentService.getMyPayments(query);
 

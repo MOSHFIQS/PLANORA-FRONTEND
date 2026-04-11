@@ -3,9 +3,10 @@ import { getMyPaymentsAction } from '@/actions/payment.action';
 import PaymentsList from '@/components/common/payments/PaymentsList';
 import GlobalPagination from '@/components/shared/GlobalPagination';
 
-const MyPaymentsPage = async ({ searchParams }: { searchParams: Promise<{ page?: number; limit?: number }> }) => {
-     const { page, limit } = await searchParams;
-     const res = await getMyPaymentsAction(page, limit);
+const MyPaymentsPage = async ({ searchParams }: { searchParams: Promise<{ page?: number; limit?: number; search?: string }> }) => {
+     const { page, limit, search } = await searchParams
+     const searchTerm = search || "";
+     const res = await getMyPaymentsAction(page, limit, searchTerm);
      // console.log(res.data);
 
      if (!res?.ok) {

@@ -3,9 +3,10 @@ import MyParticipatedEventsCard from '@/components/common/myParticipatedEventsCa
 import GlobalPagination from '@/components/shared/GlobalPagination';
 
 
-const MyParticipatedEventsPage = async ({ searchParams }: { searchParams: Promise<{ page?: number; limit?: number }> }) => {
-     const { page, limit } = await searchParams;
-     const res = await getMyEventsAction(page, limit);
+const MyParticipatedEventsPage = async ({ searchParams }: { searchParams: Promise<{ page?: number; limit?: number; search?: string }> }) => {
+     const { page, limit, search } = await searchParams
+     const searchTerm = search || "";
+     const res = await getMyEventsAction(page, limit, searchTerm);
      // console.log(res.data);
 
      if (!res?.ok) {
