@@ -22,6 +22,9 @@ type Props = {
   data: any;
 };
 
+
+
+
 const EventDetailsSmart = ({ type, data }: Props) => {
   const { handlePayment, loadingId } = usePayment();
 
@@ -310,4 +313,4 @@ const EventDetailsSmart = ({ type, data }: Props) => {
   );
 };
 
-export default EventDetailsSmart;
+export default EventDetailsSmart

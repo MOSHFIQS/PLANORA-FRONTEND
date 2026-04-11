@@ -280,7 +280,7 @@ export async function updateUserStatusAction(
 // Update user role
 export async function updateUserRoleAction(
   id: string,
-  role: "USER" | "ADMIN"
+  role: "USER" | "ADMIN" | "ORGANIZER"
 ) {
   try {
     const res = await adminService.updateUserRole(id, role);

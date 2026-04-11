@@ -9,6 +9,7 @@ import { ReactNode } from "react"
 import { redirect } from "next/navigation";
 import { AppSidebar } from "@/components/appSidebar/app-sidebar"
 import { sessionService } from "@/service/server/token.service";
+import GlobalSearch from "@/components/shared/GlobalSearch";
 
 export default async  function DashboardLayout({ admin, user, organizer, superAdmin }: { admin: ReactNode, user: ReactNode, organizer: ReactNode, superAdmin: ReactNode }) {
 
@@ -64,6 +65,7 @@ export default async  function DashboardLayout({ admin, user, organizer, superAd
                          <div className="flex items-center gap-2 px-3">
                               <SidebarTrigger />
                               <Separator orientation="vertical" className="mr-2 h-4" />
+                              <GlobalSearch />
 
                          </div>
                     </header>

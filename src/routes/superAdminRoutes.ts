@@ -11,6 +11,9 @@ import {
      List,
      Mail,
      MapPin,
+     Ticket,
+     Star,
+     Heart,
 } from "lucide-react";
 
 export const superAdminRoutes: Route[] = [
@@ -19,7 +22,7 @@ export const superAdminRoutes: Route[] = [
           items: [
                {
                     title: "Analytics",
-                    url: "/admin-dashboard",
+                    url: "/super-admin-dashboard",
                     icon: LayoutDashboard,
                },
           ],
@@ -30,7 +33,7 @@ export const superAdminRoutes: Route[] = [
           items: [
                {
                     title: "Profile",
-                    url: "/admin-dashboard/profile",
+                    url: "/super-admin-dashboard/my/profile",
                     icon: User,
                },
           ],
@@ -41,12 +44,17 @@ export const superAdminRoutes: Route[] = [
           items: [
                {
                     title: "All Users",
-                    url: "/admin-dashboard/users",
+                    url: "/super-admin-dashboard/users",
                     icon: Users,
                },
                {
                     title: "All Admins",
-                    url: "/admin-dashboard/admins",
+                    url: "/super-admin-dashboard/admins",
+                    icon: Shield,
+               },
+               {
+                    title: "Audit Logs",
+                    url: "/super-admin-dashboard/audit",
                     icon: Shield,
                },
           ],
@@ -57,17 +65,17 @@ export const superAdminRoutes: Route[] = [
           items: [
                {
                     title: "All Categories",
-                    url: "/admin-dashboard/category",
+                    url: "/super-admin-dashboard/category",
                     icon: Tags,
                },
                {
                     title: "All Banners",
-                    url: "/admin-dashboard/banner",
+                    url: "/super-admin-dashboard/banner",
                     icon: ImageIcon,
                },
                {
                     title: "Manage Events",
-                    url: "/admin-dashboard/events",
+                    url: "/super-admin-dashboard/events",
                     icon: List,
                },
           ],
@@ -78,8 +86,53 @@ export const superAdminRoutes: Route[] = [
           items: [
                {
                     title: "All Payments",
-                    url: "/admin-dashboard/payments",
+                    url: "/super-admin-dashboard/payments",
                     icon: CreditCard,
+               },
+               {
+                    title: "My Payments",
+                    url: "/super-admin-dashboard/my/payments",
+                    icon: CreditCard,
+               }
+          ],
+     },
+
+     {
+          title: "My Events",
+          items: [
+               {
+                    title: "Participated Events",
+                    url: "/super-admin-dashboard/my/participated-events",
+                    icon: Heart,
+               },
+          ],
+     },
+
+
+
+     {
+          title: "Tickets",
+          items: [
+               {
+                    title: "My Tickets",
+                    url: "/super-admin-dashboard/my/tickets",
+                    icon: Ticket,
+               }
+          ],
+     },
+
+     {
+          title: "Engagement",
+          items: [
+               {
+                    title: "My Invitations",
+                    url: "/super-admin-dashboard/my/invitations",
+                    icon: Mail,
+               },
+               {
+                    title: "My Reviews",
+                    url: "/super-admin-dashboard/my/reviews",
+                    icon: Star,
                },
           ],
      },

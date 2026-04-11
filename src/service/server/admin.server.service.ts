@@ -60,7 +60,7 @@ export const adminService = {
       body: JSON.stringify(payload),
     }),
 
-  updateUserRole: (id: string, role: "USER" | "ADMIN") =>
+  updateUserRole: (id: string, role: "USER" | "ADMIN" | "ORGANIZER") =>
     apiFetchServerMain(`/admin/users/${id}/role`, {
       method: "PATCH",
       body: JSON.stringify({ role }),
