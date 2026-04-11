@@ -23,7 +23,7 @@ export const organizerRoutes: Route[] = [
           items: [
                {
                     title: "Analytics",
-                    url: "/dashboard",
+                    url: "/organizer-dashboard",
                     icon: LayoutDashboard,
                },
           ],

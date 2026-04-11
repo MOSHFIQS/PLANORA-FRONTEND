@@ -11,6 +11,9 @@ import {
   List,
   Mail,
   MapPin,
+  Ticket,
+  Star,
+  Heart,
 } from "lucide-react";
 
 export const adminRoutes: Route[] = [
@@ -30,7 +33,7 @@ export const adminRoutes: Route[] = [
     items: [
       {
         title: "Profile",
-        url: "/admin-dashboard/profile",
+        url: "/admin-dashboard/my/profile",
         icon: User,
       },
     ],
@@ -43,12 +46,7 @@ export const adminRoutes: Route[] = [
         title: "All Users",
         url: "/admin-dashboard/users",
         icon: Users,
-      },
-      {
-        title: "All Admins",
-        url: "/admin-dashboard/admins",
-        icon: Shield,
-      },
+      }
     ],
   },
 
@@ -80,6 +78,49 @@ export const adminRoutes: Route[] = [
         title: "All Payments",
         url: "/admin-dashboard/payments",
         icon: CreditCard,
+      },
+      {
+        title: "My Payments",
+        url: "/admin-dashboard/my/payments",
+        icon: CreditCard,
+      }
+    ],
+  },
+
+  {
+    title: "My Events",
+    items: [
+      {
+        title: "Participated Events",
+        url: "/admin-dashboard/my/participated-events",
+        icon: Heart,
+      },
+    ],
+  },
+
+  {
+    title: "Tickets",
+    items: [
+      {
+        title: "My Tickets",
+        url: "/admin-dashboard/my/tickets",
+        icon: Ticket,
+      }
+    ],
+  },
+
+  {
+    title: "Engagement",
+    items: [
+      {
+        title: "My Invitations",
+        url: "/admin-dashboard/my/invitations",
+        icon: Mail,
+      },
+      {
+        title: "My Reviews",
+        url: "/admin-dashboard/my/reviews",
+        icon: Star,
       },
     ],
   },
