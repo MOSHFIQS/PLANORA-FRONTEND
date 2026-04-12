@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { Card } from "@/components/ui/card";
-import SectionHeader from "@/components/sectionHeader/SectionHeader";
+import SectionHeader from "@/components/shared/sectionHeader/SectionHeader";
 
 type Props = {
   images: string[]; // 3 images
@@ -22,7 +22,7 @@ const ImageMosaic = ({ images }: Props) => {
         <div className="absolute -top-20 -left-20 w-72 h-72 bg-purple-300/20 blur-3xl rounded-full" />
         <div className="absolute -bottom-20 -right-20 w-72 h-72 bg-indigo-300/20 blur-3xl rounded-full" />
 
-     
+
 
         {/* Mosaic Layout */}
         <div className="relative flex justify-center items-center h-[500px]">

@@ -1,4 +1,4 @@
-import SectionHeader from "@/components/sectionHeader/SectionHeader";
+import SectionHeader from "@/components/shared/sectionHeader/SectionHeader";
 import {
   Accordion,
   AccordionContent,
@@ -38,12 +38,12 @@ const FAQ = () => {
   return (
     <section className="py-20 bg-white dark:bg-transparent">
       <div className="container mx-auto px-4 max-w-4xl">
-        
+
         <SectionHeader
-        align="center"
-        title="Frequently Asked Questions"
-        description="Got questions? We've got answers. Here are the most common questions we hear from our organizers and attendees."
-      />
+          align="center"
+          title="Frequently Asked Questions"
+          description="Got questions? We've got answers. Here are the most common questions we hear from our organizers and attendees."
+        />
 
         <div className="bg-white dark:bg-gray-900  shadow-sm border border-gray-100 dark:border-gray-800 p-6 md:p-10">
           <Accordion type="single" collapsible className="w-full">

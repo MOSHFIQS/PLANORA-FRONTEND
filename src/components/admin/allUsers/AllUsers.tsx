@@ -13,7 +13,7 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
-import { Trash2, ShieldCheck, ShieldOff } from "lucide-react";
+import { Trash2 } from "lucide-react";
 import {
   updateUserStatusAction,
   deleteUserAction,
@@ -27,6 +27,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { AppImage } from "@/components/appImage/AppImage";
+import { useAuth } from "@/context/AuthProvider";
 
 type User = {
   id: string;
@@ -37,17 +38,15 @@ type User = {
   emailVerified: boolean;
   image?: string;
   createdAt: string;
+  isDeleted: boolean;
 };
 
 const AllUsers = ({ users }: { users: User[] }) => {
   const [isPending, startTransition] = useTransition();
   const [loadingId, setLoadingId] = useState<string | null>(null);
+  const { user } = useAuth();
+  const currentUserRole = user?.role;
 
-
-
-
-
-  // Delete user
   const handleDelete = (id: string) => {
     setLoadingId(id);
 
@@ -70,7 +69,7 @@ const AllUsers = ({ users }: { users: User[] }) => {
         <CardTitle>All Users</CardTitle>
       </CardHeader>
 
-      <CardContent >
+      <CardContent>
         <Table>
           <TableHeader>
             <TableRow>
@@ -86,11 +85,14 @@ const AllUsers = ({ users }: { users: User[] }) => {
 
           <TableBody>
             {users.map((user) => {
-              const isActive = user.status === "ACTIVE";
               const isLoading = loadingId === user.id;
+              const isDeleted = user.isDeleted;
 
               return (
-                <TableRow key={user.id}>
+                <TableRow
+                  key={user.id}
+                  className={isDeleted ? "opacity-40 pointer-events-none select-none" : ""}
+                >
                   {/* User */}
                   <TableCell>
                     <div className="flex items-center gap-2 min-w-0">
@@ -101,10 +103,12 @@ const AllUsers = ({ users }: { users: User[] }) => {
                         height={40}
                         className="h-10 w-10 rounded object-cover border shrink-0"
                       />
-
-                      <span >
-                        {user.name}
-                      </span>
+                      <span>{user.name}</span>
+                      {isDeleted && (
+                        <Badge variant="destructive" className="text-[10px] px-1.5 py-0">
+                          Deleted
+                        </Badge>
+                      )}
                     </div>
                   </TableCell>
 
@@ -113,73 +117,91 @@ const AllUsers = ({ users }: { users: User[] }) => {
 
                   {/* Role */}
                   <TableCell>
-                    <Select
-                      defaultValue={user.role}
-                      onValueChange={async (value) => {
-                        setLoadingId(user.id);
+                    {isDeleted ? (
+                      <span className="text-sm text-muted-foreground">{user.role}</span>
+                    ) : (
+                      <Select
+                        defaultValue={user.role}
+                        onValueChange={async (value) => {
+                          setLoadingId(user.id);
 
-                        const res = await updateUserRoleAction(user.id, value as "ADMIN" | "USER");
+                          const res = await updateUserRoleAction(
+                            user.id,
+                            value as "ADMIN" | "USER" | "ORGANIZER"
+                          );
 
-                        if (!res?.ok) {
-                          toast.error(res?.message || "Failed to update");
-                        } else {
-                          toast.success(res?.message || "Status updated");
-                        }
+                          if (!res?.ok) {
+                            toast.error(res?.message || "Failed to update");
+                          } else {
+                            toast.success(res?.message || "Status updated");
+                          }
 
-                        setLoadingId(null);
-                      }}
-                    >
-                      <SelectTrigger
-                        className="w-[130px]"
-                        disabled={isLoading}
+                          setLoadingId(null);
+                        }}
                       >
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="ADMIN">ADMIN</SelectItem>
-                        <SelectItem value="USER">USER</SelectItem>
-                      </SelectContent>
-                    </Select>
+                        <SelectTrigger className="w-[130px]" disabled={isLoading}>
+                          <SelectValue />
+                        </SelectTrigger>
+
+                        <SelectContent>
+                          {/* SUPERADMIN can assign everything */}
+                          {currentUserRole === "SUPERADMIN" && (
+                            <>
+                              <SelectItem value="ADMIN">ADMIN</SelectItem>
+                              <SelectItem value="USER">USER</SelectItem>
+                              <SelectItem value="ORGANIZER">ORGANIZER</SelectItem>
+                            </>
+                          )}
+
+                          {/* ADMIN can assign USER + ORGANIZER */}
+                          {currentUserRole === "ADMIN" && (
+                            <>
+                              <SelectItem value="USER">USER</SelectItem>
+                              <SelectItem value="ORGANIZER">ORGANIZER</SelectItem>
+                            </>
+                          )}
+
+                          {/* fallback (optional safety) */}
+                          {!["SUPERADMIN", "ADMIN"].includes(currentUserRole || "") && (
+                            <SelectItem value={user.role}>{user.role}</SelectItem>
+                          )}
+                        </SelectContent>
+                      </Select>
+                    )}
                   </TableCell>
 
-                  {/* Status (Select) */}
+                  {/* Status */}
                   <TableCell>
-                    <Select
-                      defaultValue={user.status}
-                      onValueChange={async (value) => {
-                        setLoadingId(user.id);
-
-                        const res = await updateUserStatusAction(user.id, {
-                          status: value,
-                        });
-
-                        if (!res?.ok) {
-                          toast.error(res?.message || "Failed to update");
-                        } else {
-                          toast.success(res?.message || "Status updated");
-                        }
-
-                        setLoadingId(null);
-                      }}
-                    >
-                      <SelectTrigger
-                        className="w-[130px]"
-                        disabled={isLoading}
+                    {isDeleted ? (
+                      <span className="text-sm text-muted-foreground">{user.status}</span>
+                    ) : (
+                      <Select
+                        defaultValue={user.status}
+                        onValueChange={async (value) => {
+                          setLoadingId(user.id);
+                          const res = await updateUserStatusAction(user.id, { status: value });
+                          if (!res?.ok) {
+                            toast.error(res?.message || "Failed to update");
+                          } else {
+                            toast.success(res?.message || "Status updated");
+                          }
+                          setLoadingId(null);
+                        }}
                       >
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="ACTIVE">Active</SelectItem>
-                        <SelectItem value="SUSPENDED">Suspended</SelectItem>
-                      </SelectContent>
-                    </Select>
+                        <SelectTrigger className="w-[130px]" disabled={isLoading}>
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="ACTIVE">Active</SelectItem>
+                          <SelectItem value="SUSPENDED">Suspended</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    )}
                   </TableCell>
 
                   {/* Verified */}
                   <TableCell>
-                    <Badge
-                      variant={user.emailVerified ? "default" : "destructive"}
-                    >
+                    <Badge variant={user.emailVerified ? "default" : "destructive"}>
                       {user.emailVerified ? "Verified" : "Unverified"}
                     </Badge>
                   </TableCell>
@@ -192,16 +214,15 @@ const AllUsers = ({ users }: { users: User[] }) => {
                   {/* Actions */}
                   <TableCell className="text-right">
                     <div className="flex items-end justify-end gap-2">
-
-
-                      {/* Delete */}
-                      <Button
-                        variant="destructive"
-                        disabled={isLoading}
-                        onClick={() => handleDelete(user.id)}
-                      >
-                        {isLoading ? "..." : <Trash2 />}
-                      </Button>
+                      {!isDeleted && (
+                        <Button
+                          variant="destructive"
+                          disabled={isLoading}
+                          onClick={() => handleDelete(user.id)}
+                        >
+                          {isLoading ? "..." : <Trash2 />}
+                        </Button>
+                      )}
                     </div>
                   </TableCell>
                 </TableRow>

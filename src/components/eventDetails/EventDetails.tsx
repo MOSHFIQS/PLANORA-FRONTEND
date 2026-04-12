@@ -2,9 +2,10 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import ImageMagnifier from "../imageMagnifier/ImageMagnifier";
-import DescriptionViwer from "../descriptionViwer/DescriptionViwer";
+import DescriptionViwer from "../shared/descriptionViwer/DescriptionViwer";
 import { AppImage } from "../appImage/AppImage";
+import ImageMagnifier from "../shared/imageUtils/imageMagnifier/ImageMagnifier";
+
 
 export type EventType = "ONLINE" | "OFFLINE";
 export type Visibility = "PUBLIC" | "PRIVATE";
@@ -153,7 +154,7 @@ const EventDetails = ({ event }: { event: IEvent }) => {
                          )}
 
 
-                        <div className="text-xs text-muted-foreground space-y-1">
+                         <div className="text-xs text-muted-foreground space-y-1">
                               <p>Created: {new Date(event?.createdAt).toLocaleString()}</p>
                               <p>Updated: {new Date(event?.updatedAt).toLocaleString()}</p>
                          </div>
@@ -172,7 +173,7 @@ const EventDetails = ({ event }: { event: IEvent }) => {
                          </div>
 
                          {/* Created / Updated */}
-                         
+
                     </CardContent>
                </Card>
 

@@ -11,7 +11,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { AppImage } from "@/components/appImage/AppImage";
 import { Event } from "@/types/event.types";
-import SectionHeader from "@/components/sectionHeader/SectionHeader";
+import SectionHeader from "@/components/shared/sectionHeader/SectionHeader";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthProvider";
 import { Locate, LocateIcon, Map } from "lucide-react";

@@ -14,7 +14,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Field, FieldLabel, FieldError, FieldGroup } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import ImageUploader from "@/components/imageUploader/ImageUploader";
+import ImageUploader from "@/components/shared/imageUtils/imageUploader/ImageUploader";
 import {
      Select,
      SelectContent,
@@ -22,10 +22,11 @@ import {
      SelectTrigger,
      SelectValue,
 } from "@/components/ui/select";
-import TextEditor from "../textEditor/TextEditor";
+import TextEditor from "../shared/textEditor/TextEditor";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Calendar } from "../ui/calendar";
 import { Label } from "../ui/label";
+import AIMagicWriter from "../shared/ai/AIMagicWriter";
 
 // -------------------- validation --------------------
 const formSchema = z.object({
@@ -125,7 +126,7 @@ const UpdateEventForm = ({ event, categories }: Props) => {
                          id: toastId,
                     });
 
-                    router.push("/dashboard/event");
+                    router.push("/organizer-dashboard/events");
                } catch (err) {
                     toast.error("Something went wrong", { id: toastId });
                }
@@ -287,7 +288,19 @@ const UpdateEventForm = ({ event, categories }: Props) => {
                          <form.Field name="description">
                               {(field) => (
                                    <Field>
-                                        <FieldLabel>Description</FieldLabel>
+                                        <div className="flex items-center justify-between">
+                                             <FieldLabel></FieldLabel>
+                                             <form.Subscribe selector={(state) => [state.values.title, state.values.type, state.values.venue]}>
+                                                  {([title, type, venue]) => (
+                                                       <AIMagicWriter 
+                                                            title={title as string} 
+                                                            type={type as string} 
+                                                            venue={venue as string}
+                                                            onGenerate={field.handleChange} 
+                                                       />
+                                                  )}
+                                             </form.Subscribe>
+                                        </div>
                                         <TextEditor
                                              value={field.state.value}
                                              onChange={field.handleChange}

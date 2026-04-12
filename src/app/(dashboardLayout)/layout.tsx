@@ -10,7 +10,7 @@ import { redirect } from "next/navigation";
 import { AppSidebar } from "@/components/appSidebar/app-sidebar"
 import { sessionService } from "@/service/server/token.service";
 
-export default async  function DashboardLayout({ admin, user }: { admin: ReactNode, user: ReactNode }) {
+export default async  function DashboardLayout({ admin, user, organizer, superAdmin }: { admin: ReactNode, user: ReactNode, organizer: ReactNode, superAdmin: ReactNode }) {
 
      const data = await sessionService.getUserFromToken()
      // console.log("token",data);
@@ -45,6 +45,12 @@ export default async  function DashboardLayout({ admin, user }: { admin: ReactNo
           case Roles.user:
                content = user
                break
+          case Roles.organizer:
+               content = organizer
+               break
+          case Roles.superAdmin:
+               content = superAdmin
+               break
           default:
                content = null
      }
@@ -58,6 +64,7 @@ export default async  function DashboardLayout({ admin, user }: { admin: ReactNo
                          <div className="flex items-center gap-2 px-3">
                               <SidebarTrigger />
                               <Separator orientation="vertical" className="mr-2 h-4" />
+                              {/* <GlobalSearch /> */}
 
                          </div>
                     </header>

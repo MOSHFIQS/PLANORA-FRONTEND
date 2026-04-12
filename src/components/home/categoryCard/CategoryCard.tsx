@@ -1,6 +1,6 @@
 "use client";
 
-import SectionHeader from "@/components/sectionHeader/SectionHeader";
+import SectionHeader from "@/components/shared/sectionHeader/SectionHeader";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 

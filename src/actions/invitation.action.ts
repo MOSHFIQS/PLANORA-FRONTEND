@@ -82,11 +82,12 @@ export async function cancelInvitationAction(id: string) {
 }
 
 // 4. Get My Invitations
-export async function getMyInvitationsAction(page?: number, limit?: number) {
+export async function getMyInvitationsAction(page?: number, limit?: number, searchTerm?: string) {
   try {
     const query = buildQueryString({
       page,
       limit,
+      searchTerm,
     });
     const res = await invitationService.getMyInvitations(query);
 

@@ -1,6 +1,6 @@
 "use client";
 
-import SectionHeader from "@/components/sectionHeader/SectionHeader";
+import SectionHeader from "@/components/shared/sectionHeader/SectionHeader";
 import {
   Ticket,
   BarChart2,
@@ -138,7 +138,7 @@ const Features = () => {
                         "--tw-text-opacity": 1,
                       } as React.CSSProperties
                     }
-                    // swap color via parent group
+                  // swap color via parent group
                   />
                   {/* colored icon overlay on hover */}
                   <Icon

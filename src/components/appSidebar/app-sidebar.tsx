@@ -21,6 +21,8 @@ import { adminRoutes } from "@/routes/adminRoutes";
 import { userRoutes } from "@/routes/userRoutes";
 import { Route } from "@/types/routes.type";
 import { NavUser } from "../ui/nav-user";
+import { organizerRoutes } from "@/routes/organizerRoutes";
+import { superAdminRoutes } from "@/routes/superAdminRoutes";
 
 export function AppSidebar({
      user,
@@ -37,6 +39,12 @@ export function AppSidebar({
                break;
           case Roles.user:
                routes = userRoutes;
+               break;
+          case Roles.organizer:
+               routes = organizerRoutes;
+               break;
+          case Roles.superAdmin:
+               routes = superAdminRoutes;
                break;
           default:
                routes = [];

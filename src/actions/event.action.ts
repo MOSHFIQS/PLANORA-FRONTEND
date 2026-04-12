@@ -99,7 +99,7 @@ export async function createEventAction(payload: any) {
             };
         }
 
-        revalidatePath("/dashboard/event");
+        revalidatePath("/organizer-dashboard/events");
 
         return {
             ok: true,
@@ -155,7 +155,7 @@ export async function updateEventAction(id: string, payload: any) {
             };
         }
 
-        revalidatePath("/dashboard/event");
+        revalidatePath("/organizer-dashboard/events");
 
         return {
             ok: true,
@@ -181,7 +181,7 @@ export async function deleteEventAction(id: string) {
             };
         }
 
-        revalidatePath("/dashboard/event");
+        revalidatePath("/organizer-dashboard/events");
 
         return {
             ok: true,
@@ -235,6 +235,7 @@ export async function deleteEventByAdminAction(id: string) {
         }
 
         revalidatePath("/admin-dashboard/events");
+        revalidatePath("/super-admin-dashboard/events");
 
         return {
             ok: true,
@@ -262,6 +263,7 @@ export async function updateFeaturedStatusAction(id: string, isFeatured: boolean
 
         revalidatePath("/");
         revalidatePath("/admin-dashboard/events");
+        revalidatePath("/super-admin-dashboard/events");
 
         return {
             ok: true,

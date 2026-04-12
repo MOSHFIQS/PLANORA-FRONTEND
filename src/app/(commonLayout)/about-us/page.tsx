@@ -1,6 +1,5 @@
-import { getPublicStatsAction } from '@/actions/public.action';
+import { getPublicStatsAction } from '@/actions/stat.action';
 import AboutUs from '@/components/home/aboutUs/AboutUs';
-import React from 'react';
 
 const AboutUsPage = async () => {
      const publicStatsRes = await getPublicStatsAction()

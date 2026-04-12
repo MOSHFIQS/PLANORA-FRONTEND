@@ -1,7 +1,6 @@
 "use server";
 
 import { authService } from "@/service/server/auth.server.service";
-import { revalidatePath } from "next/cache";
 
 export async function logInAction(data: { email: string; password: string }) {
      try {
@@ -13,8 +12,6 @@ export async function logInAction(data: { email: string; password: string }) {
                     message: res?.message || "Login failed",
                };
           }
-
-          // revalidatePath("/admin-dashboard");
 
           return {
                ok: true,
@@ -30,10 +27,9 @@ export async function logInAction(data: { email: string; password: string }) {
 }
 
 
-export async function registerAction(data: { email: string; password: string }) {
+export async function registerAction(data: { email: string; password: string, name: string, image?: string, role: "USER" | "ORGANIZER" }) {
      try {
           const res = await authService.register(data);
-          // console.log(res);
 
           if (!res?.ok) {
                return {

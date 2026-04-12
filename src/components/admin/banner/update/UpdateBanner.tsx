@@ -27,10 +27,12 @@ import {
 import { updateBannerAction } from "@/actions/banner.action";
 import { AppImage } from "@/components/appImage/AppImage";
 import { Field } from "@/components/ui/field";
+import { useAuth } from "@/context/AuthProvider";
 
 export default function UpdateBanner({ banner }: { banner: any }) {
      const [loading, setLoading] = useState(false);
      const router = useRouter();
+     const { user } = useAuth();
 
 
 
@@ -75,7 +77,11 @@ export default function UpdateBanner({ banner }: { banner: any }) {
                     if (!res?.ok) throw new Error(res?.message);
 
                     toast.success(res.message);
-                    router.push("/admin-dashboard/banner");
+                    if (user?.role === "ADMIN") {
+                         router.push("/admin-dashboard/banner");
+                    } else if (user?.role === "SUPERADMIN") {
+                         router.push("/super-admin-dashboard/banner");
+                    }
                     form.reset();
                } catch (err: any) {
                     toast.error(err.message);

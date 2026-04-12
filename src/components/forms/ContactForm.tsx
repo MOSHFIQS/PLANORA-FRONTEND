@@ -3,7 +3,7 @@
 import React from "react";
 import emailjs from "emailjs-com";
 import { toast } from "sonner";
-import SectionHeader from "../sectionHeader/SectionHeader";
+import SectionHeader from "../shared/sectionHeader/SectionHeader";
 import { Button } from "../ui/button";
 import { useRouter } from "next/navigation";
 

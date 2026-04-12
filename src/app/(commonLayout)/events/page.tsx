@@ -2,7 +2,7 @@
 import { getAllCategoriesAction } from "@/actions/category.action";
 import { getAllEventsAction } from "@/actions/event.action";
 import CategoryButtons from "@/components/home/categoryButtons/CategoryButtons";
-import HomePageEvents from "@/components/homePageEvents/HomePageEvents";
+import HomePageEvents from "@/components/home/homePageEvents/HomePageEvents";
 import GlobalPagination from "@/components/shared/GlobalPagination";
 
 const AllEventsPage = async ({ searchParams }: { searchParams: Promise<{ search?: string; categoryId?: string; page?: number; limit?: number }> }) => {
