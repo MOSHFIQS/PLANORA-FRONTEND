@@ -62,14 +62,14 @@ export default function CreateAdmin() {
         >
           <p
             className="flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] uppercase mb-3"
-            style={{ color: "#0db8c4" }}
+            style={{ color: "#725CAD" }}
           >
             <span
               style={{
                 display: "inline-block",
                 width: 24,
                 height: 1,
-                background: "#0db8c4",
+                background: "#725CAD",
               }}
             />
             Admin provisioning
@@ -78,7 +78,7 @@ export default function CreateAdmin() {
             className="text-[22px] font-bold tracking-tight leading-tight"
             style={{ color: "#1a1a1a" }}
           >
-            Create <span style={{ color: "#0db8c4" }}>administrator</span>
+            Create <span style={{ color: "#725CAD" }}>administrator</span>
           </h1>
           <p className="text-sm font-light mt-1" style={{ color: "#888" }}>
             Provision a new admin or super admin account.
@@ -119,11 +119,11 @@ export default function CreateAdmin() {
                     style={
                       role === r
                         ? {
-                            background: "rgba(13,184,196,0.12)",
-                            color: "#0a9ea8",
-                            border: "1px solid rgba(13,184,196,0.3)",
-                            fontWeight: 500,
-                          }
+                          background: "rgba(13,184,196,0.12)",
+                          color: "#0a9ea8",
+                          border: "1px solid rgba(13,184,196,0.3)",
+                          fontWeight: 500,
+                        }
                         : { color: "#999" }
                     }
                   >
@@ -221,8 +221,8 @@ export default function CreateAdmin() {
                   !value
                     ? "Password is required"
                     : value.length < 6
-                    ? "Minimum 6 characters"
-                    : undefined,
+                      ? "Minimum 6 characters"
+                      : undefined,
               }}
             >
               {(field) => (
@@ -261,7 +261,7 @@ export default function CreateAdmin() {
               type="submit"
               disabled={loading}
               className="w-full h-[50px] mt-1 rounded-xl text-sm font-medium tracking-wide transition-all flex items-center justify-center gap-2"
-              style={{ background: "#0db8c4", color: "#fff", border: "none" }}
+              style={{ background: "#725CAD", color: "#fff", border: "none" }}
             >
               {loading ? (
                 <>

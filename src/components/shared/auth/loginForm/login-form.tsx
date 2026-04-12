@@ -53,11 +53,11 @@ export function LoginForm() {
   return (
     <div
       className="flex items-center justify-center p-6"
-      // style={{
-      //   backgroundColor: "#f3f2ec",
-      //   backgroundImage:
-      //     "repeating-linear-gradient(0deg,transparent,transparent 39px,rgba(0,0,0,0.06) 39px,rgba(0,0,0,0.06) 40px),repeating-linear-gradient(90deg,transparent,transparent 39px,rgba(0,0,0,0.06) 39px,rgba(0,0,0,0.06) 40px)",
-      // }}
+    // style={{
+    //   backgroundColor: "#f3f2ec",
+    //   backgroundImage:
+    //     "repeating-linear-gradient(0deg,transparent,transparent 39px,rgba(0,0,0,0.06) 39px,rgba(0,0,0,0.06) 40px),repeating-linear-gradient(90deg,transparent,transparent 39px,rgba(0,0,0,0.06) 39px,rgba(0,0,0,0.06) 40px)",
+    // }}
     >
       <div
         className="relative w-full max-w-[960px] overflow-hidden"
@@ -74,14 +74,14 @@ export function LoginForm() {
           <div className="flex flex-col justify-center px-14 py-14">
             <p
               className="flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] uppercase mb-5"
-              style={{ color: "#0db8c4" }}
+              style={{ color: "#725CAD" }}
             >
               <span
                 style={{
                   display: "inline-block",
                   width: 24,
                   height: 1,
-                  background: "#0db8c4",
+                  background: "#725CAD",
                 }}
               />
               Welcome back
@@ -91,7 +91,7 @@ export function LoginForm() {
               style={{ color: "#1a1a1a" }}
             >
               Sign in to{" "}
-              <span style={{ color: "#0db8c4" }}>Planora</span>
+              <span style={{ color: "#725CAD" }}>Planora</span>
             </h1>
             <p className="text-sm font-light mb-10" style={{ color: "#888" }}>
               Your next event is waiting for you.
@@ -186,7 +186,7 @@ export function LoginForm() {
                 disabled={isSubmitting}
                 className="w-full h-[50px] mt-2 rounded text-sm font-medium tracking-wide transition-all"
                 style={{
-                  background: "#0db8c4",
+                  background: "#725CAD",
                   color: "#fff",
                   border: "none",
                 }}
@@ -201,7 +201,7 @@ export function LoginForm() {
               <Link
                 href={`/register?redirect=${encodeURIComponent(redirectUrl)}`}
                 className="font-medium transition-colors"
-                style={{ color: "#0db8c4" }}
+                style={{ color: "#725CAD" }}
               >
                 Create an account
               </Link>
@@ -221,7 +221,7 @@ export function LoginForm() {
               style={{
                 background: "rgba(13,184,196,0.15)",
                 border: "1px solid rgba(13,184,196,0.3)",
-                color: "#0db8c4",
+                color: "#725CAD",
               }}
             >
               <span
@@ -229,7 +229,7 @@ export function LoginForm() {
                   width: 6,
                   height: 6,
                   borderRadius: "50%",
-                  background: "#0db8c4",
+                  background: "#725CAD",
                   display: "inline-block",
                 }}
               />
@@ -240,7 +240,7 @@ export function LoginForm() {
               style={{ color: "#f0ede4" }}
             >
               Discover events <br />
-              worth <em style={{ color: "#0db8c4", fontStyle: "italic" }}>remembering</em>
+              worth <em style={{ color: "#725CAD", fontStyle: "italic" }}>remembering</em>
             </h2>
             <p className="text-[13px] leading-relaxed max-w-[280px] font-light m-0" style={{ color: "#888" }}>
               Connect with organisers, secure your spot, and experience moments that matter.

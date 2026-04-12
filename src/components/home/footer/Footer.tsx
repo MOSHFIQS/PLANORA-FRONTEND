@@ -74,7 +74,8 @@ export default function Footer() {
                               { name: "Home", href: "/" },
                               { name: "Events", href: "/events" },
                               { name: "About Us", href: "/about-us" },
-                              { name: "Contact", href: "/contact-us" },
+                              { name: "Contact", href: "/contact" },
+                              { name: "Help & Support", href: "/help" },
                          ].map((item, i) => (
                               <Link
                                    key={i}
@@ -109,9 +110,9 @@ export default function Footer() {
                               <input type="checkbox" />
                               <p>
                                    Your email is safe with us.{" "}
-                                   <span className="underline cursor-pointer">
+                                   <Link href="/privacy-policy" className="underline cursor-pointer">
                                         Privacy Policy
-                                   </span>
+                                   </Link>
                               </p>
                          </div>
                     </div>
@@ -122,9 +123,9 @@ export default function Footer() {
                     <p>© {new Date().getFullYear()} PLANORA. All Rights Reserved.</p>
 
                     <div className="flex gap-3">
-                         <Link href="#">Privacy Policy</Link>
+                         <Link href="/privacy-policy" className="hover:text-[#725CAD] transition">Privacy Policy</Link>
                          <span>|</span>
-                         <Link href="#">Terms</Link>
+                         <Link href="/terms" className="hover:text-[#725CAD] transition">Terms</Link>
                     </div>
                </div>
           </footer>

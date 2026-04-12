@@ -344,8 +344,8 @@ export default function AIAssistantWidget() {
         className="w-12 h-12 rounded-2xl flex items-center justify-center pointer-events-auto transition-all duration-200 focus:outline-none"
         style={{
           background: isOpen
-            ? "#0db8c4"
-            : "#0db8c4",
+            ? "#725CAD"
+            : "#725CAD",
           // boxShadow: "0 8px 24px rgba(109,40,217,0.5)",
           transform: isOpen ? "rotate(180deg)" : "rotate(0deg)",
         }}

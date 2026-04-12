@@ -75,14 +75,14 @@ export function RegisterForm() {
           <div className="flex flex-col justify-center px-12 py-12 overflow-y-auto">
             <p
               className="flex items-center gap-2 text-[11px] font-medium tracking-[0.18em] uppercase mb-4"
-              style={{ color: "#0db8c4" }}
+              style={{ color: "#725CAD" }}
             >
               <span
                 style={{
                   display: "inline-block",
                   width: 24,
                   height: 1,
-                  background: "#0db8c4",
+                  background: "#725CAD",
                 }}
               />
               Get started
@@ -92,7 +92,7 @@ export function RegisterForm() {
               style={{ color: "#1a1a1a" }}
             >
               Create your{" "}
-              <span style={{ color: "#0db8c4" }}>Planora</span> account
+              <span style={{ color: "#725CAD" }}>Planora</span> account
             </h1>
             <p className="text-sm font-light mb-8" style={{ color: "#888" }}>
               Join thousands discovering events that matter.
@@ -255,7 +255,7 @@ export function RegisterForm() {
                 disabled={isSubmitting}
                 className="w-full h-[50px] rounded text-sm font-medium tracking-wide transition-all"
                 style={{
-                  background: "#0db8c4",
+                  background: "#725CAD",
                   color: "#fff",
                   border: "none",
                 }}
@@ -267,7 +267,7 @@ export function RegisterForm() {
 
             <p className="text-center text-[13px] mt-5" style={{ color: "#999" }}>
               Already have an account?{" "}
-              <Link href="/login" className="font-medium transition-colors" style={{ color: "#0db8c4" }}>
+              <Link href="/login" className="font-medium transition-colors" style={{ color: "#725CAD" }}>
                 Sign in
               </Link>
             </p>
@@ -286,7 +286,7 @@ export function RegisterForm() {
               style={{
                 background: "rgba(13,184,196,0.15)",
                 border: "1px solid rgba(13,184,196,0.3)",
-                color: "#0db8c4",
+                color: "#725CAD",
               }}
             >
               <span
@@ -294,7 +294,7 @@ export function RegisterForm() {
                   width: 6,
                   height: 6,
                   borderRadius: "50%",
-                  background: "#0db8c4",
+                  background: "#725CAD",
                   display: "inline-block",
                 }}
               />
@@ -306,7 +306,7 @@ export function RegisterForm() {
             >
               Your events,{" "}
               <br />
-              your <em style={{ color: "#0db8c4", fontStyle: "italic" }}>community</em>
+              your <em style={{ color: "#725CAD", fontStyle: "italic" }}>community</em>
             </h2>
             <p className="text-[13px] leading-relaxed max-w-[280px] font-light m-0" style={{ color: "#888" }}>
               Whether you attend or organise, Planora puts you at the centre of every experience.
@@ -330,7 +330,7 @@ export function RegisterForm() {
                     style={{
                       background: "rgba(13,184,196,0.1)",
                       border: "1px solid rgba(13,184,196,0.2)",
-                      color: "#0db8c4",
+                      color: "#725CAD",
                     }}
                   >
                     <Icon size={13} />

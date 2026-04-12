@@ -32,8 +32,8 @@ const Navbar = () => {
           { title: "Home", url: "/" },
           { title: "All Events", url: "/events" },
           { title: "Contact Us", url: "/contact" },
-          { title: "Find Us", url: "/find-us" },
           { title: "About Us", url: "/about-us" },
+          { title: "Help", url: "/help" },
      ];
 
      const handleSearch = (value: string) => {
