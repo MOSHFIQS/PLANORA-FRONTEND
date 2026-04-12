@@ -237,6 +237,7 @@ export async function createAdminAction(payload: {
   name: string;
   email: string;
   password: string;
+  role: "ADMIN" | "SUPERADMIN";
 }) {
   try {
     const res = await adminService.createAdmin(payload);

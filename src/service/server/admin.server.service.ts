@@ -77,7 +77,7 @@ export const adminService = {
       method: "GET",
     }),
 
-  createAdmin: (payload: { name: string; email: string; password: string }) =>
+  createAdmin: (payload: { name: string; email: string; password: string; role: "ADMIN" | "SUPERADMIN" }) =>
     apiFetchServerMain(`/admin/admins`, {
       method: "POST",
       body: JSON.stringify(payload),

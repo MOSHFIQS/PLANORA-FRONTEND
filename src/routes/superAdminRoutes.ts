@@ -14,6 +14,7 @@ import {
      Ticket,
      Star,
      Heart,
+     UserPlus,
 } from "lucide-react";
 export const superAdminRoutes: Route[] = [
      {
@@ -34,6 +35,7 @@ export const superAdminRoutes: Route[] = [
           title: "User Management",
           items: [
                { title: "All Users", url: "/super-admin-dashboard/users", icon: Users },
+               { title: "Create Admin", url: "/super-admin-dashboard/admins/create", icon: UserPlus },
                { title: "All Admins", url: "/super-admin-dashboard/admins", icon: Shield },
                { title: "Audit Logs", url: "/super-admin-dashboard/audit", icon: Shield },
           ],
