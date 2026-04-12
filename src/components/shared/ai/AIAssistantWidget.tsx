@@ -58,9 +58,9 @@ export default function AIAssistantWidget() {
   const smartShortcuts = [
     ...(user?.id
       ? [
-          { title: "My Dashboard", url: "/dashboard", icon: <LayoutDashboard size={14} /> },
-          { title: "My Tickets", url: "/dashboard/my/tickets", icon: <Ticket size={14} /> },
-        ]
+        { title: "My Dashboard", url: "/dashboard", icon: <LayoutDashboard size={14} /> },
+        { title: "My Tickets", url: "/dashboard/my/tickets", icon: <Ticket size={14} /> },
+      ]
       : [{ title: "Sign in to continue", url: "/login", icon: <ArrowRight size={14} /> }]),
     ...(!pathname.includes("/events")
       ? [{ title: "Browse Events", url: "/events", icon: <Search size={14} /> }]
@@ -84,7 +84,7 @@ export default function AIAssistantWidget() {
           height: 520,
           background: "linear-gradient(160deg, #0f0a1e 0%, #1a1035 60%, #120d2a 100%)",
           border: "1px solid rgba(139,92,246,0.25)",
-          boxShadow: "0 24px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(139,92,246,0.1), inset 0 1px 0 rgba(255,255,255,0.06)",
+          // boxShadow: "0 24px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(139,92,246,0.1), inset 0 1px 0 rgba(255,255,255,0.06)",
         }}
       >
         {/* Decorative glow */}
@@ -95,9 +95,9 @@ export default function AIAssistantWidget() {
         <div className="relative flex items-center justify-between px-4 py-3"
           style={{ borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
           <div className="flex items-center gap-2.5">
-            <div className="w-7 h-7 rounded-lg flex items-center justify-center"
-              style={{ background: "linear-gradient(135deg,#7c3aed,#4f46e5)" }}>
-              <Zap size={14} className="text-white" />
+            <div className="w-8 h-8 rounded-lg flex items-center justify-center overflow-hidden bg-white/10 p-1"
+              style={{ border: "1px solid rgba(255, 255, 255, 0.2)" }}>
+              <img src="/logo/logo.png" alt="Planora Logo" className="w-full h-full object-contain" />
             </div>
             <div>
               <div className="flex items-center gap-2">
@@ -341,22 +341,25 @@ export default function AIAssistantWidget() {
       {/* ── FAB ── */}
       <button
         onClick={() => setIsOpen((o) => !o)}
-        className="w-12 h-12 rounded-2xl flex items-center justify-center pointer-events-auto transition-all duration-200 focus:outline-none"
+        className={`w-12 h-12 rounded-full flex items-center justify-center pointer-events-auto 
+    transition-transform duration-200 
+    focus:outline-none focus:ring-0 focus:ring-offset-0 shadow-none 
+    ${isOpen ? "bg-[#140e2d] rotate-180" : "bg-[#1e1e1e]"}`}
         style={{
-          background: isOpen
-            ? "#725CAD"
-            : "#725CAD",
-          // boxShadow: "0 8px 24px rgba(109,40,217,0.5)",
-          transform: isOpen ? "rotate(180deg)" : "rotate(0deg)",
+          boxShadow: "none",
+          outline: "none",
         }}
-        onMouseEnter={e => (e.currentTarget.style.boxShadow = "0 12px 32px rgba(109,40,217,0.7)")}
-        onMouseLeave={e => (e.currentTarget.style.boxShadow = "0 8px 24px rgba(109,40,217,0.5)")}
         aria-label={isOpen ? "Close AI assistant" : "Open AI assistant"}
       >
-        {isOpen
-          ? <X size={18} className="text-white" />
-          : <Sparkles size={18} className="text-white" />
-        }
+        {isOpen ? (
+          <X size={18} className="text-white" />
+        ) : (
+          <img
+            src="/logo/logo.png"
+            alt="Planora Logo"
+            className="w-full h-full object-contain rounded-full"
+          />
+        )}
       </button>
     </div>
   );

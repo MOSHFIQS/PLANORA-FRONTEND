@@ -269,12 +269,7 @@ const Navbar = () => {
      };
 
      // ── Nav link click — protect event links for guests ─────────────────────
-     const handleNavClick = (e: React.MouseEvent, url: string) => {
-          if (url === "/events" && !user?.id) {
-               e.preventDefault();
-               router.push(`/login?redirect=/events`);
-          }
-     };
+
 
      const isActive = (url: string) => {
           if (url === "/") return pathname === "/";
@@ -308,7 +303,6 @@ const Navbar = () => {
                                         <Link
                                              key={item.title}
                                              href={item.url}
-                                             onClick={(e) => handleNavClick(e, item.url)}
                                              className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-150 ${isActive(item.url)
                                                   ? "bg-[#FE7743] text-white"
                                                   : "text-gray-600 bg-white hover:text-gray-900"
@@ -484,182 +478,180 @@ const Navbar = () => {
                               <span className="font-semibold text-gray-900">PLANORA</span>
                          </Link>
 
-                        <Sheet>
-  <SheetTrigger asChild>
-    <Button variant="outline" size="icon" className="bg-white border-gray-200">
-      <Menu className="w-5 h-5 text-gray-600" />
-    </Button>
-  </SheetTrigger>
+                         <Sheet>
+                              <SheetTrigger asChild>
+                                   <Button variant="outline" size="icon" className="bg-white border-gray-200">
+                                        <Menu className="w-5 h-5 text-gray-600" />
+                                   </Button>
+                              </SheetTrigger>
 
-  <SheetContent
-    side="right"
-    className="w-[300px] bg-white flex flex-col h-screen"
-  >
-    {/* Header (fixed) */}
-    <SheetHeader className="px-3 py-3 border-b border-gray-100">
-      <SheetTitle className="text-center text-xl font-bold text-gray-900">
-        PLANORA
-      </SheetTitle>
-    </SheetHeader>
+                              <SheetContent
+                                   side="right"
+                                   className="w-[300px] bg-white flex flex-col h-screen"
+                              >
+                                   {/* Header (fixed) */}
+                                   <SheetHeader className="px-3 py-3 border-b border-gray-100">
+                                        <SheetTitle className="text-center text-xl font-bold text-gray-900">
+                                             PLANORA
+                                        </SheetTitle>
+                                   </SheetHeader>
 
-    {/* Scrollable content */}
-    <div className="flex-1 overflow-y-auto px-3 pb-4">
-      <div className="flex flex-col gap-4 mt-4">
-        {/* Mobile Search */}
-        <div ref={mobileSearchRef} className="relative w-full">
-          <Input
-            placeholder="Search Events..."
-            value={search}
-            onChange={(e) => handleMobileSearch(e.target.value)}
-            onFocus={() => search.trim() && setMobileDropdownOpen(true)}
-            className="w-full bg-white border-gray-200"
-          />
-          {mobileDropdownOpen && (
-            <SearchDropdown
-              searchQuery={searchQuery}
-              searchResults={searchResults}
-              searchLoading={searchLoading}
-              onNavigate={navigateToEvent}
-              onClose={() => setMobileDropdownOpen(false)}
-            />
-          )}
-        </div>
+                                   {/* Scrollable content */}
+                                   <div className="flex-1 overflow-y-auto px-3 pb-4">
+                                        <div className="flex flex-col gap-4 mt-4">
+                                             {/* Mobile Search */}
+                                             <div ref={mobileSearchRef} className="relative w-full">
+                                                  <Input
+                                                       placeholder="Search Events..."
+                                                       value={search}
+                                                       onChange={(e) => handleMobileSearch(e.target.value)}
+                                                       onFocus={() => search.trim() && setMobileDropdownOpen(true)}
+                                                       className="w-full bg-white border-gray-200"
+                                                  />
+                                                  {mobileDropdownOpen && (
+                                                       <SearchDropdown
+                                                            searchQuery={searchQuery}
+                                                            searchResults={searchResults}
+                                                            searchLoading={searchLoading}
+                                                            onNavigate={navigateToEvent}
+                                                            onClose={() => setMobileDropdownOpen(false)}
+                                                       />
+                                                  )}
+                                             </div>
 
-        {/* Mobile user card */}
-        {user?.id && (
-          <div className="flex items-center gap-3 px-3 py-3 rounded-2xl bg-gradient-to-br from-[#FE7743]/10 to-[#FE7743]/5 border border-orange-100">
-            <div className="w-10 h-10 rounded-full overflow-hidden flex-shrink-0 border-2 border-[#FE7743]/30">
-              <img
-                src={
-                  user.image ||
-                  "https://i.ibb.co.com/LhN7fmfM/5578a3db8b5f1101c971bdf120e63784.jpg"
-                }
-                alt="avatar"
-                className="w-full h-full object-cover"
-                onError={(e) => {
-                  e.currentTarget.src =
-                    "https://i.ibb.co.com/LhN7fmfM/5578a3db8b5f1101c971bdf120e63784.jpg";
-                }}
-              />
-            </div>
-            <div className="min-w-0">
-              <p className="text-xs font-semibold text-gray-900 truncate">
-                {user.name || "User"}
-              </p>
-              <p className="text-[10px] text-gray-400 truncate">
-                {user.email || ""}
-              </p>
-              <span className="inline-flex items-center mt-0.5 px-2 py-0.5 rounded-full text-[9px] font-medium bg-[#FE7743]/15 text-[#FE7743]">
-                {user.role || "Member"}
-              </span>
-            </div>
-          </div>
-        )}
+                                             {/* Mobile user card */}
+                                             {user?.id && (
+                                                  <div className="flex items-center gap-3 px-3 py-3 rounded-2xl bg-gradient-to-br from-[#FE7743]/10 to-[#FE7743]/5 border border-orange-100">
+                                                       <div className="w-10 h-10 rounded-full overflow-hidden flex-shrink-0 border-2 border-[#FE7743]/30">
+                                                            <img
+                                                                 src={
+                                                                      user.image ||
+                                                                      "https://i.ibb.co.com/LhN7fmfM/5578a3db8b5f1101c971bdf120e63784.jpg"
+                                                                 }
+                                                                 alt="avatar"
+                                                                 className="w-full h-full object-cover"
+                                                                 onError={(e) => {
+                                                                      e.currentTarget.src =
+                                                                           "https://i.ibb.co.com/LhN7fmfM/5578a3db8b5f1101c971bdf120e63784.jpg";
+                                                                 }}
+                                                            />
+                                                       </div>
+                                                       <div className="min-w-0">
+                                                            <p className="text-xs font-semibold text-gray-900 truncate">
+                                                                 {user.name || "User"}
+                                                            </p>
+                                                            <p className="text-[10px] text-gray-400 truncate">
+                                                                 {user.email || ""}
+                                                            </p>
+                                                            <span className="inline-flex items-center mt-0.5 px-2 py-0.5 rounded-full text-[9px] font-medium bg-[#FE7743]/15 text-[#FE7743]">
+                                                                 {user.role || "Member"}
+                                                            </span>
+                                                       </div>
+                                                  </div>
+                                             )}
 
-        {/* Menu */}
-        <div className="flex flex-col gap-1.5">
-          {menu.map((item) => (
-            <Link
-              key={item.title}
-              href={item.url}
-              onClick={(e) => handleNavClick(e, item.url)}
-            >
-              <button
-                className={`w-full text-left px-4 py-2 rounded-full text-sm font-medium transition-all ${
-                  isActive(item.url)
-                    ? "bg-[#FE7743] text-white"
-                    : "text-gray-600 border border-gray-200 bg-white hover:bg-gray-50"
-                }`}
-              >
-                {item.title}
-              </button>
-            </Link>
-          ))}
-        </div>
+                                             {/* Menu */}
+                                             <div className="flex flex-col gap-1.5">
+                                                  {menu.map((item) => (
+                                                       <Link
+                                                            key={item.title}
+                                                            href={item.url}
+                                                       >
+                                                            <button
+                                                                 className={`w-full text-left px-4 py-2 rounded-full text-sm font-medium transition-all ${isActive(item.url)
+                                                                      ? "bg-[#FE7743] text-white"
+                                                                      : "text-gray-600 border border-gray-200 bg-white hover:bg-gray-50"
+                                                                      }`}
+                                                            >
+                                                                 {item.title}
+                                                            </button>
+                                                       </Link>
+                                                  ))}
+                                             </div>
 
-        <div className="border-t border-gray-100 my-1" />
+                                             <div className="border-t border-gray-100 my-1" />
 
-        {/* Auth */}
-        <div className="flex flex-col gap-2">
-          {user?.id ? (
-            <>
-              <Link href={`${basePath}/my/profile`}>
-                <button className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm border border-gray-100 bg-white hover:bg-gray-50 transition-colors group">
-                  <div className="w-7 h-7 rounded-lg bg-purple-50 flex items-center justify-center">
-                    <User size={13} className="text-purple-500" />
-                  </div>
-                  <span className="font-medium text-gray-700">
-                    My Profiles
-                  </span>
-                </button>
-              </Link>
+                                             {/* Auth */}
+                                             <div className="flex flex-col gap-2">
+                                                  {user?.id ? (
+                                                       <>
+                                                            <Link href={`${basePath}/my/profile`}>
+                                                                 <button className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm border border-gray-100 bg-white hover:bg-gray-50 transition-colors group">
+                                                                      <div className="w-7 h-7 rounded-lg bg-purple-50 flex items-center justify-center">
+                                                                           <User size={13} className="text-purple-500" />
+                                                                      </div>
+                                                                      <span className="font-medium text-gray-700">
+                                                                           My Profiles
+                                                                      </span>
+                                                                 </button>
+                                                            </Link>
 
-              <Link href={`${basePath}`}>
-                <button className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm border border-gray-100 bg-white hover:bg-orange-50 transition-colors group">
-                  <div className="w-7 h-7 rounded-lg bg-[#FE7743]/10 flex items-center justify-center">
-                    <LayoutDashboard size={13} className="text-[#FE7743]" />
-                  </div>
-                  <span className="font-medium text-gray-700">
-                    Dashboard
-                  </span>
-                </button>
-              </Link>
+                                                            <Link href={`${basePath}`}>
+                                                                 <button className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm border border-gray-100 bg-white hover:bg-orange-50 transition-colors group">
+                                                                      <div className="w-7 h-7 rounded-lg bg-[#FE7743]/10 flex items-center justify-center">
+                                                                           <LayoutDashboard size={13} className="text-[#FE7743]" />
+                                                                      </div>
+                                                                      <span className="font-medium text-gray-700">
+                                                                           Dashboard
+                                                                      </span>
+                                                                 </button>
+                                                            </Link>
 
-              <Link href={`${basePath}/my/tickets`}>
-                <button className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm border border-gray-100 bg-white hover:bg-blue-50 transition-colors">
-                  <div className="w-7 h-7 rounded-lg bg-blue-50 flex items-center justify-center">
-                    <Ticket size={13} className="text-blue-500" />
-                  </div>
-                  <span className="font-medium text-gray-700">
-                    My Tickets
-                  </span>
-                </button>
-              </Link>
+                                                            <Link href={`${basePath}/my/tickets`}>
+                                                                 <button className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm border border-gray-100 bg-white hover:bg-blue-50 transition-colors">
+                                                                      <div className="w-7 h-7 rounded-lg bg-blue-50 flex items-center justify-center">
+                                                                           <Ticket size={13} className="text-blue-500" />
+                                                                      </div>
+                                                                      <span className="font-medium text-gray-700">
+                                                                           My Tickets
+                                                                      </span>
+                                                                 </button>
+                                                            </Link>
 
-              <Link href={`${basePath}/my/participated-events`}>
-                <button className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm border border-gray-100 bg-white hover:bg-blue-50 transition-colors">
-                  <div className="w-7 h-7 rounded-lg bg-blue-50 flex items-center justify-center">
-                    <Ticket size={13} className="text-blue-500" />
-                  </div>
-                  <span className="font-medium text-gray-700">
-                    My Participated Events
-                  </span>
-                </button>
-              </Link>
+                                                            <Link href={`${basePath}/my/participated-events`}>
+                                                                 <button className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm border border-gray-100 bg-white hover:bg-blue-50 transition-colors">
+                                                                      <div className="w-7 h-7 rounded-lg bg-blue-50 flex items-center justify-center">
+                                                                           <Ticket size={13} className="text-blue-500" />
+                                                                      </div>
+                                                                      <span className="font-medium text-gray-700">
+                                                                           My Participated Events
+                                                                      </span>
+                                                                 </button>
+                                                            </Link>
 
-              <button
-                onClick={handleLogout}
-                className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm bg-red-50 border border-red-100 hover:bg-red-100 transition-colors"
-              >
-                <div className="w-7 h-7 rounded-lg bg-red-100 flex items-center justify-center">
-                  <LogOut size={13} className="text-red-500" />
-                </div>
-                <span className="font-medium text-red-600">Logout</span>
-              </button>
-            </>
-          ) : (
-            <>
-              <Button
-                asChild
-                variant="outline"
-                className="w-full rounded-full border-gray-300 bg-white"
-              >
-                <Link href={`/login?redirect=${pathname}`}>Login</Link>
-              </Button>
+                                                            <button
+                                                                 onClick={handleLogout}
+                                                                 className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm bg-red-50 border border-red-100 hover:bg-red-100 transition-colors"
+                                                            >
+                                                                 <div className="w-7 h-7 rounded-lg bg-red-100 flex items-center justify-center">
+                                                                      <LogOut size={13} className="text-red-500" />
+                                                                 </div>
+                                                                 <span className="font-medium text-red-600">Logout</span>
+                                                            </button>
+                                                       </>
+                                                  ) : (
+                                                       <>
+                                                            <Button
+                                                                 asChild
+                                                                 variant="outline"
+                                                                 className="w-full rounded-full border-gray-300 bg-white"
+                                                            >
+                                                                 <Link href={`/login?redirect=${pathname}`}>Login</Link>
+                                                            </Button>
 
-              <Button
-                asChild
-                className="w-full rounded-full bg-[#FE7743] hover:bg-orange-500 text-white border-0"
-              >
-                <Link href="/register">Register</Link>
-              </Button>
-            </>
-          )}
-        </div>
-      </div>
-    </div>
-  </SheetContent>
-</Sheet>
+                                                            <Button
+                                                                 asChild
+                                                                 className="w-full rounded-full bg-[#FE7743] hover:bg-orange-500 text-white border-0"
+                                                            >
+                                                                 <Link href="/register">Register</Link>
+                                                            </Button>
+                                                       </>
+                                                  )}
+                                             </div>
+                                        </div>
+                                   </div>
+                              </SheetContent>
+                         </Sheet>
                     </div>
                </div>
           </section>
