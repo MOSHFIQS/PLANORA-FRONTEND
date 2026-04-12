@@ -43,7 +43,7 @@ const MyReviews: React.FC<EventReviewsProps> = ({ myReviews }) => {
   const [selectedReviewId, setSelectedReviewId] = useState<string | null>(null);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [deleting, setDeleting] = useState(false);
-  
+
 
   const handleDelete = async () => {
     if (!selectedReviewId) return;
