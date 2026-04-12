@@ -26,6 +26,7 @@ import TextEditor from "../shared/textEditor/TextEditor";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Calendar } from "../ui/calendar";
 import { Label } from "../ui/label";
+import AIMagicWriter from "../shared/ai/AIMagicWriter";
 
 // -------------------- validation --------------------
 const formSchema = z.object({
@@ -287,7 +288,19 @@ const UpdateEventForm = ({ event, categories }: Props) => {
                          <form.Field name="description">
                               {(field) => (
                                    <Field>
-                                        <FieldLabel>Description</FieldLabel>
+                                        <div className="flex items-center justify-between">
+                                             <FieldLabel></FieldLabel>
+                                             <form.Subscribe selector={(state) => [state.values.title, state.values.type, state.values.venue]}>
+                                                  {([title, type, venue]) => (
+                                                       <AIMagicWriter 
+                                                            title={title as string} 
+                                                            type={type as string} 
+                                                            venue={venue as string}
+                                                            onGenerate={field.handleChange} 
+                                                       />
+                                                  )}
+                                             </form.Subscribe>
+                                        </div>
                                         <TextEditor
                                              value={field.state.value}
                                              onChange={field.handleChange}

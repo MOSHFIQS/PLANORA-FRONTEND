@@ -18,6 +18,7 @@ import { Button } from "@/components/ui/button";
 import { AppImage } from "../../appImage/AppImage";
 import { usePathname } from "next/navigation";
 import UpdateReviewDialog from "@/components/common/updatedReviewDialog/UpdatedReviewDialog";
+import PlanoraAIReviewAnalyzer from "./PlanoraAIReviewAnalyzer";
 
 type User = {
      id: string;
@@ -76,8 +77,10 @@ const EventReviews: React.FC<EventReviewsProps> = ({ organizersReviews }) => {
      }
 
      return (
-          <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-               {reviews.map((review) => (
+          <div className="flex flex-col w-full">
+               <PlanoraAIReviewAnalyzer reviews={reviews} />
+               <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                    {reviews.map((review) => (
                     <Card
                          key={review.id}
                          className="p-4 rounded-2xl border-2 border-gray-300 flex flex-col gap-3 transition hover:shadow-md hover:border-purple-400"
@@ -181,6 +184,7 @@ const EventReviews: React.FC<EventReviewsProps> = ({ organizersReviews }) => {
                          </CardContent>
                     </Card>
                ))}
+               </div>
           </div>
      );
 };

@@ -239,6 +239,7 @@ import { deleteEventAction } from "@/actions/event.action";
 import { Event } from "@/types/event.types";
 
 export default function MyEventsList({ myEvents }: { myEvents: Event[] }) {
+  console.log(myEvents)
   const router = useRouter();
   const [openDialogId, setOpenDialogId] = React.useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
@@ -340,6 +341,9 @@ export default function MyEventsList({ myEvents }: { myEvents: Event[] }) {
                   {/* Date */}
                   <p className="text-sm text-muted-foreground">
                     {new Date(event.dateTime).toLocaleString()}
+                  </p>
+                  <p className="text-sm text-muted-foreground">
+                    {event._count?.reviews} Reviews
                   </p>
                 </div>
 
@@ -444,6 +448,7 @@ export default function MyEventsList({ myEvents }: { myEvents: Event[] }) {
                   <TableHead>Type</TableHead>
                   <TableHead>Visibility</TableHead>
                   <TableHead>Fee</TableHead>
+                  <TableHead className="text-center">Reviews</TableHead>
                   <TableHead className="text-right">Actions</TableHead>
                 </TableRow>
               </TableHeader>
@@ -474,6 +479,7 @@ export default function MyEventsList({ myEvents }: { myEvents: Event[] }) {
                       <TableCell>{event.type}</TableCell>
                       <TableCell>{event.visibility}</TableCell>
                       <TableCell>{event.fee} tk</TableCell>
+                      <TableCell className="text-center">{event._count?.reviews} </TableCell>
 
                       <TableCell className="text-right space-x-2">
                         <Button

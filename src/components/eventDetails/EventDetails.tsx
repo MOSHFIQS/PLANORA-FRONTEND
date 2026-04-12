@@ -6,6 +6,7 @@ import DescriptionViwer from "../shared/descriptionViwer/DescriptionViwer";
 import { AppImage } from "../appImage/AppImage";
 import ImageMagnifier from "../shared/imageUtils/imageMagnifier/ImageMagnifier";
 
+
 export type EventType = "ONLINE" | "OFFLINE";
 export type Visibility = "PUBLIC" | "PRIVATE";
 export type InvitationStatus = "PENDING" | "ACCEPTED" | "REJECTED";

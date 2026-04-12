@@ -20,6 +20,9 @@ export interface Event {
   isFeatured: boolean;
   createdAt: string;
   updatedAt: string;
+  _count?: {
+    reviews: number;
+  };
 }
 
 

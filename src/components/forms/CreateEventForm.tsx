@@ -26,6 +26,7 @@ import { Calendar } from "../ui/calendar";
 import { useState } from "react";
 import { format } from "date-fns";
 import { Label } from "../ui/label";
+import AIMagicWriter from "../shared/ai/AIMagicWriter";
 
 // -------------------- validation schema --------------------
 const formSchema = z.object({
@@ -268,7 +269,19 @@ const CreateEventForm = ({ categories }: { categories: Category[] }) => {
                                    const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
                                    return (
                                         <Field >
-                                             <FieldLabel htmlFor={field.name}>Description</FieldLabel>
+                                             <div className="flex items-center justify-between">
+                                                  <FieldLabel ></FieldLabel>
+                                                  <form.Subscribe selector={(state) => [state.values.title, state.values.type, state.values.venue]}>
+                                                       {([title, type, venue]) => (
+                                                            <AIMagicWriter
+                                                                 title={title as string}
+                                                                 type={type as string}
+                                                                 venue={venue as string}
+                                                                 onGenerate={field.handleChange}
+                                                            />
+                                                       )}
+                                                  </form.Subscribe>
+                                             </div>
                                              <TextEditor
                                                   placeholder="Style your event description here..."
                                                   value={field.state.value}
