@@ -355,7 +355,7 @@ export default function MyEventsList({ myEvents }: { myEvents: Event[] }) {
                   size="icon"
                   variant="outline"
                   className="flex-1 rounded-4xl"
-                  onClick={() => router.push(`/dashboard/event/${event.id}`)}
+                  onClick={() => router.push(`/organizer-dashboard/events/${event.id}`)}
                 >
                   <Eye className="w-4 h-4" />
                 </Button>
@@ -364,7 +364,7 @@ export default function MyEventsList({ myEvents }: { myEvents: Event[] }) {
                   size="icon"
                   className="flex-1 rounded-4xl"
                   onClick={() =>
-                    router.push(`/dashboard/event/update/${event.id}`)
+                    router.push(`/organizer-dashboard/events/update/${event.id}`)
                   }
                 >
                   <Pencil className="w-4 h-4" />
@@ -375,7 +375,7 @@ export default function MyEventsList({ myEvents }: { myEvents: Event[] }) {
                   className="flex-1 rounded-4xl"
                   variant="violet"
                 >
-                  <Link href={`/dashboard/review/event/${event.id}`}>
+                  <Link href={`/organizer-dashboard/review/event/${event.id}`}>
                     <MessageSquareText size={18} />
                   </Link>
                 </Button>

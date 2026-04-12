@@ -29,6 +29,7 @@ import {
 
 import { Event } from "@/types/event.types";
 import { AppImage } from "@/components/appImage/AppImage";
+import { useAuth } from "@/context/AuthProvider";
 
 export default function CreateBanner({
      featuredEvents,
@@ -37,6 +38,7 @@ export default function CreateBanner({
 }) {
      const [loading, setLoading] = useState(false);
      const router = useRouter();
+     const { user } = useAuth();
 
 
      const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
@@ -88,7 +90,11 @@ export default function CreateBanner({
 
                     toast.success(res.message);
 
-                    router.push("/admin-dashboard/banner");
+                    if (user?.role === "ADMIN") {
+                         router.push("/admin-dashboard/banner");
+                    } else if (user?.role === "SUPERADMIN") {
+                         router.push("/super-admin-dashboard/banner");
+                    }
                     form.reset();
                } catch (err: any) {
                     toast.error(err.message);

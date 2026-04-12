@@ -245,7 +245,7 @@ export async function createAdminAction(payload: {
       return { ok: false, message: res?.message || "Failed to create admin" };
     }
 
-    revalidatePath("/dashboard/admins");
+    revalidatePath("/super-admin-dashboard/admins");
 
     return { ok: true, message: res?.message || "Admin created successfully", data: res.data };
   } catch {
@@ -266,6 +266,7 @@ export async function updateUserStatusAction(
     }
 
     revalidatePath("/admin-dashboard/users");
+    revalidatePath("/super-admin-dashboard/users");
 
     return {
       ok: true,
@@ -290,7 +291,8 @@ export async function updateUserRoleAction(
     }
 
     revalidatePath("/dashboard/users");
-    revalidatePath("/dashboard/admins");
+    revalidatePath("/super-admin-dashboard/users");
+    revalidatePath("/super-admin-dashboard/admins");
 
     return {
       ok: true,
@@ -312,6 +314,7 @@ export async function deleteUserAction(id: string) {
     }
 
     revalidatePath("/admin-dashboard/users");
+    revalidatePath("/super-admin-dashboard/users");
 
     return {
       ok: true,

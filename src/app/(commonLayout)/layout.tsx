@@ -1,5 +1,6 @@
 import Footer from "@/components/home/footer/Footer";
 import { Navbar } from "@/components/home/navbar/Navbar";
+import AIAssistantWidget from "@/components/shared/ai/AIAssistantWidget";
 
 export default function CommonLayout({
   children,
@@ -14,7 +15,7 @@ export default function CommonLayout({
       <main className="flex-1 px-2 ">
         {children}
       </main>
-
+      <AIAssistantWidget />
       <Footer />
     </div>
   );

@@ -90,7 +90,8 @@ export async function createBannerAction(payload: any) {
                };
           }
 
-          revalidatePath("/dashboard/banner");
+          revalidatePath("/admin-dashboard/banner");
+          revalidatePath("/super-admin-dashboard/banner");
 
           return {
                ok: true,
@@ -117,7 +118,8 @@ export async function updateBannerAction(id: string, payload: any) {
                };
           }
 
-          revalidatePath("/dashboard/banner");
+          revalidatePath("/admin-dashboard/banner");
+          revalidatePath("/super-admin-dashboard/banner");
 
           return {
                ok: true,
@@ -143,7 +145,8 @@ export async function deleteBannerAction(id: string) {
                };
           }
 
-          revalidatePath("/dashboard/banner");
+          revalidatePath("/admin-dashboard/banner");
+          revalidatePath("/super-admin-dashboard/banner");
 
           return {
                ok: true,
@@ -172,7 +175,8 @@ export async function updateBannerStatusAction(
           }
 
           // revalidate dashboard + homepage (important)
-          revalidatePath("/dashboard/banner");
+          revalidatePath("/admin-dashboard/banner");
+          revalidatePath("/super-admin-dashboard/banner");
           revalidatePath("/"); // homepage banners
 
           return {

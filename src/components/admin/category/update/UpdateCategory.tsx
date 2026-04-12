@@ -17,10 +17,12 @@ import { useRouter } from "next/navigation";
 import { createCategoryAction, updateCategoryAction } from "@/actions/category.action";
 import { useImageUpload } from "@/hooks/useImageUpload";
 import ImageUploader from "@/components/shared/imageUtils/imageUploader/ImageUploader";
+import { useAuth } from "@/context/AuthProvider";
 
 export default function UpdateCategory({ category }: { category: any }) {
      const [loading, setLoading] = useState(false);
      const categoryImages = useImageUpload({ max: 1, defaultImages: [category?.image] });
+     const { user } = useAuth();
 
      // console.log(categoryImages.images[0]?.img);
 
@@ -48,7 +50,11 @@ export default function UpdateCategory({ category }: { category: any }) {
                     if (!res.ok) {
                          throw new Error(res.message);
                     }
-                    router.push("/admin-dashboard/category");
+                    if (user?.role === "ADMIN") {
+                         router.push("/admin-dashboard/category");
+                    } else if (user?.role === "SUPERADMIN") {
+                         router.push("/super-admin-dashboard/category");
+                    }
                     toast.success(res.message);
                     form.reset();
                } catch (err: any) {

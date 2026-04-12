@@ -125,7 +125,7 @@ const UpdateEventForm = ({ event, categories }: Props) => {
                          id: toastId,
                     });
 
-                    router.push("/dashboard/event");
+                    router.push("/organizer-dashboard/events");
                } catch (err) {
                     toast.error("Something went wrong", { id: toastId });
                }

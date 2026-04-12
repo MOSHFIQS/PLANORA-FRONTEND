@@ -63,7 +63,8 @@ export async function createCategoryAction(payload: any) {
       };
     }
 
-    revalidatePath("/dashboard/category");
+    revalidatePath("/admin-dashboard/category");
+    revalidatePath("/super-admin-dashboard/category");
 
     return {
       ok: true,
@@ -90,7 +91,8 @@ export async function updateCategoryAction(id: string, payload: any) {
       };
     }
 
-    revalidatePath("/dashboard/category");
+    revalidatePath("/admin-dashboard/category");
+    revalidatePath("/super-admin-dashboard/category");
 
     return {
       ok: true,
@@ -116,7 +118,8 @@ export async function deleteCategoryAction(id: string) {
       };
     }
 
-    revalidatePath("/dashboard/category");
+    revalidatePath("/admin-dashboard/category");
+    revalidatePath("/super-admin-dashboard/category");
 
     return {
       ok: true,
