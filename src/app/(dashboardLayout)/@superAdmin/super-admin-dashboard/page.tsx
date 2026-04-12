@@ -1,10 +1,10 @@
 
 
-import { getAdminStatsAction } from '@/actions/stat.action';
-import AdminStatsCard from '@/components/stats/AdminStatsCard';
+import { getSuperAdminStatsAction } from '@/actions/stat.action';
+import { SuperAdminStatsCard } from '@/components/stats/StatsCard';
 const AdminStatsPage = async () => {
 
-     const res = await getAdminStatsAction();
+     const res = await getSuperAdminStatsAction();
      // console.log(res.data);
 
      if (!res?.ok) {
@@ -16,7 +16,7 @@ const AdminStatsPage = async () => {
      }
 
 
-     return <AdminStatsCard data={res?.data} />;
+     return <SuperAdminStatsCard data={res?.data} />;
 };
 
 export default AdminStatsPage;

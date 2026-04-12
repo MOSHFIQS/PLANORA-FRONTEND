@@ -1,6 +1,6 @@
 
 import { getUserStatsAction } from '@/actions/stat.action';
-import UserStatsCard from '@/components/stats/UserStatsCard';
+import { UserStatsCard } from '@/components/stats/StatsCard';
 
 const UserStatsPage = async () => {
 

@@ -1,10 +1,10 @@
 
-import { getUserStatsAction } from '@/actions/stat.action';
-import UserStatsCard from '@/components/stats/UserStatsCard';
+import { getOrganizerStatsAction } from '@/actions/stat.action';
+import { OrganizerStatsCard } from '@/components/stats/StatsCard';
 
 const UserStatsPage = async () => {
 
-     const res = await getUserStatsAction();
+     const res = await getOrganizerStatsAction();
      // console.log(res.data);
 
      if (!res?.ok) {
@@ -16,7 +16,7 @@ const UserStatsPage = async () => {
      }
 
 
-     return <UserStatsCard data={res?.data} />;
+     return <OrganizerStatsCard data={res?.data} />;
 };
 
 export default UserStatsPage;
