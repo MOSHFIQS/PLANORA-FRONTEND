@@ -15,6 +15,9 @@ export const authService = {
                method: "POST",
                body: JSON.stringify(payload),
           }),
+     
+     googleLogin: (redirect: string, role: string) => 
+          `${process.env.NEXT_PUBLIC_API_URL}/auth/login/google?redirect=${encodeURIComponent(redirect)}&role=${encodeURIComponent(role)}`,
 
 
 

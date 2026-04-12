@@ -65,9 +65,14 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
                if (!res.ok) return null;
 
                const data = await res.json();
-               const { accessToken: newAccessToken, refreshToken: newRefreshToken, token: newBetterAuthToken } = data?.data || {};
+               const { 
+                    accessToken: newAccessToken, 
+                    refreshToken: newRefreshToken, 
+                    sessionToken: newSessionToken, // renamed from token
+                    user: userData 
+               } = data?.data || {};
 
-               if (!newAccessToken || !newRefreshToken || !newBetterAuthToken) return null;
+               if (!newAccessToken || !newRefreshToken || !newSessionToken) return null;
 
                const decodedAccess = safeDecode(newAccessToken);
                const decodedRefresh = safeDecode(newRefreshToken);
@@ -77,7 +82,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
                // Update state
                setAccessToken(newAccessToken);
                setRefreshToken(newRefreshToken);
-               setToken(newBetterAuthToken);
+               setToken(newSessionToken);
+               if (userData) setUser(userData);
 
                const accessExpiry = new Date(decodedAccess.exp * 1000);
                const refreshExpiry = new Date(decodedRefresh.exp * 1000);
@@ -85,12 +91,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
                // Update cookies
                Cookies.set("accessToken", newAccessToken, { expires: accessExpiry });
                Cookies.set("refreshToken", newRefreshToken, { expires: refreshExpiry });
-               Cookies.set("better-auth.session_token", newBetterAuthToken, { expires: accessExpiry });
-
-               // Extend user token (user cookie) to 7 days if it exists
-               const userCookie = Cookies.get("user");
-               if (userCookie) {
-                    Cookies.set("user", userCookie, { expires: 7 }); // 7 days
+               
+               // Better-auth session token (7 days for improved persistence)
+               Cookies.set("better-auth.session_token", newSessionToken, { expires: 7 });
+               
+               if (userData) {
+                    Cookies.set("user", JSON.stringify(userData), { expires: 7 }); 
                }
 
                return newAccessToken;
@@ -163,7 +169,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           userData: User,
           access: string,
           refresh: string,
-          tokenValue: string
+          sessionTokenValue: string // renamed from tokenValue
      ) => {
           try {
                const accessDecoded = safeDecode(access);
@@ -173,15 +179,14 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
                     logout();
                     return;
                }
-               // console.log(userData);
+
+               setAccessToken(access);
+               setRefreshToken(refresh);
+               setToken(sessionTokenValue);
+               setUser(userData);
 
                const accessExpiry = new Date(accessDecoded.exp * 1000);
                const refreshExpiry = new Date(refreshDecoded.exp * 1000);
-
-               setUser(userData);
-               setAccessToken(access);
-               setRefreshToken(refresh);
-               setToken(tokenValue);
 
                Cookies.set("accessToken", access, {
                     expires: accessExpiry
@@ -191,13 +196,13 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
                     expires: refreshExpiry
                });
 
-               // better-auth token (not JWT → fallback to refresh expiry)
-               Cookies.set("better-auth.session_token", tokenValue, {
-                    expires: accessExpiry
+               // Match user cookie persistence (7 days) for session token
+               Cookies.set("better-auth.session_token", sessionTokenValue, {
+                    expires: 7
                });
 
                Cookies.set("user", JSON.stringify(userData), {
-                    expires: refreshExpiry,
+                    expires: 7,
                });
           } catch {
                logout();

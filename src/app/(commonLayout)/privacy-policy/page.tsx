@@ -1,4 +1,10 @@
+"use client"
+
+import { useAuth } from "@/context/AuthProvider";
+
 export default function PrivacyPolicyPage() {
+     const { user } = useAuth();
+     console.log(user);
      return (
           <div className="py-16 px-4 md:px-8 max-w-4xl mx-auto">
                <div className="text-center mb-12">

@@ -53,3 +53,18 @@ export async function registerAction(data: { email: string; password: string, na
           };
      }
 }
+export async function getGoogleLoginUrlAction(redirect: string, role: string) {
+     try {
+          const url = authService.googleLogin(redirect, role);
+          console.log(url)
+          return {
+               ok: true,
+               url,
+          };
+     } catch (error) {
+          return {
+               ok: false,
+               message: "Failed to generate Google login URL",
+          };
+     }
+}

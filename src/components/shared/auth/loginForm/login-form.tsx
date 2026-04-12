@@ -12,6 +12,8 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Eye, EyeOff, Loader2 } from "lucide-react"
+import { useEffect } from "react"
+import GoogleLoginButton from "../GoogleLoginButton"
 
 const formSchema = z.object({
   password: z.string().min(6, "Minimum length is 6"),
@@ -25,6 +27,25 @@ export function LoginForm() {
   const redirectUrl = searchParams.get("redirect") || "/"
   const [showPassword, setShowPassword] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
+
+  // Handle OAuth Errors from backend redirect
+  useEffect(() => {
+    const error = searchParams.get("error")
+    if (error) {
+      const messages: Record<string, string> = {
+        oauth_failed: "Google login failed. Please try again.",
+        no_session_found: "Session could not be established.",
+        no_user_found: "User data not found in Google response.",
+        oauth_callback_failed: "Error occurred during Google callback.",
+      }
+      toast.error(messages[error] || "An authentication error occurred")
+      // Clean up the URL
+      const params = new URLSearchParams(searchParams.toString())
+      params.delete("error")
+      const newUrl = `${window.location.pathname}${params.toString() ? `?${params.toString()}` : ""}`
+      window.history.replaceState({}, "", newUrl)
+    }
+  }, [searchParams])
 
   const form = useForm({
     defaultValues: { email: "", password: "" },
@@ -194,7 +215,18 @@ export function LoginForm() {
                 {isSubmitting && <Loader2 size={16} className="animate-spin mr-2" />}
                 {isSubmitting ? "Signing in…" : "Sign in"}
               </Button>
-            </form>
+              </form>
+              
+              <div className="relative my-7">
+                <div className="absolute inset-0 flex items-center">
+                  <span className="w-full border-t border-black/10" />
+                </div>
+                <div className="relative flex justify-center text-[11px] uppercase tracking-wider">
+                  <span className="bg-[#f8f6f0] px-4 text-black/40">Or continue with</span>
+                </div>
+              </div>
+
+              <GoogleLoginButton redirectUrl={redirectUrl} />
 
             <p className="text-center text-[13px] mt-6" style={{ color: "#999" }}>
               New to Planora?{" "}
