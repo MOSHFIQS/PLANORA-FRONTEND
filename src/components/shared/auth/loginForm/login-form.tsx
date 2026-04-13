@@ -13,7 +13,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Eye, EyeOff, Loader2 } from "lucide-react"
 import { useEffect } from "react"
-import GoogleLoginButton from "../GoogleLoginButton"
+// import GoogleLoginButton from "../GoogleLoginButton"
 
 const formSchema = z.object({
   password: z.string().min(6, "Minimum length is 6"),
@@ -250,7 +250,7 @@ export function LoginForm() {
               </div>
             </div>
 
-            <GoogleLoginButton redirectUrl={redirectUrl} />
+            {/* <GoogleLoginButton redirectUrl={redirectUrl} /> */}
 
             <p className="text-center text-[13px] mt-6" style={{ color: "#999" }}>
               New to Planora?{" "}
