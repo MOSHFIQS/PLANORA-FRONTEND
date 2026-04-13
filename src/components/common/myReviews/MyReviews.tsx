@@ -17,7 +17,6 @@ import {
 import { Button } from "@/components/ui/button";
 import { AppImage } from "../../appImage/AppImage";
 import UpdateReviewDialog from "../updatedReviewDialog/UpdatedReviewDialog";
-import { usePathname } from "next/navigation";
 
 type User = {
   id: string;

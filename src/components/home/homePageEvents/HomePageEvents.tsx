@@ -42,65 +42,6 @@ const HomePageEvents = ({ events }: Props) => {
           : null;
 
         return (
-          // <Card
-          //   key={event.id}
-          //   className="overflow-hidden flex flex-col p-0 rounded hover:shadow-md transition "
-          // >
-          //   {/* IMAGE */}
-          //   <Link
-          //     href={`/event/${event.id}`}
-          //     className="relative h-48 w-full overflow-hidden"
-          //   >
-          //     {event?.images?.[0] && (
-          //       <AppImage
-          //         src={event.images[0]}
-          //         alt={event.title}
-          //         className="h-full w-full object-cover hover:scale-105 duration-300"
-          //       />
-          //     )}
-          //   </Link>
-
-          //   {/* CONTENT */}
-          //   <CardContent className="space-y-3 pt-4 flex-1">
-          //     <h3 className="font-semibold text-base line-clamp-1">
-          //       {event.title}
-          //     </h3>
-
-          //     {date && (
-          //       <p className="text-sm text-muted-foreground">
-          //         {format(date, "PPP • p")}
-          //       </p>
-          //     )}
-
-          //     <div className="flex items-center justify-between text-sm">
-          //       {event.type && (
-          //         <Badge variant="outline">{event.type}</Badge>
-          //       )}
-
-          //       {event.fee === 0 ? (
-          //         <span className="px-3 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-700">
-          //           Free
-          //         </span>
-          //       ) : (
-          //         <span className="px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-700">
-          //           {event.fee} tk
-          //         </span>
-          //       )}
-          //     </div>
-          //   </CardContent>
-
-          //   {/* BUTTON */}
-          //   <div className="p-4 pt-0">
-          //     <Button
-          //       variant="violet"
-          //       className="w-full"
-          //       onClick={() => handleViewEvent(event.id)}
-          //     >
-          //       View Event Info
-          //     </Button>
-          //   </div>
-          // </Card>
-
           <Card
             key={event.id}
             className="p-3 rounded-4xl  border shadow flex flex-col gap-3"

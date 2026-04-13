@@ -14,7 +14,6 @@ const AllEventsPage = async ({ searchParams }: { searchParams: Promise<{ search?
 
      const categoryRes = await getAllCategoriesAction();
 
-     const categories = categoryRes?.data || [];
 
 
      if (!res?.ok) {
