@@ -14,7 +14,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Eye, EyeOff, User, CalendarDays, Ticket, Bell, Loader2 } from "lucide-react"
-import GoogleLoginButton from "../GoogleLoginButton"
+
 
 const formSchema = z.object({
   name: z.string().min(2, "Minimum length is 2"),
@@ -44,10 +44,10 @@ export function RegisterForm() {
           toast.error(result.message || "Registration failed", { id: toastId })
           return { form: "Registration failed" }
         }
-        if (result.data?.user)
-          setAuthData(result.data.user, result.data.accessToken, result.data.refreshToken, result.data.token)
+        
         toast.success(result.message, { id: toastId })
-        router.push(redirectUrl)
+        // Redirect to email verification page instead of home
+        router.push(`/verify-email?email=${encodeURIComponent(value.email)}`)
       } catch {
         toast.error("Something went wrong", { id: toastId })
       } finally {
@@ -266,16 +266,7 @@ export function RegisterForm() {
               </Button>
             </form>
 
-            <div className="relative my-7">
-              <div className="absolute inset-0 flex items-center">
-                <span className="w-full border-t border-black/10" />
-              </div>
-              <div className="relative flex justify-center text-[11px] uppercase tracking-wider">
-                <span className="bg-[#f8f6f0] px-4 text-black/40">Or continue with</span>
-              </div>
-            </div>
 
-            <GoogleLoginButton redirectUrl={redirectUrl} role={form.state.values.role} />
 
             <p className="text-center text-[13px] mt-5" style={{ color: "#999" }}>
               Already have an account?{" "}

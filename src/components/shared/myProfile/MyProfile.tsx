@@ -14,11 +14,14 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { updateProfileAction } from "@/actions/profile.action";
+import { forgetPasswordAction } from "@/actions/auth.action";
 import { toast } from "sonner";
 import ImageUploader from "../imageUtils/imageUploader/ImageUploader";
 import { useImageUpload } from "@/hooks/useImageUpload";
 import { AppImage } from "../../appImage/AppImage";
-import { Calendar, Clock, Mail, Pencil, ShieldCheck, UserRound } from "lucide-react";
+import { Calendar, Clock, Mail, Pencil, ShieldCheck, UserRound, KeyRound, Loader2 } from "lucide-react";
+import { ChangePasswordForm } from "../auth/changePasswordForm/change-password-form";
+import { useRouter } from "next/navigation";
 
 type MyProfileProps = {
      profileData: {
@@ -28,6 +31,7 @@ type MyProfileProps = {
           role: string;
           status: string;
           emailVerified: boolean;
+          hasPassword?: boolean;
           image?: string;
           createdAt: string;
           updatedAt: string;
@@ -35,11 +39,33 @@ type MyProfileProps = {
 };
 
 const MyProfile: React.FC<MyProfileProps> = ({ profileData }) => {
+     const router = useRouter();
      const [profile, setProfile] = useState(profileData);
      const [isUpdating, setIsUpdating] = useState(false);
      const [newName, setNewName] = useState(profileData.name);
      const profileImage = useImageUpload({ max: 1 });
      const [open, setOpen] = useState(false);
+
+     const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
+     const [isForgotLoading, setIsForgotLoading] = useState(false);
+
+     const handleForgotPassword = async () => {
+          setIsForgotLoading(true);
+          const toastId = toast.loading("Sending reset link...");
+          try {
+               const res = await forgetPasswordAction({ email: profile.email });
+               if (!res.ok) {
+                    toast.error(res.message || "Failed to send reset link", { id: toastId });
+                    return;
+               }
+               toast.success("Reset link sent to your email", { id: toastId });
+               router.push(`/reset-password?email=${encodeURIComponent(profile.email)}`);
+          } catch {
+               toast.error("Something went wrong", { id: toastId });
+          } finally {
+               setIsForgotLoading(false);
+          }
+     };
 
      const handleUpdate = async () => {
           setIsUpdating(true);
@@ -224,6 +250,79 @@ const MyProfile: React.FC<MyProfileProps> = ({ profileData }) => {
                               </div>
                          </div>
                     ))}
+               </div>
+
+               {/* Security Section */}
+               <div className="pt-6 border-t border-gray-100 dark:border-gray-800">
+                    <h3 className="text-xs font-black tracking-[0.2em] uppercase text-gray-400 mb-4 px-1">
+                         Security & Authentication
+                    </h3>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                         {/* Change/Set Password Card */}
+                         {profile.hasPassword ? (
+                              <Dialog open={isPasswordModalOpen} onOpenChange={setIsPasswordModalOpen}>
+                                   <DialogTrigger asChild>
+                                        <button className="group flex items-center gap-4 p-5 rounded-2xl border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-950 hover:border-violet-500/30 transition-all duration-300">
+                                             <div className="w-9 h-9 rounded-xl bg-violet-500/10 border border-violet-500/20 flex items-center justify-center shrink-0 group-hover:bg-violet-500/20 transition-colors">
+                                                  <ShieldCheck className="w-4 h-4 text-violet-500" />
+                                             </div>
+                                             <div className="text-left">
+                                                  <p className="text-[13px] font-bold text-gray-800 dark:text-gray-200">Change Password</p>
+                                                  <p className="text-[11px] text-gray-400">Update your account credentials</p>
+                                             </div>
+                                        </button>
+                                   </DialogTrigger>
+                                   <DialogContent className="sm:max-w-md rounded-2xl p-0 overflow-hidden border-none text-left">
+                                        <DialogHeader className="sr-only">
+                                             <DialogTitle>Change Password</DialogTitle>
+                                             <DialogDescription>
+                                                  Update your account password to stay secure.
+                                             </DialogDescription>
+                                        </DialogHeader>
+                                        <ChangePasswordForm isModal={true} />
+                                   </DialogContent>
+                              </Dialog>
+                         ) : (
+                              <button 
+                                   disabled={isForgotLoading}
+                                   onClick={handleForgotPassword}
+                                   className="group flex items-center gap-4 p-5 rounded-2xl border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-950 hover:border-teal-500/30 transition-all duration-300 disabled:opacity-50"
+                              >
+                                   <div className="w-9 h-9 rounded-xl bg-teal-500/10 border border-teal-500/20 flex items-center justify-center shrink-0 group-hover:bg-teal-500/20 transition-colors">
+                                        {isForgotLoading ? (
+                                             <Loader2 className="w-4 h-4 text-teal-500 animate-spin" />
+                                        ) : (
+                                             <ShieldCheck className="w-4 h-4 text-teal-500" />
+                                        )}
+                                   </div>
+                                   <div className="text-left">
+                                        <p className="text-[13px] font-bold text-gray-800 dark:text-gray-200">Set Account Password</p>
+                                        <p className="text-[11px] text-gray-400">Establish password for email login</p>
+                                   </div>
+                              </button>
+                         )}
+
+                         {/* Forgot Password Card - Only show if they HAVE a password or as a secondary recovery option */}
+                         {profile.hasPassword && (
+                              <button 
+                                   disabled={isForgotLoading}
+                                   onClick={handleForgotPassword}
+                                   className="group flex items-center gap-4 p-5 rounded-2xl border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-950 hover:border-amber-500/30 transition-all duration-300 disabled:opacity-50"
+                              >
+                                   <div className="w-9 h-9 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center shrink-0 group-hover:bg-amber-500/20 transition-colors">
+                                        {isForgotLoading ? (
+                                             <Loader2 className="w-4 h-4 text-amber-500 animate-spin" />
+                                        ) : (
+                                             <KeyRound className="w-4 h-4 text-amber-500" />
+                                        )}
+                                   </div>
+                                   <div className="text-left">
+                                        <p className="text-[13px] font-bold text-gray-800 dark:text-gray-200">Forgot Password?</p>
+                                        <p className="text-[11px] text-gray-400">Reset via email verification</p>
+                                   </div>
+                              </button>
+                         )}
+                    </div>
                </div>
           </div>
      );

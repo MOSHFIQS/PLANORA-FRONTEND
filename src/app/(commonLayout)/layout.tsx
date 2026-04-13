@@ -1,6 +1,7 @@
 import Footer from "@/components/home/footer/Footer";
 import { Navbar } from "@/components/home/navbar/Navbar";
 import AIAssistantWidget from "@/components/shared/ai/AIAssistantWidget";
+import LoginPromptModal from "@/components/shared/auth/LoginPromptModal";
 
 export default function CommonLayout({
   children,
@@ -16,6 +17,7 @@ export default function CommonLayout({
         {children}
       </main>
       <AIAssistantWidget />
+      <LoginPromptModal />
       <Footer />
     </div>
   );

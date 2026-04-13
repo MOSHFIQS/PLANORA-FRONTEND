@@ -10,6 +10,7 @@ import {
 import Cookies from "js-cookie";
 import { jwtDecode } from "jwt-decode";
 import { User } from "@/types/user.types";
+import { logoutAction } from "@/actions/auth.action";
 
 type AuthContextType = {
      user: User | null;
@@ -25,7 +26,7 @@ type AuthContextType = {
           token: string
      ) => void;
 
-     logout: () => void;
+     logout: () => Promise<void>;
 };
 
 type JwtPayload = {
@@ -209,17 +210,22 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           }
      };
 
-     const logout = () => {
-          
-          setUser(null);
-          setAccessToken(null);
-          setRefreshToken(null);
-          setToken(null);
+     const logout = async () => {
+          try {
+               await logoutAction();
+          } catch (error) {
+               console.error("Logout error:", error);
+          } finally {
+               setUser(null);
+               setAccessToken(null);
+               setRefreshToken(null);
+               setToken(null);
 
-          Cookies.remove("accessToken");
-          Cookies.remove("refreshToken");
-          Cookies.remove("better-auth.session_token");
-          Cookies.remove("user");
+               Cookies.remove("accessToken");
+               Cookies.remove("refreshToken");
+               Cookies.remove("better-auth.session_token");
+               Cookies.remove("user");
+          }
      };
 
      return (

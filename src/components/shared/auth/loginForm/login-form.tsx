@@ -28,8 +28,13 @@ export function LoginForm() {
   const [showPassword, setShowPassword] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
 
-  // Handle OAuth Errors from backend redirect
+  // Handle Specific Success States or Auth Requirements
   useEffect(() => {
+    const verified = searchParams.get("verified")
+    const reset = searchParams.get("reset")
+    if (verified) toast.success("Email verified successfully! Please sign in.")
+    if (reset === "success") toast.success("Password reset successfully! Please sign in.")
+
     const error = searchParams.get("error")
     if (error) {
       const messages: Record<string, string> = {
@@ -42,6 +47,8 @@ export function LoginForm() {
       // Clean up the URL
       const params = new URLSearchParams(searchParams.toString())
       params.delete("error")
+      params.delete("verified")
+      params.delete("reset")
       const newUrl = `${window.location.pathname}${params.toString() ? `?${params.toString()}` : ""}`
       window.history.replaceState({}, "", newUrl)
     }
@@ -59,8 +66,26 @@ export function LoginForm() {
           toast.error(result.message || "Invalid credentials", { id: toastId })
           return { form: "Invalid email or password" }
         }
-        if (result.data?.user)
-          setAuthData(result.data.user, result.data.accessToken, result.data.refreshToken, result.data.token)
+
+        const userData = result.data?.user
+        if (userData) {
+          // Check for verification
+          if (!userData.emailVerified) {
+            toast.error("Please verify your email address", { id: toastId })
+            router.push(`/verify-email?email=${encodeURIComponent(userData.email)}`)
+            return
+          }
+
+          // Check for forced password change
+          if (userData.needPasswordChange) {
+            toast.info("Password reset required", { id: toastId })
+            router.push("/change-password")
+            return
+          }
+
+          setAuthData(userData, result.data.accessToken, result.data.refreshToken, result.data.token)
+        }
+
         toast.success(result.message, { id: toastId })
         router.push(redirectUrl)
       } catch {
@@ -72,25 +97,16 @@ export function LoginForm() {
   })
 
   return (
-    <div
-      className="flex items-center justify-center p-6"
-    // style={{
-    //   backgroundColor: "#f3f2ec",
-    //   backgroundImage:
-    //     "repeating-linear-gradient(0deg,transparent,transparent 39px,rgba(0,0,0,0.06) 39px,rgba(0,0,0,0.06) 40px),repeating-linear-gradient(90deg,transparent,transparent 39px,rgba(0,0,0,0.06) 39px,rgba(0,0,0,0.06) 40px)",
-    // }}
-    >
+    <div className="flex items-center justify-center p-6">
       <div
         className="relative w-full max-w-[960px] overflow-hidden"
         style={{
           background: "#f8f6f0",
           border: "1px solid rgba(0,0,0,0.1)",
           borderRadius: "4px",
-          // boxShadow: "0 4px 32px rgba(0,0,0,0.08)",
         }}
       >
         <div className="grid md:grid-cols-2 min-h-[560px]">
-
           {/* LEFT: FORM */}
           <div className="flex flex-col justify-center px-14 py-14">
             <p
@@ -111,8 +127,7 @@ export function LoginForm() {
               className="text-[clamp(30px,4vw,40px)] font-bold leading-tight tracking-tight mb-2"
               style={{ color: "#1a1a1a" }}
             >
-              Sign in to{" "}
-              <span style={{ color: "#725CAD" }}>Planora</span>
+              Sign in to <span style={{ color: "#725CAD" }}>Planora</span>
             </h1>
             <p className="text-sm font-light mb-10" style={{ color: "#888" }}>
               Your next event is waiting for you.
@@ -163,12 +178,21 @@ export function LoginForm() {
                   const invalid = field.state.meta.isTouched && !field.state.meta.isValid
                   return (
                     <div className="flex flex-col gap-1.5">
-                      <Label
-                        className="text-[11px] font-medium tracking-wide uppercase"
-                        style={{ color: "#666" }}
-                      >
-                        Password
-                      </Label>
+                      <div className="flex items-center justify-between">
+                        <Label
+                          className="text-[11px] font-medium tracking-wide uppercase"
+                          style={{ color: "#666" }}
+                        >
+                          Password
+                        </Label>
+                        <Link
+                          href="/forget-password"
+                          className="text-[11px] font-medium transition-colors hover:text-[#725CAD]"
+                          style={{ color: "#888" }}
+                        >
+                          Forgot Password?
+                        </Link>
+                      </div>
                       <div className="relative">
                         <Input
                           type={showPassword ? "text" : "password"}
@@ -215,18 +239,18 @@ export function LoginForm() {
                 {isSubmitting && <Loader2 size={16} className="animate-spin mr-2" />}
                 {isSubmitting ? "Signing in…" : "Sign in"}
               </Button>
-              </form>
-              
-              <div className="relative my-7">
-                <div className="absolute inset-0 flex items-center">
-                  <span className="w-full border-t border-black/10" />
-                </div>
-                <div className="relative flex justify-center text-[11px] uppercase tracking-wider">
-                  <span className="bg-[#f8f6f0] px-4 text-black/40">Or continue with</span>
-                </div>
-              </div>
+            </form>
 
-              <GoogleLoginButton redirectUrl={redirectUrl} />
+            <div className="relative my-7">
+              <div className="absolute inset-0 flex items-center">
+                <span className="w-full border-t border-black/10" />
+              </div>
+              <div className="relative flex justify-center text-[11px] uppercase tracking-wider">
+                <span className="bg-[#f8f6f0] px-4 text-black/40">Or continue with</span>
+              </div>
+            </div>
+
+            <GoogleLoginButton redirectUrl={redirectUrl} />
 
             <p className="text-center text-[13px] mt-6" style={{ color: "#999" }}>
               New to Planora?{" "}
