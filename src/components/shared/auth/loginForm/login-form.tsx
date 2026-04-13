@@ -59,48 +59,54 @@ export function LoginForm() {
     validators: { onSubmit: formSchema },
     onSubmit: async ({ value }) => {
       setIsSubmitting(true)
+
       const toastId = toast.loading("Signing in…")
+
       try {
         const result = await logInAction(value)
-        console.log(result)
 
         if (!result.ok) {
+          toast.error(result.message, { id: toastId }) // replaces loading
+
           if (result.message === "Email not verified") {
-            toast.error(result.message, { id: toastId })
             router.push(`/verify-email?email=${encodeURIComponent(value.email)}`)
-            return
           }
-          toast.error(result.message, { id: toastId })
+
           return { form: result.message }
         }
 
         const userData = result.data?.user
+
         if (userData) {
-          // Check for verification
           if (!userData.emailVerified) {
             toast.error("Please verify your email address", { id: toastId })
             router.push(`/verify-email?email=${encodeURIComponent(userData.email)}`)
             return
           }
 
-          // Check for forced password change
           if (userData.needPasswordChange) {
             toast.info("Password reset required", { id: toastId })
             router.push("/change-password")
             return
           }
 
-          setAuthData(userData, result.data.accessToken, result.data.refreshToken, result.data.token)
+          setAuthData(
+            userData,
+            result.data.accessToken,
+            result.data.refreshToken,
+            result.data.token
+          )
         }
 
-        toast(result.message, { id: toastId })
+        toast.success(result.message, { id: toastId }) // use success explicitly
         router.push(redirectUrl)
+
       } catch {
         toast.error("Something went wrong", { id: toastId })
       } finally {
         setIsSubmitting(false)
       }
-    },
+    }
   })
 
   return (
