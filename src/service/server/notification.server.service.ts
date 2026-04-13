@@ -1,4 +1,4 @@
-import { apiFetchServerMain } from "../lib/apiFetchServer";
+import { apiFetchServerMain } from "../../lib/apiFetchServer";
 
 
 export const notificationServiceServer = {

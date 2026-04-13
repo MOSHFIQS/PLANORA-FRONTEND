@@ -25,7 +25,7 @@ import { Input } from "../../ui/input";
 import { useRef, useState, useEffect } from "react";
 import { MapPin, Calendar, Loader2, Search } from "lucide-react";
 import { Card } from "@/components/ui/card";
-import { apiFetchClient } from "@/service/lib/apiFetchClient";
+import { apiFetchClient } from "@/lib/apiFetchClient";
 
 type NavEvent = {
      id: string;

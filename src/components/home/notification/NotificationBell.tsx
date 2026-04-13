@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
 import { getNotificationsAction, markAllNotificationsReadAction, markNotificationReadAction } from "@/actions/notification.action";
-import { cn } from "@/service/lib/utils";
+import { cn } from "@/lib/utils";
 
 export default function NotificationBell() {
      const [notifications, setNotifications] = useState<any[]>([]);

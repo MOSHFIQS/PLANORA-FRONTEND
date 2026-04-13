@@ -19,8 +19,8 @@ const SectionHeader = ({
     align === "center"
       ? "text-center items-center"
       : align === "right"
-      ? "text-right items-end"
-      : "text-left items-start";
+        ? "text-right items-end"
+        : "text-left items-start";
 
   return (
     <div className={cn("flex flex-col gap-2 my-16", alignClass, className)}>
