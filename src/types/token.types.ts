@@ -1,5 +1,12 @@
 export interface TokenPayload {
-     id: number;
+     userId: string;
      name: string;
-     role: "ADMIN" | "AGENT";
+     email: string;
+     role: "USER" | "ADMIN" | "ORGANIZER" | "SUPERADMIN";
+     status: string;
+     needPasswordChange: boolean;
+     isDeleted: boolean;
+     emailVerified: boolean;
+     iat: number;
+     exp: number;
 }

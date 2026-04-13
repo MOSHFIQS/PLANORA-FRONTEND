@@ -237,9 +237,9 @@ const Navbar = () => {
 
      const menu = [
           { title: "Home", url: "/" },
-          { title: "All Events", url: "/events" },
-          { title: "Contact Us", url: "/contact" },
-          { title: "About Us", url: "/about-us" },
+          { title: "Events", url: "/events" },
+          { title: "Contact", url: "/contact" },
+          { title: "About", url: "/about-us" },
           { title: "Help", url: "/help" },
      ];
 
@@ -315,7 +315,7 @@ const Navbar = () => {
                          </div>
 
                          {/* Search + Auth */}
-                         <div className="flex items-center gap-3">
+                         <div className="flex items-center gap-1">
 
                               {user?.id ? (
                                    // ── LOGGED IN: search + profile ──────────────────────────────

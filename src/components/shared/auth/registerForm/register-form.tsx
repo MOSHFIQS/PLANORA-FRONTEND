@@ -15,6 +15,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Eye, EyeOff, User, CalendarDays, Ticket, Bell, Loader2 } from "lucide-react"
 
+
 const formSchema = z.object({
   name: z.string().min(2, "Minimum length is 2"),
   password: z.string().min(6, "Minimum length is 6"),
@@ -43,10 +44,10 @@ export function RegisterForm() {
           toast.error(result.message || "Registration failed", { id: toastId })
           return { form: "Registration failed" }
         }
-        if (result.data?.user)
-          setAuthData(result.data.user, result.data.accessToken, result.data.refreshToken, result.data.token)
+        
         toast.success(result.message, { id: toastId })
-        router.push(redirectUrl)
+        // Redirect to email verification page instead of home
+        router.push(`/verify-email?email=${encodeURIComponent(value.email)}`)
       } catch {
         toast.error("Something went wrong", { id: toastId })
       } finally {
@@ -264,6 +265,8 @@ export function RegisterForm() {
                 {isSubmitting ? "Creating account…" : "Create account"}
               </Button>
             </form>
+
+
 
             <p className="text-center text-[13px] mt-5" style={{ color: "#999" }}>
               Already have an account?{" "}
