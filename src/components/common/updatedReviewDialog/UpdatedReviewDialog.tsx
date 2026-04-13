@@ -55,7 +55,7 @@ const UpdateReviewDialog = ({ review, onUpdated }: Props) => {
           comment: value.comment,
         });
 
-        toast.success("Review updated successfully");
+        toast("Review updated successfully");
         setOpen(false);
       } catch (err: any) {
         toast.error(err?.message || "Update failed");

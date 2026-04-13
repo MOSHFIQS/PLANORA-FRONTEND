@@ -122,7 +122,7 @@ const UpdateEventForm = ({ event, categories }: Props) => {
                          return;
                     }
 
-                    toast.success("Event updated successfully", {
+                    toast("Event updated successfully", {
                          id: toastId,
                     });
 

@@ -55,7 +55,7 @@ export default function UpdateCategory({ category }: { category: any }) {
                     } else if (user?.role === "SUPERADMIN") {
                          router.push("/super-admin-dashboard/category");
                     }
-                    toast.success(res.message);
+                    toast(res.message);
                     form.reset();
                } catch (err: any) {
                     // console.log(err);

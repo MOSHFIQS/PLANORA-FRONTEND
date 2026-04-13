@@ -46,7 +46,7 @@
 
 //         if (!res?.ok) throw new Error(res?.message);
 
-//         toast.success("Event deleted successfully");
+//         toast("Event deleted successfully");
 //       } catch (err: any) {
 //         toast.error(err?.message || "Failed to delete event");
 //       }
@@ -253,7 +253,7 @@ export default function MyEventsList({ myEvents }: { myEvents: Event[] }) {
 
         if (!res?.ok) throw new Error(res?.message);
 
-        toast.success("Event deleted successfully");
+        toast("Event deleted successfully");
       } catch (err: any) {
         toast.error(err?.message || "Failed to delete event");
       }

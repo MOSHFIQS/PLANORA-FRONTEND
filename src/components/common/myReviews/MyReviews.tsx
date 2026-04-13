@@ -55,7 +55,7 @@ const MyReviews: React.FC<EventReviewsProps> = ({ myReviews }) => {
         setReviews((prev) =>
           prev.filter((r) => r.id !== selectedReviewId)
         );
-        toast.success("Review deleted successfully!");
+        toast("Review deleted successfully!");
       } else {
         toast.error(res.message || "Failed to delete review");
       }

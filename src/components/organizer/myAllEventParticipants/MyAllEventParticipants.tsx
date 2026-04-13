@@ -66,7 +66,7 @@
 
 //         if (!res.ok) throw new Error(res.message);
 
-//         toast.success("Invitation sent successfully!");
+//         toast("Invitation sent successfully!");
 
 //         // Optimistic UI update: add invite to participant's events
 //         const participant = participants.find((p) => p.id === participantId);
@@ -295,7 +295,7 @@
 
 // //         if (!res.ok) throw new Error(res.message);
 
-// //         toast.success("Invitation sent successfully!");
+// //         toast("Invitation sent successfully!");
 
 // //         // Optimistic UI update
 // //         const participant = participants.find((p) => p.id === participantId);
@@ -519,7 +519,7 @@ export default function MyAllEventParticipants({
 
         if (!res.ok) throw new Error(res.message);
 
-        toast.success("Invitation sent successfully!");
+        toast("Invitation sent successfully!");
 
         // Optimistic UI update
         const participant = participants.find((p) => p.id === participantId);

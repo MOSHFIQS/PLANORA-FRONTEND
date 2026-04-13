@@ -30,7 +30,7 @@ export default function AllCategories({ categories }: any) {
                     if (!res.ok) {
                          throw new Error(res.message);
                     }
-                    toast.success(res.message);
+                    toast(res.message);
                } catch (err: any) {
                     toast.error(err.message || "Failed to delete category");
                }

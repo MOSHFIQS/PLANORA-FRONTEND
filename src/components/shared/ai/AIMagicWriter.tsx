@@ -140,7 +140,7 @@ export default function AIMagicWriter({ title, type, venue, onGenerate }: AIMagi
       onGenerate(generatedHtml);
       setIsGenerating(false);
 
-      toast.success("Description generated!", {
+      toast("Description generated!", {
         description: "Planora AI has written a full event description. Review and edit it to your liking.",
         duration: 5000,
         // Custom icon via the description slot isn't natively supported,

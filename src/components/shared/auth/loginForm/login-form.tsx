@@ -32,8 +32,8 @@ export function LoginForm() {
   useEffect(() => {
     const verified = searchParams.get("verified")
     const reset = searchParams.get("reset")
-    if (verified) toast.success("Email verified successfully! Please sign in.")
-    if (reset === "success") toast.success("Password reset successfully! Please sign in.")
+    if (verified) toast("Email verified successfully! Please sign in.")
+    if (reset === "success") toast("Password reset successfully! Please sign in.")
 
     const error = searchParams.get("error")
     if (error) {
@@ -93,7 +93,7 @@ export function LoginForm() {
           setAuthData(userData, result.data.accessToken, result.data.refreshToken, result.data.token)
         }
 
-        toast.success(result.message, { id: toastId })
+        toast(result.message, { id: toastId })
         router.push(redirectUrl)
       } catch {
         toast.error("Something went wrong", { id: toastId })

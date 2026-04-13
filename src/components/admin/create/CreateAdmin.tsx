@@ -27,7 +27,7 @@ export default function CreateAdmin() {
         const res = await createAdminAction({ ...value, role });
         if (!res.ok) throw new Error(res.message);
         router.push("/super-admin-dashboard/admins");
-        toast.success(res.message);
+        toast(res.message);
         form.reset();
       } catch (err: any) {
         toast.error(err.message);

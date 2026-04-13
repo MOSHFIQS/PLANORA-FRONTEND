@@ -48,7 +48,7 @@ export function RegisterForm() {
 
         
         
-        toast.success(result.message, { id: toastId })
+        toast(result.message, { id: toastId })
         // Redirect to email verification page instead of home
         router.push(`/verify-email?email=${encodeURIComponent(value.email)}`)
       } catch {

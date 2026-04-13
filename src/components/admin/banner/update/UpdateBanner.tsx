@@ -76,7 +76,7 @@ export default function UpdateBanner({ banner }: { banner: any }) {
 
                     if (!res?.ok) throw new Error(res?.message);
 
-                    toast.success(res.message);
+                    toast(res.message);
                     if (user?.role === "ADMIN") {
                          router.push("/admin-dashboard/banner");
                     } else if (user?.role === "SUPERADMIN") {

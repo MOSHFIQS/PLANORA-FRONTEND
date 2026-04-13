@@ -22,7 +22,7 @@ const ContactForm = () => {
       )
       .then(
         () => {
-          toast.success("Message sent successfully We will get back to you soon!");
+          toast("Message sent successfully We will get back to you soon!");
           router.push("/");
         },
         () => {

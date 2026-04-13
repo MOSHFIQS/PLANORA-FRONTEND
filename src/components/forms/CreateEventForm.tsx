@@ -100,7 +100,7 @@ const CreateEventForm = ({ categories }: { categories: Category[] }) => {
                          return;
                     }
                     // console.log(res);
-                    toast.success("Event created successfully", { id: toastId });
+                    toast("Event created successfully", { id: toastId });
                     router.push("/organizer-dashboard/events");
                } catch (err: any) {
                     toast.error("Something went wrong", { id: toastId });

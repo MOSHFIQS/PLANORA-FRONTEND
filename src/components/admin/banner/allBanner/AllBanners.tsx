@@ -42,7 +42,7 @@ export default function AllBanners({ banners }: any) {
                          throw new Error(res.message);
                     }
 
-                    toast.success(res.message);
+                    toast(res.message);
                } catch (err: any) {
                     toast.error(err.message || "Failed to delete banner");
                }
@@ -129,7 +129,7 @@ export default function AllBanners({ banners }: any) {
                                                                            throw new Error(res.message);
                                                                       }
 
-                                                                      toast.success(res.message);
+                                                                      toast(res.message);
                                                                  } catch (err: any) {
                                                                       toast.error(err.message || "Update failed");
                                                                  }

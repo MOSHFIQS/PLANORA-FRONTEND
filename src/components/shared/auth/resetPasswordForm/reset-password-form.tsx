@@ -59,7 +59,7 @@ export function ResetPasswordForm() {
         return
       }
       
-      toast.success("New code sent successfully!", { id: toastId })
+      toast("New code sent successfully!", { id: toastId })
       setCountdown(60)
       setCanResend(false)
     } catch {
@@ -88,7 +88,7 @@ export function ResetPasswordForm() {
           toast.error(result.message || "Reset failed", { id: toastId })
           return
         }
-        toast.success(result.message, { id: toastId })
+        toast(result.message, { id: toastId })
         router.push("/login?reset=success")
       } catch {
         toast.error("Something went wrong", { id: toastId })

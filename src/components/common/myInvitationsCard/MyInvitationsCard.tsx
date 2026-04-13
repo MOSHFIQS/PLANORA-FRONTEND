@@ -440,7 +440,7 @@ const MyInvitationsCard = ({ invitations }: { invitations: Invitation[] }) => {
         return;
       }
 
-      toast.success("Invitation rejected");
+      toast("Invitation rejected");
       setRejectingId(null);
     });
   };

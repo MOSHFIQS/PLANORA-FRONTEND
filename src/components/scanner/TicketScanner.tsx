@@ -52,7 +52,7 @@
 //           }
 
 //           setStatus("success");
-//           toast.success("Ticket checked in ✅");
+//           toast("Ticket checked in ✅");
 //         },
 //         () => {}
 //       );
@@ -232,7 +232,7 @@ export default function TicketScanner() {
 
           setStatus("success");
           setMessage(res.message);
-          toast.success(res.message);
+          toast(res.message);
         },
         () => {}
       );

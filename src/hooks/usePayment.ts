@@ -39,7 +39,7 @@ export const usePayment = () => {
 
       // CASE 1: FREE EVENT
       if (!data?.paymentUrl) {
-        toast.success(data?.message || "Joined successfully", {
+        toast(data?.message || "Joined successfully", {
           id: toastId,
         });
 
@@ -50,7 +50,7 @@ export const usePayment = () => {
       }
 
       // CASE 2: PAID EVENT
-      toast.success("Redirecting to payment...", { id: toastId });
+      toast("Redirecting to payment...", { id: toastId });
 
       window.location.href = data.paymentUrl;
     } catch (err: any) {

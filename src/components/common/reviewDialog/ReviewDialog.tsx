@@ -48,7 +48,7 @@ const ReviewDialog = ({ eventId, children }: Props) => {
         return;
       }
 
-      toast.success("Review submitted");
+      toast("Review submitted");
       setOpen(false);
       setComment("");
       setRating(5);

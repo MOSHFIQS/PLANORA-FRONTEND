@@ -56,7 +56,7 @@ const AllUsers = ({ users }: { users: User[] }) => {
       if (!res?.ok) {
         toast.error(res?.message || "Failed to delete user");
       } else {
-        toast.success("User deleted successfully");
+        toast("User deleted successfully");
       }
 
       setLoadingId(null);
@@ -133,7 +133,7 @@ const AllUsers = ({ users }: { users: User[] }) => {
                           if (!res?.ok) {
                             toast.error(res?.message || "Failed to update");
                           } else {
-                            toast.success(res?.message || "Status updated");
+                            toast(res?.message || "Status updated");
                           }
 
                           setLoadingId(null);
@@ -183,7 +183,7 @@ const AllUsers = ({ users }: { users: User[] }) => {
                           if (!res?.ok) {
                             toast.error(res?.message || "Failed to update");
                           } else {
-                            toast.success(res?.message || "Status updated");
+                            toast(res?.message || "Status updated");
                           }
                           setLoadingId(null);
                         }}
