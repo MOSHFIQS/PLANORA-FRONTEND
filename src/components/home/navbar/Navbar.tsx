@@ -1,6 +1,7 @@
 "use client";
 
 import { Menu, LayoutDashboard, Ticket, Settings, LogOut, User, Store } from "lucide-react";
+import NotificationBell from "@/components/home/notification/NotificationBell";
 import { Button } from "@/components/ui/button";
 import {
      Sheet,
@@ -24,7 +25,7 @@ import { Input } from "../../ui/input";
 import { useRef, useState, useEffect } from "react";
 import { MapPin, Calendar, Loader2, Search } from "lucide-react";
 import { Card } from "@/components/ui/card";
-import { apiFetchClient } from "@/lib/apiFetchClient";
+import { apiFetchClient } from "@/service/lib/apiFetchClient";
 
 type NavEvent = {
      id: string;
@@ -339,6 +340,9 @@ const Navbar = () => {
                                              )}
                                         </div>
 
+                                        {/* Notification Bell */}
+                                        <NotificationBell />
+
                                         <DropdownMenu>
                                              <DropdownMenuTrigger asChild>
                                                   <button className="relative flex items-center gap-2 rounded-full pl-2 pr-3 py-1 border border-gray-200 bg-white hover:bg-gray-50 shadow-sm transition-all hover:shadow-md group focus:outline-none">
@@ -568,6 +572,16 @@ const Navbar = () => {
                                                        </Link>
                                                   ))}
                                              </div>
+
+                                             {/* Notification Bell — mobile */}
+                                             {user?.id && (
+                                                  <div className="flex items-center gap-3 px-3 py-2.5 rounded-xl border border-gray-100 bg-white">
+                                                       <div className="w-7 h-7 rounded-lg bg-orange-50 flex items-center justify-center">
+                                                            <NotificationBell />
+                                                       </div>
+                                                       <span className="text-sm font-medium text-gray-700">Notifications</span>
+                                                  </div>
+                                             )}
 
                                              <div className="border-t border-gray-100 my-1" />
 
