@@ -40,10 +40,13 @@ export function RegisterForm() {
       const toastId = toast.loading("Creating account…")
       try {
         const result = await registerAction({ ...value, image: registerImages.images[0]?.img })
+        console.log(result)
         if (!result.ok) {
           toast.error(result.message || "Registration failed", { id: toastId })
           return { form: "Registration failed" }
         }
+
+        
         
         toast.success(result.message, { id: toastId })
         // Redirect to email verification page instead of home

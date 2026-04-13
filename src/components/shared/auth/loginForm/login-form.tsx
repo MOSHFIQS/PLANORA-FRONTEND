@@ -62,9 +62,16 @@ export function LoginForm() {
       const toastId = toast.loading("Signing in…")
       try {
         const result = await logInAction(value)
+        console.log(result)
+
         if (!result.ok) {
-          toast.error(result.message || "Invalid credentials", { id: toastId })
-          return { form: "Invalid email or password" }
+          if (result.message === "Email not verified") {
+            toast.error(result.message, { id: toastId })
+            router.push(`/verify-email?email=${encodeURIComponent(value.email)}`)
+            return
+          }
+          toast.error(result.message, { id: toastId })
+          return { form: result.message }
         }
 
         const userData = result.data?.user
