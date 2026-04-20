@@ -24,7 +24,7 @@ const AllEventsPage = async ({ searchParams }: { searchParams: Promise<{ search?
           );
      }
      return (
-          <div className="space-y-6 py-5">
+          <div className="space-y-6 py-5 px-2 sm:px-4">
                <CategoryButtons categories={categoryRes.data || []} />
                <HomePageEvents events={res.data?.data} />
                <GlobalPagination

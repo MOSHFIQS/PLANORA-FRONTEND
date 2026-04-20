@@ -42,7 +42,7 @@ const EventDetailsSmart = ({ type, data }: Props) => {
   const isFree = event?.fee === 0;
 
   return (
-    <div className="space-y-6 ">
+    <div className="space-y-6 py-10 px-2 sm:px-4">
       <Card className=" border">
         {/* HEADER */}
         <CardHeader className="flex flex-col md:flex-row md:justify-between md:items-center gap-6 px-6 py-5 border-b border-gray-200">
@@ -96,7 +96,7 @@ const EventDetailsSmart = ({ type, data }: Props) => {
 
         <div className="px-4 space-y-4 pt-5">
           {/* MAIN INFO */}
-          <Card className="flex flex-col md:flex-row md:text-start text-center justify-between items-center gap-4 px-4 bg-[#F3F2EC]">
+          <Card className="flex flex-col md:flex-row md:text-start text-center justify-between items-center gap-4 px-4 bg-[#FFF5F2]">
             <div className="space-y-3">
               {date && (
                 <p>
@@ -162,7 +162,7 @@ const EventDetailsSmart = ({ type, data }: Props) => {
             <div className="space-y-4">
               <p className="font-semibold text-md">Payment Details:</p>
 
-              <div className="overflow-x-auto bg-[#f3f2ec] rounded-lg">
+              <div className="overflow-x-auto bg-[#FFF5F2] rounded-lg">
                 <Table>
                   <TableHeader>
                     <TableRow>

@@ -42,8 +42,8 @@ const services = [
 
 const Services = () => {
   return (
-    <section className="py-20">
-      <div className="container mx-auto px-4">
+    <section className="">
+      <div className="container mx-auto px-4 pt-10">
         <div className="mb-16">
           <SectionHeader
             align="center"

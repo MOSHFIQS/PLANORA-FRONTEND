@@ -1,3 +1,4 @@
+import SectionHeader from "@/components/shared/sectionHeader/SectionHeader";
 import { Quote } from "lucide-react";
 
 const testimonials = [
@@ -32,20 +33,14 @@ const avatarColors = [
 
 const Testimonials = () => {
   return (
-    <section className="py-20">
-      <div className="container mx-auto px-4">
+    <section className="">
+      <div className="container mx-auto px-4 pb-10">
 
-        <div className="text-center mb-16">
-          <span className="text-teal-500 dark:text-teal-400 text-xs font-bold tracking-[0.2em] uppercase mb-4 block">
-            Testimonials
-          </span>
-          <h2 className="text-3xl md:text-5xl font-black mb-4 text-gray-900 dark:text-white tracking-tight">
-            Loved By Event Creators
-          </h2>
-          <p className="text-gray-500 dark:text-gray-400 max-w-xl mx-auto text-base leading-relaxed">
-            Here's what our community of organizers has to say about their experience.
-          </p>
-        </div>
+       <SectionHeader
+        align="center"
+        title="Loved By Event Creators"
+        description="Here's what our community of organizers has to say about their experience."
+      />
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-gray-200 dark:bg-gray-800 rounded-2xl overflow-hidden">
           {testimonials.map((testimonial, index) => (

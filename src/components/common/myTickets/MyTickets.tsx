@@ -84,7 +84,7 @@ export default function MyTickets({ data }: Props) {
             {/* Separator */}
             <div className="relative flex-shrink-0" style={{ width: "12px" }}>
               {["-6px", "auto"].map((t, i) => (
-                <div key={i} className="absolute rounded-full z-10" style={{ width: "12px", height: "12px", background: "#f3f2ec", top: i === 0 ? "-6px" : "auto", bottom: i === 1 ? "-6px" : "auto", left: "50%", transform: "translateX(-50%)" }} />
+                <div key={i} className="absolute rounded-full z-10" style={{ width: "12px", height: "12px", background: "#FFF5F2", top: i === 0 ? "-6px" : "auto", bottom: i === 1 ? "-6px" : "auto", left: "50%", transform: "translateX(-50%)" }} />
               ))}
               <div className="h-full mx-auto" style={{ borderLeft: "1.5px dashed rgba(255,255,255,0.2)", width: "0" }} />
             </div>
@@ -115,7 +115,7 @@ export default function MyTickets({ data }: Props) {
             {/* Separator */}
             <div className="relative flex-shrink-0" style={{ width: "12px" }}>
               {["-6px", "auto"].map((t, i) => (
-                <div key={i} className="absolute rounded-full z-10" style={{ width: "12px", height: "12px", background: "#f3f2ec", top: i === 0 ? "-6px" : "auto", bottom: i === 1 ? "-6px" : "auto", left: "50%", transform: "translateX(-50%)" }} />
+                <div key={i} className="absolute rounded-full z-10" style={{ width: "12px", height: "12px", background: "#FFF5F2", top: i === 0 ? "-6px" : "auto", bottom: i === 1 ? "-6px" : "auto", left: "50%", transform: "translateX(-50%)" }} />
               ))}
               <div className="h-full mx-auto" style={{ borderLeft: "1.5px dashed rgba(255,255,255,0.2)", width: "0" }} />
             </div>

@@ -36,7 +36,7 @@ const faqs = [
 
 const FAQ = () => {
   return (
-    <section className="py-20 bg-white dark:bg-transparent">
+    <section className=" dark:bg-transparent pb-10">
       <div className="container mx-auto px-4 max-w-4xl">
 
         <SectionHeader

@@ -46,14 +46,14 @@ const DescriptionViwer: React.FC<ProductDescriptionProps> = ({
     return <div className="p-6 text-gray-500">Loading description...</div>;
   }
 
- return (
-  <div className="p-6 border rounded-lg bg-[#F3F2EC] rich-content">
-    <EditorContent
-      editor={editor}
-      style={{ minHeight: height }}
-    />
-  </div>
-);
+  return (
+    <div className="p-6 border rounded-lg bg-[#FFF5F2] rich-content">
+      <EditorContent
+        editor={editor}
+        style={{ minHeight: height }}
+      />
+    </div>
+  );
 };
 
 export default DescriptionViwer;

@@ -10,14 +10,14 @@ import { redirect } from "next/navigation";
 import { AppSidebar } from "@/components/appSidebar/app-sidebar"
 import { sessionService } from "@/service/server/token.service";
 
-export default async  function DashboardLayout({ admin, user, organizer, superAdmin }: { admin: ReactNode, user: ReactNode, organizer: ReactNode, superAdmin: ReactNode }) {
+export default async function DashboardLayout({ admin, user, organizer, superAdmin }: { admin: ReactNode, user: ReactNode, organizer: ReactNode, superAdmin: ReactNode }) {
 
      const data = await sessionService.getUserFromToken()
      // console.log("token",data);
      if (!data) {
           redirect("/login");
      }
-   
+
      // const {user} = useAuth()
      // const router = useRouter()
 
@@ -59,7 +59,7 @@ export default async  function DashboardLayout({ admin, user, organizer, superAd
      return (
           <SidebarProvider>
                <AppSidebar user={userInfo} />
-               <SidebarInset className="bg-[#F3F2EC] ">
+               <SidebarInset className="bg-[#FFF5F2] ">
                     <header className="flex h-16 shrink-0 items-center gap-2 border-b">
                          <div className="flex items-center gap-2 px-3">
                               <SidebarTrigger />
@@ -68,7 +68,7 @@ export default async  function DashboardLayout({ admin, user, organizer, superAd
 
                          </div>
                     </header>
-                    <div className="flex flex-1 flex-col gap-4 p-4 bg-[#F3F2EC] ">
+                    <div className="flex flex-1 flex-col gap-4 p-4 bg-[#FFF5F2] ">
                          {content}
                     </div>
                </SidebarInset>

@@ -19,12 +19,12 @@ export default function RootLayout({
      return (
           <html lang="en">
                <body
-                    className={`${spaceGrotesk.className} bg-[#F3F2EC] font-sans `}
+                    className={`${spaceGrotesk.className} bg-[#FFF5F2] font-sans `}
                >
-                         <AuthProvider>
-                              <Toaster richColors />
-                              {children}
-                         </AuthProvider>
+                    <AuthProvider>
+                         <Toaster richColors />
+                         {children}
+                    </AuthProvider>
                </body>
           </html>
      );

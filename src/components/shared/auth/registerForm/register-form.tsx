@@ -61,13 +61,13 @@ export function RegisterForm() {
 
   return (
     <div
-      className="flex items-center justify-center p-6"
+      className="flex items-center justify-center px-6 py-30"
 
     >
       <div
         className="relative w-full max-w-[1040px] overflow-hidden"
         style={{
-          background: "#f8f6f0",
+          background: "#ffffff",
           border: "1px solid rgba(0,0,0,0.1)",
           borderRadius: "4px",
           // boxShadow: "0 4px 32px rgba(0,0,0,0.08)",

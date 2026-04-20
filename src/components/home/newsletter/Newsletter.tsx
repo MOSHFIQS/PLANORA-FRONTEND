@@ -4,23 +4,17 @@ import { Send } from "lucide-react";
 
 const Newsletter = () => {
   return (
-    <section className="py-24">
+    <section className="max-w-7xl mx-auto shadow border bg-white py-10 mb-10">
       <div className="">
-        <div className="relative overflow-hidden border border-teal-500/20 bg-white dark:bg-gray-950">
+        <div className="relative overflow-hidden  ">
 
           {/* Grid texture overlay */}
           <div
             className="absolute inset-0 opacity-[0.04]"
-            style={{
-              backgroundImage:
-                "linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)",
-              backgroundSize: "40px 40px",
-            }}
+
           />
 
-          {/* Glow orbs */}
-          <div className="absolute -top-24 -right-24 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl" />
-          <div className="absolute -bottom-24 -left-24 w-80 h-80 bg-teal-400/8 rounded-full blur-3xl" />
+
 
           <div className="relative z-10 px-8 py-16 md:px-20 md:py-20 text-center">
             {/* Eyebrow */}
@@ -41,11 +35,11 @@ const Newsletter = () => {
               <input
                 type="email"
                 placeholder="your@email.com"
-                className="flex-1 px-5 py-3.5 rounded-xl bg-white/5 border  text-white placeholder:text-gray-600 focus:outline-none focus:border-teal-500/60 focus:bg-white/8 transition-all text-sm"
+                className="flex-1 px-5 py-3.5 rounded bg-white border  text-white placeholder:text-gray-600 focus:outline-none focus:border-teal-500/60 focus:bg-white/8 transition-all text-sm"
               />
               <button
                 type="button"
-                className="px-6 py-3.5 bg-orange-400 hover:bg-teal-400 text-gray-950 rounded-xl text-white font-bold text-sm flex items-center justify-center gap-2 group transition-colors duration-200 shrink-0"
+                className="px-6 py-3.5 bg-orange-400 hover:bg-teal-400 text-gray-950 rounded text-white font-bold text-sm flex items-center justify-center gap-2 group transition-colors duration-200 shrink-0"
               >
                 Subscribe
                 <Send className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />

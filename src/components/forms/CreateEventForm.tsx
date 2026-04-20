@@ -316,7 +316,7 @@ const CreateEventForm = ({ categories }: { categories: Category[] }) => {
                                                                  <Button
                                                                       variant="outline"
                                                                       id="date"
-                                                                      className="w-32 justify-between font-normal bg-[#F3F2EC]"
+                                                                      className="w-32 justify-between font-normal bg-[#FFF5F2]"
                                                                  >
                                                                       {selectedDate
                                                                            ? format(selectedDate, "PPP")

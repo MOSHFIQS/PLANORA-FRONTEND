@@ -29,7 +29,7 @@ const steps = [
 
 const HowItWorks = () => {
   return (
-    <section className="py-24 bg-white relative overflow-hidden">
+    <section className="py-24 relative overflow-hidden">
 
       {/* Subtle grid texture */}
       <div
@@ -91,7 +91,7 @@ const HowItWorks = () => {
                 <p className="text-teal-500/60 text-[10px] font-black tracking-[0.2em] uppercase mb-2">
                   Step {step.number}
                 </p>
-                <h3 className="text-white text-base font-bold mb-3 group-hover:text-teal-400 transition-colors duration-300">
+                <h3 className=" text-base font-bold mb-3 group-hover:text-teal-400 transition-colors duration-300">
                   {step.title}
                 </h3>
                 <p className="text-gray-500 text-sm leading-relaxed max-w-[200px]">

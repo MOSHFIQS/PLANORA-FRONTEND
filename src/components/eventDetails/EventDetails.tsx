@@ -93,7 +93,7 @@ const EventDetails = ({ event }: { event: IEvent }) => {
                          </div>
 
                          {/* Organizer Section */}
-                         <div className="flex items-center gap-4 p-4 rounded-xl border bg-[#F3F2EC] ">
+                         <div className="flex items-center gap-4 p-4 rounded-xl border bg-[#FFF5F2] ">
 
                               {/* Avatar */}
                               <AppImage
@@ -161,13 +161,13 @@ const EventDetails = ({ event }: { event: IEvent }) => {
 
                          {/* Stats */}
                          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                              <div className="border p-3 rounded text-center font-extrabold bg-[#F3F2EC]">
+                              <div className="border p-3 rounded text-center font-extrabold bg-[#FFF5F2]">
                                    Invitations: {event?.invitations?.length || 0}
                               </div>
-                              <div className="border p-3 rounded text-center font-extrabold bg-[#F3F2EC]">
+                              <div className="border p-3 rounded text-center font-extrabold bg-[#FFF5F2]">
                                    Participants: {event?.participations?.length || 0}
                               </div>
-                              <div className="border p-3 rounded text-center font-extrabold bg-[#F3F2EC]">
+                              <div className="border p-3 rounded text-center font-extrabold bg-[#FFF5F2]">
                                    Reviews: {event?.reviews?.length || 0}
                               </div>
                          </div>

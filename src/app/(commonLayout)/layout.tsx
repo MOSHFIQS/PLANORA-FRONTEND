@@ -9,11 +9,11 @@ export default function CommonLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="max-w-[98vw] mx-auto min-h-screen flex flex-col space-b-5">
+    <div className="w-full min-h-screen flex flex-col">
       <Navbar />
 
       {/* Main Content */}
-      <main className="flex-1 px-2 ">
+      <main className="flex-1">
         {children}
       </main>
       <AIAssistantWidget />

@@ -3,7 +3,7 @@ import React from 'react';
 
 const FindUsPage = () => {
      return (
-          <div>
+          <div className='px-2 sm:px-4'>
                <Map />
           </div>
      );

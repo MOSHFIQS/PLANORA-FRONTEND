@@ -44,7 +44,7 @@ export default function EventsSlider({ events }: Props) {
   const visibleEvents = events.slice(0, 6);
 
   return (
-    <div>
+    <div className="px-3">
       <SectionHeader
         align="center"
         title="Explore Events"

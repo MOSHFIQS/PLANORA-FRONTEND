@@ -292,11 +292,11 @@ const UpdateEventForm = ({ event, categories }: Props) => {
                                              <FieldLabel></FieldLabel>
                                              <form.Subscribe selector={(state) => [state.values.title, state.values.type, state.values.venue]}>
                                                   {([title, type, venue]) => (
-                                                       <AIMagicWriter 
-                                                            title={title as string} 
-                                                            type={type as string} 
+                                                       <AIMagicWriter
+                                                            title={title as string}
+                                                            type={type as string}
                                                             venue={venue as string}
-                                                            onGenerate={field.handleChange} 
+                                                            onGenerate={field.handleChange}
                                                        />
                                                   )}
                                              </form.Subscribe>
@@ -324,7 +324,7 @@ const UpdateEventForm = ({ event, categories }: Props) => {
                                                        }
                                                   >
                                                        <PopoverTrigger asChild>
-                                                            <Button variant="outline" className="w-32 justify-center font-normal   bg-[#F3F2EC]">
+                                                            <Button variant="outline" className="w-32 justify-center font-normal   bg-[#FFF5F2]">
                                                                  {selectedDate
                                                                       ? format(
                                                                            selectedDate,

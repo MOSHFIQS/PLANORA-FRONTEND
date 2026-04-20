@@ -47,7 +47,7 @@ export function ChangePasswordForm({ isModal = false }: { isModal?: boolean }) {
   })
 
   const formContent = (
-    <div className="flex flex-col items-center text-center">
+  <div className="flex flex-col items-center text-center p-6 ">
       <div 
         className="w-16 h-16 rounded-full flex items-center justify-center mb-6"
         style={{ background: "rgba(114, 92, 173, 0.1)", color: "#725CAD" }}

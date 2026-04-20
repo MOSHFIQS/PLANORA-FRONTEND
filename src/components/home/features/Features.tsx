@@ -63,7 +63,7 @@ const features = [
 
 const Features = () => {
   return (
-    <section className="py-20 relative overflow-hidden">
+    <section className="relative overflow-hidden py-10">
 
       {/* subtle grid bg */}
       <div

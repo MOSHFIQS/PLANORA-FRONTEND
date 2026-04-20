@@ -286,7 +286,7 @@ const Navbar = () => {
      }
 
      return (
-          <section className="py-6 sticky top-0 z-50 bg-[#F3F2EC]">
+          <section className="py-6 sticky top-0 z-50 bg-[#FFF5F2]">
                <div>
                     {/* ================= DESKTOP ================= */}
                     {/* ================= DESKTOP ================= */}

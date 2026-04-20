@@ -43,7 +43,7 @@ export function ForgetPasswordForm() {
       <div
         className="relative w-full max-w-[500px] overflow-hidden p-10"
         style={{
-          background: "#f8f6f0",
+          background: "#ffffff",
           border: "1px solid rgba(0,0,0,0.1)",
           borderRadius: "4px",
         }}

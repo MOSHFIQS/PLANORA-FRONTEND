@@ -78,7 +78,7 @@ export default function CarouselPlugin({ banners }: { banners: Banner[] }) {
                     }
                `}</style>
 
-               <div className="relative w-full overflow-hidden rounded">
+               <div className="relative w-full overflow-hidden rounded ">
                     <Carousel
                          plugins={[plugin.current]}
                          className="w-full"
