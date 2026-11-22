@@ -23,12 +23,29 @@ const formSchema = z.object({
 })
 
 export function LoginForm() {
-  const { setAuthData } = useAuth()
+  const { setAuthData, user } = useAuth()
   const router = useRouter()
   const searchParams = useSearchParams()
   const redirectUrl = searchParams.get("redirect") || "/"
   const [showPassword, setShowPassword] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
+
+  // Redirect if already authenticated
+  useEffect(() => {
+    if (user && !searchParams.get("google_login")) {
+      const dashboardMap: Record<string, string> = {
+        ADMIN: "/admin-dashboard",
+        ORGANIZER: "/organizer-dashboard",
+        SUPERADMIN: "/super-admin-dashboard",
+        USER: "/dashboard",
+      }
+      const dest =
+        redirectUrl && redirectUrl !== "/" && redirectUrl !== "/login"
+          ? redirectUrl
+          : dashboardMap[user.role] || "/dashboard"
+      window.location.href = dest
+    }
+  }, [user, searchParams, redirectUrl])
 
   // Handle Specific Success States or Auth Requirements
   useEffect(() => {
@@ -61,17 +78,18 @@ export function LoginForm() {
         toast.dismiss()
         toast.success("Signed in with Google successfully!")
 
-        // Clean up the URL query params
-        const params = new URLSearchParams(searchParams.toString())
-        params.delete("google_login")
-        params.delete("accessToken")
-        params.delete("refreshToken")
-        params.delete("sessionToken")
-        params.delete("redirect")
-        const newUrl = `${window.location.pathname}${params.toString() ? `?${params.toString()}` : ""}`
-        window.history.replaceState({}, "", newUrl)
+        const dashboardMap: Record<string, string> = {
+          ADMIN: "/admin-dashboard",
+          ORGANIZER: "/organizer-dashboard",
+          SUPERADMIN: "/super-admin-dashboard",
+          USER: "/dashboard",
+        }
+        const destination =
+          targetRedirect && targetRedirect !== "/" && targetRedirect !== "/login"
+            ? targetRedirect
+            : dashboardMap[userData.role] || "/dashboard"
 
-        router.replace(targetRedirect)
+        window.location.href = destination
         return
       } catch (err) {
         console.error("Google sign-in callback error:", err)
@@ -148,8 +166,19 @@ export function LoginForm() {
           )
         }
 
-        toast.success(result.message, { id: toastId }) // use success explicitly
-        router.push(redirectUrl)
+        toast.success(result.message, { id: toastId })
+        const dashboardMap: Record<string, string> = {
+          ADMIN: "/admin-dashboard",
+          ORGANIZER: "/organizer-dashboard",
+          SUPERADMIN: "/super-admin-dashboard",
+          USER: "/dashboard",
+        }
+        const destination =
+          redirectUrl && redirectUrl !== "/" && redirectUrl !== "/login"
+            ? redirectUrl
+            : dashboardMap[userData?.role || "USER"] || "/dashboard"
+
+        window.location.href = destination
 
       } catch {
         toast.error("Something went wrong", { id: toastId })
