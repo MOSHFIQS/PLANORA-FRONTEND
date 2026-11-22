@@ -1,6 +1,6 @@
 "use client";
 
-import { Menu, LayoutDashboard, Ticket, Settings, LogOut, User, Store } from "lucide-react";
+import { Menu, LayoutDashboard, Ticket, Settings, LogOut, User, Store, ChevronDown } from "lucide-react";
 import NotificationBell from "@/components/home/notification/NotificationBell";
 import { Button } from "@/components/ui/button";
 import {
@@ -342,8 +342,8 @@ const Navbar = () => {
 
                                         <DropdownMenu>
                                              <DropdownMenuTrigger asChild>
-                                                  <button className="relative flex items-center gap-2 rounded-full pl-2 pr-3 py-1 border border-gray-200 bg-white hover:bg-gray-50 shadow-sm transition-all hover:shadow-md group focus:outline-none">
-                                                       <div className="w-8 h-8 rounded-full overflow-hidden border-2 border-[#FE7743]/30 group-hover:border-[#FE7743]/60 transition-colors">
+                                                  <button className="relative flex items-center gap-2.5 rounded-full pl-1.5 pr-3 py-1.5 border border-slate-200/90 bg-white hover:bg-slate-50 transition-all shadow-2xs hover:shadow-xs group focus:outline-none">
+                                                       <div className="w-8 h-8 rounded-full overflow-hidden ring-1 ring-slate-200 shrink-0">
                                                             <img
                                                                  src={user.image || "https://i.ibb.co.com/LhN7fmfM/5578a3db8b5f1101c971bdf120e63784.jpg"}
                                                                  alt="User avatar"
@@ -351,88 +351,78 @@ const Navbar = () => {
                                                                  onError={(e) => { e.currentTarget.src = "https://i.ibb.co.com/LhN7fmfM/5578a3db8b5f1101c971bdf120e63784.jpg"; }}
                                                             />
                                                        </div>
-                                                       <span className="text-sm font-medium text-gray-700 max-w-[100px] truncate">
-                                                            {user.name?.split(" ")[0] || "My Account"}
+                                                       <span className="text-sm font-semibold text-slate-800 max-w-[110px] truncate">
+                                                            {user.name?.split(" ")[0] || "Account"}
                                                        </span>
-                                                       <svg className="w-3.5 h-3.5 text-gray-400 group-hover:text-[#FE7743] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                                                            <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-                                                       </svg>
+                                                       <ChevronDown className="w-3.5 h-3.5 text-slate-400 group-hover:text-slate-700 transition-transform duration-200 group-data-[state=open]:rotate-180" />
                                                   </button>
                                              </DropdownMenuTrigger>
 
-                                             <DropdownMenuContent align="end" sideOffset={8} className="w-64 p-0 overflow-hidden rounded-2xl shadow-xl border-2 border-gray-200">
-                                                  <DropdownMenuLabel className="p-0">
-                                                       <div className="flex items-center gap-3 px-4 py-4 bg-gradient-to-br from-[#FE7743]/10 to-[#FE7743]/5 border-b border-gray-100">
-                                                            <div className="w-11 h-11 rounded-full overflow-hidden border-2 border-[#FE7743]/40 shrink-0">
-                                                                 <img
-                                                                      src={user.image || "https://i.ibb.co.com/LhN7fmfM/5578a3db8b5f1101c971bdf120e63784.jpg"}
-                                                                      alt="avatar"
-                                                                      className="w-full h-full object-cover"
-                                                                      onError={(e) => { e.currentTarget.src = "https://i.ibb.co.com/LhN7fmfM/5578a3db8b5f1101c971bdf120e63784.jpg"; }}
-                                                                 />
-                                                            </div>
-                                                            <div className="flex-1 min-w-0">
-                                                                 <p className="text-sm font-semibold text-gray-900 truncate">{user.name || "User"}</p>
-                                                                 <p className="text-xs text-gray-500 truncate">{user.email || ""}</p>
-                                                                 <span className="inline-flex items-center mt-0.5 px-2 py-0.5 rounded-full text-[10px] font-medium bg-[#FE7743]/15 text-[#FE7743]">
-                                                                      {user.role || "Member"}
-                                                                 </span>
-                                                            </div>
+                                             <DropdownMenuContent align="end" sideOffset={10} className="w-64 p-2 rounded-2xl shadow-2xl border border-slate-200/90 bg-white/95 backdrop-blur-xl animate-in fade-in-0 zoom-in-95">
+                                                  {/* Header */}
+                                                  <div className="flex items-center gap-3 p-2.5 rounded-xl bg-slate-50 border border-slate-100 mb-1">
+                                                       <div className="w-10 h-10 rounded-full overflow-hidden ring-2 ring-white shrink-0 shadow-xs">
+                                                            <img
+                                                                 src={user.image || "https://i.ibb.co.com/LhN7fmfM/5578a3db8b5f1101c971bdf120e63784.jpg"}
+                                                                 alt="avatar"
+                                                                 className="w-full h-full object-cover"
+                                                                 onError={(e) => { e.currentTarget.src = "https://i.ibb.co.com/LhN7fmfM/5578a3db8b5f1101c971bdf120e63784.jpg"; }}
+                                                            />
                                                        </div>
-                                                  </DropdownMenuLabel>
-
-                                                  <div className="p-1.5">
-                                                       <DropdownMenuItem className="flex items-center gap-3 px-3 py-2.5 rounded-xl cursor-pointer hover:bg-gray-50 group" onClick={() => router.push(`${basePath}/my/profile`)}>
-                                                            <div className="w-8 h-8 rounded-lg bg-purple-50 flex items-center justify-center group-hover:bg-purple-100 transition-colors">
-                                                                 <User className="w-4 h-4 text-purple-500" />
-                                                            </div>
-                                                            <div>
-                                                                 <p className="text-sm font-medium text-gray-800">My Profile</p>
-                                                                 <p className="text-xs text-gray-400">View & edit profile</p>
-                                                            </div>
-                                                       </DropdownMenuItem>
-
-                                                       <DropdownMenuItem className="flex items-center gap-3 px-3 py-2.5 rounded-xl cursor-pointer hover:bg-gray-50 group" onClick={() => router.push(`${basePath}`)}>
-                                                            <div className="w-8 h-8 rounded-lg bg-[#FE7743]/10 flex items-center justify-center group-hover:bg-[#FE7743]/20 transition-colors">
-                                                                 <LayoutDashboard className="w-4 h-4 text-[#FE7743]" />
-                                                            </div>
-                                                            <div>
-                                                                 <p className="text-sm font-medium text-gray-800">Dashboard</p>
-                                                                 <p className="text-xs text-gray-400">Manage your account</p>
-                                                            </div>
-                                                       </DropdownMenuItem>
-
-                                                       <DropdownMenuItem className="flex items-center gap-3 px-3 py-2.5 rounded-xl cursor-pointer hover:bg-gray-50 group" onClick={() => router.push(`${basePath}/my/tickets`)}>
-                                                            <div className="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center group-hover:bg-blue-100 transition-colors">
-                                                                 <Ticket className="w-4 h-4 text-blue-500" />
-                                                            </div>
-                                                            <div>
-                                                                 <p className="text-sm font-medium text-gray-800">My Tickets</p>
-                                                                 <p className="text-xs text-gray-400">View your tickets</p>
-                                                            </div>
-                                                       </DropdownMenuItem>
-
-                                                       <DropdownMenuItem className="flex items-center gap-3 px-3 py-2.5 rounded-xl cursor-pointer hover:bg-gray-50 group" onClick={() => router.push(`${basePath}/my/participated-events`)}>
-                                                            <div className="w-8 h-8 rounded-lg bg-green-50 flex items-center justify-center group-hover:bg-green-100 transition-colors">
-                                                                 <Store className="w-4 h-4 text-green-500" />
-                                                            </div>
-                                                            <div>
-                                                                 <p className="text-sm font-medium text-gray-800">My Participated Events</p>
-                                                                 <p className="text-xs text-gray-400">View your participated events</p>
-                                                            </div>
-                                                       </DropdownMenuItem>
-
-
+                                                       <div className="flex-1 min-w-0">
+                                                            <p className="text-sm font-bold text-slate-900 truncate leading-tight">{user.name || "User"}</p>
+                                                            <p className="text-[11px] text-slate-500 truncate font-medium mt-0.5">{user.email || ""}</p>
+                                                            <span className="inline-flex items-center mt-1 px-2 py-0.5 rounded-full text-[9px] font-bold tracking-wider uppercase bg-slate-900 text-white shadow-2xs">
+                                                                 {user.role || "MEMBER"}
+                                                            </span>
+                                                       </div>
                                                   </div>
 
-                                                  <DropdownMenuSeparator className="my-0" />
+                                                  {/* Navigation Items */}
+                                                  <div className="space-y-0.5 py-1">
+                                                       <DropdownMenuItem
+                                                            className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-slate-700 hover:text-slate-950 hover:bg-slate-100/90 cursor-pointer transition-colors group focus:bg-slate-100"
+                                                            onClick={() => router.push(`${basePath}/my/profile`)}
+                                                       >
+                                                            <User className="w-4 h-4 text-slate-400 group-hover:text-slate-800 transition-colors" />
+                                                            <span>My Profile</span>
+                                                       </DropdownMenuItem>
 
-                                                  <div className="p-1.5">
-                                                       <DropdownMenuItem className="flex items-center gap-3 px-3 py-2.5 rounded-xl cursor-pointer hover:bg-red-50 group" onClick={handleLogout}>
-                                                            <div className="w-8 h-8 rounded-lg bg-red-50 flex items-center justify-center group-hover:bg-red-100 transition-colors">
-                                                                 <LogOut className="w-4 h-4 text-red-500" />
-                                                            </div>
-                                                            <p className="text-sm font-medium text-red-600">Logout</p>
+                                                       <DropdownMenuItem
+                                                            className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-slate-700 hover:text-slate-950 hover:bg-slate-100/90 cursor-pointer transition-colors group focus:bg-slate-100"
+                                                            onClick={() => router.push(`${basePath}`)}
+                                                       >
+                                                            <LayoutDashboard className="w-4 h-4 text-slate-400 group-hover:text-slate-800 transition-colors" />
+                                                            <span>Dashboard</span>
+                                                       </DropdownMenuItem>
+
+                                                       <DropdownMenuItem
+                                                            className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-slate-700 hover:text-slate-950 hover:bg-slate-100/90 cursor-pointer transition-colors group focus:bg-slate-100"
+                                                            onClick={() => router.push(`${basePath}/my/tickets`)}
+                                                       >
+                                                            <Ticket className="w-4 h-4 text-slate-400 group-hover:text-slate-800 transition-colors" />
+                                                            <span>My Tickets</span>
+                                                       </DropdownMenuItem>
+
+                                                       <DropdownMenuItem
+                                                            className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-slate-700 hover:text-slate-950 hover:bg-slate-100/90 cursor-pointer transition-colors group focus:bg-slate-100"
+                                                            onClick={() => router.push(`${basePath}/my/participated-events`)}
+                                                       >
+                                                            <Store className="w-4 h-4 text-slate-400 group-hover:text-slate-800 transition-colors" />
+                                                            <span>Participated Events</span>
+                                                       </DropdownMenuItem>
+                                                  </div>
+
+                                                  <DropdownMenuSeparator className="my-1 border-slate-100" />
+
+                                                  {/* Logout */}
+                                                  <div className="pt-0.5">
+                                                       <DropdownMenuItem
+                                                            className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-rose-600 hover:text-rose-700 hover:bg-rose-50 cursor-pointer transition-colors group focus:bg-rose-50"
+                                                            onClick={handleLogout}
+                                                       >
+                                                            <LogOut className="w-4 h-4 text-rose-500 group-hover:text-rose-600 transition-colors" />
+                                                            <span>Log out</span>
                                                        </DropdownMenuItem>
                                                   </div>
                                              </DropdownMenuContent>
