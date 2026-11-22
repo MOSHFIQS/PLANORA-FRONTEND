@@ -212,6 +212,17 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
      const logout = async () => {
           try {
+               // Hit backend logout directly to clear any backend-domain cookies on the browser
+               try {
+                    await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/logout`, {
+                         method: "POST",
+                         credentials: "include",
+                    });
+               } catch (e) {
+                    console.error("Direct backend logout error:", e);
+               }
+
+               // Clear Next.js server-side cookies via server action
                await logoutAction();
           } catch (error) {
                console.error("Logout error:", error);
@@ -221,10 +232,21 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
                setRefreshToken(null);
                setToken(null);
 
-               Cookies.remove("accessToken");
-               Cookies.remove("refreshToken");
-               Cookies.remove("better-auth.session_token");
-               Cookies.remove("user");
+               const cookieNames = [
+                    "accessToken",
+                    "refreshToken",
+                    "better-auth.session_token",
+                    "better-auth.session_data",
+                    "better-auth.csrf_token",
+                    "user",
+               ];
+
+               cookieNames.forEach((name) => {
+                    Cookies.remove(name, { path: "/" });
+                    try {
+                         document.cookie = `${name}=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; max-age=0`;
+                    } catch {}
+               });
           }
      };
 

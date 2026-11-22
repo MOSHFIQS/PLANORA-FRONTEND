@@ -1,5 +1,6 @@
 "use server";
 
+import { cookies } from "next/headers";
 import { authService } from "@/service/server/auth.server.service";
 
 export async function logInAction(data: { email: string; password: string }) {
@@ -71,14 +72,49 @@ export async function getGoogleLoginUrlAction(redirect: string, role: string) {
 
 export async function logoutAction() {
      try {
-          const res = await authService.logout();
-          if (!res?.ok) {
-               return { ok: false, message: res?.message || "Logout failed" };
-          }
-          return { ok: true, message: "Logged out successful" };
+          await authService.logout();
      } catch (error) {
-          return { ok: false, message: "Something went wrong" };
+          console.error("Backend logout error:", error);
      }
+
+     try {
+          const cookieStore = await cookies();
+          const targetCookies = [
+               "accessToken",
+               "refreshToken",
+               "better-auth.session_token",
+               "better-auth.session_data",
+               "better-auth.csrf_token",
+               "better-auth.state",
+               "better-auth.pkce_code_verifier",
+               "user",
+          ];
+
+          for (const name of targetCookies) {
+               cookieStore.delete(name);
+               cookieStore.set(name, "", {
+                    path: "/",
+                    expires: new Date(0),
+                    maxAge: 0,
+               });
+          }
+
+          // Also scan all cookies and remove any better-auth related cookies
+          for (const cookie of cookieStore.getAll()) {
+               if (cookie.name.startsWith("better-auth")) {
+                    cookieStore.delete(cookie.name);
+                    cookieStore.set(cookie.name, "", {
+                         path: "/",
+                         expires: new Date(0),
+                         maxAge: 0,
+                    });
+               }
+          }
+     } catch (err) {
+          console.error("Failed to delete cookies in server action:", err);
+     }
+
+     return { ok: true, message: "Logged out successful" };
 }
 
 export async function verifyEmailAction(data: { email: string; otp: string }) {

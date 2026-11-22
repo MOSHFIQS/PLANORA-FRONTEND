@@ -11,10 +11,16 @@ export const sessionService = {
 
           try {
                const secret = process.env.REFRESH_TOKEN_SECRET
+               let payload: TokenPayload | null = null
                if (secret) {
-                    return jwt.verify(token, secret) as TokenPayload
+                    payload = jwt.verify(token, secret) as TokenPayload
+               } else {
+                    payload = jwt.decode(token) as TokenPayload
                }
-               return jwt.decode(token) as TokenPayload
+               if (payload && payload.exp && payload.exp * 1000 < Date.now()) {
+                    return null
+               }
+               return payload
           } catch {
                return null
           }

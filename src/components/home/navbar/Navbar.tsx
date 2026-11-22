@@ -231,9 +231,10 @@ const Navbar = () => {
           return () => document.removeEventListener("mousedown", handler);
      }, []);
 
-     const handleLogout = () => {
-          logout();
+     const handleLogout = async () => {
+          await logout();
           router.push("/");
+          router.refresh();
      };
 
      const menu = [
