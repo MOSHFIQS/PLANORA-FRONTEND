@@ -2,32 +2,19 @@
 
 import { useState } from "react";
 import {
-  X, Search, Compass, ArrowRight,
-  LayoutDashboard, Ticket, Loader2, Star, MapPin, Calendar,
-  Wifi, Flame,
+  X, Search, Sparkles, Flame, Calendar, Ticket,
+  PenSquare, Mic, ArrowRight, Loader2, MapPin,
+  Grip, Paperclip, ChevronDown, Zap, Compass, RotateCcw
 } from "lucide-react";
 import { useRouter, usePathname } from "next/navigation";
 import { useAuth } from "@/context/AuthProvider";
 import { useAIFeatures } from "@/hooks/useAiFeatures";
 
-type Tab = "search" | "foryou" | "trending" | "nav";
-
-const TABS: { id: Tab; label: string; icon: React.ReactNode }[] = [
-  { id: "search", label: "Search", icon: <Search size={12} /> },
-  { id: "foryou", label: "For You", icon: <Star size={12} /> },
-  { id: "trending", label: "Trending", icon: <Flame size={12} /> },
-  { id: "nav", label: "Navigate", icon: <Compass size={12} /> },
-];
-
-function formatDate(dateStr: string) {
-  return new Date(dateStr).toLocaleDateString("en-US", {
-    month: "short", day: "numeric", year: "numeric",
-  });
-}
+type ViewMode = "welcome" | "search" | "trending" | "recommendations" | "schedule";
 
 export default function AIAssistantWidget() {
   const [isOpen, setIsOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState<Tab>("search");
+  const [viewMode, setViewMode] = useState<ViewMode>("welcome");
 
   const {
     searchQuery, setSearchQuery,
@@ -51,361 +38,384 @@ export default function AIAssistantWidget() {
     }
   };
 
-  const smartShortcuts = [
-    ...(user?.id
-      ? [
-        { title: "My Dashboard", url: "/dashboard", icon: <LayoutDashboard size={14} /> },
-        { title: "My Tickets", url: "/dashboard/my/tickets", icon: <Ticket size={14} /> },
-      ]
-      : [{ title: "Sign in to continue", url: "/login", icon: <ArrowRight size={14} /> }]),
-    ...(!pathname.includes("/events")
-      ? [{ title: "Browse Events", url: "/events", icon: <Search size={14} /> }]
-      : []),
-  ];
+  const userName = user?.name ? user.name.split(" ")[0] : "Amélie";
 
-  // ── Shared card style (light) ──
-  const card =
-    "rounded-md border border-[#e8e3f0] bg-white hover:bg-[#f7f4ff] transition-all duration-150 shadow-sm hover:shadow-md";
+  const handlePromptClick = (mode: ViewMode) => {
+    setViewMode(mode);
+  };
+
+  const handleSearchSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      setViewMode("search");
+    }
+  };
 
   return (
-    <div className="fixed bottom-6 right-6 z-[9999] flex flex-col items-end gap-3 pointer-events-none">
+    <>
+      {/* ── BACKDROP (when sidebar is open) ── */}
+      {isOpen && (
+        <div
+          onClick={() => setIsOpen(false)}
+          className="fixed inset-0 bg-slate-900/15 backdrop-blur-[2px] z-[9998] transition-opacity duration-300"
+          aria-hidden="true"
+        />
+      )}
 
-      {/* ── Panel ── */}
+      {/* ── SIDEBAR PANEL (Matching Screenshot Pattern) ── */}
       <div
-        className={[
-          "w-[340px] flex flex-col overflow-hidden rounded-md pointer-events-auto",
-          "transition-all duration-200 ease-out origin-bottom-right shadow border-2",
+        className={`fixed top-3 right-3 bottom-3 w-[360px] sm:w-[410px] max-w-[calc(100vw-1.5rem)] bg-white rounded-2xl shadow-2xl border border-slate-200/90 z-[9999] flex flex-col justify-between overflow-hidden transition-all duration-300 ease-out origin-right ${
           isOpen
-            ? "opacity-100 scale-100 translate-y-0"
-            : "opacity-0 scale-95 translate-y-3 pointer-events-none",
-        ].join(" ")}
-        style={{
-          height: 520,
-          background: "#ffffff",          // warm off-white matching login page BG
-          // border: "2px solid black",
-          // boxShadow: "0 20px 60px rgba(109,40,217,0.10), 0 4px 16px rgba(0,0,0,0.07)",
-        }}
+            ? "translate-x-0 opacity-100 pointer-events-auto"
+            : "translate-x-[110%] opacity-0 pointer-events-none"
+        }`}
       >
-        {/* Subtle top tint strip */}
-        {/* <div
-          className="absolute top-0 left-0 right-0 h-1 rounded-t-2xl"
-          style={{ background: "linear-gradient(90deg, #7c3aed, #a855f7)" }}
-        /> */}
-
-        {/* ── Header ── */}
-        <div
-          className="relative flex items-center justify-between px-4 pt-4 pb-3"
-          style={{ borderBottom: "1px solid #e8e3f0" }}
-        >
-          <div className="flex items-center gap-2.5">
-            <div
-              className="w-8 h-8 rounded-lg flex items-center justify-center overflow-hidden p-1"
-              style={{
-                background: "linear-gradient(135deg,#e0e7ff,#ddd6fe)",
-                border: "1px solid #c7d2fe",
-              }}
-            >
-              <img src="/logo/logo.png" alt="Planora Logo" className="w-full h-full object-contain" />
-            </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <span className="text-sm font-bold text-gray-900">Planora AI</span>
-                <span
-                  className="text-[9px] font-bold tracking-widest px-1.5 py-0.5 rounded-md"
-                  style={{ background: "#e0e7ff", color: "#7c3aed", border: "1px solid #c7d2fe" }}
-                >
-                  BETA
-                </span>
-              </div>
-              <p className="text-[10px] mt-0.5 text-gray-400 leading-none">
-                Your intelligent event guide
-              </p>
-            </div>
+        {/* TOP HEADER CONTROLS */}
+        <div className="flex items-center justify-between px-5 pt-4 pb-2">
+          <div className="flex items-center gap-1.5 text-slate-400">
+            {viewMode !== "welcome" && (
+              <button
+                onClick={() => {
+                  setViewMode("welcome");
+                  setSearchQuery("");
+                }}
+                className="inline-flex items-center gap-1 text-[11px] font-semibold text-indigo-600 hover:text-indigo-800 transition"
+              >
+                <RotateCcw size={11} />
+                <span>Home</span>
+              </button>
+            )}
           </div>
-          <button
-            onClick={() => setIsOpen(false)}
-            className="w-6 h-6 flex items-center justify-center rounded-lg text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition-colors"
-          >
-            <X size={14} />
-          </button>
-        </div>
-
-        {/* ── Tabs ── */}
-        <div className="flex px-3 pt-2.5 gap-1">
-          {TABS.map((tab) => (
+          <div className="flex items-center gap-2">
             <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
-              className="flex-1 flex items-center justify-center gap-1 py-1.5 rounded-md text-[10.5px] font-semibold transition-all duration-150"
-              style={
-                activeTab === tab.id
-                  ? {
-                    background: "#4F46E5",
-                    color: "#fff"
-                  }
-                  : { color: "#9ca3af", background: "transparent" }
-              }
+              type="button"
+              className="p-1 rounded-md text-slate-400 hover:text-slate-600 hover:bg-slate-50 transition"
+              title="Options"
             >
-              {tab.icon}
-              {tab.label}
+              <Grip size={17} />
             </button>
-          ))}
+            <button
+              type="button"
+              onClick={() => setIsOpen(false)}
+              className="p-1 rounded-md text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition"
+              title="Close Assistant"
+            >
+              <X size={17} />
+            </button>
+          </div>
         </div>
 
-        {/* ── Content ── */}
-        <div
-          className="flex-1 overflow-y-auto mt-2 px-3 pb-3"
-          style={{ scrollbarWidth: "none" }}
-        >
+        {/* SCROLLABLE MAIN BODY */}
+        <div className="flex-1 overflow-y-auto px-6 py-2 [scrollbar-width:none]">
           {loading ? (
-            <div className="h-full flex flex-col items-center justify-center gap-3 text-gray-400">
-              <Loader2 size={20} className="animate-spin text-indigo-600" />
-              <span className="text-xs">Loading events…</span>
+            <div className="h-full min-h-[300px] flex flex-col items-center justify-center gap-3 text-slate-400">
+              <Loader2 size={24} className="animate-spin text-indigo-600" />
+              <span className="text-xs">Preparing your event workspace…</span>
             </div>
-          ) : (
-            <>
+          ) : viewMode === "welcome" ? (
+            /* ── PATTERN FROM SCREENSHOT: Centered Emblem, Welcome Salutation, Prompts ── */
+            <div className="flex flex-col items-center text-center pt-3 pb-4">
+              {/* Glossy Circular Orb Emblem */}
+              <div className="relative w-16 h-16 rounded-full bg-slate-950 flex items-center justify-center shadow-lg border border-slate-800 text-white mb-5 group">
+                <div
+                  className="w-8 h-8 rounded-full border-2 border-slate-500 border-t-white animate-spin"
+                  style={{ animationDuration: "7s" }}
+                />
+                <div className="absolute w-2.5 h-2.5 rounded-full bg-indigo-400 shadow-xs" />
+              </div>
 
-              {/* ── SEARCH ── */}
-              {activeTab === "search" && (
-                <div className="flex flex-col gap-3">
-                  <div className="relative mt-1">
-                    <Search
-                      size={13}
-                      className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400"
-                    />
-                    <input
-                      type="text"
-                      value={searchQuery}
-                      onChange={(e) => setSearchQuery(e.target.value)}
-                      placeholder="Search events, venues, types…"
-                      className="w-full pl-8 pr-3 py-2 text-sm text-gray-800 placeholder:text-gray-400 focus:outline-none rounded-md bg-white border border-[#c7d2fe] focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100 transition-all"
-                    />
-                  </div>
+              {/* Salutation & Welcome */}
+              <p className="text-sm font-medium text-slate-500 mb-1">
+                Hi {userName},
+              </p>
+              <h2 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight leading-snug">
+                Welcome back! How can I help?
+              </h2>
+              <p className="text-xs text-slate-500 mt-2 max-w-[290px] leading-relaxed">
+                I&apos;m here to help you tackle your events. Choose from the prompts below or just tell me what you need!
+              </p>
 
-                  {searchQuery.trim() ? (
-                    <>
-                      <p className="text-[9.5px] font-bold uppercase tracking-widest text-gray-400">Results</p>
-                      {searchLoading ? (
-                        <div className="flex items-center justify-center py-8 gap-2 text-gray-400">
-                          <Loader2 size={15} className="animate-spin text-indigo-500" />
-                          <span className="text-xs">Searching…</span>
-                        </div>
-                      ) : searchResults.length > 0 ? (
-                        <div className="flex flex-col gap-1.5">
-                          {searchResults.map((event) => (
-                            <button
-                              key={event.id}
-                              onClick={() => navigate(`/events/${event.id}`)}
-                              className={`${card} flex items-center gap-3 px-3 py-2.5 w-full text-left group`}
-                            >
-                              <div className="w-9 h-9 rounded-lg overflow-hidden flex-shrink-0 bg-indigo-50 border border-indigo-100">
-                                {event.images?.[0] && (
-                                  <img src={event.images[0]} alt={event.title} className="w-full h-full object-cover" />
-                                )}
-                              </div>
-                              <div className="flex-1 min-w-0">
-                                <p className="text-xs font-semibold text-gray-900 truncate">{event.title}</p>
-                                <p className="text-[10px] flex items-center gap-1 text-gray-400 truncate mt-0.5">
-                                  <MapPin size={9} />{event.venue ?? event.type}
-                                </p>
-                              </div>
-                              <span className={`text-[10px] font-bold flex-shrink-0 ${event.fee === 0 ? "text-emerald-600" : "text-indigo-600"}`}>
-                                {event.fee === 0 ? "Free" : `৳${event.fee}`}
-                              </span>
-                            </button>
-                          ))}
-                        </div>
-                      ) : (
-                        <p className="text-xs text-center py-8 text-gray-400">No events found.</p>
-                      )}
-                    </>
-                  ) : (
-                    <div className="flex flex-col items-center justify-center py-10 gap-3 text-center">
-                      <div
-                        className="w-10 h-10 rounded-md flex items-center justify-center"
-                        style={{ background: "#e0e7ff", border: "1px solid #c7d2fe" }}
-                      >
-                        <Search size={17} className="text-indigo-600" />
-                      </div>
-                      <p className="text-xs max-w-[180px] leading-relaxed text-gray-400">
-                        Find events by name, venue, or type.
-                      </p>
-                    </div>
-                  )}
+              {/* Quick Prompts Grid (Matching pills layout in screenshot) */}
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 w-full mt-6">
+                <button
+                  onClick={() => handlePromptClick("recommendations")}
+                  className="flex items-center gap-1.5 px-3 py-2 rounded-md border border-slate-200/90 bg-white hover:bg-slate-50 hover:border-indigo-300 text-[11px] font-medium text-slate-700 transition shadow-2xs group text-left"
+                >
+                  <Compass size={13} className="text-indigo-600 shrink-0" />
+                  <span className="truncate">Discover events</span>
+                </button>
+
+                <button
+                  onClick={() => handlePromptClick("trending")}
+                  className="flex items-center gap-1.5 px-3 py-2 rounded-md border border-slate-200/90 bg-white hover:bg-slate-50 hover:border-indigo-300 text-[11px] font-medium text-slate-700 transition shadow-2xs group text-left"
+                >
+                  <Flame size={13} className="text-indigo-600 shrink-0" />
+                  <span className="truncate">Analyze trends</span>
+                </button>
+
+                <button
+                  onClick={() => handlePromptClick("schedule")}
+                  className="flex items-center gap-1.5 px-3 py-2 rounded-md border border-slate-200/90 bg-white hover:bg-slate-50 hover:border-indigo-300 text-[11px] font-medium text-slate-700 transition shadow-2xs group text-left"
+                >
+                  <Calendar size={13} className="text-indigo-600 shrink-0" />
+                  <span className="truncate">Make a plan</span>
+                </button>
+
+                <button
+                  onClick={() => navigate(user?.id ? "/dashboard/my/tickets" : "/login")}
+                  className="flex items-center gap-1.5 px-3 py-2 rounded-md border border-slate-200/90 bg-white hover:bg-slate-50 hover:border-indigo-300 text-[11px] font-medium text-slate-700 transition shadow-2xs group text-left"
+                >
+                  <Ticket size={13} className="text-indigo-600 shrink-0" />
+                  <span className="truncate">Find tickets</span>
+                </button>
+
+                <button
+                  onClick={() => navigate(user?.role === "ORGANIZER" || user?.role === "ADMIN" ? "/organizer-dashboard/events/create" : "/events")}
+                  className="flex items-center gap-1.5 px-3 py-2 rounded-md border border-slate-200/90 bg-white hover:bg-slate-50 hover:border-indigo-300 text-[11px] font-medium text-slate-700 transition shadow-2xs group text-left"
+                >
+                  <PenSquare size={13} className="text-indigo-600 shrink-0" />
+                  <span className="truncate">Host an event</span>
+                </button>
+
+                <button
+                  onClick={() => navigate("/events")}
+                  className="flex items-center gap-1.5 px-3 py-2 rounded-md border border-slate-200/90 bg-white hover:bg-slate-50 hover:border-indigo-300 text-[11px] font-medium text-slate-700 transition shadow-2xs group text-left"
+                >
+                  <Sparkles size={13} className="text-indigo-600 shrink-0" />
+                  <span className="truncate">Explore all</span>
+                </button>
+              </div>
+            </div>
+          ) : viewMode === "search" ? (
+            /* ── SEARCH RESULTS ── */
+            <div className="py-2 space-y-3">
+              <div className="flex items-center justify-between pb-1">
+                <p className="text-xs font-bold text-slate-700">Search Results</p>
+                <span className="text-[10px] text-slate-400">{searchResults.length} events found</span>
+              </div>
+              {searchLoading ? (
+                <div className="flex items-center justify-center py-12 gap-2 text-slate-400">
+                  <Loader2 size={16} className="animate-spin text-indigo-600" />
+                  <span className="text-xs">Searching events…</span>
                 </div>
-              )}
-
-              {/* ── FOR YOU ── */}
-              {activeTab === "foryou" && (
-                <div className="flex flex-col gap-2 mt-1">
-                  <p className="text-[9.5px] font-bold uppercase tracking-widest text-gray-400 mb-1">
-                    Curated for you
-                  </p>
-                  {personalizedRecommendations.length > 0 ? (
-                    personalizedRecommendations.map((event) => (
-                      <button
-                        key={event.id}
-                        onClick={() => navigate(`/events/${event.id}`)}
-                        className={`${card} flex items-center gap-3 p-3 w-full text-left`}
-                      >
-                        <div className="w-11 h-11 rounded-md overflow-hidden flex-shrink-0 border border-indigo-100">
-                          {event.images?.[0]
-                            ? <img src={event.images[0]} alt={event.title} className="w-full h-full object-cover" />
-                            : <div className="w-full h-full" style={{ background: "linear-gradient(135deg,#4338ca,#4f46e5)" }} />
-                          }
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <div className="flex items-center gap-1.5 mb-1">
-                            <span
-                              className="text-[9px] font-bold px-1.5 py-0.5 rounded-md"
-                              style={{ background: "#dcfce7", color: "#16a34a", border: "1px solid #bbf7d0" }}
-                            >
-                              ✦ Recommended
-                            </span>
-                            {event.type === "ONLINE" && (
-                              <span
-                                className="text-[9px] font-bold px-1.5 py-0.5 rounded-md flex items-center gap-0.5"
-                                style={{ background: "#e0e7ff", color: "#7c3aed", border: "1px solid #c7d2fe" }}
-                              >
-                                <Wifi size={8} /> Online
-                              </span>
-                            )}
-                          </div>
-                          <p className="text-xs font-semibold text-gray-900 truncate">{event.title}</p>
-                          <p className="text-[10px] flex items-center gap-1 text-gray-400 mt-0.5">
-                            <Calendar size={9} />{formatDate(event.dateTime)}
-                          </p>
-                        </div>
-                      </button>
-                    ))
-                  ) : (
-                    <p className="text-xs text-center py-8 text-gray-400">No recommendations yet.</p>
-                  )}
-
-                  {!user?.id && (
-                    <div
-                      className="mt-1 rounded-md p-3 text-center"
-                      style={{ background: "#e0e7ff", border: "1px solid #c7d2fe" }}
-                    >
-                      <p className="text-[10px] mb-2 text-indigo-500">
-                        Sign in for personalized picks
-                      </p>
-                      <button
-                        onClick={() => navigate("/login")}
-                        className="text-[10px] font-bold px-3 py-1 rounded-md bg-indigo-600 text-white hover:bg-indigo-700 transition-colors"
-                      >
-                        Sign in →
-                      </button>
-                    </div>
-                  )}
-                </div>
-              )}
-
-              {/* ── TRENDING ── */}
-              {activeTab === "trending" && (
-                <div className="flex flex-col gap-2 mt-1">
-                  <p className="text-[9.5px] font-bold uppercase tracking-widest text-gray-400 mb-1">
-                    Upcoming &amp; popular
-                  </p>
-                  <div className="grid grid-cols-2 gap-2">
-                    {trendingItems.map((event, idx) => (
-                      <button
-                        key={event.id}
-                        onClick={() => navigate(`/events/${event.id}`)}
-                        className={`${card} flex flex-col p-2.5 text-left`}
-                      >
-                        <div className="flex items-center gap-1 mb-1.5">
-                          <Flame size={10} className="text-indigo-600" />
-                          <span className="text-[9px] font-bold text-indigo-600">
-                            {idx === 0 ? "Hot" : `#${idx + 1}`}
-                          </span>
-                          {event.isFeatured && <span className="text-[9px] text-amber-500">★</span>}
-                        </div>
-                        <div
-                          className="w-full h-14 rounded-lg overflow-hidden mb-2 border border-gray-100"
-                        >
-                          {event.images?.[0]
-                            ? <img src={event.images[0]} alt={event.title} className="w-full h-full object-cover" />
-                            : <div className="w-full h-full" style={{ background: "linear-gradient(135deg,#4338ca,#4f46e5)" }} />
-                          }
-                        </div>
-                        <p className="text-[10px] font-semibold text-gray-900 truncate">{event.title}</p>
-                        <p className={`text-[9px] mt-0.5 font-bold ${event.fee === 0 ? "text-emerald-600" : "text-indigo-600"}`}>
-                          {event.fee === 0 ? "Free" : `৳${event.fee}`}
-                        </p>
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* ── NAVIGATE ── */}
-              {activeTab === "nav" && (
-                <div className="flex flex-col gap-2 mt-1">
-                  <p className="text-[9.5px] font-bold uppercase tracking-widest text-gray-400 mb-1">
-                    Quick actions
-                  </p>
-                  {smartShortcuts.map((s, idx) => (
+              ) : searchResults.length > 0 ? (
+                <div className="space-y-2">
+                  {searchResults.map((event) => (
                     <button
-                      key={idx}
-                      onClick={() => navigate(s.url)}
-                      className={`${card} flex items-center justify-between px-3 py-2.5 w-full group`}
+                      key={event.id}
+                      onClick={() => navigate(`/events/${event.id}`)}
+                      className="w-full flex items-center gap-3 p-2.5 rounded-md border border-slate-200 bg-white hover:border-indigo-300 hover:shadow-2xs text-left transition group"
                     >
-                      <div className="flex items-center gap-3">
-                        <div
-                          className="w-7 h-7 rounded-lg flex items-center justify-center text-indigo-600"
-                          style={{ background: "#e0e7ff" }}
-                        >
-                          {s.icon}
-                        </div>
-                        <span className="text-xs font-medium text-gray-800">{s.title}</span>
+                      <div className="w-11 h-11 rounded-md overflow-hidden bg-slate-100 shrink-0 border border-slate-100">
+                        {event.images?.[0] ? (
+                          <img src={event.images[0]} alt={event.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform" />
+                        ) : (
+                          <div className="w-full h-full bg-slate-200" />
+                        )}
                       </div>
-                      <ArrowRight
-                        size={13}
-                        className="text-gray-300 group-hover:text-indigo-400 group-hover:translate-x-0.5 transition-all"
-                      />
+                      <div className="min-w-0 flex-1">
+                        <p className="text-xs font-bold text-slate-900 truncate group-hover:text-indigo-600 transition-colors">
+                          {event.title}
+                        </p>
+                        <p className="text-[10px] text-slate-400 truncate mt-0.5 flex items-center gap-1">
+                          <MapPin size={9} /> {event.venue || event.type}
+                        </p>
+                      </div>
+                      <span className="text-xs font-bold text-indigo-600 shrink-0">
+                        {event.fee === 0 ? "Free" : `৳${event.fee}`}
+                      </span>
                     </button>
                   ))}
-
-                  <div
-                    className="mt-1 px-3 py-2.5 rounded-md"
-                    style={{ background: "#f0ecff", border: "1px solid #e0d9f8" }}
-                  >
-                    <p className="text-[9px] font-bold uppercase tracking-widest text-gray-400 mb-1">
-                      Current page
-                    </p>
-                    <p className="text-[10px] font-mono text-gray-500 truncate">{pathname}</p>
-                  </div>
+                </div>
+              ) : (
+                <div className="text-center py-12 text-slate-400 text-xs">
+                  No matching events found for &quot;{searchQuery}&quot;.
                 </div>
               )}
-            </>
+            </div>
+          ) : viewMode === "trending" ? (
+            /* ── TRENDING VIEW ── */
+            <div className="py-2 space-y-3">
+              <div className="flex items-center justify-between pb-1">
+                <p className="text-xs font-bold text-slate-700">Trending Summits</p>
+                <span className="text-[10px] text-slate-400">Popular right now</span>
+              </div>
+              <div className="space-y-2">
+                {trendingItems.map((event, idx) => (
+                  <button
+                    key={event.id}
+                    onClick={() => navigate(`/events/${event.id}`)}
+                    className="w-full flex items-center gap-3 p-2.5 rounded-md border border-slate-200 bg-white hover:border-indigo-300 hover:shadow-2xs text-left transition group"
+                  >
+                    <div className="w-11 h-11 rounded-md overflow-hidden bg-slate-100 shrink-0 border border-slate-100">
+                      {event.images?.[0] ? (
+                        <img src={event.images[0]} alt={event.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform" />
+                      ) : (
+                        <div className="w-full h-full bg-slate-200" />
+                      )}
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-center gap-1 mb-0.5">
+                        <span className="text-[9px] font-bold text-indigo-600">#{idx + 1}</span>
+                        {event.isFeatured && <span className="text-[9px] text-emerald-600 font-semibold">• Featured</span>}
+                      </div>
+                      <p className="text-xs font-bold text-slate-900 truncate group-hover:text-indigo-600 transition-colors">
+                        {event.title}
+                      </p>
+                    </div>
+                    <span className="text-xs font-bold text-indigo-600 shrink-0">
+                      {event.fee === 0 ? "Free" : `৳${event.fee}`}
+                    </span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          ) : viewMode === "recommendations" ? (
+            /* ── RECOMMENDATIONS ── */
+            <div className="py-2 space-y-3">
+              <div className="flex items-center justify-between pb-1">
+                <p className="text-xs font-bold text-slate-700">Curated For You</p>
+                <span className="text-[10px] text-slate-400">Personalized</span>
+              </div>
+              <div className="space-y-2">
+                {personalizedRecommendations.length > 0 ? (
+                  personalizedRecommendations.map((event) => (
+                    <button
+                      key={event.id}
+                      onClick={() => navigate(`/events/${event.id}`)}
+                      className="w-full flex items-center gap-3 p-2.5 rounded-md border border-slate-200 bg-white hover:border-indigo-300 hover:shadow-2xs text-left transition group"
+                    >
+                      <div className="w-11 h-11 rounded-md overflow-hidden bg-slate-100 shrink-0 border border-slate-100">
+                        {event.images?.[0] ? (
+                          <img src={event.images[0]} alt={event.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform" />
+                        ) : (
+                          <div className="w-full h-full bg-slate-200" />
+                        )}
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <p className="text-xs font-bold text-slate-900 truncate group-hover:text-indigo-600 transition-colors">
+                          {event.title}
+                        </p>
+                        <p className="text-[10px] text-slate-400 truncate mt-0.5">
+                          {new Date(event.dateTime).toLocaleDateString()}
+                        </p>
+                      </div>
+                      <span className="text-xs font-bold text-indigo-600 shrink-0">
+                        {event.fee === 0 ? "Free" : `৳${event.fee}`}
+                      </span>
+                    </button>
+                  ))
+                ) : (
+                  <p className="text-xs text-center py-8 text-slate-400">No suggestions found.</p>
+                )}
+              </div>
+            </div>
+          ) : (
+            /* ── SCHEDULE & SHORTCUTS ── */
+            <div className="py-2 space-y-3">
+              <p className="text-xs font-bold text-slate-700">Quick Navigation</p>
+              <div className="space-y-2">
+                <button
+                  onClick={() => navigate(user?.id ? "/dashboard" : "/login")}
+                  className="w-full flex items-center justify-between p-3 rounded-md border border-slate-200 bg-white hover:bg-slate-50 transition text-xs font-semibold text-slate-800"
+                >
+                  <span>My Dashboard</span>
+                  <ArrowRight size={13} className="text-slate-400" />
+                </button>
+                <button
+                  onClick={() => navigate(user?.id ? "/dashboard/my/tickets" : "/login")}
+                  className="w-full flex items-center justify-between p-3 rounded-md border border-slate-200 bg-white hover:bg-slate-50 transition text-xs font-semibold text-slate-800"
+                >
+                  <span>My Tickets</span>
+                  <ArrowRight size={13} className="text-slate-400" />
+                </button>
+                <button
+                  onClick={() => navigate("/events")}
+                  className="w-full flex items-center justify-between p-3 rounded-md border border-slate-200 bg-white hover:bg-slate-50 transition text-xs font-semibold text-slate-800"
+                >
+                  <span>All Events Directory</span>
+                  <ArrowRight size={13} className="text-slate-400" />
+                </button>
+              </div>
+            </div>
           )}
+        </div>
+
+        {/* ── BOTTOM INPUT SECTION (Matching Screenshot Exact Pattern) ── */}
+        <div className="p-4 border-t border-slate-100 bg-white space-y-2">
+          {/* Pill Input Box */}
+          <form
+            onSubmit={handleSearchSubmit}
+            className="flex items-center gap-2 px-3.5 py-2.5 rounded-full border border-slate-200 bg-white hover:border-indigo-300 focus-within:border-indigo-500 focus-within:ring-2 focus-within:ring-indigo-100 transition-all shadow-2xs"
+          >
+            <Search size={15} className="text-slate-400 shrink-0" />
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Ask me anything..."
+              className="flex-1 text-xs text-slate-800 placeholder:text-slate-400 outline-none bg-transparent"
+            />
+            <button
+              type="button"
+              className="text-slate-400 hover:text-slate-600 transition shrink-0"
+              title="Voice Prompt"
+            >
+              <Mic size={15} />
+            </button>
+          </form>
+
+          {/* Sub-Footer Meta Controls */}
+          <div className="flex items-center justify-between px-1 text-[11px] text-slate-400 pt-0.5">
+            <button
+              type="button"
+              className="inline-flex items-center gap-1 hover:text-slate-600 font-medium transition cursor-pointer"
+            >
+              <span>Planora AI v2.0</span>
+              <ChevronDown size={11} />
+            </button>
+
+            <div className="flex items-center gap-3 text-slate-500">
+              <button
+                type="button"
+                onClick={() => handlePromptClick("schedule")}
+                className="inline-flex items-center gap-1 hover:text-indigo-600 font-medium transition cursor-pointer"
+              >
+                <Zap size={11} />
+                <span>Shortcuts</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => navigate("/events")}
+                className="inline-flex items-center gap-1 hover:text-indigo-600 font-medium transition cursor-pointer"
+              >
+                <Paperclip size={11} />
+                <span>Events</span>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* ── FAB ── */}
+      {/* ── LAUNCHER TRIGGER BUTTON (FAB) ── */}
       <button
+        type="button"
         onClick={() => setIsOpen((o) => !o)}
-        className={`
-          w-12 h-12 rounded-full flex items-center justify-center pointer-events-auto
-          transition-all duration-200 focus:outline-none
-          ${isOpen
-            ? "bg-white border-2 border-indigo-300 rotate-90 shadow-lg shadow-indigo-100"
-            : "bg-white border border-gray-200 shadow-md hover:shadow-lg hover:border-indigo-200"
-          }
-        `}
-        aria-label={isOpen ? "Close AI assistant" : "Open AI assistant"}
+        className={`fixed bottom-6 right-6 z-[9990] w-12 h-12 rounded-full flex items-center justify-center pointer-events-auto transition-all duration-300 focus:outline-none shadow-lg border border-slate-200/90 ${
+          isOpen
+            ? "bg-slate-900 text-white rotate-90 scale-95"
+            : "bg-white hover:scale-105 hover:shadow-xl"
+        }`}
+        aria-label={isOpen ? "Close AI Sidebar" : "Open Planora AI Sidebar"}
       >
         {isOpen ? (
-          <X size={18} className="text-indigo-600" />
+          <X size={18} className="text-white" />
         ) : (
-          <img
-            src="/logo/logo.png"
-            alt="Planora Logo"
-            className="w-8 h-8 object-contain rounded-full"
-          />
+          <div className="w-7 h-7 rounded-full bg-slate-950 flex items-center justify-center text-white relative shadow-inner">
+            <Sparkles size={13} className="text-indigo-400" />
+          </div>
         )}
       </button>
-    </div>
+    </>
   );
 }
