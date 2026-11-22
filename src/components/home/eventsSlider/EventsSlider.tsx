@@ -27,11 +27,7 @@ export default function EventsSlider({ events }: Props) {
   const { user } = useAuth();
 
   const handleViewEvent = (eventId: string) => {
-    if (!user) {
-      router.push(`/login?redirect=/events/${eventId}`);
-    } else {
-      router.push(`/events/${eventId}`);
-    }
+    router.push(`/events/${eventId}`);
   };
 
   const autoplay = useRef(Autoplay({ delay: 2500, stopOnInteraction: true }));

@@ -44,7 +44,7 @@ export default function AIAssistantWidget() {
 
   const navigate = (url: string) => {
     setIsOpen(false);
-    if (!user?.id) {
+    if (!user?.id && !url.startsWith("/events/")) {
       router.push(`/login?redirect=${encodeURIComponent(url)}`);
     } else {
       router.push(url);

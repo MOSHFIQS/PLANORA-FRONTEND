@@ -21,11 +21,7 @@ export default function CarouselPlugin({ banners }: { banners: Banner[] }) {
      const [prevIndex, setPrevIndex] = React.useState(-1)
 
      const handleViewEvent = (url: string) => {
-          if (!user) {
-               router.push(`/login?redirect=${encodeURIComponent(url)}`)
-          } else {
-               router.push(url)
-          }
+          router.push(url)
      }
 
      const plugin = React.useRef(

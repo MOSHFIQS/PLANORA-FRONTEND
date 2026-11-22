@@ -19,11 +19,7 @@ const HomePageEvents = ({ events }: Props) => {
   const router = useRouter();
 
   const handleViewEvent = (eventId: string) => {
-    if (!user) {
-      router.push(`/login?redirect=/events/${eventId}`);
-    } else {
-      router.push(`/events/${eventId}`);
-    }
+    router.push(`/events/${eventId}`);
   };
 
   if (!events?.length) {

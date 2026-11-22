@@ -257,17 +257,13 @@ const Navbar = () => {
           setMobileDropdownOpen(!!value.trim());
      };
 
-     // ── Navigate to event — redirect to login if not logged in ──────────────
+     // ── Navigate to event ──────────────────────────────────────────────────
      const navigateToEvent = (id: string) => {
           setDropdownOpen(false);
           setMobileDropdownOpen(false);
           setSearch("");
           setSearchQuery("");
-          if (!user?.id) {
-               router.push(`/login?redirect=/events/${id}`);
-          } else {
-               router.push(`/events/${id}`);
-          }
+          router.push(`/events/${id}`);
      };
 
      // ── Nav link click — protect event links for guests ─────────────────────
