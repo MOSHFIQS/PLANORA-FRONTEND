@@ -3,7 +3,6 @@
 import { format } from "date-fns";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardContent } from "@/components/ui/card";
 import { QRCodeCanvas } from "qrcode.react";
 import DescriptionViwer from "../../shared/descriptionViwer/DescriptionViwer";
 import { usePayment } from "@/hooks/usePayment";
@@ -20,8 +19,11 @@ import {
   Ticket,
   ShieldCheck,
   ExternalLink,
-  Copy,
   Check,
+  Globe,
+  Sparkles,
+  Mail,
+  UserCheck,
 } from "lucide-react";
 import ImageMagnifier from "@/components/shared/imageUtils/imageMagnifier/ImageMagnifier";
 import { useAuth } from "@/context/AuthProvider";
@@ -64,12 +66,12 @@ const EventDetailsSmart = ({ type, data }: Props) => {
   };
 
   return (
-    <div className="min-h-screen bg-[#faf8f5]/60 pb-16 pt-6 px-3 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-      {/* Top Bar Navigation */}
-      <div className="flex items-center justify-between gap-4 mb-6">
+    <div className="min-h-screen bg-[#FDFBF7]/80 pb-20 pt-6 px-3 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-8">
+      {/* ── Top Navigation Bar ────────────────────────────────────────── */}
+      <div className="flex items-center justify-between gap-4">
         <button
           onClick={() => router.back()}
-          className="inline-flex items-center gap-2 text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors bg-white px-3.5 py-2 rounded-full border border-slate-200 shadow-xs"
+          className="inline-flex items-center gap-2 text-sm font-semibold text-slate-700 hover:text-slate-950 transition-colors bg-white px-4 py-2 rounded-full border border-slate-200/90 shadow-2xs"
         >
           <ArrowLeft className="w-4 h-4" />
           <span>Back</span>
@@ -78,12 +80,12 @@ const EventDetailsSmart = ({ type, data }: Props) => {
         <div className="flex items-center gap-2">
           <button
             onClick={handleCopyLink}
-            className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-600 hover:text-slate-900 bg-white px-3.5 py-2 rounded-full border border-slate-200 shadow-xs transition-colors"
+            className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-700 hover:text-slate-950 bg-white px-4 py-2 rounded-full border border-slate-200/90 shadow-2xs transition-colors"
           >
             {copiedLink ? (
               <>
                 <Check className="w-3.5 h-3.5 text-emerald-600" />
-                <span className="text-emerald-700">Copied</span>
+                <span className="text-emerald-700 font-bold">Link Copied</span>
               </>
             ) : (
               <>
@@ -95,70 +97,180 @@ const EventDetailsSmart = ({ type, data }: Props) => {
         </div>
       </div>
 
-      {/* Main 2-Column Split Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-        {/* Left Column: Visual Showcase & In-Depth Details (7 cols) */}
-        <div className="lg:col-span-7 xl:col-span-8 space-y-6">
-          {/* Main Showcase / Image Gallery */}
-          {event?.images?.length > 0 && (
-            <div className="w-full">
-              <ImageMagnifier images={[...event.images].filter(Boolean)} />
-            </div>
-          )}
+      {/* ── Top Airbnb / Luxury Showcase Gallery Grid ──────────────────── */}
+      {event?.images?.length > 0 && (
+        <div className="w-full">
+          <ImageMagnifier images={[...event.images].filter(Boolean)} />
+        </div>
+      )}
 
-          {/* About Event / Description Card */}
-          <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-xs space-y-4">
-            <h2 className="text-xl sm:text-2xl font-bold text-slate-900 flex items-center gap-2">
-              <span>About this event</span>
+      {/* ── 2-Column Content Flow (Reference Pattern) ──────────────────── */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        {/* ── Left Column (Content Cards - 8 cols) ─────────────────────── */}
+        <div className="lg:col-span-8 space-y-6">
+          {/* Card 1: Header & Pricing Card (Like Reference Header) */}
+          <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-xs space-y-3">
+            <div className="flex items-center justify-between gap-4 flex-wrap">
+              {/* Big Price */}
+              <div>
+                <span className="text-xs uppercase tracking-wider text-slate-400 font-semibold block mb-0.5">
+                  Admission
+                </span>
+                <div className="flex items-baseline gap-1.5">
+                  {isFree ? (
+                    <span className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">Free</span>
+                  ) : (
+                    <>
+                      <span className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+                        ৳{event?.fee}
+                      </span>
+                      <span className="text-sm font-bold text-slate-500">BDT</span>
+                    </>
+                  )}
+                </div>
+              </div>
+
+              {/* Status Badge */}
+              <div className="flex items-center gap-2">
+                <span className="inline-flex items-center px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-100 text-emerald-800 border border-emerald-200">
+                  Active
+                </span>
+                <span className="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider bg-slate-100 text-slate-700 border border-slate-200">
+                  {event?.type || "EVENT"}
+                </span>
+              </div>
+            </div>
+
+            {/* Title & Subtitle */}
+            <div className="pt-2 border-t border-slate-100">
+              <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 leading-snug">
+                {event?.title}
+              </h1>
+              {event?.subtitle && (
+                <p className="mt-1 text-sm sm:text-base text-slate-500">
+                  {event.subtitle}
+                </p>
+              )}
+            </div>
+
+            {/* Quick Summary Pill Line */}
+            <div className="flex items-center gap-4 text-xs font-semibold text-slate-500 flex-wrap pt-2">
+              {date && (
+                <span className="flex items-center gap-1.5">
+                  <Calendar className="w-3.5 h-3.5 text-slate-400" />
+                  {format(date, "MMM dd, yyyy")}
+                </span>
+              )}
+              {event?.venue && (
+                <span className="flex items-center gap-1.5">
+                  <MapPin className="w-3.5 h-3.5 text-slate-400" />
+                  {event.venue}
+                </span>
+              )}
+              {event?.visibility && (
+                <span className="flex items-center gap-1.5">
+                  <Globe className="w-3.5 h-3.5 text-slate-400" />
+                  {event.visibility}
+                </span>
+              )}
+            </div>
+          </div>
+
+          {/* Card 2: About / Description (Like Reference "About" Card) */}
+          <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-xs space-y-4">
+            <h2 className="text-xl sm:text-2xl font-bold text-slate-900">
+              About
             </h2>
 
             {event?.description ? (
-              <div className="text-slate-700 leading-relaxed">
+              <div className="text-slate-600 leading-relaxed text-sm sm:text-base">
                 <DescriptionViwer description={event.description} height="auto" />
               </div>
             ) : (
-              <p className="text-slate-500 text-sm">No detailed description provided for this event.</p>
+              <p className="text-slate-400 text-sm">No detailed description available for this event.</p>
             )}
           </div>
 
-          {/* Online Meeting Link (If Online & available) */}
+          {/* Card 3: Key Details (Exact Reference 3x2 Grid Pattern) */}
+          <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-xs space-y-5">
+            <h2 className="text-xl sm:text-2xl font-bold text-slate-900">
+              Key Details
+            </h2>
+
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-6 pt-1">
+              <div>
+                <span className="text-xs text-slate-400 font-semibold block mb-1">Event Type</span>
+                <span className="text-sm sm:text-base font-bold text-slate-800">{event?.type || "N/A"}</span>
+              </div>
+              <div>
+                <span className="text-xs text-slate-400 font-semibold block mb-1">Admission Fee</span>
+                <span className="text-sm sm:text-base font-bold text-slate-800">
+                  {isFree ? "Free Entry" : `৳${event?.fee} BDT`}
+                </span>
+              </div>
+              <div>
+                <span className="text-xs text-slate-400 font-semibold block mb-1">Date</span>
+                <span className="text-sm sm:text-base font-bold text-slate-800">
+                  {date ? format(date, "MMM dd, yyyy") : "TBA"}
+                </span>
+              </div>
+              <div>
+                <span className="text-xs text-slate-400 font-semibold block mb-1">Time</span>
+                <span className="text-sm sm:text-base font-bold text-slate-800">
+                  {date ? format(date, "p") : "TBA"}
+                </span>
+              </div>
+              <div>
+                <span className="text-xs text-slate-400 font-semibold block mb-1">Location / Venue</span>
+                <span className="text-sm sm:text-base font-bold text-slate-800 truncate block">
+                  {event?.type === "ONLINE" ? "Online Stream / Meet" : event?.venue || "To be announced"}
+                </span>
+              </div>
+              <div>
+                <span className="text-xs text-slate-400 font-semibold block mb-1">Visibility</span>
+                <span className="text-sm sm:text-base font-bold text-slate-800">{event?.visibility || "PUBLIC"}</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Card 4: Online Meeting Link (if ONLINE) */}
           {event?.type === "ONLINE" && event?.meetingLink && (
-            <div className="bg-linear-to-r from-blue-50 to-indigo-50/50 rounded-3xl p-6 border border-blue-200/70 shadow-xs space-y-3">
+            <div className="bg-linear-to-r from-blue-50 to-indigo-50/50 rounded-3xl p-6 sm:p-8 border border-blue-200/70 shadow-xs space-y-4">
               <div className="flex items-center justify-between gap-3">
-                <div className="flex items-center gap-2 text-blue-900 font-bold">
+                <div className="flex items-center gap-2 text-blue-950 font-bold text-lg">
                   <Video className="w-5 h-5 text-blue-600" />
-                  <span>Online Meeting Link</span>
+                  <span>Live Stream & Meeting Link</span>
                 </div>
-                <Badge className="bg-blue-100 text-blue-800 border-blue-200">Live Access</Badge>
+                <Badge className="bg-blue-100 text-blue-800 border-blue-200">Online Event</Badge>
               </div>
 
               {isJoined || isOrganizer ? (
-                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2">
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-1">
                   <a
                     href={event.meetingLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full bg-blue-600 text-white font-semibold text-sm hover:bg-blue-700 shadow-sm transition"
+                    className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-blue-600 text-white font-semibold text-sm hover:bg-blue-700 shadow-sm transition"
                   >
-                    <span>Join Meeting</span>
+                    <span>Launch Meeting</span>
                     <ExternalLink className="w-4 h-4" />
                   </a>
-                  <span className="text-xs text-slate-500 font-mono break-all px-2 py-1 bg-white/70 rounded-md border border-blue-100">
+                  <span className="text-xs text-slate-600 font-mono break-all px-3 py-2 bg-white/80 rounded-xl border border-blue-100">
                     {event.meetingLink}
                   </span>
                 </div>
               ) : (
-                <p className="text-xs text-blue-700/80">
-                  Meeting link and access instructions will be unlocked upon joining this event.
+                <p className="text-xs sm:text-sm text-blue-700/80 leading-relaxed">
+                  Join or get your ticket to reveal private conference details and meeting access.
                 </p>
               )}
             </div>
           )}
 
-          {/* Payment & Invoice Details (FULL Mode only) */}
+          {/* Card 5: Payment & Invoice History (FULL Mode only) */}
           {isFull && payment?.length > 0 && (
-            <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-xs space-y-4">
-              <h2 className="text-xl font-bold text-slate-900 flex items-center gap-2">
+            <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-xs space-y-4">
+              <h2 className="text-xl sm:text-2xl font-bold text-slate-900 flex items-center gap-2">
                 <ShieldCheck className="w-5 h-5 text-emerald-600" />
                 <span>Payment & Invoices</span>
               </h2>
@@ -246,107 +358,129 @@ const EventDetailsSmart = ({ type, data }: Props) => {
               </div>
             </div>
           )}
+
+          {/* Card 6: Listing Host / Organizer Card (Exact "Listing Agent" Style) */}
+          {event?.organizer && (
+            <div className="bg-white rounded-3xl p-6 sm:p-7 border border-slate-200/90 shadow-xs space-y-4">
+              <span className="text-xs uppercase tracking-wider text-slate-400 font-bold block">
+                Listing Host
+              </span>
+
+              <div className="flex items-center justify-between gap-4 flex-wrap">
+                <div className="flex items-center gap-4">
+                  <div className="w-13 h-13 rounded-full bg-slate-950 text-white flex items-center justify-center font-bold text-lg shrink-0 shadow-sm">
+                    {event.organizer.name?.[0] || "O"}
+                  </div>
+                  <div>
+                    <h3 className="font-extrabold text-slate-900 text-base sm:text-lg">
+                      {event.organizer.name}
+                    </h3>
+                    <div className="flex items-center gap-3 text-xs text-slate-500 mt-0.5">
+                      {event.organizer.email && (
+                        <span className="flex items-center gap-1">
+                          <Mail className="w-3 h-3 text-slate-400" />
+                          {event.organizer.email}
+                        </span>
+                      )}
+                      <span className="px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 font-medium">
+                        Verified Organizer
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => toast.info(`Organizer contact: ${event.organizer.email || "support@planora.com"}`)}
+                  className="px-5 py-2 rounded-full border border-slate-300 text-slate-800 text-xs font-bold hover:bg-slate-100 transition shadow-2xs"
+                >
+                  Contact
+                </button>
+              </div>
+            </div>
+          )}
         </div>
 
-        {/* Right Column: Sticky Ticket & Action Sidebar (5 cols) */}
-        <div className="lg:col-span-5 xl:col-span-4 space-y-6 lg:sticky lg:top-24">
-          <div className="bg-white rounded-3xl p-6 sm:p-7 border border-slate-200/90 shadow-lg shadow-slate-100 space-y-6">
-            {/* Badges Header */}
-            <div className="flex items-center justify-between gap-2 flex-wrap">
-              <Badge
-                variant="outline"
-                className={`font-semibold px-3 py-1 rounded-full text-xs uppercase tracking-wider ${
-                  event?.type === "ONLINE"
-                    ? "bg-blue-50 text-blue-700 border-blue-200"
-                    : "bg-emerald-50 text-emerald-700 border-emerald-200"
-                }`}
-              >
-                {event?.type || "EVENT"}
-              </Badge>
+        {/* ── Right Column: Sticky Booking / Showing Card (4 cols) ────── */}
+        <div className="lg:col-span-4 space-y-6 lg:sticky lg:top-24">
+          <div className="bg-white rounded-3xl p-6 sm:p-7 border border-slate-200/90 shadow-xl shadow-slate-100 space-y-6">
+            <h2 className="text-xl font-bold text-slate-900">
+              Request to Join
+            </h2>
 
-              {event?.visibility && (
-                <span className="text-xs font-medium text-slate-400 uppercase tracking-wider">
-                  {event.visibility}
-                </span>
-              )}
-            </div>
-
-            {/* Title & Subtitle */}
-            <div className="space-y-1.5">
-              <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 leading-tight">
-                {event?.title}
-              </h1>
-              {event?.subtitle && (
-                <p className="text-sm text-slate-500 leading-snug">
-                  {event.subtitle}
-                </p>
-              )}
-            </div>
-
-            {/* Pricing Section */}
-            <div className="p-4 rounded-2xl bg-[#FFF8F5] border border-orange-100/80 flex items-center justify-between">
+            {/* Quick Pricing Summary */}
+            <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200/70 flex items-center justify-between">
               <div>
-                <span className="text-xs uppercase tracking-wider text-slate-400 font-medium block">
-                  Admission Fee
+                <span className="text-xs uppercase tracking-wider text-slate-400 font-bold block">
+                  Total Due
                 </span>
-                <div className="flex items-baseline gap-1 mt-0.5">
-                  {isFree ? (
-                    <span className="text-2xl font-black text-emerald-600">Free</span>
-                  ) : (
-                    <>
-                      <span className="text-2xl font-black text-[#725CAD]">৳{event?.fee}</span>
-                      <span className="text-xs font-semibold text-slate-500">BDT</span>
-                    </>
-                  )}
+                <span className="text-2xl font-black text-slate-900">
+                  {isFree ? "Free" : `৳${event?.fee}`}
+                </span>
+              </div>
+              <div className="px-3 py-1 rounded-full bg-white border border-slate-200 text-xs font-semibold text-slate-700">
+                General Admission
+              </div>
+            </div>
+
+            {/* Event Time Pill */}
+            {date && (
+              <div className="p-3.5 rounded-2xl bg-violet-50/70 border border-violet-100 flex items-center gap-3 text-xs">
+                <Calendar className="w-4 h-4 text-[#725CAD] shrink-0" />
+                <div>
+                  <p className="font-bold text-slate-800">{format(date, "EEEE, MMMM d, yyyy")}</p>
+                  <p className="text-slate-500">{format(date, "h:mm a")}</p>
                 </div>
               </div>
+            )}
 
-              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white text-slate-600 text-xs font-medium border border-orange-200/50 shadow-2xs">
-                <Ticket className="w-3.5 h-3.5 text-[#725CAD]" />
-                <span>Standard Entry</span>
+            {/* Attendee Info (if logged in) */}
+            {currentUser && (
+              <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200/70 flex items-center gap-3 text-xs">
+                <UserCheck className="w-4 h-4 text-emerald-600 shrink-0" />
+                <div className="min-w-0">
+                  <p className="font-bold text-slate-800 truncate">{currentUser.name}</p>
+                  <p className="text-slate-500 truncate">{currentUser.email}</p>
+                </div>
               </div>
-            </div>
+            )}
 
-            {/* Main Action Button */}
-            <div className="pt-1">
+            {/* Main Action Button (Black Pill Button matching Reference) */}
+            <div>
               {isOrganizer ? (
-                <div className="w-full py-3.5 text-center bg-slate-100 border border-slate-200 text-slate-700 font-semibold rounded-2xl text-sm">
-                  You are the organizer of this event
+                <div className="w-full py-3.5 text-center bg-slate-100 border border-slate-200 text-slate-700 font-bold rounded-full text-xs uppercase tracking-wider">
+                  You are the host
                 </div>
               ) : isJoined ? (
                 <div className="space-y-3">
-                  <div className="w-full flex items-center justify-center gap-2 p-3 bg-emerald-50 border border-emerald-200 rounded-2xl text-emerald-800 font-semibold text-sm">
+                  <div className="w-full flex items-center justify-center gap-2 p-3 bg-emerald-50 border border-emerald-200 rounded-2xl text-emerald-800 font-bold text-xs">
                     <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
                     <span>You are registered for this event!</span>
                   </div>
-                  <Button
-                    variant="violet"
-                    className="w-full rounded-2xl h-12 text-sm font-semibold shadow-md"
+                  <button
                     onClick={() => router.push("/dashboard/my/tickets")}
+                    className="w-full py-3.5 px-6 rounded-full font-bold text-sm text-white bg-slate-950 hover:bg-slate-800 transition shadow-md"
                   >
                     View My Ticket
-                  </Button>
+                  </button>
                 </div>
               ) : isPending ? (
-                <div className="w-full py-3.5 text-center bg-amber-50 border border-amber-200 text-amber-800 font-semibold rounded-2xl text-sm flex items-center justify-center gap-2">
+                <div className="w-full py-3.5 text-center bg-amber-50 border border-amber-200 text-amber-800 font-bold rounded-full text-xs flex items-center justify-center gap-2">
                   <Clock className="w-4 h-4 text-amber-600" />
                   <span>Registration Pending Approval</span>
                 </div>
               ) : !currentUser ? (
-                <Button
-                  variant="violet"
-                  className="w-full rounded-2xl h-12 text-sm font-semibold shadow-md"
+                <button
                   onClick={() => {
                     toast.info("Please sign in to join this event");
                     router.push(`/login?redirect=${encodeURIComponent(`/events/${event?.id}`)}`);
                   }}
+                  className="w-full py-3.5 px-6 rounded-full font-bold text-sm text-white bg-slate-950 hover:bg-slate-800 transition shadow-md"
                 >
-                  {isFree ? "Sign In to Join (Free)" : `Sign In to Pay & Join (৳${event?.fee})`}
-                </Button>
+                  {isFree ? "Sign In to Join" : `Sign In & Pay (৳${event?.fee})`}
+                </button>
               ) : (
-                <Button
-                  variant="violet"
-                  className="w-full rounded-2xl h-12 text-sm font-semibold shadow-md"
+                <button
                   disabled={loadingId === event?.id || !event?.id}
                   onClick={() => {
                     if (!event?.id) return;
@@ -354,91 +488,40 @@ const EventDetailsSmart = ({ type, data }: Props) => {
                       eventId: event.id,
                     });
                   }}
+                  className="w-full py-3.5 px-6 rounded-full font-bold text-sm text-white bg-slate-950 hover:bg-slate-800 transition shadow-md disabled:opacity-60"
                 >
                   {loadingId === event?.id
                     ? "Processing..."
                     : isFree
-                      ? "Join Event (Free)"
-                      : `Get Ticket — ৳${event?.fee}`}
-                </Button>
+                      ? "Join Event Free"
+                      : `Request Ticket (৳${event?.fee})`}
+                </button>
               )}
             </div>
 
-            {/* Key Event Details List */}
-            <div className="border-t border-slate-100 pt-5 space-y-4 text-sm">
-              {/* Date & Time */}
-              {date && (
-                <div className="flex items-start gap-3">
-                  <div className="w-9 h-9 rounded-xl bg-violet-50 text-[#725CAD] flex items-center justify-center shrink-0 border border-violet-100">
-                    <Calendar className="w-4 h-4" />
-                  </div>
-                  <div>
-                    <p className="font-semibold text-slate-800">{format(date, "EEEE, MMMM d, yyyy")}</p>
-                    <p className="text-xs text-slate-500">{format(date, "h:mm a")}</p>
-                  </div>
-                </div>
-              )}
-
-              {/* Venue */}
-              <div className="flex items-start gap-3">
-                <div className="w-9 h-9 rounded-xl bg-orange-50 text-orange-600 flex items-center justify-center shrink-0 border border-orange-100">
-                  <MapPin className="w-4 h-4" />
-                </div>
-                <div>
-                  <p className="font-semibold text-slate-800">
-                    {event?.type === "ONLINE" ? "Online Event" : event?.venue || "Venue to be announced"}
-                  </p>
-                  <p className="text-xs text-slate-500">
-                    {event?.type === "ONLINE" ? "Web / Virtual Conferencing" : "Physical location"}
-                  </p>
-                </div>
+            {/* Trust Points */}
+            <div className="border-t border-slate-100 pt-4 space-y-2 text-[11px] text-slate-500">
+              <div className="flex items-center gap-2">
+                <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
+                <span>Instant digital ticket generation & QR pass</span>
               </div>
-
-              {/* Organizer Info */}
-              {event?.organizer && (
-                <div className="flex items-center gap-3 pt-2 border-t border-slate-100">
-                  <div className="w-10 h-10 rounded-full bg-linear-to-br from-indigo-500 to-[#725CAD] text-white flex items-center justify-center font-bold text-sm shrink-0 shadow-xs">
-                    {event.organizer.name?.[0] || "O"}
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <span className="text-[11px] uppercase tracking-wider text-slate-400 font-semibold block">
-                      Hosted by
-                    </span>
-                    <p className="font-semibold text-slate-900 text-sm truncate">
-                      {event.organizer.name}
-                    </p>
-                  </div>
-                </div>
-              )}
-
-              {/* Participant info in FULL mode */}
-              {isFull && user && (
-                <div className="p-3 bg-purple-50/70 border border-purple-100 rounded-2xl flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-full bg-purple-200 text-purple-800 flex items-center justify-center font-bold text-xs shrink-0">
-                    {user?.name?.[0] || "P"}
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <span className="text-[10px] uppercase tracking-wider text-purple-600 font-bold block">
-                      Ticket Holder
-                    </span>
-                    <p className="font-semibold text-slate-900 text-xs truncate">{user?.name}</p>
-                    <p className="text-[11px] text-slate-500 truncate">{user?.email}</p>
-                  </div>
-                </div>
-              )}
+              <div className="flex items-center gap-2">
+                <Sparkles className="w-3.5 h-3.5 text-violet-500" />
+                <span>100% verified organizer on Planora</span>
+              </div>
             </div>
 
-            {/* QR Ticket Preview (FULL Mode only) */}
+            {/* QR Pass (if joined and ticket exists) */}
             {isFull && ticket?.qrCode && (
-              <div className="border-t border-slate-100 pt-5 text-center space-y-3">
-                <span className="text-xs font-semibold uppercase tracking-wider text-slate-400 block">
+              <div className="border-t border-slate-100 pt-5 text-center space-y-2">
+                <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 block">
                   Your Digital Ticket Pass
                 </span>
-                <div className="inline-block p-3 bg-white rounded-2xl border border-slate-200 shadow-xs">
-                  <QRCodeCanvas value={ticket.qrCode} size={160} />
+                <div className="inline-block p-3 bg-white rounded-2xl border border-slate-200 shadow-2xs">
+                  <QRCodeCanvas value={ticket.qrCode} size={150} />
                 </div>
-                <p className="text-xs font-medium text-slate-600">
-                  Status: <span className="font-semibold text-emerald-600">{ticket.status}</span>
+                <p className="text-xs font-semibold text-slate-600">
+                  Status: <span className="font-bold text-emerald-600">{ticket.status}</span>
                 </p>
               </div>
             )}
