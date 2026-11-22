@@ -58,6 +58,7 @@ export function LoginForm() {
         }
 
         setAuthData(userData, accessToken, refreshToken, sessionToken)
+        toast.dismiss()
         toast.success("Signed in with Google successfully!")
 
         // Clean up the URL query params

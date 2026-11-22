@@ -21,12 +21,13 @@ export default function GoogleLoginButton({
 
      const handleGoogleLogin = async () => {
           setIsLoading(true);
-          const toastId = toast.loading("Connecting to Google...");
+          const toastId = toast.loading("Connecting to Google...", { id: "google-login-toast" });
 
           try {
                const result = await getGoogleLoginUrlAction(redirectUrl, role);
 
                if (result.ok && result.url) {
+                    toast.dismiss(toastId);
                     // Standard browser redirect to the backend OAuth root
                     window.location.href = result.url;
                } else {
