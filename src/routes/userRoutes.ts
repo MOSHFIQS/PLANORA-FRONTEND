@@ -49,7 +49,6 @@ export const userRoutes: Route[] = [
                { title: "Home", url: "/", icon: Home },
                { title: "Browse Events", url: "/events", icon: List },
                { title: "Contact Us", url: "/contact", icon: Mail },
-               { title: "Find Us", url: "/find-us", icon: MapPin },
           ],
      },
 ];
