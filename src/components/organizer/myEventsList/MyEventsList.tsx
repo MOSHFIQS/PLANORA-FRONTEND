@@ -349,7 +349,7 @@ export default function MyEventsList({ myEvents }: { myEvents: Event[] }) {
 
                 {/* Price */}
                 <span className="text-lg font-bold text-purple-500 whitespace-nowrap">
-                  {event.fee === 0 ? "Free" : `$${event.fee}`}
+                  {event.fee === 0 ? "Free" : `৳${event.fee}`}
                 </span>
               </CardContent>
 
@@ -478,7 +478,7 @@ export default function MyEventsList({ myEvents }: { myEvents: Event[] }) {
                       </TableCell>
                       <TableCell>{event.type}</TableCell>
                       <TableCell>{event.visibility}</TableCell>
-                      <TableCell>{event.fee} tk</TableCell>
+                      <TableCell>{event.fee === 0 ? "Free" : `৳${event.fee}`}</TableCell>
                       <TableCell className="text-center">{event._count?.reviews} </TableCell>
 
                       <TableCell className="text-right space-x-2">

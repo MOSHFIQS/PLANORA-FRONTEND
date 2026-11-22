@@ -103,7 +103,7 @@ export default function MyTickets({ data }: Props) {
                   }
                 />
                 <Info label="Type" value={ticket.event.type || "—"} />
-                <Info label="Fee" value={ticket.event.fee != null ? `$${ticket.event.fee}` : "Free"} />
+                <Info label="Fee" value={ticket.event.fee != null ? `৳${ticket.event.fee}` : "Free"} />
               </div>
               <div style={{ borderTop: "1px solid rgba(255,255,255,0.12)" }} />
               <div className="grid grid-cols-2 gap-x-2 gap-y-1.5">

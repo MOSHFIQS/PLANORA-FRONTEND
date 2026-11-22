@@ -128,7 +128,7 @@ const MyParticipatedEventsCard = ({ myEvents }: Props) => {
 
                   {/* Price */}
                   <span className="text-lg font-bold text-purple-500 whitespace-nowrap">
-                    {event?.fee === 0 ? "Free" : `$${event?.fee}`}
+                    {event?.fee === 0 ? "Free" : `৳${event?.fee}`}
                   </span>
                 </CardContent>
 
@@ -218,7 +218,7 @@ const MyParticipatedEventsCard = ({ myEvents }: Props) => {
                       </TableCell>
                       <TableCell>{date ? format(date, "PPP • p") : "-"}</TableCell>
                       <TableCell>{event?.type || "-"}</TableCell>
-                      <TableCell>{event?.fee} tk</TableCell>
+                      <TableCell>{event?.fee === 0 ? "Free" : `৳${event?.fee}`}</TableCell>
                       <TableCell>{event?.venue || "-"}</TableCell>
                       <TableCell>
                         <Badge variant={isApproved ? "default" : "secondary"}>

@@ -144,7 +144,7 @@ const EventDetails = ({ event }: { event: IEvent }) => {
                       <span className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
                         ৳{event?.fee}
                       </span>
-                      <span className="text-sm font-bold text-slate-500">BDT</span>
+                      
                     </>
                   )}
                 </div>
@@ -216,7 +216,7 @@ const EventDetails = ({ event }: { event: IEvent }) => {
               <div>
                 <span className="text-xs text-slate-400 font-semibold block mb-1">Admission Fee</span>
                 <span className="text-sm sm:text-base font-bold text-slate-800">
-                  {isFree ? "Free Entry" : `৳${event?.fee} BDT`}
+                  {isFree ? "Free Entry" : `৳${event?.fee}`}
                 </span>
               </div>
               <div>

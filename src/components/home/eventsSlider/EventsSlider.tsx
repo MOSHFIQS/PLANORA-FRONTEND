@@ -109,7 +109,7 @@ export default function EventsSlider({ events }: Props) {
                     )}
                   </div>
                   <span className="text-lg font-bold text-purple-500">
-                    {event.fee === 0 ? "Free" : `$${event.fee}`}
+                    {event.fee === 0 ? "Free" : `৳${event.fee}`}
                   </span>
 
 
@@ -204,7 +204,7 @@ export default function EventsSlider({ events }: Props) {
 
                         {/* Price */}
                         <span className="text-lg font-bold text-purple-500 whitespace-nowrap">
-                          {event.fee === 0 ? "Free" : `$${event.fee}`}
+                          {event.fee === 0 ? "Free" : `৳${event.fee}`}
                         </span>
                       </CardContent>
 

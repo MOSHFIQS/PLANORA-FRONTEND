@@ -71,7 +71,7 @@ export default function PaymentsList({ payments }: { payments: Payment[] }) {
 
                                              {/* Amount */}
                                              <TableCell className="py-5">
-                                                  {payment?.amount} tk
+                                                  ৳{payment?.amount}
                                              </TableCell>
 
                                              {/* Status */}

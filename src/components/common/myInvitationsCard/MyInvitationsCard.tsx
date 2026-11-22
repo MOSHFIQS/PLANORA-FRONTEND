@@ -128,7 +128,7 @@
 // //                                                   >
 // //                                                        {loadingId === item.eventId
 // //                                                             ? "Processing..."
-// //                                                             : `Pay ${event.fee} tk`}
+// //                                                             : `Pay ৳${event.fee}`}
 // //                                                   </Button>
 // //                                              )}
 
@@ -293,7 +293,7 @@
 //                   </TableCell>
 
 //                   {/* FEE */}
-//                   <TableCell>{event?.fee} tk</TableCell>
+//                   <TableCell>{event?.fee === 0 ? "Free" : `৳${event?.fee}`}</TableCell>
 
 //                   {/* STATUS */}
 //                   <TableCell>
@@ -338,7 +338,7 @@
 //                           >
 //                             {loadingId === item.eventId
 //                               ? "Processing..."
-//                               : `Pay ${event.fee} tk`}
+//                               : `Pay ৳${event.fee}`}
 //                           </Button>
 //                         )}
 
@@ -518,7 +518,7 @@ const MyInvitationsCard = ({ invitations }: { invitations: Invitation[] }) => {
 
                   {/* Price */}
                   <span className="text-lg font-bold text-purple-500 whitespace-nowrap">
-                    {event?.fee === 0 ? "Free" : `${event?.fee} tk`}
+                    {event?.fee === 0 ? "Free" : `৳${event?.fee}`}
                   </span>
                 </CardContent>
 
@@ -554,7 +554,7 @@ const MyInvitationsCard = ({ invitations }: { invitations: Invitation[] }) => {
                         >
                           {loadingId === item.eventId
                             ? "Processing..."
-                            : `Pay ${event.fee} tk`}
+                            : `Pay ৳${event.fee}`}
                         </Button>
                       )}
 
@@ -630,7 +630,7 @@ const MyInvitationsCard = ({ invitations }: { invitations: Invitation[] }) => {
                       </TableCell>
 
                       {/* FEE */}
-                      <TableCell>{event?.fee} tk</TableCell>
+                      <TableCell>{event?.fee === 0 ? "Free" : `৳${event?.fee}`}</TableCell>
 
                       {/* STATUS */}
                       <TableCell>
@@ -669,7 +669,7 @@ const MyInvitationsCard = ({ invitations }: { invitations: Invitation[] }) => {
                               >
                                 {loadingId === item.eventId
                                   ? "Processing..."
-                                  : `Pay ${event.fee} tk`}
+                                  : `Pay ৳${event.fee}`}
                               </Button>
                             )}
 

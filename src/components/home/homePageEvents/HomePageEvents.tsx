@@ -95,7 +95,7 @@ const HomePageEvents = ({ events }: Props) => {
                 )}
               </div>
               <span className="text-lg font-bold text-purple-500">
-                {event.fee === 0 ? "Free" : `$${event.fee}`}
+                {event.fee === 0 ? "Free" : `৳${event.fee}`}
               </span>
 
 

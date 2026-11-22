@@ -125,7 +125,7 @@ const EventDetailsSmart = ({ type, data }: Props) => {
                       <span className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
                         ৳{event?.fee}
                       </span>
-                      <span className="text-sm font-bold text-slate-500">BDT</span>
+                      
                     </>
                   )}
                 </div>
@@ -209,7 +209,7 @@ const EventDetailsSmart = ({ type, data }: Props) => {
               <div>
                 <span className="text-xs text-slate-400 font-semibold block mb-1">Admission Fee</span>
                 <span className="text-sm sm:text-base font-bold text-slate-800">
-                  {isFree ? "Free Entry" : `৳${event?.fee} BDT`}
+                  {isFree ? "Free Entry" : `৳${event?.fee}`}
                 </span>
               </div>
               <div>
@@ -338,7 +338,7 @@ const EventDetailsSmart = ({ type, data }: Props) => {
                   <TableBody className="text-slate-800 text-sm">
                     {payment.map((p: any) => (
                       <TableRow key={p.id}>
-                        <TableCell className="text-center font-semibold">{p.amount} tk</TableCell>
+                        <TableCell className="text-center font-semibold">৳{p.amount}</TableCell>
                         <TableCell className="text-center">
                           <Badge
                             className={
