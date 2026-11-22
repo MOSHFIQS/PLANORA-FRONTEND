@@ -14,8 +14,11 @@ import { QRCodeCanvas } from "qrcode.react";
 import DescriptionViwer from "../../shared/descriptionViwer/DescriptionViwer";
 import { usePayment } from "@/hooks/usePayment";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../../ui/table";
-import { Download } from "lucide-react";
+import { Download, CheckCircle2, Clock } from "lucide-react";
 import ImageMagnifier from "@/components/shared/imageUtils/imageMagnifier/ImageMagnifier";
+import { useAuth } from "@/context/AuthProvider";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 type Props = {
   type: "FULL" | "PUBLIC";
@@ -27,6 +30,8 @@ type Props = {
 
 const EventDetailsSmart = ({ type, data }: Props) => {
   const { handlePayment, loadingId } = usePayment();
+  const { user: currentUser } = useAuth();
+  const router = useRouter();
 
   const isFull = type === "FULL";
 
@@ -35,6 +40,9 @@ const EventDetailsSmart = ({ type, data }: Props) => {
   const payment = isFull ? data?.payment : [];
   const user = isFull ? data?.user : null;
   const status = isFull ? data?.status : null;
+  const isJoined = isFull || !!data?.isJoined || status === "APPROVED";
+  const isPending = data?.myParticipation?.status === "PENDING";
+  const isOrganizer = currentUser?.id && event?.organizerId && currentUser.id === event.organizerId;
 
   // console.log(payment);
 
@@ -284,17 +292,48 @@ const EventDetailsSmart = ({ type, data }: Props) => {
           )}
         </div>
 
-        {!isFull && (
-          <CardFooter className="px-4">
-            <Button variant={"violet"}
-              className={`w-full rounded-full`}
+        <CardFooter className="px-4 pt-2">
+          {isOrganizer ? (
+            <div className="w-full py-3.5 text-center bg-slate-100 border border-slate-200 text-slate-700 font-semibold rounded-full text-sm">
+              You are the organizer of this event
+            </div>
+          ) : isJoined ? (
+            <div className="w-full flex flex-col sm:flex-row items-center justify-between gap-3 p-4 bg-emerald-50 border border-emerald-200 rounded-2xl">
+              <div className="flex items-center gap-2 text-emerald-800 font-semibold text-sm sm:text-base">
+                <CheckCircle2 className="w-5 h-5 text-emerald-600 flex-shrink-0" />
+                <span>You have joined this event!</span>
+              </div>
+              <Button
+                variant="violet"
+                className="rounded-full px-6 w-full sm:w-auto"
+                onClick={() => router.push("/dashboard/my/tickets")}
+              >
+                View My Ticket
+              </Button>
+            </div>
+          ) : isPending ? (
+            <div className="w-full py-3.5 text-center bg-amber-50 border border-amber-200 text-amber-800 font-semibold rounded-full text-sm flex items-center justify-center gap-2">
+              <Clock className="w-4 h-4 text-amber-600" />
+              <span>Registration Pending Approval</span>
+            </div>
+          ) : !currentUser ? (
+            <Button
+              variant={"violet"}
+              className="w-full rounded-full h-12 text-sm font-semibold"
+              onClick={() => {
+                toast.info("Please sign in to join this event");
+                router.push(`/login?redirect=${encodeURIComponent(`/events/${event?.id}`)}`);
+              }}
+            >
+              {isFree ? "Sign In to Join (Free)" : `Sign In to Pay & Join (${event?.fee} tk)`}
+            </Button>
+          ) : (
+            <Button
+              variant={"violet"}
+              className="w-full rounded-full h-12 text-sm font-semibold"
               disabled={loadingId === event?.id || !event?.id}
               onClick={() => {
-                if (!event?.id) {
-                  console.error("Missing event id", event);
-                  return;
-                }
-
+                if (!event?.id) return;
                 handlePayment({
                   eventId: event.id,
                 });
@@ -306,8 +345,8 @@ const EventDetailsSmart = ({ type, data }: Props) => {
                   ? "Join Free"
                   : `Pay ${event?.fee} tk to join event`}
             </Button>
-          </CardFooter>
-        )}
+          )}
+        </CardFooter>
       </Card>
     </div>
   );
