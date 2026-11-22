@@ -8,7 +8,7 @@ interface Props {
   zoom?: number;
 }
 
-export default function ImageMagnifier({ images, zoom = 1.08 }: Props) {
+export default function ImageMagnifier({ images, zoom = 1.05 }: Props) {
   const rawList = (Array.isArray(images) ? images : [images]).filter(Boolean);
   const [galleryImages, setGalleryImages] = useState<string[]>(rawList);
   const [isHovering, setIsHovering] = useState(false);
@@ -55,21 +55,17 @@ export default function ImageMagnifier({ images, zoom = 1.08 }: Props) {
       {/* ── Single Image View ───────────────────────────────────────────── */}
       {galleryImages.length === 1 && (
         <div
-          className="w-full relative h-[360px] sm:h-[460px] lg:h-[520px] rounded-md overflow-hidden border border-slate-200/80 shadow-sm bg-slate-900 group"
+          className="w-full relative h-[360px] sm:h-[460px] lg:h-[500px] rounded-xl overflow-hidden border border-slate-200/90 shadow-sm bg-slate-100 group"
           onMouseMove={handleMouseMove}
           onMouseEnter={() => setIsHovering(true)}
           onMouseLeave={() => setIsHovering(false)}
         >
-          <div
-            className="absolute inset-0 bg-cover bg-center blur-2xl opacity-40 scale-110 pointer-events-none"
-            style={{ backgroundImage: `url(${mainImage})` }}
-          />
           <AppImage
             src={mainImage}
             alt="Event banner"
             width={1920}
             height={1080}
-            className="hero-gallery-img w-full h-full object-cover transition-transform duration-300 relative z-10"
+            className="hero-gallery-img w-full h-full object-cover transition-transform duration-300"
             style={{
               transform: isHovering ? `scale(${zoom})` : "scale(1)",
             }}
@@ -81,10 +77,10 @@ export default function ImageMagnifier({ images, zoom = 1.08 }: Props) {
 
       {/* ── 2 Images View ──────────────────────────────────────────────── */}
       {galleryImages.length === 2 && (
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-3 sm:gap-4 h-[360px] sm:h-[460px] lg:h-[500px]">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-3 sm:gap-4 h-[340px] sm:h-[440px] lg:h-[480px]">
           {/* Hero Left */}
           <div
-            className="md:col-span-8 h-full relative rounded-md overflow-hidden border border-slate-200/80 shadow-sm bg-slate-900 cursor-pointer"
+            className="md:col-span-8 h-full relative rounded-xl overflow-hidden border border-slate-200/90 shadow-sm bg-slate-100 cursor-pointer"
             onMouseMove={handleMouseMove}
             onMouseEnter={() => setIsHovering(true)}
             onMouseLeave={() => setIsHovering(false)}
@@ -108,7 +104,7 @@ export default function ImageMagnifier({ images, zoom = 1.08 }: Props) {
           {/* Secondary Right */}
           <div
             onClick={() => handleSwapWithHero(0)}
-            className="md:col-span-4 h-full relative rounded-md overflow-hidden border border-slate-200/80 shadow-sm bg-slate-900 cursor-pointer group hover:ring-3 hover:ring-[#4F46E5]/50 transition-all"
+            className="md:col-span-4 h-full relative rounded-xl overflow-hidden border border-slate-200/90 shadow-sm bg-slate-100 cursor-pointer group hover:ring-2 hover:ring-[#4F46E5]/60 transition-all"
             title="Click to view as main banner"
           >
             <AppImage
@@ -118,17 +114,17 @@ export default function ImageMagnifier({ images, zoom = 1.08 }: Props) {
               height={800}
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
             />
-            <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors" />
+            <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors" />
           </div>
         </div>
       )}
 
       {/* ── 3 Images View ──────────────────────────────────────────────── */}
       {galleryImages.length === 3 && (
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-3 sm:gap-4 h-[380px] sm:h-[480px] lg:h-[520px]">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-3 sm:gap-4 h-[360px] sm:h-[460px] lg:h-[500px]">
           {/* Hero Left */}
           <div
-            className="md:col-span-7 lg:col-span-8 h-full relative rounded-md overflow-hidden border border-slate-200/80 shadow-sm bg-slate-900"
+            className="md:col-span-7 lg:col-span-8 h-full relative rounded-xl overflow-hidden border border-slate-200/90 shadow-sm bg-slate-100"
             onMouseMove={handleMouseMove}
             onMouseEnter={() => setIsHovering(true)}
             onMouseLeave={() => setIsHovering(false)}
@@ -155,7 +151,7 @@ export default function ImageMagnifier({ images, zoom = 1.08 }: Props) {
               <div
                 key={idx}
                 onClick={() => handleSwapWithHero(idx)}
-                className="relative rounded-md sm:rounded-md overflow-hidden border border-slate-200/80 shadow-xs cursor-pointer group hover:ring-3 hover:ring-[#4F46E5]/50 transition-all bg-slate-900"
+                className="relative rounded-xl overflow-hidden border border-slate-200/90 shadow-xs cursor-pointer group hover:ring-2 hover:ring-[#4F46E5]/60 transition-all bg-slate-100"
                 title="Click to switch with main image"
               >
                 <AppImage
@@ -165,7 +161,7 @@ export default function ImageMagnifier({ images, zoom = 1.08 }: Props) {
                   height={600}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
-                <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors" />
+                <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors" />
               </div>
             ))}
           </div>
@@ -174,10 +170,10 @@ export default function ImageMagnifier({ images, zoom = 1.08 }: Props) {
 
       {/* ── 4+ Images Grid (Exact Reference Pattern: Left Hero + Right 2x2 Grid) ── */}
       {galleryImages.length >= 4 && (
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-3 sm:gap-4 md:h-[440px] lg:h-[500px] xl:h-[540px]">
-          {/* Left Large Hero Image (7 cols) */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-3 sm:gap-4 md:h-[440px] lg:h-[480px] xl:h-[520px]">
+          {/* Left Large Hero Image (~58% width: 7 cols) */}
           <div
-            className="md:col-span-7 h-[320px] md:h-full relative rounded-md overflow-hidden border border-slate-200/80 shadow-sm bg-slate-900"
+            className="md:col-span-7 h-[300px] md:h-full relative rounded-xl overflow-hidden border border-slate-200/90 shadow-sm bg-slate-100"
             onMouseMove={handleMouseMove}
             onMouseEnter={() => setIsHovering(true)}
             onMouseLeave={() => setIsHovering(false)}
@@ -198,7 +194,7 @@ export default function ImageMagnifier({ images, zoom = 1.08 }: Props) {
             />
           </div>
 
-          {/* Right 2x2 Grid of 4 Images (5 cols) */}
+          {/* Right 2x2 Grid of 4 Images (~42% width: 5 cols) */}
           <div className="md:col-span-5 grid grid-cols-2 grid-rows-2 gap-3 sm:gap-4 h-[260px] md:h-full">
             {sideImages.map((img, idx) => {
               const isLastBoxWithMore = idx === 3 && remainingCount > 0;
@@ -207,7 +203,7 @@ export default function ImageMagnifier({ images, zoom = 1.08 }: Props) {
                 <div
                   key={idx}
                   onClick={() => handleSwapWithHero(idx)}
-                  className="relative rounded-md sm:rounded-md overflow-hidden border border-slate-200/80 shadow-xs cursor-pointer group hover:ring-3 hover:ring-[#4F46E5]/60 transition-all bg-slate-900"
+                  className="relative rounded-xl overflow-hidden border border-slate-200/90 shadow-xs cursor-pointer group hover:ring-2 hover:ring-[#4F46E5]/60 transition-all bg-slate-100"
                   title="Click to view as main banner"
                 >
                   <AppImage
@@ -217,7 +213,7 @@ export default function ImageMagnifier({ images, zoom = 1.08 }: Props) {
                     height={600}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
-                  <div className="absolute inset-0 bg-black/15 group-hover:bg-transparent transition-colors" />
+                  <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors" />
 
                   {/* If more than 5 images, show counter badge overlay on the 4th thumbnail */}
                   {isLastBoxWithMore && (
