@@ -30,7 +30,7 @@ export function ForgetPasswordForm() {
           toast.error(result.message || "Email not found", { id: toastId })
           return
         }
-        toast(result.message, { id: toastId })
+        toast.success(result.message || "Reset code sent to your email", { id: toastId })
         router.push(`/reset-password?email=${encodeURIComponent(value.email)}`)
       } catch {
         toast.error("Something went wrong", { id: toastId })

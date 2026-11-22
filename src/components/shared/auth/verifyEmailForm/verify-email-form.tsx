@@ -61,7 +61,7 @@ export function VerifyEmailForm() {
         return
       }
       
-      toast("New code sent successfully!", { id: toastId })
+      toast.success("New code sent successfully!", { id: toastId })
       setCountdown(60)
       setCanResend(false)
     } catch {
@@ -82,7 +82,7 @@ export function VerifyEmailForm() {
           toast.error(result.message || "Invalid or expired code", { id: toastId })
           return
         }
-        toast(result.message, { id: toastId })
+        toast.success(result.message || "Email verified successfully", { id: toastId })
         router.push("/login?verified=true")
       } catch {
         toast.error("Something went wrong", { id: toastId })

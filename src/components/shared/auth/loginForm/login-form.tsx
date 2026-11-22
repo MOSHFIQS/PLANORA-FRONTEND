@@ -80,8 +80,8 @@ export function LoginForm() {
 
     const verified = searchParams.get("verified")
     const reset = searchParams.get("reset")
-    if (verified) toast("Email verified successfully! Please sign in.")
-    if (reset === "success") toast("Password reset successfully! Please sign in.")
+    if (verified) toast.success("Email verified successfully! Please sign in.")
+    if (reset === "success") toast.success("Password reset successfully! Please sign in.")
 
     const error = searchParams.get("error")
     if (error) {

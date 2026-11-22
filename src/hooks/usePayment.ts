@@ -39,7 +39,7 @@ export const usePayment = () => {
 
       // CASE 1: FREE EVENT
       if (!data?.paymentUrl) {
-        toast(data?.message || "Joined successfully", {
+        toast.success(data?.message || "Joined successfully", {
           id: toastId,
         });
 

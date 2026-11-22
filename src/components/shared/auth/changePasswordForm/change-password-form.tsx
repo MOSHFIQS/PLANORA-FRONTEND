@@ -36,7 +36,7 @@ export function ChangePasswordForm({ isModal = false }: { isModal?: boolean }) {
           toast.error(result.message || "Failed to update password", { id: toastId })
           return
         }
-        toast(result.message, { id: toastId })
+        toast.success(result.message || "Password updated successfully", { id: toastId })
         if (!isModal) {
           router.push("/dashboard")
         }

@@ -49,7 +49,7 @@ export function RegisterForm() {
 
         
         
-        toast(result.message, { id: toastId })
+        toast.success(result.message || "Account created successfully", { id: toastId })
         // Redirect to email verification page instead of home
         router.push(`/verify-email?email=${encodeURIComponent(value.email)}`)
       } catch {

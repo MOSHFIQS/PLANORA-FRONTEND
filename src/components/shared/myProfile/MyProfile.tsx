@@ -58,7 +58,7 @@ const MyProfile: React.FC<MyProfileProps> = ({ profileData }) => {
                     toast.error(res.message || "Failed to send reset link", { id: toastId });
                     return;
                }
-               toast("Reset link sent to your email", { id: toastId });
+               toast.success("Reset link sent to your email", { id: toastId });
                router.push(`/reset-password?email=${encodeURIComponent(profile.email)}`);
           } catch {
                toast.error("Something went wrong", { id: toastId });
