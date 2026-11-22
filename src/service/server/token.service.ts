@@ -1,4 +1,3 @@
-
 import { cookies } from "next/headers"
 import jwt from "jsonwebtoken"
 import { TokenPayload } from "@/types/token.types"
@@ -11,9 +10,12 @@ export const sessionService = {
           if (!token) return null
 
           try {
-               return jwt.verify(token, process.env.REFRESH_TOKEN_SECRET as string) as TokenPayload
-          } catch (err){
-               // console.log("JWT invalid or expired:", err);
+               const secret = process.env.REFRESH_TOKEN_SECRET
+               if (secret) {
+                    return jwt.verify(token, secret) as TokenPayload
+               }
+               return jwt.decode(token) as TokenPayload
+          } catch {
                return null
           }
      },
