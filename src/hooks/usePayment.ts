@@ -5,64 +5,39 @@ import { initiatePaymentAction } from "@/actions/payment.action";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 
-type PaymentPayload = {
-  eventId?: string;
-  invitationId?: string;
-};
-
 export const usePayment = () => {
   const [loadingId, setLoadingId] = useState<string | null>(null);
   const router = useRouter();
 
-  const handlePayment = async (payload: PaymentPayload) => {
+  const handlePayment = async (payload: { eventId?: string; invitationId?: string }) => {
     const key = payload?.eventId ?? payload?.invitationId;
-
-    if (!key) {
-      toast.error("Invalid request");
-      return;
-    }
+    if (!key) return toast.error("Invalid payment request");
 
     setLoadingId(key);
-    const toastId = toast.loading("Processing...");
+    const toastId = toast.loading("Processing payment...");
 
     try {
       const res = await initiatePaymentAction(payload);
-
-      // console.log(res);
       if (!res?.ok) {
-        toast.error(res?.message || "Failed", { id: toastId });
-        setLoadingId(null);
+        toast.error(res?.message || "Payment initiation failed", { id: toastId });
         return;
       }
 
-      const data = res?.data;
+      const { paymentUrl, message } = res?.data || {};
 
-      // CASE 1: FREE EVENT
-      if (!data?.paymentUrl) {
-        toast.success(data?.message || "Joined successfully", {
-          id: toastId,
-        });
-
-       
-        router.refresh()
-
-        return;
+      if (paymentUrl) {
+        toast.success("Redirecting to checkout...", { id: toastId });
+        window.location.href = paymentUrl;
+      } else {
+        toast.success(message || "Joined event successfully!", { id: toastId });
+        router.refresh();
       }
-
-      // CASE 2: PAID EVENT
-      toast("Redirecting to payment...", { id: toastId });
-
-      window.location.href = data.paymentUrl;
     } catch (err: any) {
-      toast.error(err?.message || "Something went wrong", {
-        id: toastId,
-      });
+      toast.error(err?.message || "Something went wrong", { id: toastId });
+    } finally {
       setLoadingId(null);
     }
   };
 
-  return {
-    handlePayment,
-    loadingId,
-  };
+  return { handlePayment, loadingId };
 };
