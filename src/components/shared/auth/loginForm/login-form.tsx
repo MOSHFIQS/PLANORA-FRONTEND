@@ -14,6 +14,8 @@ import { Label } from "@/components/ui/label"
 import { Eye, EyeOff, Loader2 } from "lucide-react"
 import { useEffect } from "react"
 import GoogleLoginButton from "../GoogleLoginButton"
+import { jwtDecode } from "jwt-decode"
+import { User } from "@/types/user.types"
 
 const formSchema = z.object({
   password: z.string().min(6, "Minimum length is 6"),
@@ -30,6 +32,52 @@ export function LoginForm() {
 
   // Handle Specific Success States or Auth Requirements
   useEffect(() => {
+    // Handle Google OAuth callback from backend
+    const isGoogleSuccess = searchParams.get("google_login") === "success"
+    const accessToken = searchParams.get("accessToken")
+    const refreshToken = searchParams.get("refreshToken")
+    const sessionToken = searchParams.get("sessionToken")
+    const targetRedirect = searchParams.get("redirect") || "/dashboard"
+
+    if (isGoogleSuccess && accessToken && refreshToken && sessionToken) {
+      try {
+        const decoded = jwtDecode<any>(accessToken)
+        const userData: User = {
+          id: decoded.userId || decoded.id,
+          name: decoded.name || "",
+          email: decoded.email || "",
+          role: decoded.role,
+          image: decoded.image || "",
+          status: decoded.status || "ACTIVE",
+          needPasswordChange: decoded.needPasswordChange ?? false,
+          emailVerified: decoded.emailVerified ?? true,
+          isDeleted: decoded.isDeleted ?? false,
+          deletedAt: null,
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString(),
+        }
+
+        setAuthData(userData, accessToken, refreshToken, sessionToken)
+        toast.success("Signed in with Google successfully!")
+
+        // Clean up the URL query params
+        const params = new URLSearchParams(searchParams.toString())
+        params.delete("google_login")
+        params.delete("accessToken")
+        params.delete("refreshToken")
+        params.delete("sessionToken")
+        params.delete("redirect")
+        const newUrl = `${window.location.pathname}${params.toString() ? `?${params.toString()}` : ""}`
+        window.history.replaceState({}, "", newUrl)
+
+        router.replace(targetRedirect)
+        return
+      } catch (err) {
+        console.error("Google sign-in callback error:", err)
+        toast.error("Failed to complete Google authentication")
+      }
+    }
+
     const verified = searchParams.get("verified")
     const reset = searchParams.get("reset")
     if (verified) toast("Email verified successfully! Please sign in.")
@@ -39,6 +87,7 @@ export function LoginForm() {
     if (error) {
       const messages: Record<string, string> = {
         oauth_failed: "Google login failed. Please try again.",
+        google_session_not_found: "Google session could not be established. Please try again.",
         no_session_found: "Session could not be established.",
         no_user_found: "User data not found in Google response.",
         oauth_callback_failed: "Error occurred during Google callback.",
