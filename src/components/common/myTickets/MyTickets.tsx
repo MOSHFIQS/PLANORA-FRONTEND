@@ -25,6 +25,7 @@ type Ticket = {
   };
 };
 
+
 type Props = { data: Ticket[] };
 
 function formatDate(dateStr?: string) {
