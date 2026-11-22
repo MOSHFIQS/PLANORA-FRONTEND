@@ -14,7 +14,7 @@ export default function PrivacyPolicyPage() {
                     <p className="text-gray-500">Last Updated: October 2025</p>
                </div>
 
-               <div className="bg-white rounded-3xl p-8 md:p-12 shadow-sm border border-gray-100 prose prose-lg prose-indigo max-w-none text-gray-700">
+               <div className="bg-white rounded-md p-8 md:p-12 shadow-sm border border-gray-100 prose prose-lg prose-indigo max-w-none text-gray-700">
                     <p className="lead text-xl text-gray-600 mb-8">
                          At Planora, we take your privacy seriously. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website and use our platform.
                     </p>
@@ -53,7 +53,7 @@ export default function PrivacyPolicyPage() {
                     <h2 className="text-2xl font-bold text-[#181759] mt-10 mb-4">5. Contact Us</h2>
                     <p>
                          If you have questions or comments about this Privacy Policy, please contact us at:<br/>
-                         <a href="mailto:privacy@planora.com" className="text-[#FE7743] hover:underline font-semibold mt-2 inline-block">privacy@planora.com</a>
+                         <a href="mailto:privacy@planora.com" className="text-[#4F46E5] hover:underline font-semibold mt-2 inline-block">privacy@planora.com</a>
                     </p>
                </div>
           </div>

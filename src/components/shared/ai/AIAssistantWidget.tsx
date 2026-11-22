@@ -65,7 +65,7 @@ export default function AIAssistantWidget() {
 
   // ── Shared card style (light) ──
   const card =
-    "rounded-xl border border-[#e8e3f0] bg-white hover:bg-[#f7f4ff] transition-all duration-150 shadow-sm hover:shadow-md";
+    "rounded-md border border-[#e8e3f0] bg-white hover:bg-[#f7f4ff] transition-all duration-150 shadow-sm hover:shadow-md";
 
   return (
     <div className="fixed bottom-6 right-6 z-[9999] flex flex-col items-end gap-3 pointer-events-none">
@@ -73,7 +73,7 @@ export default function AIAssistantWidget() {
       {/* ── Panel ── */}
       <div
         className={[
-          "w-[340px] flex flex-col overflow-hidden rounded-2xl pointer-events-auto",
+          "w-[340px] flex flex-col overflow-hidden rounded-md pointer-events-auto",
           "transition-all duration-200 ease-out origin-bottom-right shadow border-2",
           isOpen
             ? "opacity-100 scale-100 translate-y-0"
@@ -111,7 +111,7 @@ export default function AIAssistantWidget() {
               <div className="flex items-center gap-2">
                 <span className="text-sm font-bold text-gray-900">Planora AI</span>
                 <span
-                  className="text-[9px] font-bold tracking-widest px-1.5 py-0.5 rounded-full"
+                  className="text-[9px] font-bold tracking-widest px-1.5 py-0.5 rounded-md"
                   style={{ background: "#ede9fe", color: "#7c3aed", border: "1px solid #c4b5fd" }}
                 >
                   BETA
@@ -136,11 +136,11 @@ export default function AIAssistantWidget() {
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className="flex-1 flex items-center justify-center gap-1 py-1.5 rounded-full text-[10.5px] font-semibold transition-all duration-150"
+              className="flex-1 flex items-center justify-center gap-1 py-1.5 rounded-md text-[10.5px] font-semibold transition-all duration-150"
               style={
                 activeTab === tab.id
                   ? {
-                    background: "#FE7743",
+                    background: "#4F46E5",
                     color: "#fff"
                   }
                   : { color: "#9ca3af", background: "transparent" }
@@ -178,7 +178,7 @@ export default function AIAssistantWidget() {
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
                       placeholder="Search events, venues, types…"
-                      className="w-full pl-8 pr-3 py-2 text-sm text-gray-800 placeholder:text-gray-400 focus:outline-none rounded-xl bg-white border border-[#ddd6f3] focus:border-violet-400 focus:ring-2 focus:ring-violet-100 transition-all"
+                      className="w-full pl-8 pr-3 py-2 text-sm text-gray-800 placeholder:text-gray-400 focus:outline-none rounded-md bg-white border border-[#ddd6f3] focus:border-violet-400 focus:ring-2 focus:ring-violet-100 transition-all"
                     />
                   </div>
 
@@ -222,7 +222,7 @@ export default function AIAssistantWidget() {
                   ) : (
                     <div className="flex flex-col items-center justify-center py-10 gap-3 text-center">
                       <div
-                        className="w-10 h-10 rounded-xl flex items-center justify-center"
+                        className="w-10 h-10 rounded-md flex items-center justify-center"
                         style={{ background: "#ede9fe", border: "1px solid #c4b5fd" }}
                       >
                         <Search size={17} className="text-violet-600" />
@@ -248,7 +248,7 @@ export default function AIAssistantWidget() {
                         onClick={() => navigate(`/events/${event.id}`)}
                         className={`${card} flex items-center gap-3 p-3 w-full text-left`}
                       >
-                        <div className="w-11 h-11 rounded-xl overflow-hidden flex-shrink-0 border border-violet-100">
+                        <div className="w-11 h-11 rounded-md overflow-hidden flex-shrink-0 border border-violet-100">
                           {event.images?.[0]
                             ? <img src={event.images[0]} alt={event.title} className="w-full h-full object-cover" />
                             : <div className="w-full h-full" style={{ background: "linear-gradient(135deg,#7c3aed,#4f46e5)" }} />
@@ -257,14 +257,14 @@ export default function AIAssistantWidget() {
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center gap-1.5 mb-1">
                             <span
-                              className="text-[9px] font-bold px-1.5 py-0.5 rounded-full"
+                              className="text-[9px] font-bold px-1.5 py-0.5 rounded-md"
                               style={{ background: "#dcfce7", color: "#16a34a", border: "1px solid #bbf7d0" }}
                             >
                               ✦ Recommended
                             </span>
                             {event.type === "ONLINE" && (
                               <span
-                                className="text-[9px] font-bold px-1.5 py-0.5 rounded-full flex items-center gap-0.5"
+                                className="text-[9px] font-bold px-1.5 py-0.5 rounded-md flex items-center gap-0.5"
                                 style={{ background: "#ede9fe", color: "#7c3aed", border: "1px solid #c4b5fd" }}
                               >
                                 <Wifi size={8} /> Online
@@ -284,7 +284,7 @@ export default function AIAssistantWidget() {
 
                   {!user?.id && (
                     <div
-                      className="mt-1 rounded-xl p-3 text-center"
+                      className="mt-1 rounded-md p-3 text-center"
                       style={{ background: "#ede9fe", border: "1px solid #c4b5fd" }}
                     >
                       <p className="text-[10px] mb-2 text-violet-500">
@@ -292,7 +292,7 @@ export default function AIAssistantWidget() {
                       </p>
                       <button
                         onClick={() => navigate("/login")}
-                        className="text-[10px] font-bold px-3 py-1 rounded-full bg-violet-600 text-white hover:bg-violet-700 transition-colors"
+                        className="text-[10px] font-bold px-3 py-1 rounded-md bg-violet-600 text-white hover:bg-violet-700 transition-colors"
                       >
                         Sign in →
                       </button>
@@ -315,8 +315,8 @@ export default function AIAssistantWidget() {
                         className={`${card} flex flex-col p-2.5 text-left`}
                       >
                         <div className="flex items-center gap-1 mb-1.5">
-                          <Flame size={10} className="text-orange-500" />
-                          <span className="text-[9px] font-bold text-orange-500">
+                          <Flame size={10} className="text-indigo-600" />
+                          <span className="text-[9px] font-bold text-indigo-600">
                             {idx === 0 ? "Hot" : `#${idx + 1}`}
                           </span>
                           {event.isFeatured && <span className="text-[9px] text-amber-500">★</span>}
@@ -368,7 +368,7 @@ export default function AIAssistantWidget() {
                   ))}
 
                   <div
-                    className="mt-1 px-3 py-2.5 rounded-xl"
+                    className="mt-1 px-3 py-2.5 rounded-md"
                     style={{ background: "#f0ecff", border: "1px solid #e0d9f8" }}
                   >
                     <p className="text-[9px] font-bold uppercase tracking-widest text-gray-400 mb-1">

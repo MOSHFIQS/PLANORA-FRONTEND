@@ -54,12 +54,12 @@ export default function EventsSlider({ events }: Props) {
             return (
               <Card
                 key={event.id}
-                className="p-3 rounded-4xl  border shadow flex flex-col gap-3"
+                className="p-3 rounded-md border shadow flex flex-col gap-3"
               >
                 {/* Image Section */}
                 <Link
                   href={`/events/${event.id}`}
-                  className="relative h-52 xl:h-64 w-full overflow-hidden rounded-2xl group"
+                  className="relative h-52 xl:h-64 w-full overflow-hidden rounded-md group"
                 >
                   {event?.images?.[0] && (
                     <AppImage
@@ -73,14 +73,14 @@ export default function EventsSlider({ events }: Props) {
 
                   {/* Top Left Badge */}
                   {event.type && (
-                    <span className="absolute top-3 left-3 bg-white/80 backdrop-blur px-3 py-1 text-xs rounded-full font-medium">
+                    <span className="absolute top-3 left-3 bg-white/80 backdrop-blur px-3 py-1 text-xs rounded-md font-medium">
                       {event.type}
                     </span>
                   )}
 
                   {/* Top Right Status */}
-                  <span className="absolute top-3 right-3 bg-white/80 backdrop-blur px-3 py-1 text-xs rounded-full flex items-center gap-1">
-                    <span className="w-2 h-2 bg-pink-500 rounded-full"></span>
+                  <span className="absolute top-3 right-3 bg-white/80 backdrop-blur px-3 py-1 text-xs rounded-md flex items-center gap-1">
+                    <span className="w-2 h-2 bg-pink-500 rounded-md"></span>
                     Active
                   </span>
                 </Link>
@@ -117,7 +117,7 @@ export default function EventsSlider({ events }: Props) {
 
                 {/* Button */}
                 <Button
-                  className="w-full rounded-4xl"
+                  className="w-full rounded-md"
                   variant="violet"
                   onClick={() => handleViewEvent(event.id)}
                 >
@@ -147,12 +147,12 @@ export default function EventsSlider({ events }: Props) {
                   <CarouselItem key={event.id} className="pl-3 basis-1/1 sm:basis-1/2 md:basis-1/2 lg:basis-1/3 xl:basis-1/4 ">
                     <Card
                       key={event.id}
-                      className="p-3 rounded-4xl  border-2  border-gray-300 flex flex-col gap-3"
+                      className="p-3 rounded-md border-2 border-gray-300 flex flex-col gap-3"
                     >
                       {/* Image Section */}
                       <Link
                         href={`/events/${event.id}`}
-                        className="relative h-50 xl:h-55 w-full overflow-hidden rounded-2xl group"
+                        className="relative h-50 xl:h-55 w-full overflow-hidden rounded-md group"
                       >
                         {event?.images?.[0] && (
                           <AppImage
@@ -166,14 +166,14 @@ export default function EventsSlider({ events }: Props) {
 
                         {/* Type Badge */}
                         {event.type && (
-                          <span className="absolute top-3 left-3 bg-white/80 backdrop-blur px-3 py-1 text-xs rounded-full font-medium">
+                          <span className="absolute top-3 left-3 bg-white/80 backdrop-blur px-3 py-1 text-xs rounded-md font-medium">
                             {event.type}
                           </span>
                         )}
 
                         {/* Status */}
-                        <span className="absolute top-3 right-3 bg-white/80 backdrop-blur px-3 py-1 text-xs rounded-full flex items-center gap-1">
-                          <span className="w-2 h-2 bg-pink-500 rounded-full"></span>
+                        <span className="absolute top-3 right-3 bg-white/80 backdrop-blur px-3 py-1 text-xs rounded-md flex items-center gap-1">
+                          <span className="w-2 h-2 bg-pink-500 rounded-md"></span>
                           Active
                         </span>
                       </Link>
@@ -210,7 +210,7 @@ export default function EventsSlider({ events }: Props) {
 
                       {/* Button */}
                       <Button
-                        className="w-full rounded-4xl"
+                        className="w-full rounded-md"
                         variant="violet"
                         onClick={() => handleViewEvent(event.id)}
                       >

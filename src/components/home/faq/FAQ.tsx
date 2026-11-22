@@ -45,7 +45,7 @@ const FAQ = () => {
           description="Got questions? We've got answers. Here are the most common questions we hear from our organizers and attendees."
         />
 
-        <div className="bg-white dark:bg-gray-900  shadow-sm border border-gray-100 dark:border-gray-800 p-6 md:p-10">
+        <div className="bg-white dark:bg-gray-900 shadow-sm border border-gray-100 dark:border-gray-800 p-6 md:p-10">
           <Accordion type="single" collapsible className="w-full">
             {faqs.map((faq, index) => (
               <AccordionItem key={index} value={`item-${index}`}>

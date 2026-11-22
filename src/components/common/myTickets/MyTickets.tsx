@@ -60,7 +60,7 @@ export default function MyTickets({ data }: Props) {
         return (
           <div
             key={ticket.id}
-            className="flex rounded-xl overflow-visible"
+            className="flex rounded-md overflow-visible"
             style={{ background: "#355872", fontFamily: "'Inter','Segoe UI',sans-serif" }}
           >
             {/* LEFT: Image */}
@@ -85,7 +85,7 @@ export default function MyTickets({ data }: Props) {
             {/* Separator */}
             <div className="relative flex-shrink-0" style={{ width: "12px" }}>
               {["-6px", "auto"].map((t, i) => (
-                <div key={i} className="absolute rounded-full z-10" style={{ width: "12px", height: "12px", background: "#FFF5F2", top: i === 0 ? "-6px" : "auto", bottom: i === 1 ? "-6px" : "auto", left: "50%", transform: "translateX(-50%)" }} />
+                <div key={i} className="absolute rounded-md z-10" style={{ width: "12px", height: "12px", background: "#F8FAFC", top: i === 0 ? "-6px" : "auto", bottom: i === 1 ? "-6px" : "auto", left: "50%", transform: "translateX(-50%)" }} />
               ))}
               <div className="h-full mx-auto" style={{ borderLeft: "1.5px dashed rgba(255,255,255,0.2)", width: "0" }} />
             </div>
@@ -97,7 +97,7 @@ export default function MyTickets({ data }: Props) {
                 <Info
                   label="Status"
                   value={
-                    <span className="inline-block px-1.5 py-px rounded-full font-semibold" style={{ fontSize: "9px", background: isValid ? "#dcfce7" : "#fee2e2", color: isValid ? "#15803d" : "#dc2626" }}>
+                    <span className="inline-block px-1.5 py-px rounded-md font-semibold" style={{ fontSize: "9px", background: isValid ? "#dcfce7" : "#fee2e2", color: isValid ? "#15803d" : "#dc2626" }}>
                       {ticket.status}
                     </span>
                   }
@@ -116,13 +116,13 @@ export default function MyTickets({ data }: Props) {
             {/* Separator */}
             <div className="relative flex-shrink-0" style={{ width: "12px" }}>
               {["-6px", "auto"].map((t, i) => (
-                <div key={i} className="absolute rounded-full z-10" style={{ width: "12px", height: "12px", background: "#FFF5F2", top: i === 0 ? "-6px" : "auto", bottom: i === 1 ? "-6px" : "auto", left: "50%", transform: "translateX(-50%)" }} />
+                <div key={i} className="absolute rounded-md z-10" style={{ width: "12px", height: "12px", background: "#F8FAFC", top: i === 0 ? "-6px" : "auto", bottom: i === 1 ? "-6px" : "auto", left: "50%", transform: "translateX(-50%)" }} />
               ))}
               <div className="h-full mx-auto" style={{ borderLeft: "1.5px dashed rgba(255,255,255,0.2)", width: "0" }} />
             </div>
 
             {/* RIGHT: QR */}
-            <div className="flex-shrink-0 flex flex-col items-center justify-center p-2  gap-1" style={{ width: "68px" }}>
+            <div className="flex-shrink-0 flex flex-col items-center justify-center p-2 gap-1" style={{ width: "68px" }}>
               <p className="font-bold text-white/70 text-center leading-tight" style={{ fontSize: "9px" }}>Scan to Enter</p>
               <div className="bg-white p-1 rounded-md">
                 <QRCodeCanvas value={ticket.qrCode} size={48} />

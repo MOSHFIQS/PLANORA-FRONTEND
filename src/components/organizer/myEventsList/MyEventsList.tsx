@@ -299,10 +299,10 @@ export default function MyEventsList({ myEvents }: { myEvents: Event[] }) {
           {myEvents?.map((event) => (
             <Card
               key={event.id}
-              className="p-3 rounded-4xl  border-2 border-gray-300 flex flex-col gap-3"
+              className="p-3 rounded-md border-2 border-gray-300 flex flex-col gap-3"
             >
               {/* Image */}
-              <div className="relative h-52 w-full overflow-hidden rounded-2xl group">
+              <div className="relative h-52 w-full overflow-hidden rounded-md group">
                 {event?.images?.[0] ? (
                   <AppImage
                     src={event.images[0]}
@@ -319,13 +319,13 @@ export default function MyEventsList({ myEvents }: { myEvents: Event[] }) {
 
                 {/* Type */}
                 {event.type && (
-                  <span className="absolute top-3 left-3 bg-white/80 backdrop-blur px-3 py-1 text-xs rounded-full font-medium">
+                  <span className="absolute top-3 left-3 bg-white/80 backdrop-blur px-3 py-1 text-xs rounded-md font-medium">
                     {event.type}
                   </span>
                 )}
 
                 {/* Visibility */}
-                <span className="absolute top-3 right-3 bg-white/80 backdrop-blur px-3 py-1 text-xs rounded-full">
+                <span className="absolute top-3 right-3 bg-white/80 backdrop-blur px-3 py-1 text-xs rounded-md">
                   {event.visibility}
                 </span>
               </div>
@@ -358,7 +358,7 @@ export default function MyEventsList({ myEvents }: { myEvents: Event[] }) {
                 <Button
                   size="icon"
                   variant="outline"
-                  className="flex-1 rounded-4xl"
+                  className="flex-1 rounded-md"
                   onClick={() => router.push(`/organizer-dashboard/events/${event.id}`)}
                 >
                   <Eye className="w-4 h-4" />
@@ -366,7 +366,7 @@ export default function MyEventsList({ myEvents }: { myEvents: Event[] }) {
 
                 <Button
                   size="icon"
-                  className="flex-1 rounded-4xl"
+                  className="flex-1 rounded-md"
                   onClick={() =>
                     router.push(`/organizer-dashboard/events/update/${event.id}`)
                   }
@@ -376,7 +376,7 @@ export default function MyEventsList({ myEvents }: { myEvents: Event[] }) {
 
                 <Button
                   asChild
-                  className="flex-1 rounded-4xl"
+                  className="flex-1 rounded-md"
                   variant="violet"
                 >
                   <Link href={`/organizer-dashboard/review/event/${event.id}`}>
@@ -392,7 +392,7 @@ export default function MyEventsList({ myEvents }: { myEvents: Event[] }) {
                   <AlertDialogTrigger asChild>
                     <Button
                       size="icon"
-                      className="flex-1 rounded-4xl"
+                      className="flex-1 rounded-md"
                       variant="destructive"
                       onClick={() => setOpenDialogId(event.id)}
                     >

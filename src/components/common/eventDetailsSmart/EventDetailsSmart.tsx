@@ -66,12 +66,12 @@ const EventDetailsSmart = ({ type, data }: Props) => {
   };
 
   return (
-    <div className="min-h-screen bg-[#FDFBF7]/80 pb-20 pt-6 px-3 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-8">
+    <div className="min-h-screen bg-[#F8FAFC]/80 pb-20 pt-6 px-3 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-8">
       {/* ── Top Navigation Bar ────────────────────────────────────────── */}
       <div className="flex items-center justify-between gap-4">
         <button
           onClick={() => router.back()}
-          className="inline-flex items-center gap-2 text-sm font-semibold text-slate-700 hover:text-slate-950 transition-colors bg-white px-4 py-2 rounded-full border border-slate-200/90 shadow-2xs"
+          className="inline-flex items-center gap-2 text-sm font-semibold text-slate-700 hover:text-slate-950 transition-colors bg-white px-4 py-2 rounded-md border border-slate-200/90 shadow-2xs"
         >
           <ArrowLeft className="w-4 h-4" />
           <span>Back</span>
@@ -80,7 +80,7 @@ const EventDetailsSmart = ({ type, data }: Props) => {
         <div className="flex items-center gap-2">
           <button
             onClick={handleCopyLink}
-            className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-700 hover:text-slate-950 bg-white px-4 py-2 rounded-full border border-slate-200/90 shadow-2xs transition-colors"
+            className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-700 hover:text-slate-950 bg-white px-4 py-2 rounded-md border border-slate-200/90 shadow-2xs transition-colors"
           >
             {copiedLink ? (
               <>
@@ -109,7 +109,7 @@ const EventDetailsSmart = ({ type, data }: Props) => {
         {/* ── Left Column (Content Cards - 8 cols) ─────────────────────── */}
         <div className="lg:col-span-8 space-y-6">
           {/* Card 1: Header & Pricing Card (Like Reference Header) */}
-          <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-xs space-y-3">
+          <div className="bg-white rounded-md p-6 sm:p-8 border border-slate-200/90 shadow-xs space-y-3">
             <div className="flex items-center justify-between gap-4 flex-wrap">
               {/* Big Price */}
               <div>
@@ -132,10 +132,10 @@ const EventDetailsSmart = ({ type, data }: Props) => {
 
               {/* Status Badge */}
               <div className="flex items-center gap-2">
-                <span className="inline-flex items-center px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-100 text-emerald-800 border border-emerald-200">
+                <span className="inline-flex items-center px-4 py-1.5 rounded-md text-xs font-bold uppercase tracking-wider bg-emerald-100 text-emerald-800 border border-emerald-200">
                   Active
                 </span>
-                <span className="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider bg-slate-100 text-slate-700 border border-slate-200">
+                <span className="inline-flex items-center px-3 py-1.5 rounded-md text-xs font-semibold uppercase tracking-wider bg-slate-100 text-slate-700 border border-slate-200">
                   {event?.type || "EVENT"}
                 </span>
               </div>
@@ -177,7 +177,7 @@ const EventDetailsSmart = ({ type, data }: Props) => {
           </div>
 
           {/* Card 2: About / Description (Like Reference "About" Card) */}
-          <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-xs space-y-4">
+          <div className="bg-white rounded-md p-6 sm:p-8 border border-slate-200/90 shadow-xs space-y-4">
             <h2 className="text-xl sm:text-2xl font-bold text-slate-900">
               About
             </h2>
@@ -192,7 +192,7 @@ const EventDetailsSmart = ({ type, data }: Props) => {
           </div>
 
           {/* Card 3: Key Details (Exact Reference 3x2 Grid Pattern) */}
-          <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-xs space-y-5">
+          <div className="bg-white rounded-md p-6 sm:p-8 border border-slate-200/90 shadow-xs space-y-5">
             <h2 className="text-xl sm:text-2xl font-bold text-slate-900">
               Key Details
             </h2>
@@ -235,7 +235,7 @@ const EventDetailsSmart = ({ type, data }: Props) => {
 
           {/* Card 4: Online Meeting Link (if ONLINE) */}
           {event?.type === "ONLINE" && event?.meetingLink && (
-            <div className="bg-linear-to-r from-blue-50 to-indigo-50/50 rounded-3xl p-6 sm:p-8 border border-blue-200/70 shadow-xs space-y-4">
+            <div className="bg-linear-to-r from-blue-50 to-indigo-50/50 rounded-md p-6 sm:p-8 border border-blue-200/70 shadow-xs space-y-4">
               <div className="flex items-center justify-between gap-3">
                 <div className="flex items-center gap-2 text-blue-950 font-bold text-lg">
                   <Video className="w-5 h-5 text-blue-600" />
@@ -250,12 +250,12 @@ const EventDetailsSmart = ({ type, data }: Props) => {
                     href={event.meetingLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-blue-600 text-white font-semibold text-sm hover:bg-blue-700 shadow-sm transition"
+                    className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-md bg-blue-600 text-white font-semibold text-sm hover:bg-blue-700 shadow-sm transition"
                   >
                     <span>Launch Meeting</span>
                     <ExternalLink className="w-4 h-4" />
                   </a>
-                  <span className="text-xs text-slate-600 font-mono break-all px-3 py-2 bg-white/80 rounded-xl border border-blue-100">
+                  <span className="text-xs text-slate-600 font-mono break-all px-3 py-2 bg-white/80 rounded-md border border-blue-100">
                     {event.meetingLink}
                   </span>
                 </div>
@@ -269,13 +269,13 @@ const EventDetailsSmart = ({ type, data }: Props) => {
 
           {/* Card 5: Payment & Invoice History (FULL Mode only) */}
           {isFull && payment?.length > 0 && (
-            <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-xs space-y-4">
+            <div className="bg-white rounded-md p-6 sm:p-8 border border-slate-200/90 shadow-xs space-y-4">
               <h2 className="text-xl sm:text-2xl font-bold text-slate-900 flex items-center gap-2">
                 <ShieldCheck className="w-5 h-5 text-emerald-600" />
                 <span>Payment & Invoices</span>
               </h2>
 
-              <div className="overflow-x-auto rounded-2xl border border-slate-200">
+              <div className="overflow-x-auto rounded-md border border-slate-200">
                 <Table>
                   <TableHeader className="bg-slate-50">
                     <TableRow>
@@ -361,7 +361,7 @@ const EventDetailsSmart = ({ type, data }: Props) => {
 
           {/* Card 6: Listing Host / Organizer Card (Exact "Listing Agent" Style) */}
           {event?.organizer && (
-            <div className="bg-white rounded-3xl p-6 sm:p-7 border border-slate-200/90 shadow-xs space-y-4">
+            <div className="bg-white rounded-md p-6 sm:p-7 border border-slate-200/90 shadow-xs space-y-4">
               <span className="text-xs uppercase tracking-wider text-slate-400 font-bold block">
                 Listing Host
               </span>
@@ -382,7 +382,7 @@ const EventDetailsSmart = ({ type, data }: Props) => {
                           {event.organizer.email}
                         </span>
                       )}
-                      <span className="px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 font-medium">
+                      <span className="px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 font-medium">
                         Verified Organizer
                       </span>
                     </div>
@@ -392,7 +392,7 @@ const EventDetailsSmart = ({ type, data }: Props) => {
                 <button
                   type="button"
                   onClick={() => toast.info(`Organizer contact: ${event.organizer.email || "support@planora.com"}`)}
-                  className="px-5 py-2 rounded-full border border-slate-300 text-slate-800 text-xs font-bold hover:bg-slate-100 transition shadow-2xs"
+                  className="px-5 py-2 rounded-md border border-slate-300 text-slate-800 text-xs font-bold hover:bg-slate-100 transition shadow-2xs"
                 >
                   Contact
                 </button>
@@ -403,13 +403,13 @@ const EventDetailsSmart = ({ type, data }: Props) => {
 
         {/* ── Right Column: Sticky Booking / Showing Card (4 cols) ────── */}
         <div className="lg:col-span-4 space-y-6 lg:sticky lg:top-24">
-          <div className="bg-white rounded-3xl p-6 sm:p-7 border border-slate-200/90 shadow-xl shadow-slate-100 space-y-6">
+          <div className="bg-white rounded-md p-6 sm:p-7 border border-slate-200/90 shadow-xl shadow-slate-100 space-y-6">
             <h2 className="text-xl font-bold text-slate-900">
               Request to Join
             </h2>
 
             {/* Quick Pricing Summary */}
-            <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200/70 flex items-center justify-between">
+            <div className="p-4 rounded-md bg-slate-50 border border-slate-200/70 flex items-center justify-between">
               <div>
                 <span className="text-xs uppercase tracking-wider text-slate-400 font-bold block">
                   Total Due
@@ -418,15 +418,15 @@ const EventDetailsSmart = ({ type, data }: Props) => {
                   {isFree ? "Free" : `৳${event?.fee}`}
                 </span>
               </div>
-              <div className="px-3 py-1 rounded-full bg-white border border-slate-200 text-xs font-semibold text-slate-700">
+              <div className="px-3 py-1 rounded-md bg-white border border-slate-200 text-xs font-semibold text-slate-700">
                 General Admission
               </div>
             </div>
 
             {/* Event Time Pill */}
             {date && (
-              <div className="p-3.5 rounded-2xl bg-violet-50/70 border border-violet-100 flex items-center gap-3 text-xs">
-                <Calendar className="w-4 h-4 text-[#725CAD] shrink-0" />
+              <div className="p-3.5 rounded-md bg-violet-50/70 border border-violet-100 flex items-center gap-3 text-xs">
+                <Calendar className="w-4 h-4 text-[#4F46E5] shrink-0" />
                 <div>
                   <p className="font-bold text-slate-800">{format(date, "EEEE, MMMM d, yyyy")}</p>
                   <p className="text-slate-500">{format(date, "h:mm a")}</p>
@@ -436,7 +436,7 @@ const EventDetailsSmart = ({ type, data }: Props) => {
 
             {/* Attendee Info (if logged in) */}
             {currentUser && (
-              <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200/70 flex items-center gap-3 text-xs">
+              <div className="p-3.5 rounded-md bg-slate-50 border border-slate-200/70 flex items-center gap-3 text-xs">
                 <UserCheck className="w-4 h-4 text-emerald-600 shrink-0" />
                 <div className="min-w-0">
                   <p className="font-bold text-slate-800 truncate">{currentUser.name}</p>
@@ -448,24 +448,24 @@ const EventDetailsSmart = ({ type, data }: Props) => {
             {/* Main Action Button (Black Pill Button matching Reference) */}
             <div>
               {isOrganizer ? (
-                <div className="w-full py-3.5 text-center bg-slate-100 border border-slate-200 text-slate-700 font-bold rounded-full text-xs uppercase tracking-wider">
+                <div className="w-full py-3.5 text-center bg-slate-100 border border-slate-200 text-slate-700 font-bold rounded-md text-xs uppercase tracking-wider">
                   You are the host
                 </div>
               ) : isJoined ? (
                 <div className="space-y-3">
-                  <div className="w-full flex items-center justify-center gap-2 p-3 bg-emerald-50 border border-emerald-200 rounded-2xl text-emerald-800 font-bold text-xs">
+                  <div className="w-full flex items-center justify-center gap-2 p-3 bg-emerald-50 border border-emerald-200 rounded-md text-emerald-800 font-bold text-xs">
                     <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
                     <span>You are registered for this event!</span>
                   </div>
                   <button
                     onClick={() => router.push("/dashboard/my/tickets")}
-                    className="w-full py-3.5 px-6 rounded-full font-bold text-sm text-white bg-slate-950 hover:bg-slate-800 transition shadow-md"
+                    className="w-full py-3.5 px-6 rounded-md font-bold text-sm text-white bg-slate-950 hover:bg-slate-800 transition shadow-md"
                   >
                     View My Ticket
                   </button>
                 </div>
               ) : isPending ? (
-                <div className="w-full py-3.5 text-center bg-amber-50 border border-amber-200 text-amber-800 font-bold rounded-full text-xs flex items-center justify-center gap-2">
+                <div className="w-full py-3.5 text-center bg-amber-50 border border-amber-200 text-amber-800 font-bold rounded-md text-xs flex items-center justify-center gap-2">
                   <Clock className="w-4 h-4 text-amber-600" />
                   <span>Registration Pending Approval</span>
                 </div>
@@ -475,7 +475,7 @@ const EventDetailsSmart = ({ type, data }: Props) => {
                     toast.info("Please sign in to join this event");
                     router.push(`/login?redirect=${encodeURIComponent(`/events/${event?.id}`)}`);
                   }}
-                  className="w-full py-3.5 px-6 rounded-full font-bold text-sm text-white bg-slate-950 hover:bg-slate-800 transition shadow-md"
+                  className="w-full py-3.5 px-6 rounded-md font-bold text-sm text-white bg-slate-950 hover:bg-slate-800 transition shadow-md"
                 >
                   {isFree ? "Sign In to Join" : `Sign In & Pay (৳${event?.fee})`}
                 </button>
@@ -488,7 +488,7 @@ const EventDetailsSmart = ({ type, data }: Props) => {
                       eventId: event.id,
                     });
                   }}
-                  className="w-full py-3.5 px-6 rounded-full font-bold text-sm text-white bg-slate-950 hover:bg-slate-800 transition shadow-md disabled:opacity-60"
+                  className="w-full py-3.5 px-6 rounded-md font-bold text-sm text-white bg-slate-950 hover:bg-slate-800 transition shadow-md disabled:opacity-60"
                 >
                   {loadingId === event?.id
                     ? "Processing..."
@@ -517,7 +517,7 @@ const EventDetailsSmart = ({ type, data }: Props) => {
                 <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 block">
                   Your Digital Ticket Pass
                 </span>
-                <div className="inline-block p-3 bg-white rounded-2xl border border-slate-200 shadow-2xs">
+                <div className="inline-block p-3 bg-white rounded-md border border-slate-200 shadow-2xs">
                   <QRCodeCanvas value={ticket.qrCode} size={150} />
                 </div>
                 <p className="text-xs font-semibold text-slate-600">

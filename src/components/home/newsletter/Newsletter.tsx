@@ -6,7 +6,7 @@ const Newsletter = () => {
   return (
     <section className="max-w-7xl mx-auto shadow border bg-white py-10 mb-10">
       <div className="">
-        <div className="relative overflow-hidden  ">
+        <div className="relative overflow-hidden ">
 
           {/* Grid texture overlay */}
           <div
@@ -18,11 +18,11 @@ const Newsletter = () => {
 
           <div className="relative z-10 px-8 py-16 md:px-20 md:py-20 text-center">
             {/* Eyebrow */}
-            <span className="inline-block text-teal-400 text-xs font-bold tracking-[0.25em] uppercase mb-6 border border-teal-400/30 px-4 py-1.5 rounded-full">
+            <span className="inline-block text-teal-400 text-xs font-bold tracking-[0.25em] uppercase mb-6 border border-teal-400/30 px-4 py-1.5 rounded-md">
               Newsletter
             </span>
 
-            <h2 className="text-4xl md:text-6xl font-black  mb-5 leading-[1.05] tracking-tight">
+            <h2 className="text-4xl md:text-6xl font-black mb-5 leading-[1.05] tracking-tight">
               Stay in the{" "}
               <span className="">Loop</span>
             </h2>
@@ -35,7 +35,7 @@ const Newsletter = () => {
               <input
                 type="email"
                 placeholder="your@email.com"
-                className="flex-1 px-5 py-3.5 rounded bg-white border  text-white placeholder:text-gray-600 focus:outline-none focus:border-teal-500/60 focus:bg-white/8 transition-all text-sm"
+                className="flex-1 px-5 py-3.5 rounded bg-white border text-white placeholder:text-gray-600 focus:outline-none focus:border-teal-500/60 focus:bg-white/8 transition-all text-sm"
               />
               <button
                 type="button"

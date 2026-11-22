@@ -15,7 +15,7 @@ export default function AboutUs({ statData }: { statData: PublicStats }) {
     <div className="min-h-screen bg-[#fdfaf6] opacity-85">
 
       {/* HERO SECTION */}
-      <section className="relative py-40 text-center bg-gradient-to-b from-black via-black to-[#fdfaf6]  text-white">
+      <section className="relative py-40 text-center bg-gradient-to-b from-black via-black to-[#fdfaf6] text-white">
         <div className="max-w-4xl mx-auto px-4 space-y-6">
 
           <h1 className="text-4xl md:text-5xl font-bold">
@@ -79,7 +79,7 @@ export default function AboutUs({ statData }: { statData: PublicStats }) {
         <div className="max-w-6xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
 
           <div>
-            <h2 className="text-5xl font-extrabold text-orange-500">
+            <h2 className="text-5xl font-extrabold text-indigo-600">
               <CountUp
                 end={stats?.totalActiveUsers || 0}
                 duration={3}
@@ -92,7 +92,7 @@ export default function AboutUs({ statData }: { statData: PublicStats }) {
           </div>
 
           <div>
-            <h2 className="text-5xl font-extrabold text-orange-500">
+            <h2 className="text-5xl font-extrabold text-indigo-600">
               <CountUp
                 end={stats?.totalEventsDone || 0}
                 duration={3}
@@ -104,7 +104,7 @@ export default function AboutUs({ statData }: { statData: PublicStats }) {
           </div>
 
           <div>
-            <h2 className="text-5xl font-extrabold text-orange-500">
+            <h2 className="text-5xl font-extrabold text-indigo-600">
               <CountUp
                 end={stats?.totalOrganizers || 0}
                 duration={3}
@@ -116,7 +116,7 @@ export default function AboutUs({ statData }: { statData: PublicStats }) {
           </div>
 
           {/* <div>
-            <h2 className="text-5xl font-extrabold text-orange-500">
+            <h2 className="text-5xl font-extrabold text-indigo-600">
               <CountUp
                 end={stats?.totalParticipants || 0}
                 duration={3}
@@ -128,7 +128,7 @@ export default function AboutUs({ statData }: { statData: PublicStats }) {
           </div> */}
 
           <div>
-            <h2 className="text-5xl font-extrabold text-orange-500">
+            <h2 className="text-5xl font-extrabold text-indigo-600">
               <CountUp
                 end={stats?.totalTicketsCreated || 0}
                 duration={3}

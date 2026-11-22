@@ -322,7 +322,7 @@
 // //       {participants.length === 0 && <p className="col-span-full text-center text-muted-foreground">No participants found.</p>}
 
 // //       {participants.map((p) => (
-// //         <div key={p.id} className="bg-white rounded-xl shadow-md p-5 border hover:shadow-lg transition-shadow flex flex-col justify-between">
+// //         <div key={p.id} className="bg-white rounded-md shadow-md p-5 border hover:shadow-lg transition-shadow flex flex-col justify-between">
 // //           <div className="flex flex-col gap-2">
 // //             {/* Header: Avatar + Name */}
 // //             <div className="flex items-center gap-4 mb-4">
@@ -567,7 +567,7 @@ export default function MyAllEventParticipants({
           {participants.map((p) => (
             <Card
               key={p.id}
-              className="p-4 rounded-4xl  border-2 border-gray-300 flex flex-col justify-between gap-4"
+              className="p-4 rounded-md border-2 border-gray-300 flex flex-col justify-between gap-4"
             >
               <div className="flex flex-col gap-3">
                 {/* Header */}
@@ -628,7 +628,7 @@ export default function MyAllEventParticipants({
                 <AlertDialogTrigger asChild>
                   <Button
                     variant="violet"
-                    className="w-full rounded-4xl"
+                    className="w-full rounded-md"
                     disabled={privateEvents.length === 0}
                     onClick={() => setOpenDialogId(p.id)}
                   >

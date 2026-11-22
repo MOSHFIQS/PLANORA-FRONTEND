@@ -82,18 +82,13 @@ const Features = () => {
           description="Everything you need to plan, promote, and host unforgettable events, all in one intuitive platform."
         />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-gray-200 dark:bg-gray-700 rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700 mt-14">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-gray-200 dark:bg-gray-700 rounded-md overflow-hidden border border-gray-200 dark:border-gray-700 mt-14">
           {features.map((feature, index) => {
             const Icon = feature.icon;
             return (
               <div
                 key={index}
-                className="
-                  group relative bg-white dark:bg-gray-900
-                  p-8 flex flex-col gap-5 cursor-default
-                  transition-all duration-300
-                  hover:z-10
-                "
+                className=" group relative bg-white dark:bg-gray-900 p-8 flex flex-col gap-5 cursor-default transition-all duration-300 hover:z-10 "
                 style={
                   {
                     "--accent": feature.accent,
@@ -108,18 +103,14 @@ const Features = () => {
 
                 {/* faint number watermark */}
                 <span
-                  className="absolute top-4 right-5 text-6xl font-black leading-none select-none
-                    text-gray-100 dark:text-gray-800 transition-all duration-300
-                    group-hover:text-[var(--accent)] group-hover:opacity-10"
+                  className="absolute top-4 right-5 text-6xl font-black leading-none select-none text-gray-100 dark:text-gray-800 transition-all duration-300 group-hover:text-[var(--accent)] group-hover:opacity-10"
                 >
                   {feature.number}
                 </span>
 
                 {/* icon */}
                 <div
-                  className="relative w-12 h-12 rounded-2xl flex items-center justify-center transition-all duration-300
-                    border border-gray-200 dark:border-gray-700
-                    group-hover:border-transparent group-hover:shadow-lg"
+                  className="relative w-12 h-12 rounded-md flex items-center justify-center transition-all duration-300 border border-gray-200 dark:border-gray-700 group-hover:border-transparent group-hover:shadow-lg"
                   style={
                     {
                       boxShadow: "none",
@@ -128,7 +119,7 @@ const Features = () => {
                 >
                   {/* icon bg fill on hover via inline style trick */}
                   <span
-                    className="absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-15"
+                    className="absolute inset-0 rounded-md opacity-0 transition-opacity duration-300 group-hover:opacity-15"
                     style={{ background: feature.accent }}
                   />
                   <Icon
@@ -150,8 +141,7 @@ const Features = () => {
                 {/* text */}
                 <div className="flex flex-col gap-2">
                   <h3
-                    className="text-[15px] font-semibold text-gray-900 dark:text-white tracking-tight
-                      transition-colors duration-300"
+                    className="text-[15px] font-semibold text-gray-900 dark:text-white tracking-tight transition-colors duration-300"
                     style={
                       {
                         // title turns accent on hover via group trick below

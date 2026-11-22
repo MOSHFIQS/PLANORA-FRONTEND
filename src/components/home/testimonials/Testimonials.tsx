@@ -42,7 +42,7 @@ const Testimonials = () => {
         description="Here's what our community of organizers has to say about their experience."
       />
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-gray-200 dark:bg-gray-800 rounded-2xl overflow-hidden">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-gray-200 dark:bg-gray-800 rounded-md overflow-hidden">
           {testimonials.map((testimonial, index) => (
             <div
               key={index}

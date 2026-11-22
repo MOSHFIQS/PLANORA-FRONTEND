@@ -60,7 +60,7 @@ export default function ImageView({
                {imgList.map((img) => (
                     <div
                          key={img.id}
-                         className="relative rounded-xl border border-gray-200 overflow-hidden group w-36 h-36 flex  items-center justify-center"
+                         className="relative rounded-md border border-gray-200 overflow-hidden group w-36 h-36 flex items-center justify-center"
                     >
                          <Image
                               src={img.img}
@@ -83,7 +83,7 @@ export default function ImageView({
                                    <button
                                         type="button"
                                         onClick={() => handleViewOpen(img)}
-                                        className="bg-white p-2 rounded-full shadow-md hover:bg-gray-100 transition"
+                                        className="bg-white p-2 rounded-md shadow-md hover:bg-gray-100 transition"
                                    >
                                         <Eye className="h-5 w-5 text-gray-800" />
                                    </button>
@@ -91,7 +91,7 @@ export default function ImageView({
                                    <button
                                         type="button"
                                         onClick={() => handleDeleteConfirm(img)}
-                                        className="bg-white p-2 rounded-full shadow-md hover:bg-red-100 transition"
+                                        className="bg-white p-2 rounded-md shadow-md hover:bg-red-100 transition"
                                    >
                                         <Trash2 className="h-5 w-5 text-red-600" />
                                    </button>

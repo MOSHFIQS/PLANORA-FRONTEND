@@ -57,7 +57,7 @@ export default function GoogleLoginButton({
                }}
           >
                {isLoading ? (
-                    <Loader2 size={18} className="animate-spin text-[#725CAD]" />
+                    <Loader2 size={18} className="animate-spin text-[#4F46E5]" />
                ) : (
                     <svg
                          width="18"

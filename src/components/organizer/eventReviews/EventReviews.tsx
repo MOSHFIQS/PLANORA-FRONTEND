@@ -83,7 +83,7 @@ const EventReviews: React.FC<EventReviewsProps> = ({ organizersReviews }) => {
                     {reviews.map((review) => (
                     <Card
                          key={review.id}
-                         className="p-4 rounded-2xl border-2 border-gray-300 flex flex-col gap-3 transition hover:shadow-md hover:border-purple-400"
+                         className="p-4 rounded-md border-2 border-gray-300 flex flex-col gap-3 transition hover:shadow-md hover:border-purple-400"
                     >
                          {/* Header */}
                          <CardHeader className="p-0 flex items-center gap-3">
@@ -91,7 +91,7 @@ const EventReviews: React.FC<EventReviewsProps> = ({ organizersReviews }) => {
                               <AppImage
                                    src={review.user?.image}
                                    alt={review.user?.name}
-                                   className="w-10 h-10 rounded-full object-cover border-2  "
+                                   className="w-10 h-10 rounded-full object-cover border-2 "
                               />
 
                               {/* User Info */}

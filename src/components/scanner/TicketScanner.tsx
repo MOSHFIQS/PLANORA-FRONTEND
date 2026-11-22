@@ -94,7 +94,7 @@
 
 //         <CardContent className="space-y-6">
 //           {/* Scanner Box */}
-//           <div className="relative w-full aspect-square rounded-xl overflow-hidden border bg-black/5">
+//           <div className="relative w-full aspect-square rounded-md overflow-hidden border bg-black/5">
 //             <div id="qr-reader" className="w-full h-full" />
 
 //             {/* 🔥 PERFECT OVERLAY */}
@@ -108,7 +108,7 @@
 //                 <div className="absolute bottom-0 right-0 w-8 h-8 border-b-4 border-r-4 border-primary rounded-br-md" />
 
 //                 {/* Center subtle border */}
-//                 <div className="absolute inset-0 border border-primary/30 rounded-xl" />
+//                 <div className="absolute inset-0 border border-primary/30 rounded-md" />
 
 //                 {/* 🔥 Scan Line Animation */}
 //                 {scanning && (
@@ -274,7 +274,7 @@ export default function TicketScanner() {
 
         <CardContent className="space-y-6">
           {/* Scanner Box */}
-          <div className="relative w-full aspect-square rounded-xl overflow-hidden border bg-black/5">
+          <div className="relative w-full aspect-square rounded-md overflow-hidden border bg-black/5">
             <div id="qr-reader" className="w-full h-full" />
 
             {/* Overlay */}
@@ -289,7 +289,7 @@ export default function TicketScanner() {
                 <div className="absolute bottom-0 left-0 w-8 h-8 border-b-4 border-l-4 border-primary rounded-bl-md" />
                 <div className="absolute bottom-0 right-0 w-8 h-8 border-b-4 border-r-4 border-primary rounded-br-md" />
 
-                <div className="absolute inset-0 border border-primary/30 rounded-xl" />
+                <div className="absolute inset-0 border border-primary/30 rounded-md" />
 
                 {/* Scan line */}
                 {scanning && (

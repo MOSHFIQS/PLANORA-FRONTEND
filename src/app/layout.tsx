@@ -20,7 +20,7 @@ export default function RootLayout({
           <html lang="en" suppressHydrationWarning>
                <body
                     suppressHydrationWarning
-                    className={`${spaceGrotesk.className} bg-[#FFF5F2] font-sans `}
+                    className={`${spaceGrotesk.className} bg-[#F8FAFC] font-sans `}
                >
                     <AuthProvider>
                          <Toaster richColors />

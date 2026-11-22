@@ -8,7 +8,7 @@ export default function TermsOfServicePage() {
                     <p className="text-gray-500">Last Updated: October 2025</p>
                </div>
 
-               <div className="bg-white rounded-3xl p-8 md:p-12 shadow-sm border border-gray-100 prose prose-lg prose-indigo max-w-none text-gray-700">
+               <div className="bg-white rounded-md p-8 md:p-12 shadow-sm border border-gray-100 prose prose-lg prose-indigo max-w-none text-gray-700">
                     <p className="lead text-xl text-gray-600 mb-8">
                          Welcome to Planora. These Terms of Service ("Terms") govern your use of the Planora website, applications, and services. By accessing or using our platform, you agree to be bound by these Terms.
                     </p>
@@ -50,7 +50,7 @@ export default function TermsOfServicePage() {
                     <h2 className="text-2xl font-bold text-[#181759] mt-10 mb-4">7. Contact Us</h2>
                     <p>
                          If you have any questions regarding these Terms, please contact us at:<br/>
-                         <a href="mailto:legal@planora.com" className="text-[#FE7743] hover:underline font-semibold mt-2 inline-block">legal@planora.com</a>
+                         <a href="mailto:legal@planora.com" className="text-[#4F46E5] hover:underline font-semibold mt-2 inline-block">legal@planora.com</a>
                     </p>
                </div>
           </div>

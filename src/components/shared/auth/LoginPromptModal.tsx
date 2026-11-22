@@ -64,14 +64,14 @@ export default function LoginPromptModal() {
                 <DialogTitle className="sr-only">Unlock Full Access</DialogTitle>
                 <div className="relative w-full rounded overflow-hidden bg-white">
                     {/* Top Decorative Graphic */}
-                    <div className="h-32 bg-gradient-to-br from-indigo-500 via-purple-500 to-[#FE7743] relative flex items-center justify-center">
+                    <div className="h-32 bg-gradient-to-br from-indigo-500 via-purple-500 to-[#4F46E5] relative flex items-center justify-center">
                         {/* Abstract Background Shapes */}
                         <div className="absolute inset-0 overflow-hidden opacity-30">
-                            <div className="absolute -top-10 -left-10 w-40 h-40 rounded-full bg-white blur-2xl flex-shrink-0" />
-                            <div className="absolute top-10 -right-10 w-32 h-32 rounded-full bg-yellow-300 blur-2xl flex-shrink-0" />
+                            <div className="absolute -top-10 -left-10 w-40 h-40 rounded-md bg-white blur-2xl flex-shrink-0" />
+                            <div className="absolute top-10 -right-10 w-32 h-32 rounded-md bg-yellow-300 blur-2xl flex-shrink-0" />
                         </div>
                         
-                        <div className="relative z-10 w-20 h-20 rounded-2xl bg-white backdrop-blur-md shadow-xl flex items-center justify-center">
+                        <div className="relative z-10 w-20 h-20 rounded-md bg-white backdrop-blur-md shadow-xl flex items-center justify-center">
                             <img src="/logo/logo.png" alt="Planora Logo" className="w-full h-full object-contain" />
                         </div>
                     </div>
@@ -91,7 +91,7 @@ export default function LoginPromptModal() {
                         <div className="grid grid-cols-2 gap-3 pb-2 pt-2">
                             <div className="flex gap-3 items-center p-3 rounded bg-slate-100 border border-slate-100">
                                 <div className="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center flex-shrink-0">
-                                    <Calendar size={14} className="text-[#FE7743]" />
+                                    <Calendar size={14} className="text-[#4F46E5]" />
                                 </div>
                                 <p className="text-xs font-semibold text-slate-700">Save & Join Events</p>
                             </div>
@@ -119,7 +119,7 @@ export default function LoginPromptModal() {
                         <div className="flex flex-col gap-2.5 w-full">
                             <Button 
                                 onClick={() => handleAction(`/login?redirect=${encodeURIComponent(pathname)}`)}
-                                className="w-full text-md py-6 rounded bg-[#FE7743] hover:bg-orange-500 text-white font-bold tracking-wide group"
+                                className="w-full text-md py-6 rounded bg-[#4F46E5] hover:bg-indigo-600 text-white font-bold tracking-wide group"
                             >
                                 Login to Account
                                 <ArrowRight size={18} className="ml-2 group-hover:translate-x-1 transition-transform" />

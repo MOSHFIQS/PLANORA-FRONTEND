@@ -15,7 +15,7 @@ export default function NotFound() {
                          className="object-contain"
                          priority
                     />
-                    <Button variant="outline" className="rounded-full" onClick={() => window.location.href = "/"}>Go Home</Button>
+                    <Button variant="outline" className="rounded-md" onClick={() => window.location.href = "/"}>Go Home</Button>
                </div>
 
 

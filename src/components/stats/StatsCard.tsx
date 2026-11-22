@@ -53,7 +53,7 @@ const StatCard = ({
   icon: React.ReactNode;
   bg: string;
 }) => (
-  <div className={`flex items-center gap-3 p-4 rounded-xl border ${bg}`}>
+  <div className={`flex items-center gap-3 p-4 rounded-md border ${bg}`}>
     <div className="w-10 h-10 flex items-center justify-center bg-white rounded-lg border border-white/80 shadow-sm flex-shrink-0">
       {icon}
     </div>
@@ -71,7 +71,7 @@ const ChartBox = ({
   bg: string;
   children: React.ReactNode;
 }) => (
-  <div className={`${bg} rounded-xl border p-4`}>
+  <div className={`${bg} rounded-md border p-4`}>
     <SecTitle>{title}</SecTitle>
     {children}
   </div>
@@ -81,7 +81,7 @@ const Legend = ({ items }: { items: { label: string; color: string; value?: numb
   <div className="flex flex-wrap gap-x-4 gap-y-1.5 mt-2">
     {items.map((d) => (
       <div key={d.label} className="flex items-center gap-1.5 text-xs text-slate-500">
-        <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: d.color }} />
+        <span className="w-2 h-2 rounded-md flex-shrink-0" style={{ background: d.color }} />
         {d.label}{d.value !== undefined && <>: <span className="font-bold text-slate-800 ml-0.5">{d.value}</span></>}
       </div>
     ))}
@@ -181,7 +181,7 @@ export const SuperAdminStatsCard = ({ data }: { data: any }) => {
     { title: "Total Reviews", value: rev.total ?? 0, icon: <Star className="text-yellow-700 w-5 h-5" />, bg: "bg-yellow-50 border-yellow-200" },
     { title: "Avg Rating", value: Number(rev.averageRating ?? 0).toFixed(1), icon: <Star className="text-yellow-600 w-5 h-5" />, bg: "bg-yellow-50 border-yellow-200" },
     { title: "Notifications", value: not.total ?? 0, icon: <Bell className="text-slate-600 w-5 h-5" />, bg: "bg-slate-50 border-slate-200" },
-    { title: "Unread Notifs", value: not.unread ?? 0, icon: <Bell className="text-orange-600 w-5 h-5" />, bg: "bg-orange-50 border-orange-200" },
+    { title: "Unread Notifs", value: not.unread ?? 0, icon: <Bell className="text-indigo-600 w-5 h-5" />, bg: "bg-orange-50 border-orange-200" },
     { title: "Audit Logs", value: aud.total ?? 0, icon: <Activity className="text-slate-600 w-5 h-5" />, bg: "bg-slate-50 border-slate-200" },
     { title: "Participations", value: pa.total ?? 0, icon: <ClipboardList className="text-orange-700 w-5 h-5" />, bg: "bg-orange-50 border-orange-200" },
   ];
@@ -239,7 +239,7 @@ export const SuperAdminStatsCard = ({ data }: { data: any }) => {
 
   return (
     <div className="space-y-5 mb-6">
-      <Card className="border border-gray-200 p-4 sm:p-6 bg-white rounded-xl shadow-none">
+      <Card className="border border-gray-200 p-4 sm:p-6 bg-white rounded-md shadow-none">
         <h4 className="text-lg sm:text-xl lg:text-2xl font-bold mb-6">Super Admin — Platform Overview</h4>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 mb-8">
@@ -344,7 +344,7 @@ export const AdminStatsCard = ({ data }: { data: any }) => {
 
   return (
     <div className="space-y-5 mb-6">
-      <Card className="border border-gray-200 p-4 sm:p-6 bg-white rounded-xl shadow-none">
+      <Card className="border border-gray-200 p-4 sm:p-6 bg-white rounded-md shadow-none">
         <h4 className="text-lg sm:text-xl lg:text-2xl font-bold mb-6">Admin — Dashboard Stats</h4>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 mb-8">
@@ -449,7 +449,7 @@ export const OrganizerStatsCard = ({ data }: { data: any }) => {
 
   return (
     <div className="space-y-5 mb-6">
-      <Card className="border border-gray-200 p-4 sm:p-6 bg-white rounded-xl shadow-none">
+      <Card className="border border-gray-200 p-4 sm:p-6 bg-white rounded-md shadow-none">
         <h4 className="text-lg sm:text-xl lg:text-2xl font-bold mb-6">Organizer — Dashboard Stats</h4>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 mb-8">
@@ -515,7 +515,7 @@ export const UserStatsCard = ({ data }: { data: any }) => {
     { title: "Valid Tickets", value: ti.valid ?? 0, icon: <Ticket className="text-green-700 w-5 h-5" />, bg: "bg-green-50 border-green-200" },
     { title: "Used Tickets", value: ti.used ?? 0, icon: <Ticket className="text-slate-600 w-5 h-5" />, bg: "bg-slate-50 border-slate-200" },
     { title: "Reviews Written", value: rev.total ?? 0, icon: <Star className="text-yellow-700 w-5 h-5" />, bg: "bg-yellow-50 border-yellow-200" },
-    { title: "Unread Notifs", value: not.unread ?? 0, icon: <Bell className="text-orange-600 w-5 h-5" />, bg: "bg-orange-50 border-orange-200" },
+    { title: "Unread Notifs", value: not.unread ?? 0, icon: <Bell className="text-indigo-600 w-5 h-5" />, bg: "bg-orange-50 border-orange-200" },
   ];
 
   const participationPie = [
@@ -541,7 +541,7 @@ export const UserStatsCard = ({ data }: { data: any }) => {
 
   return (
     <div className="space-y-5 mb-6">
-      <Card className="border border-gray-200 p-4 sm:p-6 bg-white rounded-xl shadow-none">
+      <Card className="border border-gray-200 p-4 sm:p-6 bg-white rounded-md shadow-none">
         <h4 className="text-lg sm:text-xl lg:text-2xl font-bold mb-6">My Dashboard — Overview</h4>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 mb-8">
@@ -589,9 +589,9 @@ export const UserStatsCard = ({ data }: { data: any }) => {
                   <p className="text-sm text-yellow-600">Reviews Written</p>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Bell className="text-orange-500 w-4 h-4" />
+                  <Bell className="text-indigo-600 w-4 h-4" />
                   <p className="text-xl font-bold text-orange-700">{not.unread ?? 0}</p>
-                  <p className="text-sm text-orange-500">Unread</p>
+                  <p className="text-sm text-indigo-600">Unread</p>
                 </div>
               </div>
             </div>

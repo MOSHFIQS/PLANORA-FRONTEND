@@ -18,7 +18,7 @@ const colors = [
   { base: "bg-purple-500/50", hover: "group-hover:bg-purple-200/30" },
   { base: "bg-pink-500/50", hover: "group-hover:bg-pink-200/30" },
   { base: "bg-indigo-500/50", hover: "group-hover:bg-indigo-200/30" },
-  { base: "bg-orange-500/50", hover: "group-hover:bg-orange-200/30" },
+  { base: "bg-indigo-600/50", hover: "group-hover:bg-orange-200/30" },
 ];
 
 const CategoryCard = ({ categories }: { categories: Category[] }) => {

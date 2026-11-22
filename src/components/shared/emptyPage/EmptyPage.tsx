@@ -3,7 +3,7 @@ import Link from "next/link";
 export default function EmptyPage() {
      return (
           <div className="min-h-[70vh] flex items-center justify-center px-4">
-               <div className="max-w-md w-full text-center border border-gray-200 rounded-xl p-8 shadow-sm bg-white">
+               <div className="max-w-md w-full text-center border border-gray-200 rounded-md p-8 shadow-sm bg-white">
 
                     <div className="flex justify-center mb-4">
                          <div className="w-16 h-16 flex items-center justify-center rounded-full bg-gray-100 text-3xl">

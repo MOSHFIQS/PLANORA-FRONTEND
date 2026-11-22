@@ -10,7 +10,7 @@ type Props = {
 
 const ImageMosaic = ({ images }: Props) => {
   return (
-    <section className="px-6  overflow-hidden">
+    <section className="px-6 overflow-hidden">
       <SectionHeader
         align="center"
         title="Moments That Matter"
@@ -19,8 +19,8 @@ const ImageMosaic = ({ images }: Props) => {
       <div className="max-w-6xl mx-auto relative">
 
         {/* Background glow */}
-        {/* <div className="absolute -top-20 -left-20 w-72 h-72 bg-purple-300/20 blur-3xl rounded-full" />
-        <div className="absolute -bottom-20 -right-20 w-72 h-72 bg-indigo-300/20 blur-3xl rounded-full" /> */}
+        {/* <div className="absolute -top-20 -left-20 w-72 h-72 bg-purple-300/20 blur-3xl rounded-md" />
+        <div className="absolute -bottom-20 -right-20 w-72 h-72 bg-indigo-300/20 blur-3xl rounded-md" /> */}
 
 
 
@@ -28,7 +28,7 @@ const ImageMosaic = ({ images }: Props) => {
         <div className="relative flex justify-center items-center h-[500px]">
 
           {/* Left Image */}
-          <Card className="absolute left-0 top-10 w-[260px] h-[320px] overflow-hidden rounded-2xl shadow-xl rotate-[-6deg] hover:rotate-0 transition-transform duration-500 group">
+          <Card className="absolute left-0 top-10 w-[260px] h-[320px] overflow-hidden rounded-md shadow-xl rotate-[-6deg] hover:rotate-0 transition-transform duration-500 group">
             <Image
               src={images[0]}
               alt="img1"
@@ -39,7 +39,7 @@ const ImageMosaic = ({ images }: Props) => {
           </Card>
 
           {/* Center Image (Main) */}
-          <Card className="relative z-10 w-[320px] h-[400px] overflow-hidden rounded-3xl shadow-2xl group">
+          <Card className="relative z-10 w-[320px] h-[400px] overflow-hidden rounded-md shadow-2xl group">
             <Image
               src={images[1]}
               alt="img2"
@@ -57,7 +57,7 @@ const ImageMosaic = ({ images }: Props) => {
           </Card>
 
           {/* Right Image */}
-          <Card className="absolute right-0 bottom-10 w-[260px] h-[320px] overflow-hidden rounded-2xl shadow-xl rotate-[6deg] hover:rotate-0 transition-transform duration-500 group">
+          <Card className="absolute right-0 bottom-10 w-[260px] h-[320px] overflow-hidden rounded-md shadow-xl rotate-[6deg] hover:rotate-0 transition-transform duration-500 group">
             <Image
               src={images[2]}
               alt="img3"

@@ -42,7 +42,7 @@ const HowItWorks = () => {
       />
 
       {/* Teal glow center */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-teal-500/6 blur-[100px] rounded-full pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-teal-500/6 blur-[100px] rounded-md pointer-events-none" />
 
       <div className="container mx-auto px-4 relative z-10">
 
@@ -80,12 +80,12 @@ const HowItWorks = () => {
                     {step.number}
                   </span>
 
-                  <div className="w-20 h-20 rounded-full border border-gray-800 group-hover:border-teal-500/50 bg-gray-900 group-hover:bg-teal-500/8 flex items-center justify-center transition-all duration-300 relative z-10">
+                  <div className="w-20 h-20 rounded-md border border-gray-800 group-hover:border-teal-500/50 bg-gray-900 group-hover:bg-teal-500/8 flex items-center justify-center transition-all duration-300 relative z-10">
                     <Icon className="w-7 h-7 text-gray-500 group-hover:text-teal-400 transition-colors duration-300" />
                   </div>
 
                   {/* Teal dot indicator */}
-                  <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-teal-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-md bg-teal-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>
 
                 <p className="text-teal-500/60 text-[10px] font-black tracking-[0.2em] uppercase mb-2">

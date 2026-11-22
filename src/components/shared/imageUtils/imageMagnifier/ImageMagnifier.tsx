@@ -55,7 +55,7 @@ export default function ImageMagnifier({ images, zoom = 1.08 }: Props) {
       {/* ── Single Image View ───────────────────────────────────────────── */}
       {galleryImages.length === 1 && (
         <div
-          className="w-full relative h-[360px] sm:h-[460px] lg:h-[520px] rounded-3xl overflow-hidden border border-slate-200/80 shadow-sm bg-slate-900 group"
+          className="w-full relative h-[360px] sm:h-[460px] lg:h-[520px] rounded-md overflow-hidden border border-slate-200/80 shadow-sm bg-slate-900 group"
           onMouseMove={handleMouseMove}
           onMouseEnter={() => setIsHovering(true)}
           onMouseLeave={() => setIsHovering(false)}
@@ -84,7 +84,7 @@ export default function ImageMagnifier({ images, zoom = 1.08 }: Props) {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-3 sm:gap-4 h-[360px] sm:h-[460px] lg:h-[500px]">
           {/* Hero Left */}
           <div
-            className="md:col-span-8 h-full relative rounded-3xl overflow-hidden border border-slate-200/80 shadow-sm bg-slate-900 cursor-pointer"
+            className="md:col-span-8 h-full relative rounded-md overflow-hidden border border-slate-200/80 shadow-sm bg-slate-900 cursor-pointer"
             onMouseMove={handleMouseMove}
             onMouseEnter={() => setIsHovering(true)}
             onMouseLeave={() => setIsHovering(false)}
@@ -108,7 +108,7 @@ export default function ImageMagnifier({ images, zoom = 1.08 }: Props) {
           {/* Secondary Right */}
           <div
             onClick={() => handleSwapWithHero(0)}
-            className="md:col-span-4 h-full relative rounded-3xl overflow-hidden border border-slate-200/80 shadow-sm bg-slate-900 cursor-pointer group hover:ring-3 hover:ring-[#725CAD]/50 transition-all"
+            className="md:col-span-4 h-full relative rounded-md overflow-hidden border border-slate-200/80 shadow-sm bg-slate-900 cursor-pointer group hover:ring-3 hover:ring-[#4F46E5]/50 transition-all"
             title="Click to view as main banner"
           >
             <AppImage
@@ -128,7 +128,7 @@ export default function ImageMagnifier({ images, zoom = 1.08 }: Props) {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-3 sm:gap-4 h-[380px] sm:h-[480px] lg:h-[520px]">
           {/* Hero Left */}
           <div
-            className="md:col-span-7 lg:col-span-8 h-full relative rounded-3xl overflow-hidden border border-slate-200/80 shadow-sm bg-slate-900"
+            className="md:col-span-7 lg:col-span-8 h-full relative rounded-md overflow-hidden border border-slate-200/80 shadow-sm bg-slate-900"
             onMouseMove={handleMouseMove}
             onMouseEnter={() => setIsHovering(true)}
             onMouseLeave={() => setIsHovering(false)}
@@ -155,7 +155,7 @@ export default function ImageMagnifier({ images, zoom = 1.08 }: Props) {
               <div
                 key={idx}
                 onClick={() => handleSwapWithHero(idx)}
-                className="relative rounded-2xl sm:rounded-3xl overflow-hidden border border-slate-200/80 shadow-xs cursor-pointer group hover:ring-3 hover:ring-[#725CAD]/50 transition-all bg-slate-900"
+                className="relative rounded-md sm:rounded-md overflow-hidden border border-slate-200/80 shadow-xs cursor-pointer group hover:ring-3 hover:ring-[#4F46E5]/50 transition-all bg-slate-900"
                 title="Click to switch with main image"
               >
                 <AppImage
@@ -177,7 +177,7 @@ export default function ImageMagnifier({ images, zoom = 1.08 }: Props) {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-3 sm:gap-4 md:h-[440px] lg:h-[500px] xl:h-[540px]">
           {/* Left Large Hero Image (7 cols) */}
           <div
-            className="md:col-span-7 h-[320px] md:h-full relative rounded-3xl overflow-hidden border border-slate-200/80 shadow-sm bg-slate-900"
+            className="md:col-span-7 h-[320px] md:h-full relative rounded-md overflow-hidden border border-slate-200/80 shadow-sm bg-slate-900"
             onMouseMove={handleMouseMove}
             onMouseEnter={() => setIsHovering(true)}
             onMouseLeave={() => setIsHovering(false)}
@@ -207,7 +207,7 @@ export default function ImageMagnifier({ images, zoom = 1.08 }: Props) {
                 <div
                   key={idx}
                   onClick={() => handleSwapWithHero(idx)}
-                  className="relative rounded-2xl sm:rounded-3xl overflow-hidden border border-slate-200/80 shadow-xs cursor-pointer group hover:ring-3 hover:ring-[#725CAD]/60 transition-all bg-slate-900"
+                  className="relative rounded-md sm:rounded-md overflow-hidden border border-slate-200/80 shadow-xs cursor-pointer group hover:ring-3 hover:ring-[#4F46E5]/60 transition-all bg-slate-900"
                   title="Click to view as main banner"
                 >
                   <AppImage

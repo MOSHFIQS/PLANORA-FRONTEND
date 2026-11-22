@@ -109,7 +109,7 @@ export function ResetPasswordForm() {
         <div className="flex flex-col items-center text-center">
           <div 
             className="w-16 h-16 rounded-full flex items-center justify-center mb-6"
-            style={{ background: "rgba(114, 92, 173, 0.1)", color: "#725CAD" }}
+            style={{ background: "rgba(79, 70, 229, 0.1)", color: "#4F46E5" }}
           >
             <ShieldCheck size={32} />
           </div>
@@ -234,7 +234,7 @@ export function ResetPasswordForm() {
                   }
                   className="w-full h-[54px] mt-2 rounded text-sm font-medium tracking-wide transition-all"
                   style={{
-                    background: "#725CAD",
+                    background: "#4F46E5",
                     color: "#fff",
                     border: "none",
                   }}
@@ -257,12 +257,12 @@ export function ResetPasswordForm() {
                   disabled={isResending}
                   onClick={handleResend}
                   className="font-medium transition-colors hover:underline"
-                  style={{ color: "#725CAD" }}
+                  style={{ color: "#4F46E5" }}
                 >
                   {isResending ? "Resending…" : "Resend code"}
                 </button>
               ) : (
-                <span className="font-medium" style={{ color: "#725CAD" }}>
+                <span className="font-medium" style={{ color: "#4F46E5" }}>
                   Resend in {countdown}s
                 </span>
               )}

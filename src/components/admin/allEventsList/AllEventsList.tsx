@@ -295,9 +295,9 @@ export default function AllEventsList({ myEvents }: { myEvents: Event[] }) {
                {viewMode === "card" && (
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                          {myEvents?.map((event) => (
-                              <Card key={event.id} className="p-3 rounded-4xl border  flex flex-col gap-3  ">
+                              <Card key={event.id} className="p-3 rounded-md border flex flex-col gap-3 ">
                                    {/* IMAGE + OVERLAY + BADGES */}
-                                   <div className="relative h-52 xl:h-64 w-full overflow-hidden rounded-2xl group">
+                                   <div className="relative h-52 xl:h-64 w-full overflow-hidden rounded-md group">
                                         {event?.images?.[0] ? (
                                              <AppImage
                                                   src={event.images[0]}
@@ -315,14 +315,14 @@ export default function AllEventsList({ myEvents }: { myEvents: Event[] }) {
 
                                         {/* Top Left Badge */}
                                         {event.type && (
-                                             <span className="absolute top-3 left-3 bg-white/80 backdrop-blur px-3 py-1 text-xs rounded-full font-medium">
+                                             <span className="absolute top-3 left-3 bg-white/80 backdrop-blur px-3 py-1 text-xs rounded-md font-medium">
                                                   {event.type}
                                              </span>
                                         )}
 
                                         {/* Top Right Status */}
-                                        <span className="absolute top-3 right-3 bg-white/80 backdrop-blur px-3 py-1 text-xs rounded-full flex items-center gap-1">
-                                             <span className="w-2 h-2 bg-pink-500 rounded-full"></span>
+                                        <span className="absolute top-3 right-3 bg-white/80 backdrop-blur px-3 py-1 text-xs rounded-md flex items-center gap-1">
+                                             <span className="w-2 h-2 bg-pink-500 rounded-md"></span>
                                              Active
                                         </span>
                                    </div>
@@ -350,7 +350,7 @@ export default function AllEventsList({ myEvents }: { myEvents: Event[] }) {
                                         {/* Type + Fee */}
                                         <div className="flex justify-between items-center mt-1">
                                              {event.type && (
-                                                  <span className="bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded-full font-medium">
+                                                  <span className="bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded-md font-medium">
                                                        {event.type}
                                                   </span>
                                              )}
@@ -367,7 +367,7 @@ export default function AllEventsList({ myEvents }: { myEvents: Event[] }) {
                                    <CardFooter className="flex gap-3 px-0">
                                         {/* VIEW BUTTON */}
                                         <Button
-                                             className="flex-1 rounded-4xl"
+                                             className="flex-1 rounded-md"
                                              variant="violet"
                                              onClick={() => router.push(`/admin-dashboard/events/${event.id}`)}
                                         >
@@ -381,7 +381,7 @@ export default function AllEventsList({ myEvents }: { myEvents: Event[] }) {
                                         >
                                              <AlertDialogTrigger asChild>
                                                   <Button
-                                                       className="flex-1 rounded-4xl"
+                                                       className="flex-1 rounded-md"
                                                        variant="destructive"
                                                        onClick={() => setOpenDialogId(event.id)}
                                                   >

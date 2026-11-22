@@ -62,7 +62,7 @@ function SearchDropdown({
 
      return (
           <div className="absolute top-full mt-2 left-0 z-[999] w-full">
-               <Card className="rounded-2xl overflow-hidden border border-gray-200 bg-white shadow-xl">
+               <Card className="rounded-md overflow-hidden border border-gray-200 bg-white shadow-xl">
 
                     {/* Header */}
                     <div className="px-4 py-2.5 flex items-center justify-between border-b border-gray-100 bg-gray-50/80">
@@ -72,13 +72,13 @@ function SearchDropdown({
                                    Search Results
                               </span>
                               {!searchLoading && searchResults.length > 0 && (
-                                   <span className="text-[9px] font-bold px-1.5 py-0.5 rounded-full bg-orange-100 text-orange-600">
+                                   <span className="text-[9px] font-bold px-1.5 py-0.5 rounded-md bg-orange-100 text-indigo-600">
                                         {searchResults.length} found
                                    </span>
                               )}
                          </div>
                          {searchLoading && (
-                              <Loader2 size={11} className="animate-spin text-orange-500" />
+                              <Loader2 size={11} className="animate-spin text-indigo-600" />
                          )}
                     </div>
 
@@ -94,9 +94,9 @@ function SearchDropdown({
                                    <button
                                         key={event.id}
                                         onClick={() => { onNavigate(event.id); onClose(); }}
-                                        className="flex items-center gap-3 px-3 py-3 rounded-xl w-full text-left border  hover:border-orange-100 hover:bg-orange-50/60 transition-all duration-150 group"
+                                        className="flex items-center gap-3 px-3 py-3 rounded-md w-full text-left border hover:border-orange-100 hover:bg-orange-50/60 transition-all duration-150 group"
                                    >
-                                        <div className="w-14 h-14 rounded-xl overflow-hidden flex-shrink-0 border border-gray-100 bg-gray-100">
+                                        <div className="w-14 h-14 rounded-md overflow-hidden flex-shrink-0 border border-gray-100 bg-gray-100">
                                              {event.images?.[0] ? (
                                                   <img src={event.images[0]} alt={event.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200" />
                                              ) : (
@@ -106,7 +106,7 @@ function SearchDropdown({
                                              )}
                                         </div>
                                         <div className="flex-1 min-w-0">
-                                             <p className="text-sm font-semibold text-gray-900 truncate group-hover:text-orange-600 transition-colors">
+                                             <p className="text-sm font-semibold text-gray-900 truncate group-hover:text-indigo-600 transition-colors">
                                                   {event.title}
                                              </p>
                                              <p className="text-[11px] flex items-center gap-1 truncate mt-0.5 text-gray-400">
@@ -148,7 +148,7 @@ function SearchDropdown({
                          <div className="border-t border-gray-100 bg-gray-50/50">
                               <Link href={`/events?search=${searchQuery}`}
                                    onClick={onClose}
-                                   className="w-full px-4 py-2.5 text-xs font-semibold text-center text-orange-500 hover:bg-orange-50 transition-colors flex items-center justify-center gap-1"
+                                   className="w-full px-4 py-2.5 text-xs font-semibold text-center text-indigo-600 hover:bg-orange-50 transition-colors flex items-center justify-center gap-1"
                               >
                                    View all results for &quot;{searchQuery}&quot; →
                               </Link>
@@ -283,7 +283,7 @@ const Navbar = () => {
      }
 
      return (
-          <section className="py-6 sticky top-0 z-50 bg-[#FFF5F2]">
+          <section className="py-6 sticky top-0 z-50 bg-[#F8FAFC]">
                <div>
                     {/* ================= DESKTOP ================= */}
                     {/* ================= DESKTOP ================= */}
@@ -302,7 +302,7 @@ const Navbar = () => {
                                              key={item.title}
                                              href={item.url}
                                              className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-150 ${isActive(item.url)
-                                                  ? "bg-[#FE7743] text-white"
+                                                  ? "bg-[#4F46E5] text-white"
                                                   : "text-gray-600 bg-white hover:text-gray-900"
                                                   }`}
                                         >
@@ -324,7 +324,7 @@ const Navbar = () => {
                                                   value={search}
                                                   onChange={(e) => handleSearch(e.target.value)}
                                                   onFocus={() => search.trim() && setDropdownOpen(true)}
-                                                  className="w-64 bg-white border-gray-200 rounded-full pl-5 text-sm focus:border-orange-300 focus:ring-orange-100"
+                                                  className="w-64 bg-white border-gray-200 rounded-md pl-5 text-sm focus:border-orange-300 focus:ring-orange-100"
                                              />
                                              {dropdownOpen && (
                                                   <SearchDropdown
@@ -342,7 +342,7 @@ const Navbar = () => {
 
                                         <DropdownMenu>
                                              <DropdownMenuTrigger asChild>
-                                                  <button className="relative flex items-center gap-2.5 rounded-full pl-1.5 pr-3 py-1.5 border border-slate-200/90 bg-white hover:bg-slate-50 transition-all shadow-2xs hover:shadow-xs group focus:outline-none">
+                                                  <button className="relative flex items-center gap-2.5 rounded-md pl-1.5 pr-3 py-1.5 border border-slate-200/90 bg-white hover:bg-slate-50 transition-all shadow-2xs hover:shadow-xs group focus:outline-none">
                                                        <div className="w-8 h-8 rounded-full overflow-hidden ring-1 ring-slate-200 shrink-0">
                                                             <img
                                                                  src={user.image || "https://i.ibb.co.com/LhN7fmfM/5578a3db8b5f1101c971bdf120e63784.jpg"}
@@ -358,9 +358,9 @@ const Navbar = () => {
                                                   </button>
                                              </DropdownMenuTrigger>
 
-                                             <DropdownMenuContent align="end" sideOffset={10} className="w-64 p-2 rounded-2xl shadow-2xl border border-slate-200/90 bg-white/95 backdrop-blur-xl animate-in fade-in-0 zoom-in-95">
+                                             <DropdownMenuContent align="end" sideOffset={10} className="w-64 p-2 rounded-md shadow-2xl border border-slate-200/90 bg-white/95 backdrop-blur-xl animate-in fade-in-0 zoom-in-95">
                                                   {/* Header */}
-                                                  <div className="flex items-center gap-3 p-2.5 rounded-xl bg-slate-50 border border-slate-100 mb-1">
+                                                  <div className="flex items-center gap-3 p-2.5 rounded-md bg-slate-50 border border-slate-100 mb-1">
                                                        <div className="w-10 h-10 rounded-full overflow-hidden ring-2 ring-white shrink-0 shadow-xs">
                                                             <img
                                                                  src={user.image || "https://i.ibb.co.com/LhN7fmfM/5578a3db8b5f1101c971bdf120e63784.jpg"}
@@ -372,7 +372,7 @@ const Navbar = () => {
                                                        <div className="flex-1 min-w-0">
                                                             <p className="text-sm font-bold text-slate-900 truncate leading-tight">{user.name || "User"}</p>
                                                             <p className="text-[11px] text-slate-500 truncate font-medium mt-0.5">{user.email || ""}</p>
-                                                            <span className="inline-flex items-center mt-1 px-2 py-0.5 rounded-full text-[9px] font-bold tracking-wider uppercase bg-slate-900 text-white shadow-2xs">
+                                                            <span className="inline-flex items-center mt-1 px-2 py-0.5 rounded-md text-[9px] font-bold tracking-wider uppercase bg-slate-900 text-white shadow-2xs">
                                                                  {user.role || "MEMBER"}
                                                             </span>
                                                        </div>
@@ -381,7 +381,7 @@ const Navbar = () => {
                                                   {/* Navigation Items */}
                                                   <div className="space-y-0.5 py-1">
                                                        <DropdownMenuItem
-                                                            className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-slate-700 hover:text-slate-950 hover:bg-slate-100/90 cursor-pointer transition-colors group focus:bg-slate-100"
+                                                            className="flex items-center gap-3 px-3 py-2.5 rounded-md text-sm font-semibold text-slate-700 hover:text-slate-950 hover:bg-slate-100/90 cursor-pointer transition-colors group focus:bg-slate-100"
                                                             onClick={() => router.push(`${basePath}/my/profile`)}
                                                        >
                                                             <User className="w-4 h-4 text-slate-400 group-hover:text-slate-800 transition-colors" />
@@ -389,7 +389,7 @@ const Navbar = () => {
                                                        </DropdownMenuItem>
 
                                                        <DropdownMenuItem
-                                                            className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-slate-700 hover:text-slate-950 hover:bg-slate-100/90 cursor-pointer transition-colors group focus:bg-slate-100"
+                                                            className="flex items-center gap-3 px-3 py-2.5 rounded-md text-sm font-semibold text-slate-700 hover:text-slate-950 hover:bg-slate-100/90 cursor-pointer transition-colors group focus:bg-slate-100"
                                                             onClick={() => router.push(`${basePath}`)}
                                                        >
                                                             <LayoutDashboard className="w-4 h-4 text-slate-400 group-hover:text-slate-800 transition-colors" />
@@ -397,7 +397,7 @@ const Navbar = () => {
                                                        </DropdownMenuItem>
 
                                                        <DropdownMenuItem
-                                                            className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-slate-700 hover:text-slate-950 hover:bg-slate-100/90 cursor-pointer transition-colors group focus:bg-slate-100"
+                                                            className="flex items-center gap-3 px-3 py-2.5 rounded-md text-sm font-semibold text-slate-700 hover:text-slate-950 hover:bg-slate-100/90 cursor-pointer transition-colors group focus:bg-slate-100"
                                                             onClick={() => router.push(`${basePath}/my/tickets`)}
                                                        >
                                                             <Ticket className="w-4 h-4 text-slate-400 group-hover:text-slate-800 transition-colors" />
@@ -405,7 +405,7 @@ const Navbar = () => {
                                                        </DropdownMenuItem>
 
                                                        <DropdownMenuItem
-                                                            className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-slate-700 hover:text-slate-950 hover:bg-slate-100/90 cursor-pointer transition-colors group focus:bg-slate-100"
+                                                            className="flex items-center gap-3 px-3 py-2.5 rounded-md text-sm font-semibold text-slate-700 hover:text-slate-950 hover:bg-slate-100/90 cursor-pointer transition-colors group focus:bg-slate-100"
                                                             onClick={() => router.push(`${basePath}/my/participated-events`)}
                                                        >
                                                             <Store className="w-4 h-4 text-slate-400 group-hover:text-slate-800 transition-colors" />
@@ -418,7 +418,7 @@ const Navbar = () => {
                                                   {/* Logout */}
                                                   <div className="pt-0.5">
                                                        <DropdownMenuItem
-                                                            className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-rose-600 hover:text-rose-700 hover:bg-rose-50 cursor-pointer transition-colors group focus:bg-rose-50"
+                                                            className="flex items-center gap-3 px-3 py-2.5 rounded-md text-sm font-semibold text-rose-600 hover:text-rose-700 hover:bg-rose-50 cursor-pointer transition-colors group focus:bg-rose-50"
                                                             onClick={handleLogout}
                                                        >
                                                             <LogOut className="w-4 h-4 text-rose-500 group-hover:text-rose-600 transition-colors" />
@@ -438,7 +438,7 @@ const Navbar = () => {
                                                   value={search}
                                                   onChange={(e) => handleSearch(e.target.value)}
                                                   onFocus={() => search.trim() && setDropdownOpen(true)}
-                                                  className="w-64 bg-white border-gray-200 rounded-full pl-5 text-sm focus:border-orange-300 focus:ring-orange-100"
+                                                  className="w-64 bg-white border-gray-200 rounded-md pl-5 text-sm focus:border-orange-300 focus:ring-orange-100"
                                              />
                                              {dropdownOpen && (
                                                   <SearchDropdown
@@ -451,10 +451,10 @@ const Navbar = () => {
                                              )}
                                         </div>
 
-                                        <Button asChild variant="outline" className="rounded-full border-gray-300 bg-white text-gray-700 hover:bg-gray-50">
+                                        <Button asChild variant="outline" className="rounded-md border-gray-300 bg-white text-gray-700 hover:bg-gray-50">
                                              <Link href={`/login?redirect=${pathname}`}>Login</Link>
                                         </Button>
-                                        <Button asChild className="rounded-full bg-[#FE7743] hover:bg-orange-500 text-white border-0">
+                                        <Button asChild className="rounded-md bg-[#4F46E5] hover:bg-indigo-600 text-white border-0">
                                              <Link href="/register">Register</Link>
                                         </Button>
                                    </>
@@ -512,8 +512,8 @@ const Navbar = () => {
 
                                              {/* Mobile user card */}
                                              {user?.id && (
-                                                  <div className="flex items-center gap-3 px-3 py-3 rounded-2xl bg-gradient-to-br from-[#FE7743]/10 to-[#FE7743]/5 border border-orange-100">
-                                                       <div className="w-10 h-10 rounded-full overflow-hidden flex-shrink-0 border-2 border-[#FE7743]/30">
+                                                  <div className="flex items-center gap-3 px-3 py-3 rounded-md bg-gradient-to-br from-[#4F46E5]/10 to-[#4F46E5]/5 border border-orange-100">
+                                                       <div className="w-10 h-10 rounded-full overflow-hidden flex-shrink-0 border-2 border-[#4F46E5]/30">
                                                             <img
                                                                  src={
                                                                       user.image ||
@@ -534,7 +534,7 @@ const Navbar = () => {
                                                             <p className="text-[10px] text-gray-400 truncate">
                                                                  {user.email || ""}
                                                             </p>
-                                                            <span className="inline-flex items-center mt-0.5 px-2 py-0.5 rounded-full text-[9px] font-medium bg-[#FE7743]/15 text-[#FE7743]">
+                                                            <span className="inline-flex items-center mt-0.5 px-2 py-0.5 rounded-md text-[9px] font-medium bg-[#4F46E5]/15 text-[#4F46E5]">
                                                                  {user.role || "Member"}
                                                             </span>
                                                        </div>
@@ -550,7 +550,7 @@ const Navbar = () => {
                                                        >
                                                             <button
                                                                  className={`w-full text-left px-4 py-2 rounded-full text-sm font-medium transition-all ${isActive(item.url)
-                                                                      ? "bg-[#FE7743] text-white"
+                                                                      ? "bg-[#4F46E5] text-white"
                                                                       : "text-gray-600 border border-gray-200 bg-white hover:bg-gray-50"
                                                                       }`}
                                                             >
@@ -562,7 +562,7 @@ const Navbar = () => {
 
                                              {/* Notification Bell — mobile */}
                                              {user?.id && (
-                                                  <div className="flex items-center gap-3 px-3 py-2.5 rounded-xl border border-gray-100 bg-white">
+                                                  <div className="flex items-center gap-3 px-3 py-2.5 rounded-md border border-gray-100 bg-white">
                                                        <div className="w-7 h-7 rounded-lg bg-orange-50 flex items-center justify-center">
                                                             <NotificationBell />
                                                        </div>
@@ -577,7 +577,7 @@ const Navbar = () => {
                                                   {user?.id ? (
                                                        <>
                                                             <Link href={`${basePath}/my/profile`}>
-                                                                 <button className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm border border-gray-100 bg-white hover:bg-gray-50 transition-colors group">
+                                                                 <button className="w-full flex items-center gap-3 px-3 py-2.5 rounded-md text-sm border border-gray-100 bg-white hover:bg-gray-50 transition-colors group">
                                                                       <div className="w-7 h-7 rounded-lg bg-purple-50 flex items-center justify-center">
                                                                            <User size={13} className="text-purple-500" />
                                                                       </div>
@@ -588,9 +588,9 @@ const Navbar = () => {
                                                             </Link>
 
                                                             <Link href={`${basePath}`}>
-                                                                 <button className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm border border-gray-100 bg-white hover:bg-orange-50 transition-colors group">
-                                                                      <div className="w-7 h-7 rounded-lg bg-[#FE7743]/10 flex items-center justify-center">
-                                                                           <LayoutDashboard size={13} className="text-[#FE7743]" />
+                                                                 <button className="w-full flex items-center gap-3 px-3 py-2.5 rounded-md text-sm border border-gray-100 bg-white hover:bg-orange-50 transition-colors group">
+                                                                      <div className="w-7 h-7 rounded-lg bg-[#4F46E5]/10 flex items-center justify-center">
+                                                                           <LayoutDashboard size={13} className="text-[#4F46E5]" />
                                                                       </div>
                                                                       <span className="font-medium text-gray-700">
                                                                            Dashboard
@@ -599,7 +599,7 @@ const Navbar = () => {
                                                             </Link>
 
                                                             <Link href={`${basePath}/my/tickets`}>
-                                                                 <button className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm border border-gray-100 bg-white hover:bg-blue-50 transition-colors">
+                                                                 <button className="w-full flex items-center gap-3 px-3 py-2.5 rounded-md text-sm border border-gray-100 bg-white hover:bg-blue-50 transition-colors">
                                                                       <div className="w-7 h-7 rounded-lg bg-blue-50 flex items-center justify-center">
                                                                            <Ticket size={13} className="text-blue-500" />
                                                                       </div>
@@ -610,7 +610,7 @@ const Navbar = () => {
                                                             </Link>
 
                                                             <Link href={`${basePath}/my/participated-events`}>
-                                                                 <button className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm border border-gray-100 bg-white hover:bg-blue-50 transition-colors">
+                                                                 <button className="w-full flex items-center gap-3 px-3 py-2.5 rounded-md text-sm border border-gray-100 bg-white hover:bg-blue-50 transition-colors">
                                                                       <div className="w-7 h-7 rounded-lg bg-blue-50 flex items-center justify-center">
                                                                            <Ticket size={13} className="text-blue-500" />
                                                                       </div>
@@ -622,7 +622,7 @@ const Navbar = () => {
 
                                                             <button
                                                                  onClick={handleLogout}
-                                                                 className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm bg-red-50 border border-red-100 hover:bg-red-100 transition-colors"
+                                                                 className="w-full flex items-center gap-3 px-3 py-2.5 rounded-md text-sm bg-red-50 border border-red-100 hover:bg-red-100 transition-colors"
                                                             >
                                                                  <div className="w-7 h-7 rounded-lg bg-red-100 flex items-center justify-center">
                                                                       <LogOut size={13} className="text-red-500" />
@@ -635,14 +635,14 @@ const Navbar = () => {
                                                             <Button
                                                                  asChild
                                                                  variant="outline"
-                                                                 className="w-full rounded-full border-gray-300 bg-white"
+                                                                 className="w-full rounded-md border-gray-300 bg-white"
                                                             >
                                                                  <Link href={`/login?redirect=${pathname}`}>Login</Link>
                                                             </Button>
 
                                                             <Button
                                                                  asChild
-                                                                 className="w-full rounded-full bg-[#FE7743] hover:bg-orange-500 text-white border-0"
+                                                                 className="w-full rounded-md bg-[#4F46E5] hover:bg-indigo-600 text-white border-0"
                                                             >
                                                                  <Link href="/register">Register</Link>
                                                             </Button>

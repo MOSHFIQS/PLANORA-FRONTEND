@@ -91,12 +91,12 @@ const EventDetails = ({ event }: { event: IEvent }) => {
   const isFree = event?.fee === 0;
 
   return (
-    <div className="min-h-screen bg-[#FDFBF7]/80 pb-20 pt-6 px-3 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-8">
+    <div className="min-h-screen bg-[#F8FAFC]/80 pb-20 pt-6 px-3 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-8">
       {/* ── Top Bar ─────────────────────────────────────────────────── */}
       <div className="flex items-center justify-between gap-4">
         <button
           onClick={() => router.back()}
-          className="inline-flex items-center gap-2 text-sm font-semibold text-slate-700 hover:text-slate-950 transition-colors bg-white px-4 py-2 rounded-full border border-slate-200/90 shadow-2xs"
+          className="inline-flex items-center gap-2 text-sm font-semibold text-slate-700 hover:text-slate-950 transition-colors bg-white px-4 py-2 rounded-md border border-slate-200/90 shadow-2xs"
         >
           <ArrowLeft className="w-4 h-4" />
           <span>Back</span>
@@ -110,7 +110,7 @@ const EventDetails = ({ event }: { event: IEvent }) => {
             href={`/events/${event?.id}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-700 hover:text-slate-950 bg-white px-4 py-2 rounded-full border border-slate-200/90 shadow-2xs transition-colors"
+            className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-700 hover:text-slate-950 bg-white px-4 py-2 rounded-md border border-slate-200/90 shadow-2xs transition-colors"
           >
             <span>View Public Page</span>
             <ExternalLink className="w-3.5 h-3.5" />
@@ -130,7 +130,7 @@ const EventDetails = ({ event }: { event: IEvent }) => {
         {/* Left Column (8 cols) */}
         <div className="lg:col-span-8 space-y-6">
           {/* Card 1: Header & Pricing Card */}
-          <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-xs space-y-3">
+          <div className="bg-white rounded-md p-6 sm:p-8 border border-slate-200/90 shadow-xs space-y-3">
             <div className="flex items-center justify-between gap-4 flex-wrap">
               <div>
                 <span className="text-xs uppercase tracking-wider text-slate-400 font-semibold block mb-0.5">
@@ -151,10 +151,10 @@ const EventDetails = ({ event }: { event: IEvent }) => {
               </div>
 
               <div className="flex items-center gap-2">
-                <span className="inline-flex items-center px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-100 text-emerald-800 border border-emerald-200">
+                <span className="inline-flex items-center px-4 py-1.5 rounded-md text-xs font-bold uppercase tracking-wider bg-emerald-100 text-emerald-800 border border-emerald-200">
                   Active
                 </span>
-                <span className="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider bg-slate-100 text-slate-700 border border-slate-200">
+                <span className="inline-flex items-center px-3 py-1.5 rounded-md text-xs font-semibold uppercase tracking-wider bg-slate-100 text-slate-700 border border-slate-200">
                   {event?.type || "EVENT"}
                 </span>
               </div>
@@ -189,7 +189,7 @@ const EventDetails = ({ event }: { event: IEvent }) => {
           </div>
 
           {/* Card 2: About / Description */}
-          <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-xs space-y-4">
+          <div className="bg-white rounded-md p-6 sm:p-8 border border-slate-200/90 shadow-xs space-y-4">
             <h2 className="text-xl sm:text-2xl font-bold text-slate-900">
               About
             </h2>
@@ -203,7 +203,7 @@ const EventDetails = ({ event }: { event: IEvent }) => {
           </div>
 
           {/* Card 3: Key Details Grid */}
-          <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-xs space-y-5">
+          <div className="bg-white rounded-md p-6 sm:p-8 border border-slate-200/90 shadow-xs space-y-5">
             <h2 className="text-xl sm:text-2xl font-bold text-slate-900">
               Key Details
             </h2>
@@ -246,7 +246,7 @@ const EventDetails = ({ event }: { event: IEvent }) => {
 
           {/* Card 4: Online Meeting Link (if ONLINE) */}
           {event?.type === "ONLINE" && event?.meetingLink && (
-            <div className="bg-linear-to-r from-blue-50 to-indigo-50/50 rounded-3xl p-6 sm:p-8 border border-blue-200/70 shadow-xs space-y-4">
+            <div className="bg-linear-to-r from-blue-50 to-indigo-50/50 rounded-md p-6 sm:p-8 border border-blue-200/70 shadow-xs space-y-4">
               <div className="flex items-center justify-between gap-3">
                 <div className="flex items-center gap-2 text-blue-950 font-bold text-lg">
                   <Video className="w-5 h-5 text-blue-600" />
@@ -260,12 +260,12 @@ const EventDetails = ({ event }: { event: IEvent }) => {
                   href={event.meetingLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-blue-600 text-white font-semibold text-sm hover:bg-blue-700 shadow-sm transition"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-md bg-blue-600 text-white font-semibold text-sm hover:bg-blue-700 shadow-sm transition"
                 >
                   <span>Launch Link</span>
                   <ExternalLink className="w-4 h-4" />
                 </a>
-                <span className="text-xs text-slate-600 font-mono break-all px-3 py-2 bg-white/80 rounded-xl border border-blue-100">
+                <span className="text-xs text-slate-600 font-mono break-all px-3 py-2 bg-white/80 rounded-md border border-blue-100">
                   {event.meetingLink}
                 </span>
               </div>
@@ -274,7 +274,7 @@ const EventDetails = ({ event }: { event: IEvent }) => {
 
           {/* Card 5: Listing Host / Organizer */}
           {event?.organizer && (
-            <div className="bg-white rounded-3xl p-6 sm:p-7 border border-slate-200/90 shadow-xs space-y-4">
+            <div className="bg-white rounded-md p-6 sm:p-7 border border-slate-200/90 shadow-xs space-y-4">
               <span className="text-xs uppercase tracking-wider text-slate-400 font-bold block">
                 Listing Host
               </span>
@@ -295,7 +295,7 @@ const EventDetails = ({ event }: { event: IEvent }) => {
                           {event.organizer.email}
                         </span>
                       )}
-                      <span className="px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 font-medium">
+                      <span className="px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 font-medium">
                         Organizer
                       </span>
                     </div>
@@ -308,28 +308,28 @@ const EventDetails = ({ event }: { event: IEvent }) => {
 
         {/* Right Column (4 cols - Sticky Metrics & Info) */}
         <div className="lg:col-span-4 space-y-6 lg:sticky lg:top-24">
-          <div className="bg-white rounded-3xl p-6 sm:p-7 border border-slate-200/90 shadow-xl shadow-slate-100 space-y-6">
+          <div className="bg-white rounded-md p-6 sm:p-7 border border-slate-200/90 shadow-xl shadow-slate-100 space-y-6">
             <h2 className="text-xl font-bold text-slate-900">
               Event Management
             </h2>
 
             {/* Quick Metrics Grid */}
             <div className="grid grid-cols-3 gap-2">
-              <div className="p-3 rounded-2xl bg-slate-50 border border-slate-200/70 text-center">
+              <div className="p-3 rounded-md bg-slate-50 border border-slate-200/70 text-center">
                 <MailCheck className="w-4 h-4 text-slate-500 mx-auto mb-1" />
                 <span className="text-lg font-black text-slate-900 block leading-tight">
                   {event?.invitations?.length || 0}
                 </span>
                 <span className="text-[10px] uppercase font-bold text-slate-400">Invites</span>
               </div>
-              <div className="p-3 rounded-2xl bg-slate-50 border border-slate-200/70 text-center">
+              <div className="p-3 rounded-md bg-slate-50 border border-slate-200/70 text-center">
                 <Users className="w-4 h-4 text-emerald-600 mx-auto mb-1" />
                 <span className="text-lg font-black text-slate-900 block leading-tight">
                   {event?.participations?.length || 0}
                 </span>
                 <span className="text-[10px] uppercase font-bold text-slate-400">Joined</span>
               </div>
-              <div className="p-3 rounded-2xl bg-slate-50 border border-slate-200/70 text-center">
+              <div className="p-3 rounded-md bg-slate-50 border border-slate-200/70 text-center">
                 <Star className="w-4 h-4 text-amber-500 mx-auto mb-1" />
                 <span className="text-lg font-black text-slate-900 block leading-tight">
                   {event?.reviews?.length || 0}
@@ -340,8 +340,8 @@ const EventDetails = ({ event }: { event: IEvent }) => {
 
             {/* Event Timing Reminder */}
             {date && (
-              <div className="p-3.5 rounded-2xl bg-violet-50/70 border border-violet-100 flex items-center gap-3 text-xs">
-                <Calendar className="w-4 h-4 text-[#725CAD] shrink-0" />
+              <div className="p-3.5 rounded-md bg-violet-50/70 border border-violet-100 flex items-center gap-3 text-xs">
+                <Calendar className="w-4 h-4 text-[#4F46E5] shrink-0" />
                 <div>
                   <p className="font-bold text-slate-800">{format(date, "EEEE, MMMM d, yyyy")}</p>
                   <p className="text-slate-500">{format(date, "h:mm a")}</p>

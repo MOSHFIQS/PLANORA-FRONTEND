@@ -40,12 +40,12 @@ const HomePageEvents = ({ events }: Props) => {
         return (
           <Card
             key={event.id}
-            className="p-3 rounded-4xl  border shadow flex flex-col gap-3"
+            className="p-3 rounded-md border shadow flex flex-col gap-3"
           >
             {/* Image Section */}
             <Link
               href={`/events/${event.id}`}
-              className="relative h-52 xl:h-64 w-full overflow-hidden rounded-2xl group"
+              className="relative h-52 xl:h-64 w-full overflow-hidden rounded-md group"
             >
               {event?.images?.[0] && (
                 <AppImage
@@ -59,14 +59,14 @@ const HomePageEvents = ({ events }: Props) => {
 
               {/* Top Left Badge */}
               {event.type && (
-                <span className="absolute top-3 left-3 bg-white/80 backdrop-blur px-3 py-1 text-xs rounded-full font-medium">
+                <span className="absolute top-3 left-3 bg-white/80 backdrop-blur px-3 py-1 text-xs rounded-md font-medium">
                   {event.type}
                 </span>
               )}
 
               {/* Top Right Status */}
-              <span className="absolute top-3 right-3 bg-white/80 backdrop-blur px-3 py-1 text-xs rounded-full flex items-center gap-1">
-                <span className="w-2 h-2 bg-pink-500 rounded-full"></span>
+              <span className="absolute top-3 right-3 bg-white/80 backdrop-blur px-3 py-1 text-xs rounded-md flex items-center gap-1">
+                <span className="w-2 h-2 bg-pink-500 rounded-md"></span>
                 Active
               </span>
             </Link>
@@ -103,7 +103,7 @@ const HomePageEvents = ({ events }: Props) => {
 
             {/* Button */}
             <Button
-              className="w-full rounded-4xl"
+              className="w-full rounded-md"
               variant="violet"
               onClick={() => handleViewEvent(event.id)}
             >

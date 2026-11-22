@@ -75,7 +75,7 @@ const ReviewDialog = ({ eventId, children }: Props) => {
               key={star}
               size={40}
               className={`cursor-pointer transition ${rating >= star
-                  ? "text-[#725cAD] fill-[#725cAD]"
+                  ? "text-[#4F46E5] fill-[#4F46E5]"
                   : "text-gray-300"
                 }`}
               onClick={() => setRating(star)}

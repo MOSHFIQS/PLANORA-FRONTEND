@@ -155,28 +155,16 @@ export default function AIMagicWriter({ title, type, venue, onGenerate }: AIMagi
           If it's already in your root layout, remove it from here. */}
       {/* <Toaster /> */}
 
-      <div className="rounded-full p-[1px] bg-gradient-to-r from-[#725CAD] via-[#a07cd4] to-[#FE7743] shadow-md mb-3">
+      <div className="rounded-md p-[1px] bg-gradient-to-r from-[#4F46E5] via-[#818CF8] to-[#4F46E5] shadow-md mb-3">
   <button
     type="button"
     onClick={handleGenerate}
     disabled={isGenerating}
-    className="
-      w-full rounded-full px-4 py-2.5
-      bg-white hover:bg-gradient-to-r hover:from-[#725CAD] hover:via-[#a07cd4] hover:to-[#FE7743]
-      text-[#725CAD] hover:text-white
-      transition-all duration-300 group
-      flex items-center justify-between gap-3
-      disabled:opacity-70 disabled:cursor-not-allowed
-    "
+    className=" w-full rounded-md px-4 py-2.5 bg-white hover:bg-gradient-to-r hover:from-[#4F46E5] hover:via-[#818CF8] hover:to-[#4F46E5] text-[#4F46E5] hover:text-white transition-all duration-300 group flex items-center justify-between gap-3 disabled:opacity-70 disabled:cursor-not-allowed "
   >
     {/* Left: Icon + Text */}
     <div className="flex items-center gap-2.5">
-      <div className="
-        w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0
-        bg-gradient-to-br from-[#725CAD] to-[#FE7743]
-        group-hover:from-white/30 group-hover:to-white/20
-        transition-all duration-300
-      ">
+      <div className=" w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 bg-gradient-to-br from-[#4F46E5] to-[#4F46E5] group-hover:from-white/30 group-hover:to-white/20 transition-all duration-300 ">
         {isGenerating ? (
           <Loader2 size={16} className="text-white animate-spin" />
         ) : (
@@ -197,12 +185,7 @@ export default function AIMagicWriter({ title, type, venue, onGenerate }: AIMagi
     </div>
 
     {/* Right: AI badge */}
-    <div className="
-      flex items-center gap-1 px-2 py-1 rounded-full flex-shrink-0
-      bg-gradient-to-r from-[#725CAD]/10 to-[#FE7743]/10
-      group-hover:from-white/20 group-hover:to-white/20
-      transition-all duration-300
-    ">
+    <div className=" flex items-center gap-1 px-2 py-1 rounded-md flex-shrink-0 bg-gradient-to-r from-[#4F46E5]/10 to-[#4F46E5]/10 group-hover:from-white/20 group-hover:to-white/20 transition-all duration-300 ">
       <Sparkles size={11} className={isGenerating ? "opacity-50" : "animate-pulse"} />
       <span className="text-[10px] font-semibold">AI</span>
     </div>

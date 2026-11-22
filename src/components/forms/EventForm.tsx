@@ -299,7 +299,7 @@ export const EventForm = ({ mode, categories, event }: EventFormProps) => {
                         <Button
                           variant="outline"
                           id="date"
-                          className="w-32 justify-between font-normal bg-[#FFF5F2]"
+                          className="w-32 justify-between font-normal bg-[#F8FAFC]"
                         >
                           {selectedDate ? format(selectedDate, "PPP") : "Select date"}
                         </Button>

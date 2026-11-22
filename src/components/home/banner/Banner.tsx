@@ -122,8 +122,8 @@ export default function CarouselPlugin({ banners }: { banners: Banner[] }) {
 
                                                                  {/* Type pill */}
                                                                  <div className="slide-pill">
-                                                                      <span className="inline-flex items-center gap-1.5 px-3 py-1 text-[10px] font-black tracking-[0.2em] uppercase rounded-full border border-teal-400/40 bg-teal-400/10 text-teal-400">
-                                                                           <span className="w-1.5 h-1.5 rounded-full bg-teal-400 animate-pulse" />
+                                                                      <span className="inline-flex items-center gap-1.5 px-3 py-1 text-[10px] font-black tracking-[0.2em] uppercase rounded-md border border-teal-400/40 bg-teal-400/10 text-teal-400">
+                                                                           <span className="w-1.5 h-1.5 rounded-md bg-teal-400 animate-pulse" />
                                                                            {banner.type} Event
                                                                       </span>
                                                                  </div>
@@ -157,7 +157,7 @@ export default function CarouselPlugin({ banners }: { banners: Banner[] }) {
                                                                       <div className="slide-content-5 pt-1">
                                                                            <button
                                                                                 onClick={() => handleViewEvent(banner.redirectUrl || "#")}
-                                                                                className="group inline-flex items-center gap-2.5 px-6 py-3 bg-teal-500 hover:bg-teal-400 text-gray-950 text-sm font-black rounded-xl transition-all duration-200 hover:gap-4 active:scale-95"
+                                                                                className="group inline-flex items-center gap-2.5 px-6 py-3 bg-teal-500 hover:bg-teal-400 text-gray-950 text-sm font-black rounded-md transition-all duration-200 hover:gap-4 active:scale-95"
                                                                            >
                                                                                 {banner.buttonText}
                                                                                 <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5" />

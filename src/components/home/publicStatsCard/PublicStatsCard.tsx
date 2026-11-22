@@ -25,7 +25,7 @@ const PublicStatsCard = ({ publicStats }: { publicStats: PublicStats }) => {
 
   return (
     <div className="pb-5">
-      <div className="relative w-full  overflow-hidden">
+      <div className="relative w-full overflow-hidden">
         {/* Background image */}
         <Image
           src="/stats.jpg"

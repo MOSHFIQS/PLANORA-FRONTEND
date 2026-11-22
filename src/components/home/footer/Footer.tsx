@@ -39,7 +39,7 @@ export default function Footer() {
                                    <Link
                                         key={i}
                                         href="/"
-                                        className="w-10 h-10 flex items-center justify-center bg-black text-white hover:bg-[#725CAD]  border transition"
+                                        className="w-10 h-10 flex items-center justify-center bg-black text-white hover:bg-[#4F46E5] border transition"
                                    >
                                         <Icon size={18} />
                                    </Link>
@@ -80,7 +80,7 @@ export default function Footer() {
                               <Link
                                    key={i}
                                    href={item.href}
-                                   className="text-sm hover:text-[#725CAD] transition"
+                                   className="text-sm hover:text-[#4F46E5] transition"
                               >
                                    {item.name}
                               </Link>
@@ -101,7 +101,7 @@ export default function Footer() {
                                    placeholder="Email Address"
                                    className="w-full px-3 py-2 outline-none bg-transparent text-sm"
                               />
-                              <button className="w-12 flex items-center justify-center bg-black text-white hover:bg-[#725CAD]  border transition">
+                              <button className="w-12 flex items-center justify-center bg-black text-white hover:bg-[#4F46E5] border transition">
                                    <Send size={18} />
                               </button>
                          </div>
@@ -123,9 +123,9 @@ export default function Footer() {
                     <p>© {new Date().getFullYear()} PLANORA. All Rights Reserved.</p>
 
                     <div className="flex gap-3">
-                         <Link href="/privacy-policy" className="hover:text-[#725CAD] transition">Privacy Policy</Link>
+                         <Link href="/privacy-policy" className="hover:text-[#4F46E5] transition">Privacy Policy</Link>
                          <span>|</span>
-                         <Link href="/terms" className="hover:text-[#725CAD] transition">Terms</Link>
+                         <Link href="/terms" className="hover:text-[#4F46E5] transition">Terms</Link>
                     </div>
                </div>
           </footer>

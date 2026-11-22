@@ -53,8 +53,7 @@ export function AppSidebar({
 
      return (
           <Sidebar {...props} >
-               <SidebarContent className="bg-white rounded-lg flex flex-col justify-between px-2 py-3 overflow-y-auto 
-  [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+               <SidebarContent className="bg-white rounded-lg flex flex-col justify-between px-2 py-3 overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
 
                     {/* TOP */}
                     <div className="space-y-6">

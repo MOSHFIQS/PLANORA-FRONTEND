@@ -471,10 +471,10 @@ const MyInvitationsCard = ({ invitations }: { invitations: Invitation[] }) => {
             return (
               <Card
                 key={item.id}
-                className="p-3 rounded-4xl  border-2 border-gray-300 flex flex-col gap-3"
+                className="p-3 rounded-md border-2 border-gray-300 flex flex-col gap-3"
               >
                 {/* Image */}
-                <div className="relative h-60 w-full overflow-hidden rounded-2xl group">
+                <div className="relative h-60 w-full overflow-hidden rounded-md group">
                   {event?.images?.[0] && (
                     <AppImage
                       src={event.images[0]}
@@ -487,13 +487,13 @@ const MyInvitationsCard = ({ invitations }: { invitations: Invitation[] }) => {
 
                   {/* Type */}
                   {event?.type && (
-                    <span className="absolute top-3 left-3 bg-white/80 backdrop-blur px-3 py-1 text-xs rounded-full font-medium">
+                    <span className="absolute top-3 left-3 bg-white/80 backdrop-blur px-3 py-1 text-xs rounded-md font-medium">
                       {event.type}
                     </span>
                   )}
 
                   {/* Status */}
-                  <span className="absolute top-3 right-3 bg-white/80 backdrop-blur px-3 py-1 text-xs rounded-full">
+                  <span className="absolute top-3 right-3 bg-white/80 backdrop-blur px-3 py-1 text-xs rounded-md">
                     {isAccepted
                       ? "Accepted"
                       : isPending
@@ -527,7 +527,7 @@ const MyInvitationsCard = ({ invitations }: { invitations: Invitation[] }) => {
                   {isAccepted ? (
                     <Button
                       variant="violet"
-                      className="w-full rounded-4xl"
+                      className="w-full rounded-md"
                     >
                       <Link href={`invitations/${event.id}`}>
                         View Event
@@ -537,7 +537,7 @@ const MyInvitationsCard = ({ invitations }: { invitations: Invitation[] }) => {
                     <div className="flex w-full gap-2">
                       {event.fee === 0 ? (
                         <Button
-                          className="flex-1 rounded-4xl"
+                          className="flex-1 rounded-md"
                           onClick={() =>
                             handlePayment({ invitationId: item.id })
                           }
@@ -546,7 +546,7 @@ const MyInvitationsCard = ({ invitations }: { invitations: Invitation[] }) => {
                         </Button>
                       ) : (
                         <Button
-                          className="flex-1 rounded-4xl"
+                          className="flex-1 rounded-md"
                           disabled={loadingId === item.eventId}
                           onClick={() =>
                             handlePayment({ invitationId: item.id })
@@ -560,7 +560,7 @@ const MyInvitationsCard = ({ invitations }: { invitations: Invitation[] }) => {
 
                       <Button
                         variant="destructive"
-                        className="flex-1 rounded-4xl"
+                        className="flex-1 rounded-md"
                         disabled={rejectingId === item.id}
                         onClick={() => handleReject(item.id)}
                       >

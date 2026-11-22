@@ -101,7 +101,7 @@ const UpdateReviewDialog = ({ review, onUpdated }: Props) => {
                         size={40}
                         className={`cursor-pointer ${
                           value <= field.state.value
-                            ? "text-[#725cAD] fill-[#725cAD]"
+                            ? "text-[#4F46E5] fill-[#4F46E5]"
                             : "text-gray-300"
                         }`}
                         onClick={() =>

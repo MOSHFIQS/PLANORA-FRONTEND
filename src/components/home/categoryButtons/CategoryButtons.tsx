@@ -44,14 +44,14 @@ export default function CategoryButtons({
       <Button
         variant={activeCategory === "ALL" ? "orange" : "outline"}
         onClick={() => handleCategoryChange("ALL")}
-        className="rounded-full"
+        className="rounded-md"
       >
         All
       </Button>
 
       {categories.map((cat) => (
         <Button
-          className="rounded-full"
+          className="rounded-md"
           key={cat.id}
           variant={activeCategory === cat.id ? "orange" : "outline"}
           onClick={() => handleCategoryChange(cat.id)}
