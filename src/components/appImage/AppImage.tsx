@@ -12,8 +12,10 @@ type Props = {
   width?: number;
   height?: number;
   priority?: boolean;
+  fill?: boolean;
+  sizes?: string;
   loading?: "lazy" | "eager";
-} & Omit<ImageProps, "src" | "alt" | "width" | "height" | "loading">;
+} & Omit<ImageProps, "src" | "alt" | "width" | "height" | "loading" | "fill">;
 
 export const AppImage = ({
   src,
@@ -22,7 +24,9 @@ export const AppImage = ({
   width,
   height,
   priority = false,
-  loading = "lazy", // lazy by default for better performance
+  fill = false,
+  sizes,
+  loading = "lazy",
   ...rest
 }: Props) => {
   const [imgSrc, setImgSrc] = useState(src || fallbackImage);
@@ -31,12 +35,28 @@ export const AppImage = ({
     setImgSrc(src || fallbackImage);
   }, [src]);
 
+  if (fill) {
+    return (
+      <Image
+        src={imgSrc}
+        alt={alt || "image"}
+        fill
+        sizes={sizes || "(max-width: 768px) 100vw, (max-width: 1200px) 60vw, 50vw"}
+        onError={() => setImgSrc(fallbackImage)}
+        className={className}
+        priority={priority}
+        loading={loading}
+        {...rest}
+      />
+    );
+  }
+
   return (
     <Image
       src={imgSrc}
       alt={alt || "image"}
-      width={width || 500}   // default width
-      height={height || 300} // default height
+      width={width || 500}
+      height={height || 300}
       onError={() => setImgSrc(fallbackImage)}
       className={className}
       priority={priority}

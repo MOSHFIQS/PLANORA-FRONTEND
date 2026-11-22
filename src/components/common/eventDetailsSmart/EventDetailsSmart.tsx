@@ -67,7 +67,7 @@ const EventDetailsSmart = ({ type, data }: Props) => {
   };
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC]/80 pb-20 pt-6 px-3 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-6 sm:space-y-8">
+    <div className="min-h-screen bg-[#F8FAFC]/80 pb-20 pt-6 px-3 sm:px-6 lg:px-8 max-w-7xl mx-auto flex flex-col gap-6 sm:gap-8">
       {/* ── Top Navigation Bar ────────────────────────────────────────── */}
       <div className="flex items-center justify-between gap-4">
         <button
@@ -100,13 +100,13 @@ const EventDetailsSmart = ({ type, data }: Props) => {
 
       {/* ── Top Gallery Grid (1 Hero Left + 4 Images in 2x2 Grid Right) ── */}
       {event?.images?.length > 0 && (
-        <div className="w-full">
+        <div className="w-full relative z-0">
           <ImageMagnifier images={[...event.images].filter(Boolean)} />
         </div>
       )}
 
       {/* ── 2-Column Content Flow (Matching Reference Layout) ─────────── */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-8 items-start relative z-10">
         {/* ── Left Column (Content Cards - 8 cols) ─────────────────────── */}
         <div className="lg:col-span-8 space-y-6">
           {/* Card 1: Header & Pricing Card (Like Reference Top Card) */}
