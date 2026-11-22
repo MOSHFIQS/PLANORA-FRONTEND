@@ -5,6 +5,11 @@ import { sessionService } from "./service/server/token.service";
 export const dynamic = "force-dynamic";
 
 export async function proxy(request: NextRequest) {
+     // Skip Server Actions and internal requests
+     if (request.headers.get("next-action") || request.nextUrl.pathname.startsWith("/api")) {
+          return NextResponse.next();
+     }
+
      const pathname = request.nextUrl.pathname;
 
      const data = await sessionService.getUserFromToken();
@@ -15,9 +20,12 @@ export async function proxy(request: NextRequest) {
      const isOrganizer = role === Roles.organizer;
      const isSuperAdmin = role === Roles.superAdmin;
 
-     // If user is already logged in, redirect from login/register
+     // If user is already logged in, redirect from login/register (only on GET navigations)
      if (role && (pathname === "/login" || pathname === "/register")) {
-          return NextResponse.redirect(new URL("/dashboard", request.url));
+          if (request.method === "GET") {
+               return NextResponse.redirect(new URL("/dashboard", request.url));
+          }
+          return NextResponse.next();
      }
 
      // Force password change redirect

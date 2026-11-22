@@ -18,22 +18,36 @@ export default function NotificationBell() {
      const unread = notifications.filter((n) => !n.isRead).length;
 
      const load = async () => {
-          const res = await getNotificationsAction();
-          if (res.ok) setNotifications(res.data);
+          try {
+               const res = await getNotificationsAction();
+               if (res?.ok && Array.isArray(res?.data)) {
+                    setNotifications(res.data);
+               }
+          } catch (err) {
+               console.error("Failed to load notifications:", err);
+          }
      };
 
      useEffect(() => { load(); }, []);
 
      const handleMarkRead = async (id: string) => {
-          await markNotificationReadAction(id);
-          setNotifications((prev) =>
-               prev.map((n) => (n.id === id ? { ...n, isRead: true } : n))
-          );
+          try {
+               await markNotificationReadAction(id);
+               setNotifications((prev) =>
+                    prev.map((n) => (n.id === id ? { ...n, isRead: true } : n))
+               );
+          } catch (err) {
+               console.error("Failed to mark notification read:", err);
+          }
      };
 
      const handleMarkAll = async () => {
-          await markAllNotificationsReadAction();
-          setNotifications((prev) => prev.map((n) => ({ ...n, isRead: true })));
+          try {
+               await markAllNotificationsReadAction();
+               setNotifications((prev) => prev.map((n) => ({ ...n, isRead: true })));
+          } catch (err) {
+               console.error("Failed to mark all notifications read:", err);
+          }
      };
 
      const typeColors: Record<string, string> = {
