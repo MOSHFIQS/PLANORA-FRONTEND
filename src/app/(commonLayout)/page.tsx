@@ -1,4 +1,3 @@
-
 import { getAllBannersAction } from "@/actions/banner.action";
 import { getAllCategoriesAction } from "@/actions/category.action";
 import { getAllEventsAction } from "@/actions/event.action";
@@ -16,33 +15,27 @@ import FAQ from "@/components/home/faq/FAQ";
 import { Banner } from "@/types/banner.types";
 import { Event } from "@/types/event.types";
 import { getPublicStatsAction } from "@/actions/stat.action";
+
 const HomePage = async () => {
-     // const data = await sessionService.getUserFromToken()
-     // console.log(data);
-
      const res = await getAllEventsAction();
-     const bannerRes = await getAllBannersAction()
-     const categoryRes = await getAllCategoriesAction()
-     const publicStatsRes = await getPublicStatsAction()
-     // console.log(publicStatsRes);
-     // console.log(categoryRes);
-     // console.log(res.data);
-     const events = res?.data?.data as Event[];
-     // console.log(events);
-     const banners = bannerRes?.data as Banner[];
+     const bannerRes = await getAllBannersAction();
+     const categoryRes = await getAllCategoriesAction();
+     const publicStatsRes = await getPublicStatsAction();
 
+     const events = (Array.isArray(res?.data) ? res.data : res?.data?.data) as Event[] || [];
+     const banners = (Array.isArray(bannerRes?.data) ? bannerRes.data : bannerRes?.data?.data) as Banner[] || [];
+     const categories = (Array.isArray(categoryRes?.data) ? categoryRes.data : categoryRes?.data?.data) || [];
 
-     if (!res?.ok) {
+     if (!res?.ok && !events.length) {
           return (
                <p className="p-6 text-red-600">
                     Failed to load Events
                </p>
           );
      }
+
      return (
           <div>
-
-
                <CarouselPlugin banners={banners} />
 
                {/* New Section 1: Features */}
@@ -53,12 +46,12 @@ const HomePage = async () => {
                {/* New Section 2: Services */}
                <Services />
 
-               <CategoryCard categories={categoryRes.data} />
+               <CategoryCard categories={categories} />
                
                {/* New Section 3: How It Works */}
                <HowItWorks />
 
-               <PublicStatsCard publicStats={publicStatsRes.data} />
+               <PublicStatsCard publicStats={publicStatsRes?.data} />
 
                {/* New Section 4: Testimonials */}
                <Testimonials />
@@ -76,7 +69,6 @@ const HomePage = async () => {
 
                {/* New Section 6: Newsletter */}
                <Newsletter />
-
           </div>
      );
 };
