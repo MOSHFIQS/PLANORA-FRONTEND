@@ -17,8 +17,9 @@ export default function RootLayout({
      children: React.ReactNode;
 }>) {
      return (
-          <html lang="en">
+          <html lang="en" suppressHydrationWarning>
                <body
+                    suppressHydrationWarning
                     className={`${spaceGrotesk.className} bg-[#FFF5F2] font-sans `}
                >
                     <AuthProvider>
