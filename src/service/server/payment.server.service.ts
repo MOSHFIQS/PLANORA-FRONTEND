@@ -24,4 +24,8 @@ export const paymentService = {
           apiFetchServerMain(`/payment/admin?${query || ""}`, {
                method: "GET",
           }),
+     verifyPayment: (query?: string) =>
+          apiFetchServerMain(`/payment/verify?${query || ""}`, {
+               method: "GET",
+          }),
 };

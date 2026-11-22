@@ -111,3 +111,27 @@ export async function getAllPaymentsAction(page?: number, limit?: number) {
     };
   }
 }
+
+export async function verifyPaymentAction(paymentId?: string, sessionId?: string) {
+  try {
+    const query = buildQueryString({ paymentId, sessionId });
+    const res = await paymentService.verifyPayment(query);
+
+    if (!res?.ok) {
+      return {
+        ok: false,
+        message: res?.message || "Payment verification failed",
+      };
+    }
+
+    return {
+      ok: true,
+      data: res.data,
+    };
+  } catch (err: any) {
+    return {
+      ok: false,
+      message: err?.message || "Verification failed",
+    };
+  }
+}
