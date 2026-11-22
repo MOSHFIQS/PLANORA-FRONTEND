@@ -49,7 +49,7 @@ const Testimonials = () => {
               className="bg-white dark:bg-gray-950 p-8 md:p-10 flex flex-col gap-6 hover:bg-gray-50 dark:hover:bg-gray-900 transition-colors duration-300 group"
             >
               {/* Quote icon */}
-              <Quote className="w-7 h-7 text-teal-500/40 group-hover:text-teal-500/70 transition-colors duration-300 fill-current" />
+              <Quote className="w-7 h-7 text-indigo-500/40 group-hover:text-indigo-500/70 transition-colors duration-300 fill-current" />
 
               {/* Stars */}
               <div className="flex gap-0.5">

@@ -604,7 +604,7 @@ const EventDetailsSmart = ({ type, data }: Props) => {
                 <span>Instant digital ticket generation & QR pass</span>
               </div>
               <div className="flex items-center gap-2">
-                <Sparkles className="w-3.5 h-3.5 text-violet-500" />
+                <Sparkles className="w-3.5 h-3.5 text-indigo-600" />
                 <span>100% verified organizer on Planora</span>
               </div>
             </div>

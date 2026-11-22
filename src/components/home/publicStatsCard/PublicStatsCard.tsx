@@ -35,7 +35,7 @@ const PublicStatsCard = ({ publicStats }: { publicStats: PublicStats }) => {
           priority
         />
 
-        {/* Dark overlay with subtle teal tint */}
+        {/* Dark overlay with subtle indigo tint */}
         <div className="absolute inset-0 bg-gray-950/85" />
 
         {/* Subtle grid */}
@@ -52,7 +52,7 @@ const PublicStatsCard = ({ publicStats }: { publicStats: PublicStats }) => {
         <div className="relative z-10 py-16 px-6 md:px-12">
 
           {/* Top label */}
-          <p className="text-center text-teal-400 text-xs font-bold tracking-[0.25em] uppercase mb-10">
+          <p className="text-center text-indigo-400 text-xs font-bold tracking-[0.25em] uppercase mb-10">
             Platform Overview
           </p>
 
@@ -67,7 +67,7 @@ const PublicStatsCard = ({ publicStats }: { publicStats: PublicStats }) => {
                     suffix={stat.suffix}
                   />
                 </div>
-                <div className="w-6 h-[2px] bg-teal-500 mx-auto mb-3 group-hover:w-10 transition-all duration-300" />
+                <div className="w-6 h-[2px] bg-indigo-500 mx-auto mb-3 group-hover:w-10 transition-all duration-300" />
                 <p className="text-gray-400 text-xs tracking-widest uppercase font-medium">
                   {stat.label}
                 </p>

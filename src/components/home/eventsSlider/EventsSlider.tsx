@@ -80,7 +80,7 @@ export default function EventsSlider({ events }: Props) {
 
                   {/* Top Right Status */}
                   <span className="absolute top-3 right-3 bg-white/80 backdrop-blur px-3 py-1 text-xs rounded-md flex items-center gap-1">
-                    <span className="w-2 h-2 bg-pink-500 rounded-md"></span>
+                    <span className="w-2 h-2 bg-emerald-500 rounded-md"></span>
                     Active
                   </span>
                 </Link>
@@ -108,7 +108,7 @@ export default function EventsSlider({ events }: Props) {
                       </p>
                     )}
                   </div>
-                  <span className="text-lg font-bold text-purple-500">
+                  <span className="text-lg font-bold text-indigo-600">
                     {event.fee === 0 ? "Free" : `৳${event.fee}`}
                   </span>
 
@@ -117,8 +117,7 @@ export default function EventsSlider({ events }: Props) {
 
                 {/* Button */}
                 <Button
-                  className="w-full rounded-md"
-                  variant="violet"
+                  className="w-full rounded-md bg-[#4F46E5] hover:bg-indigo-600 text-white"
                   onClick={() => handleViewEvent(event.id)}
                 >
                   View Event Info
@@ -173,7 +172,7 @@ export default function EventsSlider({ events }: Props) {
 
                         {/* Status */}
                         <span className="absolute top-3 right-3 bg-white/80 backdrop-blur px-3 py-1 text-xs rounded-md flex items-center gap-1">
-                          <span className="w-2 h-2 bg-pink-500 rounded-md"></span>
+                          <span className="w-2 h-2 bg-emerald-500 rounded-md"></span>
                           Active
                         </span>
                       </Link>
@@ -203,15 +202,14 @@ export default function EventsSlider({ events }: Props) {
                         </div>
 
                         {/* Price */}
-                        <span className="text-lg font-bold text-purple-500 whitespace-nowrap">
+                        <span className="text-lg font-bold text-indigo-600 whitespace-nowrap">
                           {event.fee === 0 ? "Free" : `৳${event.fee}`}
                         </span>
                       </CardContent>
 
                       {/* Button */}
                       <Button
-                        className="w-full rounded-md"
-                        variant="violet"
+                        className="w-full rounded-md bg-[#4F46E5] hover:bg-indigo-600 text-white"
                         onClick={() => handleViewEvent(event.id)}
                       >
                         View Event Info

@@ -101,8 +101,8 @@ export default function AIAssistantWidget() {
             <div
               className="w-8 h-8 rounded-lg flex items-center justify-center overflow-hidden p-1"
               style={{
-                background: "linear-gradient(135deg,#ede9fe,#ddd6fe)",
-                border: "1px solid #c4b5fd",
+                background: "linear-gradient(135deg,#e0e7ff,#ddd6fe)",
+                border: "1px solid #c7d2fe",
               }}
             >
               <img src="/logo/logo.png" alt="Planora Logo" className="w-full h-full object-contain" />
@@ -112,7 +112,7 @@ export default function AIAssistantWidget() {
                 <span className="text-sm font-bold text-gray-900">Planora AI</span>
                 <span
                   className="text-[9px] font-bold tracking-widest px-1.5 py-0.5 rounded-md"
-                  style={{ background: "#ede9fe", color: "#7c3aed", border: "1px solid #c4b5fd" }}
+                  style={{ background: "#e0e7ff", color: "#7c3aed", border: "1px solid #c7d2fe" }}
                 >
                   BETA
                 </span>
@@ -159,7 +159,7 @@ export default function AIAssistantWidget() {
         >
           {loading ? (
             <div className="h-full flex flex-col items-center justify-center gap-3 text-gray-400">
-              <Loader2 size={20} className="animate-spin text-violet-600" />
+              <Loader2 size={20} className="animate-spin text-indigo-600" />
               <span className="text-xs">Loading events…</span>
             </div>
           ) : (
@@ -178,7 +178,7 @@ export default function AIAssistantWidget() {
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
                       placeholder="Search events, venues, types…"
-                      className="w-full pl-8 pr-3 py-2 text-sm text-gray-800 placeholder:text-gray-400 focus:outline-none rounded-md bg-white border border-[#ddd6f3] focus:border-violet-400 focus:ring-2 focus:ring-violet-100 transition-all"
+                      className="w-full pl-8 pr-3 py-2 text-sm text-gray-800 placeholder:text-gray-400 focus:outline-none rounded-md bg-white border border-[#c7d2fe] focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100 transition-all"
                     />
                   </div>
 
@@ -187,7 +187,7 @@ export default function AIAssistantWidget() {
                       <p className="text-[9.5px] font-bold uppercase tracking-widest text-gray-400">Results</p>
                       {searchLoading ? (
                         <div className="flex items-center justify-center py-8 gap-2 text-gray-400">
-                          <Loader2 size={15} className="animate-spin text-violet-500" />
+                          <Loader2 size={15} className="animate-spin text-indigo-500" />
                           <span className="text-xs">Searching…</span>
                         </div>
                       ) : searchResults.length > 0 ? (
@@ -198,7 +198,7 @@ export default function AIAssistantWidget() {
                               onClick={() => navigate(`/events/${event.id}`)}
                               className={`${card} flex items-center gap-3 px-3 py-2.5 w-full text-left group`}
                             >
-                              <div className="w-9 h-9 rounded-lg overflow-hidden flex-shrink-0 bg-violet-50 border border-violet-100">
+                              <div className="w-9 h-9 rounded-lg overflow-hidden flex-shrink-0 bg-indigo-50 border border-indigo-100">
                                 {event.images?.[0] && (
                                   <img src={event.images[0]} alt={event.title} className="w-full h-full object-cover" />
                                 )}
@@ -209,7 +209,7 @@ export default function AIAssistantWidget() {
                                   <MapPin size={9} />{event.venue ?? event.type}
                                 </p>
                               </div>
-                              <span className={`text-[10px] font-bold flex-shrink-0 ${event.fee === 0 ? "text-emerald-600" : "text-violet-600"}`}>
+                              <span className={`text-[10px] font-bold flex-shrink-0 ${event.fee === 0 ? "text-emerald-600" : "text-indigo-600"}`}>
                                 {event.fee === 0 ? "Free" : `৳${event.fee}`}
                               </span>
                             </button>
@@ -223,9 +223,9 @@ export default function AIAssistantWidget() {
                     <div className="flex flex-col items-center justify-center py-10 gap-3 text-center">
                       <div
                         className="w-10 h-10 rounded-md flex items-center justify-center"
-                        style={{ background: "#ede9fe", border: "1px solid #c4b5fd" }}
+                        style={{ background: "#e0e7ff", border: "1px solid #c7d2fe" }}
                       >
-                        <Search size={17} className="text-violet-600" />
+                        <Search size={17} className="text-indigo-600" />
                       </div>
                       <p className="text-xs max-w-[180px] leading-relaxed text-gray-400">
                         Find events by name, venue, or type.
@@ -248,10 +248,10 @@ export default function AIAssistantWidget() {
                         onClick={() => navigate(`/events/${event.id}`)}
                         className={`${card} flex items-center gap-3 p-3 w-full text-left`}
                       >
-                        <div className="w-11 h-11 rounded-md overflow-hidden flex-shrink-0 border border-violet-100">
+                        <div className="w-11 h-11 rounded-md overflow-hidden flex-shrink-0 border border-indigo-100">
                           {event.images?.[0]
                             ? <img src={event.images[0]} alt={event.title} className="w-full h-full object-cover" />
-                            : <div className="w-full h-full" style={{ background: "linear-gradient(135deg,#7c3aed,#4f46e5)" }} />
+                            : <div className="w-full h-full" style={{ background: "linear-gradient(135deg,#4338ca,#4f46e5)" }} />
                           }
                         </div>
                         <div className="flex-1 min-w-0">
@@ -265,7 +265,7 @@ export default function AIAssistantWidget() {
                             {event.type === "ONLINE" && (
                               <span
                                 className="text-[9px] font-bold px-1.5 py-0.5 rounded-md flex items-center gap-0.5"
-                                style={{ background: "#ede9fe", color: "#7c3aed", border: "1px solid #c4b5fd" }}
+                                style={{ background: "#e0e7ff", color: "#7c3aed", border: "1px solid #c7d2fe" }}
                               >
                                 <Wifi size={8} /> Online
                               </span>
@@ -285,14 +285,14 @@ export default function AIAssistantWidget() {
                   {!user?.id && (
                     <div
                       className="mt-1 rounded-md p-3 text-center"
-                      style={{ background: "#ede9fe", border: "1px solid #c4b5fd" }}
+                      style={{ background: "#e0e7ff", border: "1px solid #c7d2fe" }}
                     >
-                      <p className="text-[10px] mb-2 text-violet-500">
+                      <p className="text-[10px] mb-2 text-indigo-500">
                         Sign in for personalized picks
                       </p>
                       <button
                         onClick={() => navigate("/login")}
-                        className="text-[10px] font-bold px-3 py-1 rounded-md bg-violet-600 text-white hover:bg-violet-700 transition-colors"
+                        className="text-[10px] font-bold px-3 py-1 rounded-md bg-indigo-600 text-white hover:bg-indigo-700 transition-colors"
                       >
                         Sign in →
                       </button>
@@ -326,11 +326,11 @@ export default function AIAssistantWidget() {
                         >
                           {event.images?.[0]
                             ? <img src={event.images[0]} alt={event.title} className="w-full h-full object-cover" />
-                            : <div className="w-full h-full" style={{ background: "linear-gradient(135deg,#7c3aed,#4f46e5)" }} />
+                            : <div className="w-full h-full" style={{ background: "linear-gradient(135deg,#4338ca,#4f46e5)" }} />
                           }
                         </div>
                         <p className="text-[10px] font-semibold text-gray-900 truncate">{event.title}</p>
-                        <p className={`text-[9px] mt-0.5 font-bold ${event.fee === 0 ? "text-emerald-600" : "text-violet-600"}`}>
+                        <p className={`text-[9px] mt-0.5 font-bold ${event.fee === 0 ? "text-emerald-600" : "text-indigo-600"}`}>
                           {event.fee === 0 ? "Free" : `৳${event.fee}`}
                         </p>
                       </button>
@@ -353,8 +353,8 @@ export default function AIAssistantWidget() {
                     >
                       <div className="flex items-center gap-3">
                         <div
-                          className="w-7 h-7 rounded-lg flex items-center justify-center text-violet-600"
-                          style={{ background: "#ede9fe" }}
+                          className="w-7 h-7 rounded-lg flex items-center justify-center text-indigo-600"
+                          style={{ background: "#e0e7ff" }}
                         >
                           {s.icon}
                         </div>
@@ -362,7 +362,7 @@ export default function AIAssistantWidget() {
                       </div>
                       <ArrowRight
                         size={13}
-                        className="text-gray-300 group-hover:text-violet-400 group-hover:translate-x-0.5 transition-all"
+                        className="text-gray-300 group-hover:text-indigo-400 group-hover:translate-x-0.5 transition-all"
                       />
                     </button>
                   ))}
@@ -390,14 +390,14 @@ export default function AIAssistantWidget() {
           w-12 h-12 rounded-full flex items-center justify-center pointer-events-auto
           transition-all duration-200 focus:outline-none
           ${isOpen
-            ? "bg-white border-2 border-violet-300 rotate-90 shadow-lg shadow-violet-100"
-            : "bg-white border border-gray-200 shadow-md hover:shadow-lg hover:border-violet-200"
+            ? "bg-white border-2 border-indigo-300 rotate-90 shadow-lg shadow-indigo-100"
+            : "bg-white border border-gray-200 shadow-md hover:shadow-lg hover:border-indigo-200"
           }
         `}
         aria-label={isOpen ? "Close AI assistant" : "Open AI assistant"}
       >
         {isOpen ? (
-          <X size={18} className="text-violet-600" />
+          <X size={18} className="text-indigo-600" />
         ) : (
           <img
             src="/logo/logo.png"

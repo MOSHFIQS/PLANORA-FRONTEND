@@ -130,7 +130,7 @@
 //                       {p.events?.map((e, index) => (
 //                         <span
 //                           key={`${e.eventId}-${index}`}
-//                           className={`flex items-center gap-1 px-2 py-1 rounded-md text-xs font-medium ${e.invited ? "bg-yellow-100 text-yellow-800" : "bg-green-100 text-green-800"
+//                           className={`flex items-center gap-1 px-2 py-1 rounded-md text-xs font-medium ${e.invited ? "bg-indigo-50 text-indigo-700 border border-indigo-200" : "bg-green-100 text-green-800"
 //                             }`}
 //                           title={e.invited ? `Invitation Status: ${e.invitationStatus}` : `Participation Status: ${e.participationStatus}`}
 //                         >
@@ -344,7 +344,7 @@
 // //                 {p.events.map((e, index) => (
 // //                   <span
 // //                     key={`${e.eventId}-${index}`}
-// //                     className={`flex items-center gap-1 px-2 py-1 rounded-md text-xs font-medium ${e.invited ? "bg-yellow-100 text-yellow-800" : "bg-green-100 text-green-800"
+// //                     className={`flex items-center gap-1 px-2 py-1 rounded-md text-xs font-medium ${e.invited ? "bg-indigo-50 text-indigo-700 border border-indigo-200" : "bg-green-100 text-green-800"
 // //                       }`}
 // //                     title={e.invited ? `Invitation Status: ${e.invitationStatus}` : `Participation Status: ${e.participationStatus}`}
 // //                   >
@@ -599,7 +599,7 @@ export default function MyAllEventParticipants({
                       <span
                         key={`${e.eventId}-${index}`}
                         className={`flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium ${e.invited
-                          ? "bg-yellow-100 text-yellow-800"
+                          ? "bg-indigo-50 text-indigo-700 border border-indigo-200"
                           : "bg-green-100 text-green-800"
                           }`}
                         title={
@@ -756,7 +756,7 @@ export default function MyAllEventParticipants({
                           <span
                             key={`${e.eventId}-${index}`}
                             className={`flex items-center gap-1 px-2 py-1 rounded-md text-xs font-medium ${e.invited
-                              ? "bg-yellow-100 text-yellow-800"
+                              ? "bg-indigo-50 text-indigo-700 border border-indigo-200"
                               : "bg-green-100 text-green-800"
                               }`}
                             title={

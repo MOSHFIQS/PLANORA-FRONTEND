@@ -66,7 +66,7 @@ const HomePageEvents = ({ events }: Props) => {
 
               {/* Top Right Status */}
               <span className="absolute top-3 right-3 bg-white/80 backdrop-blur px-3 py-1 text-xs rounded-md flex items-center gap-1">
-                <span className="w-2 h-2 bg-pink-500 rounded-md"></span>
+                <span className="w-2 h-2 bg-emerald-500 rounded-md"></span>
                 Active
               </span>
             </Link>
@@ -94,7 +94,7 @@ const HomePageEvents = ({ events }: Props) => {
                   </p>
                 )}
               </div>
-              <span className="text-lg font-bold text-purple-500">
+              <span className="text-lg font-bold text-indigo-600">
                 {event.fee === 0 ? "Free" : `৳${event.fee}`}
               </span>
 

@@ -92,7 +92,7 @@ const MyProfile: React.FC<MyProfileProps> = ({ profileData }) => {
                label: "Email Address",
                value: profile.email,
                extra: (
-                    <span className={`inline-flex items-center gap-1 text-[10px] font-bold tracking-wide uppercase px-2 py-0.5 rounded-full ${profile.emailVerified ? "bg-teal-500/10 text-teal-600 border border-teal-500/20" : "bg-red-500/10 text-red-500 border border-red-500/20"}`}>
+                    <span className={`inline-flex items-center gap-1 text-[10px] font-bold tracking-wide uppercase px-2 py-0.5 rounded-full ${profile.emailVerified ? "bg-emerald-50 text-emerald-700 border border-emerald-200" : "bg-red-500/10 text-red-500 border border-red-500/20"}`}>
                          <ShieldCheck className="w-3 h-3" />
                          {profile.emailVerified ? "Verified" : "Unverified"}
                     </span>
@@ -129,7 +129,7 @@ const MyProfile: React.FC<MyProfileProps> = ({ profileData }) => {
                <div className="relative rounded-md overflow-hidden border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950">
 
                     {/* Top banner strip */}
-                    <div className="h-24 bg-gradient-to-r from-gray-400/20 via-gray-400/10 to-transparent dark:from-teal-500/10" />
+                    <div className="h-24 bg-gradient-to-r from-gray-400/20 via-gray-400/10 to-transparent dark:from-indigo-500/10" />
 
                     {/* Avatar + name row */}
                     <div className="px-8 pb-8 -mt-12 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
@@ -144,7 +144,7 @@ const MyProfile: React.FC<MyProfileProps> = ({ profileData }) => {
                                         />
                                    </div>
                                    {/* Status dot */}
-                                   <span className={`absolute -bottom-1 -right-1 w-4 h-4 rounded-full border-2 border-white dark:border-gray-950 ${profile.status === "ACTIVE" ? "bg-teal-500" : "bg-gray-400"}`} />
+                                   <span className={`absolute -bottom-1 -right-1 w-4 h-4 rounded-full border-2 border-white dark:border-gray-950 ${profile.status === "ACTIVE" ? "bg-emerald-500" : "bg-gray-400"}`} />
                               </div>
 
                               {/* Name + badges */}
@@ -153,8 +153,8 @@ const MyProfile: React.FC<MyProfileProps> = ({ profileData }) => {
                                         {profile.name}
                                    </h2>
                                    <div className="flex items-center gap-2 mt-1.5 flex-wrap">
-                                        <span className="inline-flex items-center gap-1 text-[10px] font-black tracking-[0.15em] uppercase px-2.5 py-1 rounded-md bg-teal-500/10 text-teal-600 dark:text-teal-400 border border-teal-500/20">
-                                             <span className="w-1.5 h-1.5 rounded-md bg-teal-500 animate-pulse" />
+                                        <span className="inline-flex items-center gap-1 text-[10px] font-black tracking-[0.15em] uppercase px-2.5 py-1 rounded-md bg-emerald-50 text-emerald-700 dark:text-emerald-400 border border-emerald-200">
+                                             <span className="w-1.5 h-1.5 rounded-md bg-emerald-500 animate-pulse" />
                                              {profile.status}
                                         </span>
                                         <span className="inline-flex items-center text-[10px] font-black tracking-[0.15em] uppercase px-2.5 py-1 rounded-md bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 border border-gray-200 dark:border-gray-700">
@@ -167,8 +167,8 @@ const MyProfile: React.FC<MyProfileProps> = ({ profileData }) => {
                          {/* Edit button */}
                          <Dialog open={open} onOpenChange={setOpen}>
                               <DialogTrigger asChild>
-                                   <button className="group inline-flex items-center gap-2 px-4 py-2 rounded-md border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 hover:border-teal-500/50 hover:bg-teal-50/50 dark:hover:bg-teal-500/5 text-sm font-semibold text-gray-700 dark:text-gray-300 transition-all duration-200 self-start sm:self-auto shrink-0">
-                                        <Pencil className="w-3.5 h-3.5 text-gray-400 group-hover:text-teal-500 transition-colors" />
+                                   <button className="group inline-flex items-center gap-2 px-4 py-2 rounded-md border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 hover:border-indigo-500/50 hover:bg-indigo-50/50 dark:hover:bg-emerald-500/5 text-sm font-semibold text-gray-700 dark:text-gray-300 transition-all duration-200 self-start sm:self-auto shrink-0">
+                                        <Pencil className="w-3.5 h-3.5 text-gray-400 group-hover:text-indigo-600 transition-colors" />
                                         Edit Profile
                                    </button>
                               </DialogTrigger>
@@ -219,7 +219,7 @@ const MyProfile: React.FC<MyProfileProps> = ({ profileData }) => {
                                         <Button
                                              onClick={handleUpdate}
                                              disabled={isUpdating}
-                                             className="rounded-md bg-teal-500 hover:bg-teal-400 text-white font-bold px-6"
+                                             className="rounded-md bg-indigo-600 hover:bg-indigo-500 text-white font-bold px-6"
                                         >
                                              {isUpdating ? "Saving..." : "Save Changes"}
                                         </Button>
@@ -234,10 +234,10 @@ const MyProfile: React.FC<MyProfileProps> = ({ profileData }) => {
                     {infoFields.map(({ icon: Icon, label, value, extra }) => (
                          <div
                               key={label}
-                              className="group flex items-start gap-4 p-5 rounded-md border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-950 hover:border-teal-500/30 transition-colors duration-200"
+                              className="group flex items-start gap-4 p-5 rounded-md border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-950 hover:border-indigo-500/30 transition-colors duration-200"
                          >
-                              <div className="w-9 h-9 rounded-md bg-gray-50 dark:bg-gray-900 border border-gray-100 dark:border-gray-800 flex items-center justify-center shrink-0 group-hover:border-teal-500/30 group-hover:bg-teal-50/50 dark:group-hover:bg-teal-500/5 transition-colors duration-200">
-                                   <Icon className="w-4 h-4 text-gray-400 group-hover:text-teal-500 transition-colors duration-200" />
+                              <div className="w-9 h-9 rounded-md bg-gray-50 dark:bg-gray-900 border border-gray-100 dark:border-gray-800 flex items-center justify-center shrink-0 group-hover:border-indigo-500/30 group-hover:bg-indigo-50/50 dark:group-hover:bg-emerald-500/5 transition-colors duration-200">
+                                   <Icon className="w-4 h-4 text-gray-400 group-hover:text-indigo-600 transition-colors duration-200" />
                               </div>
                               <div className="min-w-0 flex-1">
                                    <p className="text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-1">
@@ -262,9 +262,9 @@ const MyProfile: React.FC<MyProfileProps> = ({ profileData }) => {
                          {profile.hasPassword ? (
                               <Dialog open={isPasswordModalOpen} onOpenChange={setIsPasswordModalOpen}>
                                    <DialogTrigger asChild>
-                                        <button className="group flex items-center gap-4 p-5 rounded-md border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-950 hover:border-violet-500/30 transition-all duration-300">
-                                             <div className="w-9 h-9 rounded-md bg-violet-500/10 border border-violet-500/20 flex items-center justify-center shrink-0 group-hover:bg-violet-500/20 transition-colors">
-                                                  <ShieldCheck className="w-4 h-4 text-violet-500" />
+                                        <button className="group flex items-center gap-4 p-5 rounded-md border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-950 hover:border-indigo-500/30 transition-all duration-300">
+                                             <div className="w-9 h-9 rounded-md bg-indigo-50 border border-indigo-100 flex items-center justify-center shrink-0 group-hover:bg-indigo-100/60 transition-colors">
+                                                  <ShieldCheck className="w-4 h-4 text-indigo-600" />
                                              </div>
                                              <div className="text-left">
                                                   <p className="text-[13px] font-bold text-gray-800 dark:text-gray-200">Change Password</p>
@@ -286,13 +286,13 @@ const MyProfile: React.FC<MyProfileProps> = ({ profileData }) => {
                               <button 
                                    disabled={isForgotLoading}
                                    onClick={handleForgotPassword}
-                                   className="group flex items-center gap-4 p-5 rounded-md border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-950 hover:border-teal-500/30 transition-all duration-300 disabled:opacity-50"
+                                   className="group flex items-center gap-4 p-5 rounded-md border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-950 hover:border-indigo-500/30 transition-all duration-300 disabled:opacity-50"
                               >
-                                   <div className="w-9 h-9 rounded-md bg-teal-500/10 border border-teal-500/20 flex items-center justify-center shrink-0 group-hover:bg-teal-500/20 transition-colors">
+                                   <div className="w-9 h-9 rounded-md bg-indigo-50 border border-indigo-100 flex items-center justify-center shrink-0 group-hover:bg-indigo-100/60 transition-colors">
                                         {isForgotLoading ? (
-                                             <Loader2 className="w-4 h-4 text-teal-500 animate-spin" />
+                                             <Loader2 className="w-4 h-4 text-indigo-600 animate-spin" />
                                         ) : (
-                                             <ShieldCheck className="w-4 h-4 text-teal-500" />
+                                             <ShieldCheck className="w-4 h-4 text-indigo-600" />
                                         )}
                                    </div>
                                    <div className="text-left">
@@ -307,13 +307,13 @@ const MyProfile: React.FC<MyProfileProps> = ({ profileData }) => {
                               <button 
                                    disabled={isForgotLoading}
                                    onClick={handleForgotPassword}
-                                   className="group flex items-center gap-4 p-5 rounded-md border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-950 hover:border-amber-500/30 transition-all duration-300 disabled:opacity-50"
+                                   className="group flex items-center gap-4 p-5 rounded-md border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-950 hover:border-indigo-500/30 transition-all duration-300 disabled:opacity-50"
                               >
-                                   <div className="w-9 h-9 rounded-md bg-amber-500/10 border border-amber-500/20 flex items-center justify-center shrink-0 group-hover:bg-amber-500/20 transition-colors">
+                                   <div className="w-9 h-9 rounded-md bg-indigo-50 border border-indigo-100 flex items-center justify-center shrink-0 group-hover:bg-indigo-100/60 transition-colors">
                                         {isForgotLoading ? (
-                                             <Loader2 className="w-4 h-4 text-amber-500 animate-spin" />
+                                             <Loader2 className="w-4 h-4 text-indigo-600 animate-spin" />
                                         ) : (
-                                             <KeyRound className="w-4 h-4 text-amber-500" />
+                                             <KeyRound className="w-4 h-4 text-indigo-600" />
                                         )}
                                    </div>
                                    <div className="text-left">

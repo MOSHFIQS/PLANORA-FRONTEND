@@ -51,10 +51,10 @@ export default function NotificationBell() {
      };
 
      const typeColors: Record<string, string> = {
-          ORDER_UPDATE: "bg-blue-50 border-blue-200",
-          PAYMENT_UPDATE: "bg-green-50 border-green-200",
-          PRESCRIPTION_STATUS: "bg-purple-50 border-purple-200",
-          PROMOTION: "bg-yellow-50 border-yellow-200",
+          ORDER_UPDATE: "bg-indigo-50 border-indigo-300",
+          PAYMENT_UPDATE: "bg-emerald-50 border-emerald-300",
+          PRESCRIPTION_STATUS: "bg-indigo-50 border-indigo-300",
+          PROMOTION: "bg-indigo-50 border-indigo-300",
           SYSTEM: "bg-gray-50 border-gray-200",
      };
 
@@ -72,7 +72,7 @@ export default function NotificationBell() {
                          {/* Notification Badge */}
                          {unread > 0 && (
                               <span
-                                   className=" absolute -top-1 -right-1 min-w-[18px] h-[18px] px-[4px] bg-gradient-to-r from-red-500 to-pink-500 text-white text-[10px] font-semibold rounded-md flex items-center justify-center shadow-md ring-2 ring-white dark:ring-gray-900 animate-in fade-in zoom-in-50 "
+                                   className=" absolute -top-1 -right-1 min-w-[18px] h-[18px] px-[4px] bg-[#4F46E5] text-white text-[10px] font-semibold rounded-md flex items-center justify-center shadow-md ring-2 ring-white dark:ring-gray-900 animate-in fade-in zoom-in-50 "
                               >
                                    {unread > 9 ? "9+" : unread}
                               </span>
@@ -83,7 +83,7 @@ export default function NotificationBell() {
                     <div className="flex items-center justify-between px-4 py-3 border-b">
                          <h3 className="font-semibold">Notifications</h3>
                          {unread > 0 && (
-                              <button onClick={handleMarkAll} className="text-xs text-blue-600 hover:underline">
+                              <button onClick={handleMarkAll} className="text-xs text-[#4F46E5] hover:underline">
                                    Mark all read
                               </button>
                          )}

@@ -67,12 +67,12 @@ function SearchDropdown({
                     {/* Header */}
                     <div className="px-4 py-2.5 flex items-center justify-between border-b border-gray-100 bg-gray-50/80">
                          <div className="flex items-center gap-2">
-                              <Search size={12} className="text-orange-400" />
+                              <Search size={12} className="text-indigo-600" />
                               <span className="text-[10px] font-bold uppercase tracking-widest text-gray-400">
                                    Search Results
                               </span>
                               {!searchLoading && searchResults.length > 0 && (
-                                   <span className="text-[9px] font-bold px-1.5 py-0.5 rounded-md bg-orange-100 text-indigo-600">
+                                   <span className="text-[9px] font-bold px-1.5 py-0.5 rounded-md bg-indigo-50 text-indigo-600 border border-indigo-100">
                                         {searchResults.length} found
                                    </span>
                               )}
@@ -86,7 +86,7 @@ function SearchDropdown({
                     <div className="p-2 flex flex-col gap-1 max-h-80 overflow-y-auto [scrollbar-width:none] bg-white">
                          {searchLoading ? (
                               <div className="flex flex-col items-center justify-center py-10 gap-2">
-                                   <Loader2 size={20} className="animate-spin text-orange-400" />
+                                   <Loader2 size={20} className="animate-spin text-indigo-600" />
                                    <span className="text-xs text-gray-400">Searching events…</span>
                               </div>
                          ) : searchResults.length > 0 ? (
@@ -94,13 +94,13 @@ function SearchDropdown({
                                    <button
                                         key={event.id}
                                         onClick={() => { onNavigate(event.id); onClose(); }}
-                                        className="flex items-center gap-3 px-3 py-3 rounded-md w-full text-left border hover:border-orange-100 hover:bg-orange-50/60 transition-all duration-150 group"
+                                        className="flex items-center gap-3 px-3 py-3 rounded-md w-full text-left border hover:border-indigo-100 hover:bg-indigo-50/50 transition-all duration-150 group"
                                    >
                                         <div className="w-14 h-14 rounded-md overflow-hidden flex-shrink-0 border border-gray-100 bg-gray-100">
                                              {event.images?.[0] ? (
                                                   <img src={event.images[0]} alt={event.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200" />
                                              ) : (
-                                                  <div className="w-full h-full bg-gradient-to-br from-orange-400 to-orange-500 flex items-center justify-center">
+                                                  <div className="w-full h-full bg-gradient-to-br from-indigo-500 to-indigo-700 flex items-center justify-center">
                                                        <Calendar size={20} className="text-white/70" />
                                                   </div>
                                              )}
@@ -123,7 +123,7 @@ function SearchDropdown({
                                         <div className="flex flex-col items-end gap-1 flex-shrink-0">
                                              <span className={`text-[11px] font-bold px-2 py-1 rounded-lg border ${event.fee === 0
                                                   ? "bg-green-50 text-green-700 border-green-200"
-                                                  : "bg-orange-50 text-orange-700 border-orange-200"
+                                                  : "bg-indigo-50 text-indigo-700 border-indigo-200"
                                                   }`}>
                                                   {event.fee === 0 ? "Free" : `৳${event.fee}`}
                                              </span>
@@ -148,7 +148,7 @@ function SearchDropdown({
                          <div className="border-t border-gray-100 bg-gray-50/50">
                               <Link href={`/events?search=${searchQuery}`}
                                    onClick={onClose}
-                                   className="w-full px-4 py-2.5 text-xs font-semibold text-center text-indigo-600 hover:bg-orange-50 transition-colors flex items-center justify-center gap-1"
+                                   className="w-full px-4 py-2.5 text-xs font-semibold text-center text-indigo-600 hover:bg-indigo-50 transition-colors flex items-center justify-center gap-1"
                               >
                                    View all results for &quot;{searchQuery}&quot; →
                               </Link>
@@ -324,7 +324,7 @@ const Navbar = () => {
                                                   value={search}
                                                   onChange={(e) => handleSearch(e.target.value)}
                                                   onFocus={() => search.trim() && setDropdownOpen(true)}
-                                                  className="w-64 bg-white border-gray-200 rounded-md pl-5 text-sm focus:border-orange-300 focus:ring-orange-100"
+                                                  className="w-64 bg-white border-gray-200 rounded-md pl-5 text-sm focus:border-indigo-400 focus:ring-indigo-100"
                                              />
                                              {dropdownOpen && (
                                                   <SearchDropdown
@@ -438,7 +438,7 @@ const Navbar = () => {
                                                   value={search}
                                                   onChange={(e) => handleSearch(e.target.value)}
                                                   onFocus={() => search.trim() && setDropdownOpen(true)}
-                                                  className="w-64 bg-white border-gray-200 rounded-md pl-5 text-sm focus:border-orange-300 focus:ring-orange-100"
+                                                  className="w-64 bg-white border-gray-200 rounded-md pl-5 text-sm focus:border-indigo-400 focus:ring-indigo-100"
                                              />
                                              {dropdownOpen && (
                                                   <SearchDropdown
@@ -512,7 +512,7 @@ const Navbar = () => {
 
                                              {/* Mobile user card */}
                                              {user?.id && (
-                                                  <div className="flex items-center gap-3 px-3 py-3 rounded-md bg-gradient-to-br from-[#4F46E5]/10 to-[#4F46E5]/5 border border-orange-100">
+                                                  <div className="flex items-center gap-3 px-3 py-3 rounded-md bg-gradient-to-br from-[#4F46E5]/10 to-[#4F46E5]/5 border border-indigo-100">
                                                        <div className="w-10 h-10 rounded-full overflow-hidden flex-shrink-0 border-2 border-[#4F46E5]/30">
                                                             <img
                                                                  src={
@@ -563,7 +563,7 @@ const Navbar = () => {
                                              {/* Notification Bell — mobile */}
                                              {user?.id && (
                                                   <div className="flex items-center gap-3 px-3 py-2.5 rounded-md border border-gray-100 bg-white">
-                                                       <div className="w-7 h-7 rounded-lg bg-orange-50 flex items-center justify-center">
+                                                       <div className="w-7 h-7 rounded-lg bg-indigo-50 flex items-center justify-center">
                                                             <NotificationBell />
                                                        </div>
                                                        <span className="text-sm font-medium text-gray-700">Notifications</span>
@@ -578,8 +578,8 @@ const Navbar = () => {
                                                        <>
                                                             <Link href={`${basePath}/my/profile`}>
                                                                  <button className="w-full flex items-center gap-3 px-3 py-2.5 rounded-md text-sm border border-gray-100 bg-white hover:bg-gray-50 transition-colors group">
-                                                                      <div className="w-7 h-7 rounded-lg bg-purple-50 flex items-center justify-center">
-                                                                           <User size={13} className="text-purple-500" />
+                                                                      <div className="w-7 h-7 rounded-lg bg-indigo-50 flex items-center justify-center">
+                                                                           <User size={13} className="text-indigo-600" />
                                                                       </div>
                                                                       <span className="font-medium text-gray-700">
                                                                            My Profiles
@@ -588,7 +588,7 @@ const Navbar = () => {
                                                             </Link>
 
                                                             <Link href={`${basePath}`}>
-                                                                 <button className="w-full flex items-center gap-3 px-3 py-2.5 rounded-md text-sm border border-gray-100 bg-white hover:bg-orange-50 transition-colors group">
+                                                                 <button className="w-full flex items-center gap-3 px-3 py-2.5 rounded-md text-sm border border-gray-100 bg-white hover:bg-indigo-50 transition-colors group">
                                                                       <div className="w-7 h-7 rounded-lg bg-[#4F46E5]/10 flex items-center justify-center">
                                                                            <LayoutDashboard size={13} className="text-[#4F46E5]" />
                                                                       </div>
@@ -599,9 +599,9 @@ const Navbar = () => {
                                                             </Link>
 
                                                             <Link href={`${basePath}/my/tickets`}>
-                                                                 <button className="w-full flex items-center gap-3 px-3 py-2.5 rounded-md text-sm border border-gray-100 bg-white hover:bg-blue-50 transition-colors">
-                                                                      <div className="w-7 h-7 rounded-lg bg-blue-50 flex items-center justify-center">
-                                                                           <Ticket size={13} className="text-blue-500" />
+                                                                 <button className="w-full flex items-center gap-3 px-3 py-2.5 rounded-md text-sm border border-gray-100 bg-white hover:bg-indigo-50 transition-colors">
+                                                                      <div className="w-7 h-7 rounded-lg bg-indigo-50 flex items-center justify-center">
+                                                                           <Ticket size={13} className="text-indigo-600" />
                                                                       </div>
                                                                       <span className="font-medium text-gray-700">
                                                                            My Tickets
@@ -610,9 +610,9 @@ const Navbar = () => {
                                                             </Link>
 
                                                             <Link href={`${basePath}/my/participated-events`}>
-                                                                 <button className="w-full flex items-center gap-3 px-3 py-2.5 rounded-md text-sm border border-gray-100 bg-white hover:bg-blue-50 transition-colors">
-                                                                      <div className="w-7 h-7 rounded-lg bg-blue-50 flex items-center justify-center">
-                                                                           <Ticket size={13} className="text-blue-500" />
+                                                                 <button className="w-full flex items-center gap-3 px-3 py-2.5 rounded-md text-sm border border-gray-100 bg-white hover:bg-indigo-50 transition-colors">
+                                                                      <div className="w-7 h-7 rounded-lg bg-indigo-50 flex items-center justify-center">
+                                                                           <Ticket size={13} className="text-indigo-600" />
                                                                       </div>
                                                                       <span className="font-medium text-gray-700">
                                                                            My Participated Events

@@ -56,22 +56,22 @@ const Services = () => {
           {services.map((service, index) => (
             <div
               key={index}
-              className="group relative p-8 border-t border-gray-200 dark:border-gray-700 hover:border-teal-500 dark:hover:border-teal-400 transition-colors duration-300 cursor-default"
+              className="group relative p-8 border-t border-gray-200 dark:border-gray-700 hover:border-indigo-500 dark:hover:border-indigo-400 transition-colors duration-300 cursor-default"
             >
-              {/* Animated teal fill line on top */}
-              <div className="absolute top-[-1px] left-0 h-[2px] w-0 bg-teal-500 dark:bg-teal-400 group-hover:w-full transition-all duration-500 ease-out" />
+              {/* Animated indigo fill line on top */}
+              <div className="absolute top-[-1px] left-0 h-[2px] w-0 bg-indigo-500 dark:bg-indigo-400 group-hover:w-full transition-all duration-500 ease-out" />
 
               {/* Ghost number */}
-              <span className="absolute top-6 right-6 text-5xl font-black text-gray-100 dark:text-gray-800 select-none group-hover:text-teal-50 dark:group-hover:text-teal-950 transition-colors duration-300 leading-none">
+              <span className="absolute top-6 right-6 text-5xl font-black text-gray-100 dark:text-gray-800 select-none group-hover:text-indigo-50 dark:group-hover:text-indigo-950 transition-colors duration-300 leading-none">
                 {service.number}
               </span>
 
               {/* Icon + title row */}
               <div className="flex items-center gap-3 mb-4 relative">
-                <span className="text-teal-600 dark:text-teal-400 group-hover:scale-110 transition-transform duration-300 inline-flex">
+                <span className="text-indigo-600 dark:text-indigo-400 group-hover:scale-110 transition-transform duration-300 inline-flex">
                   {service.icon}
                 </span>
-                <h3 className="text-base font-semibold tracking-wide uppercase text-gray-500 dark:text-gray-400 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors duration-300">
+                <h3 className="text-base font-semibold tracking-wide uppercase text-gray-500 dark:text-gray-400 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors duration-300">
                   {service.title}
                 </h3>
               </div>

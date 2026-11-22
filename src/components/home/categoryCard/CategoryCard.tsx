@@ -10,58 +10,48 @@ type Category = {
   image: string;
 };
 
-const colors = [
-  { base: "bg-red-500/50", hover: "group-hover:bg-red-200/30" },
-  { base: "bg-blue-500/50", hover: "group-hover:bg-blue-200/30" },
-  { base: "bg-green-500/50", hover: "group-hover:bg-green-200/30" },
-  { base: "bg-yellow-500/50", hover: "group-hover:bg-yellow-200/30" },
-  { base: "bg-purple-500/50", hover: "group-hover:bg-purple-200/30" },
-  { base: "bg-pink-500/50", hover: "group-hover:bg-pink-200/30" },
-  { base: "bg-indigo-500/50", hover: "group-hover:bg-indigo-200/30" },
-  { base: "bg-indigo-600/50", hover: "group-hover:bg-orange-200/30" },
-];
-
 const CategoryCard = ({ categories }: { categories: Category[] }) => {
   const router = useRouter();
   const limitedCategories = categories?.slice(0, 8);
 
   return (
-    <div className="max-w-7xl mx-auto ">
+    <div className="max-w-7xl mx-auto">
       <SectionHeader
         align="center"
         title="Events By Category"
         description="Discover events based on your interests and join amazing experiences."
       />
 
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 md:gap-3 lg:gap-4">
-        {limitedCategories?.map((category, index) => {
-          const color = colors[index % colors.length];
-
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 md:gap-4">
+        {limitedCategories?.map((category) => {
           return (
             <div
               key={category.id}
               onClick={() => router.push(`/events?categoryId=${category.id}`)}
-              className="relative h-40 overflow-hidden rounded cursor-pointer group"
+              className="relative h-44 overflow-hidden rounded-md border border-slate-200/80 cursor-pointer group shadow-2xs hover:shadow-md transition-all duration-300"
             >
               <Image
                 src={category.image}
                 alt={category.name}
                 fill
-                className="object-cover transition duration-300 group-hover:scale-105"
+                className="object-cover transition-transform duration-500 group-hover:scale-108"
               />
 
-              <div className={`absolute inset-0 ${color.base} ${color.hover} transition duration-300`} />
+              {/* Sophisticated dark slate to indigo brand gradient */}
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-900/45 to-transparent group-hover:from-indigo-950/90 group-hover:via-indigo-950/50 group-hover:to-indigo-900/20 transition-all duration-300" />
 
-              <div className="absolute inset-0 flex items-center justify-center">
-                <h3 className="text-white text-lg font-semibold text-center px-2">
+              <div className="absolute inset-0 flex flex-col justify-end p-4">
+                <h3 className="text-white text-base md:text-lg font-bold group-hover:text-indigo-200 transition-colors drop-shadow-xs">
                   {category.name}
                 </h3>
+                <span className="text-[11px] font-medium text-slate-300 group-hover:text-white mt-0.5 inline-flex items-center gap-1 transition-colors">
+                  Explore events →
+                </span>
               </div>
             </div>
           );
         })}
       </div>
-
     </div>
   );
 };

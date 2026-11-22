@@ -122,8 +122,8 @@ export default function CarouselPlugin({ banners }: { banners: Banner[] }) {
 
                                                                  {/* Type pill */}
                                                                  <div className="slide-pill">
-                                                                      <span className="inline-flex items-center gap-1.5 px-3 py-1 text-[10px] font-black tracking-[0.2em] uppercase rounded-md border border-teal-400/40 bg-teal-400/10 text-teal-400">
-                                                                           <span className="w-1.5 h-1.5 rounded-md bg-teal-400 animate-pulse" />
+                                                                      <span className="inline-flex items-center gap-1.5 px-3 py-1 text-[10px] font-black tracking-[0.2em] uppercase rounded-md border border-indigo-400/40 bg-indigo-500/20 text-indigo-300">
+                                                                           <span className="w-1.5 h-1.5 rounded-md bg-indigo-500 animate-pulse" />
                                                                            {banner.type} Event
                                                                       </span>
                                                                  </div>
@@ -141,12 +141,12 @@ export default function CarouselPlugin({ banners }: { banners: Banner[] }) {
                                                                  {/* Meta row */}
                                                                  <div className="slide-content-4 flex flex-wrap items-center gap-4 text-xs text-gray-400">
                                                                       <span className="flex items-center gap-1.5">
-                                                                           <CalendarDays className="w-3.5 h-3.5 text-teal-400" />
+                                                                           <CalendarDays className="w-3.5 h-3.5 text-indigo-400" />
                                                                            {format(new Date(banner.dateTime), "PPP 'at' p")}
                                                                       </span>
                                                                       {banner.altText && (
                                                                            <span className="flex items-center gap-1.5">
-                                                                                <MapPin className="w-3.5 h-3.5 text-teal-400" />
+                                                                                <MapPin className="w-3.5 h-3.5 text-indigo-400" />
                                                                                 {banner.altText}
                                                                            </span>
                                                                       )}
@@ -157,7 +157,7 @@ export default function CarouselPlugin({ banners }: { banners: Banner[] }) {
                                                                       <div className="slide-content-5 pt-1">
                                                                            <button
                                                                                 onClick={() => handleViewEvent(banner.redirectUrl || "#")}
-                                                                                className="group inline-flex items-center gap-2.5 px-6 py-3 bg-teal-500 hover:bg-teal-400 text-gray-950 text-sm font-black rounded-md transition-all duration-200 hover:gap-4 active:scale-95"
+                                                                                className="group inline-flex items-center gap-2.5 px-6 py-3 bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-bold shadow-lg shadow-indigo-600/30 rounded-md transition-all duration-200 hover:gap-4 active:scale-95"
                                                                            >
                                                                                 {banner.buttonText}
                                                                                 <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5" />
@@ -171,7 +171,7 @@ export default function CarouselPlugin({ banners }: { banners: Banner[] }) {
                                                   {/* Progress bar — bottom edge */}
                                                   {isActive && (
                                                        <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-white/10">
-                                                            <div className="h-full bg-teal-400 progress-bar-active" />
+                                                            <div className="h-full bg-indigo-500 progress-bar-active" />
                                                        </div>
                                                   )}
 
@@ -189,7 +189,7 @@ export default function CarouselPlugin({ banners }: { banners: Banner[] }) {
                                    key={i}
                                    className={`rounded-full transition-all duration-300 ${
                                         i === activeIndex
-                                             ? "w-6 h-1.5 bg-teal-400"
+                                             ? "w-6 h-1.5 bg-indigo-500"
                                              : "w-1.5 h-1.5 bg-white/30 hover:bg-white/60"
                                    }`}
                               />

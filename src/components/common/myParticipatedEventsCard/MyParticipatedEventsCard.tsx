@@ -127,7 +127,7 @@ const MyParticipatedEventsCard = ({ myEvents }: Props) => {
                   </div>
 
                   {/* Price */}
-                  <span className="text-lg font-bold text-purple-500 whitespace-nowrap">
+                  <span className="text-lg font-bold text-indigo-600 whitespace-nowrap">
                     {event?.fee === 0 ? "Free" : `৳${event?.fee}`}
                   </span>
                 </CardContent>

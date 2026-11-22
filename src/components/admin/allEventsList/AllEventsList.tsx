@@ -322,7 +322,7 @@ export default function AllEventsList({ myEvents }: { myEvents: Event[] }) {
 
                                         {/* Top Right Status */}
                                         <span className="absolute top-3 right-3 bg-white/80 backdrop-blur px-3 py-1 text-xs rounded-md flex items-center gap-1">
-                                             <span className="w-2 h-2 bg-pink-500 rounded-md"></span>
+                                             <span className="w-2 h-2 bg-emerald-500 rounded-md"></span>
                                              Active
                                         </span>
                                    </div>
@@ -350,11 +350,11 @@ export default function AllEventsList({ myEvents }: { myEvents: Event[] }) {
                                         {/* Type + Fee */}
                                         <div className="flex justify-between items-center mt-1">
                                              {event.type && (
-                                                  <span className="bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded-md font-medium">
+                                                  <span className="bg-indigo-50 text-indigo-700 border border-indigo-200 text-xs px-2 py-1 rounded-md font-medium">
                                                        {event.type}
                                                   </span>
                                              )}
-                                             <span className="text-lg font-bold text-purple-500">
+                                             <span className="text-lg font-bold text-indigo-600">
                                                   {event.fee === 0 ? "Free" : `৳${event.fee}`}
                                              </span>
                                         </div>

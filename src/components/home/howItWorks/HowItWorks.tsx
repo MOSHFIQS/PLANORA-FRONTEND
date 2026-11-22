@@ -42,18 +42,18 @@ const HowItWorks = () => {
       />
 
       {/* Teal glow center */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-teal-500/6 blur-[100px] rounded-md pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-indigo-500/6 blur-[100px] rounded-md pointer-events-none" />
 
       <div className="container mx-auto px-4 relative z-10">
 
         {/* Header */}
         <div className="text-center mb-20">
-          <span className="text-teal-400 text-xs font-bold tracking-[0.25em] uppercase mb-4 block">
+          <span className="text-indigo-400 text-xs font-bold tracking-[0.25em] uppercase mb-4 block">
             How It Works
           </span>
           <h2 className="text-3xl md:text-5xl font-black mb-4 tracking-tight">
             Four Steps to Your{" "}
-            <span className="text-teal-400">Next Event</span>
+            <span className="text-indigo-400">Next Event</span>
           </h2>
           <p className="text-gray-500 max-w-xl mx-auto text-base leading-relaxed">
             Your journey to unforgettable experiences is just four simple steps away.
@@ -64,7 +64,7 @@ const HowItWorks = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-0 relative">
 
           {/* Connector line — desktop only */}
-          <div className="hidden lg:block absolute top-10 left-[12.5%] right-[12.5%] h-[1px] bg-gradient-to-r from-transparent via-teal-500/30 to-transparent" />
+          <div className="hidden lg:block absolute top-10 left-[12.5%] right-[12.5%] h-[1px] bg-gradient-to-r from-transparent via-indigo-500/30 to-transparent" />
 
           {steps.map((step, index) => {
             const Icon = step.icon;
@@ -76,22 +76,22 @@ const HowItWorks = () => {
                 {/* Icon circle */}
                 <div className="relative mb-8">
                   {/* Ghost number behind */}
-                  <span className="absolute -top-3 -right-4 text-4xl font-black text-white/5 select-none leading-none group-hover:text-teal-400/10 transition-colors duration-300">
+                  <span className="absolute -top-3 -right-4 text-4xl font-black text-white/5 select-none leading-none group-hover:text-indigo-400/10 transition-colors duration-300">
                     {step.number}
                   </span>
 
-                  <div className="w-20 h-20 rounded-md border border-gray-800 group-hover:border-teal-500/50 bg-gray-900 group-hover:bg-teal-500/8 flex items-center justify-center transition-all duration-300 relative z-10">
-                    <Icon className="w-7 h-7 text-gray-500 group-hover:text-teal-400 transition-colors duration-300" />
+                  <div className="w-20 h-20 rounded-md border border-gray-800 group-hover:border-indigo-500/50 bg-gray-900 group-hover:bg-indigo-500/8 flex items-center justify-center transition-all duration-300 relative z-10">
+                    <Icon className="w-7 h-7 text-gray-500 group-hover:text-indigo-400 transition-colors duration-300" />
                   </div>
 
                   {/* Teal dot indicator */}
-                  <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-md bg-teal-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-md bg-indigo-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>
 
-                <p className="text-teal-500/60 text-[10px] font-black tracking-[0.2em] uppercase mb-2">
+                <p className="text-indigo-500/60 text-[10px] font-black tracking-[0.2em] uppercase mb-2">
                   Step {step.number}
                 </p>
-                <h3 className=" text-base font-bold mb-3 group-hover:text-teal-400 transition-colors duration-300">
+                <h3 className=" text-base font-bold mb-3 group-hover:text-indigo-400 transition-colors duration-300">
                   {step.title}
                 </h3>
                 <p className="text-gray-500 text-sm leading-relaxed max-w-[200px]">

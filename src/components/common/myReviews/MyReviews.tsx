@@ -79,7 +79,7 @@ const MyReviews: React.FC<EventReviewsProps> = ({ myReviews }) => {
       {reviews.map((review) => (
         <Card
           key={review.id}
-          className="p-4 rounded-md border-2 border-gray-300 flex flex-col gap-3 transition hover:shadow-md hover:border-purple-400"
+          className="p-4 rounded-md border-2 border-gray-300 flex flex-col gap-3 transition hover:shadow-md hover:border-indigo-300"
         >
           {/* Header */}
           <CardHeader className="p-0 flex items-center gap-3">

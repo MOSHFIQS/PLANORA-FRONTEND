@@ -340,7 +340,7 @@ const EventDetails = ({ event }: { event: IEvent }) => {
 
             {/* Event Timing Reminder */}
             {date && (
-              <div className="p-3.5 rounded-md bg-violet-50/70 border border-violet-100 flex items-center gap-3 text-xs">
+              <div className="p-3.5 rounded-md bg-indigo-50/70 border border-indigo-100 flex items-center gap-3 text-xs">
                 <Calendar className="w-4 h-4 text-[#4F46E5] shrink-0" />
                 <div>
                   <p className="font-bold text-slate-800">{format(date, "EEEE, MMMM d, yyyy")}</p>

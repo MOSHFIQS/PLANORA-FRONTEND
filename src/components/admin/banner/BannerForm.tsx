@@ -175,8 +175,8 @@ export default function BannerForm({
                       onClick={() => setSelectedImage(img)}
                       className={`cursor-pointer rounded-md p-1 border-4 transition ${
                         selectedImage === img
-                          ? "border-orange-500 scale-95"
-                          : "border-gray-50 hover:border-orange-300"
+                          ? "border-indigo-600 scale-95"
+                          : "border-gray-50 hover:border-indigo-300"
                       }`}
                     >
                       <AppImage
@@ -292,7 +292,7 @@ export default function BannerForm({
                     Selected Image Preview
                   </Label>
                   <div className="pt-2">
-                    <div className="inline-block p-1 border-4 border-orange-500 rounded">
+                    <div className="inline-block p-1 border-4 border-indigo-600 rounded">
                       <AppImage
                         src={selectedImage}
                         alt="banner"
